@@ -15,4 +15,16 @@ use App\Http\Controllers\FrontEndController;
 */
 
 
-Route::get('/',[FrontEndController::class,'index']);
+Route::middleware('auth')->group(function () {
+    Route::get('/',[FrontEndController::class,'index']);
+});
+
+
+Auth::routes(['register'=>false,'password.request'=>false,
+            'password.reset'=>false,
+            'password.update'=>false,
+            'password.confirm'=>false,
+
+            ]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

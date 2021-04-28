@@ -12,9 +12,11 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .vue();
+    .vue()
+    .sass('resources/sass/app.scss', 'public/css');
 
-const path_css="resources/assets/css";
+
+    const path_css="resources/assets/css";
 mix.styles([
     `${path_css+'/all.min.css'}`,
     `${path_css+'/bootstrap.min.css'}`,
