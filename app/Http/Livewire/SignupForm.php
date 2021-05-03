@@ -16,11 +16,14 @@ class SignupForm extends Component
 
     protected $rules = [
         'first_name' => 'required|min:3',
-        'phone_number' => 'required',
+        'phone_number' => 'required|min:3',
     ];
 
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
     }
+
+  
+
 }

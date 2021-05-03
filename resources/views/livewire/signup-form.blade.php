@@ -12,10 +12,23 @@
         <!-- fieldsets -->
         <fieldset>
             <p class="text-left">First, we need some basic account information. But don't worry - you can always change your settings later.</p>
-            <input type="text" name="fname" placeholder="First Name"/>
-            <input type="text" name="lname" placeholder="Last Name"/>
-            <input type="text" name="phone" placeholder="Phone"/>
-            <input type="button" name="next" class="next action-button btn btn-business" value="Next"/>
+            <input type="text" placeholder="First Name" required wire:model="first_name"/>
+            @error('first_name')
+             <span class="error text-danger">{{ $message }}</span>
+             @enderror
+            <input type="text"  placeholder="Last Name" wire:model="last_name" required/>
+            @error('last_name')
+            <span class="error text-danger">{{ $message }}</span>
+            @enderror
+            <input type="text"  placeholder="Phone" wire:model="phone_number" required/>
+            {{-- <span>{{$this->errors('phone_number')}} - message</span> --}}
+
+             @error('phone_number')
+             <span class="error text-danger">{{ $message }}</span>
+             @else
+             <input type="button" name="next" class="next action-button btn btn-business" value="Next"/>
+             @enderror
+
         </fieldset>
         <fieldset>
             <p class="text-left">First, we need some basic account information. But don't worry - you can always change your settings later.</p>
