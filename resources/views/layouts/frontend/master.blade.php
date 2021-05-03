@@ -18,6 +18,7 @@
 
         <!-- Meta -->
         <title>{{config('app.name')}} </title>
+        @livewireStyles
 </head>
 <body>
 <!-- Header -->
@@ -49,6 +50,6 @@
 <script src="{{asset('/assets/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('/assets/js/slick.min.js')}}"></script>
 
-
+@livewireScripts
 </body>
 </html>
