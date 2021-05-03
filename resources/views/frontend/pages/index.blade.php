@@ -41,7 +41,7 @@
 			<div class="col-sm-12 col-md-12 col-lg-6 dis-flex text-center">
 				<p class="para-two text-left pl-4">Don`t miss out an your chance for adventure
 				and community. Get <strong class="color-black bold" >RedE</strong> Now.</p>
-				<a href="#" class="btn btn-business">Explore more</a>
+				<a href="{{route('signup')}}" class="btn btn-business">Try It Out!</a>
 				<p class="para-three"><strong class="color-black bold">FREE</strong>-no credit card needed <br>
 				no in-app purchases or other hidden charges</p>
 
@@ -56,45 +56,45 @@
 		<div class="row">
 			<div class="col-lg-4">
 				<div class="img-box img1"><img src="/assets/images/img1.jpg" alt="">
-					<div class="overlay"><a href="#">“Gaming With Friends.”</a></div>
+					{{-- <div class="overlay"><a href="#">“Gaming With Friends.”</a></div> --}}
 				</div>
 				<div class="img-box img2"><img src="/assets/images/img2.jpg" alt="">
-					<div class="overlay"><a href="#">“Gaming With Friends.”</a></div>
+					{{-- <div class="overlay"><a href="#">“Gaming With Friends.”</a></div> --}}
 				</div>
 				<div class="img-box img2"><img src="/assets/images/img3.jpg" alt="">
-					<div class="overlay"><a href="#">“Gaming With Friends.”</a></div>
+					{{-- <div class="overlay"><a href="#">“Gaming With Friends.”</a></div> --}}
 				</div>
 			</div>
 			<div class="col-lg-8">
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="img-box img2"><img src="/assets/images/img4.jpg" alt="">
-							<div class="overlay"><a href="#">“Gaming With Friends.”</a></div>
+							{{-- <div class="overlay"><a href="#">“Gaming With Friends.”</a></div> --}}
 						</div>
 					</div>
 					<div class="col-lg-6">
 		                <div class="img-box img2"><img src="/assets/images/img5.jpg" alt="">
-		                	<div class="overlay"><a href="#">“Gaming With Friends.”</a></div>
+		                	{{-- <div class="overlay"><a href="#">“Gaming With Friends.”</a></div> --}}
 		                </div>
 					</div>
 					<div class="col-lg-12 ">
 		                <div class="img-box img2"><img src="/assets/images/img6.jpg" alt="">
-		                	<div class="overlay"><a href="#">“Gaming With Friends.”</a></div>
+		                	{{-- <div class="overlay"><a href="#">“Gaming With Friends.”</a></div> --}}
 		                </div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="img-box img1"><img src="/assets/images/img7.jpg" alt="">
-							<div class="overlay"><a href="#">“Gaming With Friends.”</a></div>
+							{{-- <div class="overlay"><a href="#">“Gaming With Friends.”</a></div> --}}
 						</div>
 					</div>
 					<div class="col-lg-6">
 		                <div class="img-box img2"><img src="/assets/images/img8.jpg" alt="">
-		                	<div class="overlay"><a href="#">“Gaming With Friends.”</a></div>
+		                	{{-- <div class="overlay"><a href="#">“Gaming With Friends.”</a></div> --}}
 		                </div>
 		                <div class="img-box img3"><img src="/assets/images/img9.jpg" alt="">
-		                	<div class="overlay"><a href="#">“Gaming With Friends.”</a></div>
+		                	{{-- <div class="overlay"><a href="#">“Gaming With Friends.”</a></div> --}}
 		                </div>
 					</div>
 				</div>
@@ -141,7 +141,7 @@
 			<div class="col-lg-6">
 				<p class="para-two text-left">Don`t miss out an your chance for adventure
 				and community. Get <strong class="color-red bold" >RedE</strong> Now.</p>
-				<a href="#" class="btn btn-business">Try it out</a>
+				<a href="{{route('signup')}}" class="btn btn-business">Try it out</a>
 				<p class="para-three"><strong class="color-red bold">FREE</strong>-no credit card needed <br>
 				no in-app purchases or other hidden charges</p>
 			</div>

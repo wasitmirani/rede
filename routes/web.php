@@ -16,7 +16,9 @@ use App\Http\Controllers\FrontEndController;
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/',[FrontEndController::class,'index']);
+    Route::get('/',[FrontEndController::class,'index'])->name('index');
+    Route::get('/welcome',[FrontEndController::class,'welcome'])->name('welcome');
+    Route::get('/signup',[FrontEndController::class,'signup'])->name('signup');
 });
 
 
@@ -24,7 +26,6 @@ Auth::routes(['register'=>false,'password.request'=>false,
             'password.reset'=>false,
             'password.update'=>false,
             'password.confirm'=>false,
-
             ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
