@@ -18,4 +18,12 @@ class FrontEndController extends Controller
     public function signup(){
         return view('frontend.pages.signup');
     }
+
+    public function register(Request $request){
+
+        $request->validate([
+         'username' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        ]);
+
+    }
 }

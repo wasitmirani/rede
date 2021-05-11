@@ -27,7 +27,10 @@
 @include('layouts.frontend.components.header')
 @endif
 <!-- Header -->
-@yield('content')
+<div id="app">
+    @yield('content')
+</div>
+
 
 
 <!-- Contact Form -->
@@ -39,7 +42,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" ></script>
 
-
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 <script src="{{asset('/assets/js/fontawesome.js')}}"></script>
 <script src="{{asset('/assets/js/fontawesome.min.js')}}"></script>
 <script src="{{asset('/assets/js/custom.js')}}"></script>

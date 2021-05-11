@@ -29,3 +29,4 @@ Auth::routes(['register'=>false,'password.request'=>false,
             ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
