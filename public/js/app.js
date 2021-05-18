@@ -1926,6 +1926,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "signup-component",
@@ -1939,10 +1949,12 @@ __webpack_require__.r(__webpack_exports__);
       twitter: null,
       username: null,
       full_name: null,
+      email: null,
       password: null,
-      zip: null,
+      zip_code: null,
       onclick: false,
-      onclick2: false
+      onclick2: false,
+      errors: []
     };
   },
   validations: {
@@ -1965,14 +1977,32 @@ __webpack_require__.r(__webpack_exports__);
     password: {
       required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__.required,
       minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__.minLength)(6)
+    },
+    email: {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__.required
     }
   },
   methods: {
     onComplete: function onComplete() {
+      var _this = this;
+
       this.onclick2 = true;
 
       if (this.username.length > 3 && this.password.length > 5) {
-        alert("done");
+        var fromdata = new FormData();
+        fromdata.append('username', this.username);
+        fromdata.append("full_name", this.full_name);
+        fromdata.append("password", this.password);
+        fromdata.append("google_plus", this.google_plus);
+        fromdata.append("facebook", this.facebook);
+        fromdata.append("twitter", this.twitter);
+        fromdata.append("email", this.email);
+        fromdata.append("phone_number", this.phone_number);
+        axios.post(this.$hostapi_url + '/user/register', fromdata).then(function (res) {
+          window.location.href = _this.$base_url + "/soon";
+        })["catch"](function (er) {
+          _this.errors = er.response.data.errors;
+        });
       }
     },
     firstStep: function firstStep() {
@@ -2038,6 +2068,8 @@ files.keys().map(function (key) {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.prototype.$base_url = window.location.origin;
+Vue.prototype.$hostapi_url = window.location.origin + "/api";
 var app = new Vue({
   el: '#app'
 });
@@ -41444,7 +41476,13 @@ var render = function() {
         _c(
           "form-wizard",
           {
-            attrs: { shape: "circle", color: "#c04438" },
+            attrs: {
+              title: "New User",
+              subtitle:
+                "First, we need some basic account information. But don't worry - you can always change your settings later.",
+              shape: "circle",
+              color: "#c04438"
+            },
             on: { "on-complete": _vm.onComplete }
           },
           [
@@ -41693,6 +41731,16 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
+                this.errors["username"]
+                  ? _c("div", [
+                      _c("span", { staticClass: "error text-danger" }, [
+                        _vm._v(_vm._s(this.errors["username"][0]))
+                      ]),
+                      _vm._v(" "),
+                      _c("br")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 !_vm.$v.username.minLength
                   ? _c("div", { staticClass: "error text-danger" }, [
                       _vm._v(
@@ -41723,6 +41771,46 @@ var render = function() {
                       }
                       _vm.$set(
                         _vm.$v.username,
+                        "$model",
+                        $event.target.value.trim()
+                      )
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                this.errors["email"]
+                  ? _c("div", [
+                      _c("span", { staticClass: "error text-danger" }, [
+                        _vm._v(_vm._s(this.errors["email"][0]))
+                      ]),
+                      _vm._v(" "),
+                      _c("br")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.trim",
+                      value: _vm.$v.email.$model,
+                      expression: "$v.email.$model",
+                      modifiers: { trim: true }
+                    }
+                  ],
+                  class: { "form-group--error": _vm.$v.email.$error },
+                  attrs: { type: "text", placeholder: "E-Mail Address" },
+                  domProps: { value: _vm.$v.email.$model },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.$v.email,
                         "$model",
                         $event.target.value.trim()
                       )
@@ -41809,18 +41897,18 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.zip,
-                      expression: "zip"
+                      value: _vm.zip_code,
+                      expression: "zip_code"
                     }
                   ],
                   attrs: { type: "tel", name: "zip", placeholder: "Zip Code" },
-                  domProps: { value: _vm.zip },
+                  domProps: { value: _vm.zip_code },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.zip = $event.target.value
+                      _vm.zip_code = $event.target.value
                     }
                   }
                 })

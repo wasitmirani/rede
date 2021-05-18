@@ -1,7 +1,7 @@
 <template>
 <div>
      <form id="msform" data-aos="fade-right">
-     <form-wizard  @on-complete="onComplete"  shape="circle" color="#c04438">
+     <form-wizard  title="New User" subtitle="First, we need some basic account information. But don't worry - you can always change your settings later."  @on-complete="onComplete"  shape="circle" color="#c04438">
       <tab-content title="Step 01" icon="fas fa-info" :before-change="firstStep">
       <div class="error text-danger" v-if="!$v.first_name.required && onclick">First Name Field is required</div>
        <div class="error text-danger" v-if="!$v.first_name.minLength">First Name must have at least {{$v.first_name.$params.minLength.min}} letters.</div>
@@ -25,8 +25,18 @@
 
 
         <div class="error text-danger" v-if="!$v.username.required && onclick2">Username Field is required</div>
+        <div v-if="this.errors['username']">
+            <span class="error text-danger">{{this.errors['username'][0]}}</span>
+            <br>
+        </div>
         <div class="error text-danger" v-if="!$v.username.minLength">Username must have at least {{$v.username.$params.minLength.min}} letters.</div>
         <input type="text" :class="{ 'form-group--error': $v.username.$error }"  v-model.trim="$v.username.$model" placeholder="Username" />
+          <div v-if="this.errors['email']">
+            <span class="error text-danger">{{this.errors['email'][0]}}</span>
+            <br>
+        </div>
+        <!-- <div class="error text-danger" v-if="!$v.email">Email Field {{$v.email.$params.required}} .</div> -->
+        <input type="text" :class="{ 'form-group--error': $v.email.$error }"  v-model.trim="$v.email.$model" placeholder="E-Mail Address" />
 
         <div class="error text-danger" v-if="!$v.password.required && onclick2">Password Field is required</div>
         <div class="error text-danger" v-if="!$v.password.minLength">Password must have at least {{$v.password.$params.minLength.min}} letters.</div>
@@ -34,7 +44,7 @@
 
 
         <input type="text" name="text"  v-model="full_name" placeholder="First Name and Last Initial"/>
-        <input type="tel" name="zip" v-model="zip"  placeholder="Zip Code"/>
+        <input type="tel" name="zip" v-model="zip_code"  placeholder="Zip Code"/>
       </tab-content>
 
 
@@ -59,11 +69,13 @@ export default {
          twitter:null,
          username:null,
          full_name:null,
+         email:null,
          password:null,
-         zip:null,
+         zip_code:null,
 
          onclick:false,
          onclick2:false,
+         errors:[],
         };
     },
     validations: {
@@ -87,12 +99,31 @@ export default {
         required,
         minLength: minLength(6)
         },
+        email:{
+        required,
+        },
     },
     methods: {
     onComplete: function() {
     this.onclick2=true;
     if(this.username.length>3 && this.password.length>5){
-        alert("done");
+    let fromdata= new FormData();
+        fromdata.append('username',this.username);
+        fromdata.append("full_name",this.full_name);
+        fromdata.append("password",this.password);
+        fromdata.append("google_plus",this.google_plus);
+        fromdata.append("facebook",this.facebook);
+        fromdata.append("twitter",this.twitter);
+        fromdata.append("email",this.email);
+        fromdata.append("phone_number",this.phone_number);
+        axios.post(this.$hostapi_url+'/user/register',fromdata).then((res)=>{
+
+            window.location.href=this.$base_url+"/soon";
+
+        }) .catch((er) => {
+              this.errors = er.response.data.errors;
+
+            });
     }
     },
     firstStep(){

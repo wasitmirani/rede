@@ -15,6 +15,8 @@ class CreateUserDetailsTable extends Migration
     {
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
+            $table->json('social')->nullable();
+            $table->string('zip_code')->nullable();
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->timestamps();
         });
