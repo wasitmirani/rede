@@ -3,26 +3,6 @@
      <form id="msform" data-aos="fade-right">
      <form-wizard  title="New User" subtitle="First, we need some basic account information. But don't worry - you can always change your settings later."  @on-complete="onComplete"  shape="circle" color="#c04438">
       <tab-content title="Step 01" icon="fas fa-info" :before-change="firstStep">
-      <div class="error text-danger" v-if="!$v.first_name.required && onclick">First Name Field is required</div>
-       <div class="error text-danger" v-if="!$v.first_name.minLength">First Name must have at least {{$v.first_name.$params.minLength.min}} letters.</div>
-        <input type="text" :class="{ 'form-group--error': $v.first_name.$error }" v-model.trim="$v.first_name.$model" placeholder="First Name"  />
-
-        <div class="error text-danger" v-if="!$v.last_name.required && onclick">Last Name Field is required</div>
-        <div class="error text-danger" v-if="!$v.last_name.minLength">Last Name must have at least {{$v.last_name.$params.minLength.min}} letters.</div>
-         <input type="text" :class="{ 'form-group--error': $v.last_name.$error }"  v-model.trim="$v.last_name.$model" placeholder="Last Name"  required/>
-
-        <div class="error text-danger" v-if="!$v.phone_number.required && onclick">Phone Number Field is required</div>
-        <div class="error text-danger" v-if="!$v.phone_number.minLength">Phone Number must have at least {{$v.phone_number.$params.minLength.min}} letters.</div>
-        <input type="text" :class="{ 'form-group--error': $v.phone_number.$error }"   v-model.trim="$v.phone_number.$model" placeholder="Phone" />
-
-      </tab-content>
-      <tab-content title="Step 02" icon="fas fa-info" >
-         <input type="text" name="twitter" v-model="twitter" placeholder="Twitter"/>
-         <input type="text" name="facebook" v-model="facebook" placeholder="Facebook"/>
-         <input type="text" name="gplus" v-model="google_plus" placeholder="Google Plus"/>
-      </tab-content>
-      <tab-content title="Step 03" icon="fas fa-info">
-
 
         <div class="error text-danger" v-if="!$v.username.required && onclick2">Username Field is required</div>
         <div v-if="this.errors['username']">
@@ -38,6 +18,7 @@
         <!-- <div class="error text-danger" v-if="!$v.email">Email Field {{$v.email.$params.required}} .</div> -->
         <input type="text" :class="{ 'form-group--error': $v.email.$error }"  v-model.trim="$v.email.$model" placeholder="E-Mail Address" />
 
+
         <div class="error text-danger" v-if="!$v.password.required && onclick2">Password Field is required</div>
         <div class="error text-danger" v-if="!$v.password.minLength">Password must have at least {{$v.password.$params.minLength.min}} letters.</div>
         <input type="password" :class="{ 'form-group--error': $v.password.$error }"  v-model.trim="$v.password.$model" placeholder="Password" />
@@ -45,6 +26,39 @@
 
         <input type="text" name="text"  v-model="full_name" placeholder="First Name and Last Initial"/>
         <input type="tel" name="zip" v-model="zip_code"  placeholder="Zip Code"/>
+      </tab-content>
+      <tab-content title="Step 02" icon="fas fa-info" >
+          <label for="">Select Age Range</label>
+          <select class="form-control"  v-model="age_range">
+
+            <option value="10-20">10 to 20</option>
+            <option value="20-40">20 to 40</option>
+            <option value="40-60">40-60</option>
+          </select>
+          <br>
+            <label for="">Select Gender</label>
+         <select class="form-control" v-model="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="Not Specified">Not Specified</option>
+          </select>
+          <br>
+
+           <label for="">Select Covid-19 Status</label>
+       <select class=" form-control"  v-model="status">
+
+
+            <option value="positive">Positive</option>
+            <option value="negative">Negative</option>
+         </select>
+      </tab-content>
+      <tab-content title="Step 03" icon="fas fa-info">
+        <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+        <label class="form-check-label float-right mr-4" for="defaultCheck1">
+          I Agree
+        </label>
+        </div>
       </tab-content>
 
 
@@ -75,6 +89,9 @@ export default {
 
          onclick:false,
          onclick2:false,
+         age_range:null,
+         gender:null,
+         status:null,
          errors:[],
         };
     },
@@ -116,9 +133,12 @@ export default {
         fromdata.append("twitter",this.twitter);
         fromdata.append("email",this.email);
         fromdata.append("phone_number",this.phone_number);
+        fromdata.append("age_range",this.age_range);
+        fromdata.append("gender",this.gender);
+        fromdata.append("status",this.status);
         axios.post(this.$hostapi_url+'/user/register',fromdata).then((res)=>{
 
-            window.location.href=this.$base_url+"/soon";
+            window.location.href=this.$base_url+"/congs";
 
         }) .catch((er) => {
               this.errors = er.response.data.errors;
@@ -127,13 +147,12 @@ export default {
     }
     },
     firstStep(){
-        this.onclick=true;
-        if(this.first_name && this.last_name  && this.phone_number)
+        this.onclick2=true;
+        if(this.username.length>3 && this.password.length>5)
         {
-            this.full_name=this.first_name+" "+this.last_name;
+
             return true;
         }
-
         else
         return false;
     },

@@ -1936,6 +1936,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "signup-component",
@@ -1954,6 +1968,9 @@ __webpack_require__.r(__webpack_exports__);
       zip_code: null,
       onclick: false,
       onclick2: false,
+      age_range: null,
+      gender: null,
+      status: null,
       errors: []
     };
   },
@@ -1998,18 +2015,20 @@ __webpack_require__.r(__webpack_exports__);
         fromdata.append("twitter", this.twitter);
         fromdata.append("email", this.email);
         fromdata.append("phone_number", this.phone_number);
+        fromdata.append("age_range", this.age_range);
+        fromdata.append("gender", this.gender);
+        fromdata.append("status", this.status);
         axios.post(this.$hostapi_url + '/user/register', fromdata).then(function (res) {
-          window.location.href = _this.$base_url + "/soon";
+          window.location.href = _this.$base_url + "/congs";
         })["catch"](function (er) {
           _this.errors = er.response.data.errors;
         });
       }
     },
     firstStep: function firstStep() {
-      this.onclick = true;
+      this.onclick2 = true;
 
-      if (this.first_name && this.last_name && this.phone_number) {
-        this.full_name = this.first_name + " " + this.last_name;
+      if (this.username.length > 3 && this.password.length > 5) {
         return true;
       } else return false;
     }
@@ -41496,235 +41515,6 @@ var render = function() {
                 }
               },
               [
-                !_vm.$v.first_name.required && _vm.onclick
-                  ? _c("div", { staticClass: "error text-danger" }, [
-                      _vm._v("First Name Field is required")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                !_vm.$v.first_name.minLength
-                  ? _c("div", { staticClass: "error text-danger" }, [
-                      _vm._v(
-                        "First Name must have at least " +
-                          _vm._s(_vm.$v.first_name.$params.minLength.min) +
-                          " letters."
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.trim",
-                      value: _vm.$v.first_name.$model,
-                      expression: "$v.first_name.$model",
-                      modifiers: { trim: true }
-                    }
-                  ],
-                  class: { "form-group--error": _vm.$v.first_name.$error },
-                  attrs: { type: "text", placeholder: "First Name" },
-                  domProps: { value: _vm.$v.first_name.$model },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.$v.first_name,
-                        "$model",
-                        $event.target.value.trim()
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                !_vm.$v.last_name.required && _vm.onclick
-                  ? _c("div", { staticClass: "error text-danger" }, [
-                      _vm._v("Last Name Field is required")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                !_vm.$v.last_name.minLength
-                  ? _c("div", { staticClass: "error text-danger" }, [
-                      _vm._v(
-                        "Last Name must have at least " +
-                          _vm._s(_vm.$v.last_name.$params.minLength.min) +
-                          " letters."
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.trim",
-                      value: _vm.$v.last_name.$model,
-                      expression: "$v.last_name.$model",
-                      modifiers: { trim: true }
-                    }
-                  ],
-                  class: { "form-group--error": _vm.$v.last_name.$error },
-                  attrs: {
-                    type: "text",
-                    placeholder: "Last Name",
-                    required: ""
-                  },
-                  domProps: { value: _vm.$v.last_name.$model },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.$v.last_name,
-                        "$model",
-                        $event.target.value.trim()
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                !_vm.$v.phone_number.required && _vm.onclick
-                  ? _c("div", { staticClass: "error text-danger" }, [
-                      _vm._v("Phone Number Field is required")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                !_vm.$v.phone_number.minLength
-                  ? _c("div", { staticClass: "error text-danger" }, [
-                      _vm._v(
-                        "Phone Number must have at least " +
-                          _vm._s(_vm.$v.phone_number.$params.minLength.min) +
-                          " letters."
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.trim",
-                      value: _vm.$v.phone_number.$model,
-                      expression: "$v.phone_number.$model",
-                      modifiers: { trim: true }
-                    }
-                  ],
-                  class: { "form-group--error": _vm.$v.phone_number.$error },
-                  attrs: { type: "text", placeholder: "Phone" },
-                  domProps: { value: _vm.$v.phone_number.$model },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.$v.phone_number,
-                        "$model",
-                        $event.target.value.trim()
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "tab-content",
-              { attrs: { title: "Step 02", icon: "fas fa-info" } },
-              [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.twitter,
-                      expression: "twitter"
-                    }
-                  ],
-                  attrs: {
-                    type: "text",
-                    name: "twitter",
-                    placeholder: "Twitter"
-                  },
-                  domProps: { value: _vm.twitter },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.twitter = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.facebook,
-                      expression: "facebook"
-                    }
-                  ],
-                  attrs: {
-                    type: "text",
-                    name: "facebook",
-                    placeholder: "Facebook"
-                  },
-                  domProps: { value: _vm.facebook },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.facebook = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.google_plus,
-                      expression: "google_plus"
-                    }
-                  ],
-                  attrs: {
-                    type: "text",
-                    name: "gplus",
-                    placeholder: "Google Plus"
-                  },
-                  domProps: { value: _vm.google_plus },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.google_plus = $event.target.value
-                    }
-                  }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "tab-content",
-              { attrs: { title: "Step 03", icon: "fas fa-info" } },
-              [
                 !_vm.$v.username.required && _vm.onclick2
                   ? _c("div", { staticClass: "error text-danger" }, [
                       _vm._v("Username Field is required")
@@ -41912,6 +41702,178 @@ var render = function() {
                     }
                   }
                 })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "tab-content",
+              { attrs: { title: "Step 02", icon: "fas fa-info" } },
+              [
+                _c("label", { attrs: { for: "" } }, [
+                  _vm._v("Select Age Range")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.age_range,
+                        expression: "age_range"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.age_range = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "10-20" } }, [
+                      _vm._v("10 to 20")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "20-40" } }, [
+                      _vm._v("20 to 40")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "40-60" } }, [
+                      _vm._v("40-60")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "" } }, [_vm._v("Select Gender")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.gender,
+                        expression: "gender"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.gender = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "male" } }, [
+                      _vm._v("Male")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "female" } }, [
+                      _vm._v("Female")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "Not Specified" } }, [
+                      _vm._v("Not Specified")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "" } }, [
+                  _vm._v("Select Covid-19 Status")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.status,
+                        expression: "status"
+                      }
+                    ],
+                    staticClass: " form-control",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.status = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "positive" } }, [
+                      _vm._v("Positive")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "negative" } }, [
+                      _vm._v("Negative")
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "tab-content",
+              { attrs: { title: "Step 03", icon: "fas fa-info" } },
+              [
+                _c("div", { staticClass: "form-check" }, [
+                  _c("input", {
+                    staticClass: "form-check-input",
+                    attrs: {
+                      type: "checkbox",
+                      value: "",
+                      id: "defaultCheck1",
+                      checked: ""
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-check-label float-right mr-4",
+                      attrs: { for: "defaultCheck1" }
+                    },
+                    [_vm._v("\n          I Agree\n        ")]
+                  )
+                ])
               ]
             )
           ],

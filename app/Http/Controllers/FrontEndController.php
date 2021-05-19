@@ -24,10 +24,10 @@ class FrontEndController extends Controller
 
     public function register(Request $request){
 
-        $request->validate([
-         'username' => ['required', 'string', 'max:255', 'unique:users'],
-         'email' => ['required', 'string','email', 'max:255', 'unique:users'],
-        ]);
+        // $request->validate([
+        //  'username' => ['required', 'string', 'max:255', 'unique:users'],
+        //  'email' => ['required', 'string','email', 'max:255', 'unique:users'],
+        // ]);
 
        $user= User::create([
             'name'=>$request->full_name,
@@ -58,5 +58,15 @@ class FrontEndController extends Controller
     public function soon(){
 
         return view('frontend.pages.soon');
+    }
+
+    public function congs(){
+
+    return view('frontend.pages.congs');
+    }
+
+    public function timeLine(){
+
+         return view('frontend.pages.timeLine');
     }
 }

@@ -19,6 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/',[FrontEndController::class,'index'])->name('index');
     Route::get('/welcome',[FrontEndController::class,'welcome'])->name('welcome');
     Route::get('/signup',[FrontEndController::class,'signup'])->name('signup');
+    Route::get('/congs',[FrontEndController::class,'congs'])->name('congs');
+    Route::get('/timeline',[FrontEndController::class,'timeLine'])->name('timeline');
     Route::get('soon',[FrontEndController::class,'soon']);
 });
 
