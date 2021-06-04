@@ -110,7 +110,7 @@ body{
 /*Responsive*/
 @media(max-width: 1440px){
   section.banner{
-        height: 390px !important;
+        height: 350px !important;
   }
 }
 
@@ -134,7 +134,7 @@ body{
 }
 
 #msform fieldset {
-    
+
 
     /*stacking fieldsets above each other*/
 }
@@ -597,19 +597,19 @@ section.learn a.btn{}
 /*Try It Out*/
 section.try{
     padding: 100px 0;
-} 
+}
 section.try a.btn{
     color: #ffc740;
     background-color: #ffff;
     margin: 30px auto 45px;
-} 
+}
 section.try .para-two{
     color: #24252e;
-} 
+}
 section.try .para-three{
     color: #24252e;
     margin: 0;
-} 
+}
 /*Try It Out*/
 /*Signup Page*/
 section.signup{}
@@ -626,7 +626,7 @@ section.signup .para-two{
 section.pass-sec{}
 section.pass-sec {
     padding: 0;
-    height: 100vh;
+    /* height: 100vh; */
     position: relative;
     display: flex;
     align-items: center;
@@ -643,7 +643,7 @@ section.pass-sec:after{
   left: 0;
 }
 section.pass-sec .pass-in{
-    padding: 0 0 0 100px;
+    padding: 60px 0 60px 100px;
 }
 section.pass-sec  a.btn{
     text-transform: uppercase;
@@ -687,7 +687,7 @@ section.pass-sec .content .para-three{
   font-size: 18px;
   margin: 20px 0;
 }
-/*Password*/ 
+/*Password*/
 /*COngratulations*/
 section.congs{}
 section.congs form{
@@ -788,9 +788,9 @@ section.congs .box p{
   font-weight: 500;
 }
 section.congs a.btn.grad{
-  
+
 background: rgb(192,68,56);
-  
+
 background: linear-gradient(90deg, rgba(192,68,56,1) 25%, rgba(246,216,78,1) 75%);
 }
 section.congs a.btn.grad:hover{color: #fff !important;}
@@ -1135,7 +1135,7 @@ section.account .forward-btns li a img{
     background-color: transparent;
 }
 
-.search-bar .search-wrapper .input-holder {    
+.search-bar .search-wrapper .input-holder {
     height: 70px;
     width:70px;
     overflow: hidden;
@@ -1208,9 +1208,9 @@ section.account .forward-btns li a img{
 .search-wrapper.active .input-holder .search-icon span {
     transform: rotate(-45deg);
 }
-.search-bar .search-wrapper .input-holder .search-icon span::before, 
+.search-bar .search-wrapper .input-holder .search-icon span::before,
 .search-bar .search-wrapper .input-holder .search-icon span::after {
-    position: absolute; 
+    position: absolute;
     content:'';
 }
 .search-bar .search-wrapper .input-holder .search-icon span::before {
@@ -1267,7 +1267,7 @@ section.account .forward-btns li a img{
 }
 
 /*Search-bar*/
-/*Account*/ 
+/*Account*/
 
 /*Respomsive*/
 @media(max-width: 1800px){

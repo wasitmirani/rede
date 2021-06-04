@@ -6,7 +6,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-5 dis-flex" data-aos="fade-right">
-				<div class="logo mb-5 text-center"><img src="{{asset('/assets/images/logo.png')}}" class="img-fluid" alt=""></div>
+				<div class="logo mb-5 text-center"><img src="{{asset('/assets/images/new-logo.png')}}" class="img-fluid w-75" alt=""></div>
 				<div class="img-box text-center"><img src="{{asset('/assets/images/welcome-img.jpg')}}" class="img-fluid" alt=""></div>
 			</div>
 			<div class="col-lg-7 pass-in dis-flex" data-aos="fade-left">

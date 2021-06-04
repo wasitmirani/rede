@@ -7,11 +7,11 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-5 dis-flex" data-aos="fade-right">
-				<div class="logo mb-5 text-center"><img src="/assets/images/logo.png" class="img-fluid" alt=""></div>
+				<div class="logo mb-5 text-center"><img src="/assets/images/new-logo.png" class="img-fluid w-75" alt=""></div>
 				<div class="img-box"><img src="/assets/images/pass-img.jpg" class="img-fluid" alt=""></div>
 			</div>
 			<div class="col-lg-7 pass-in dis-flex" data-aos="fade-left">
-				<h2 class="heading-one">Enter your Password</h2>
+				<h2 class="heading-one">Enter your secure Password</h2>
 				<form action="{{route('login')}}" method="POST">
                     @csrf
 					<div class="form-group">
