@@ -69,4 +69,8 @@ class FrontEndController extends Controller
 
          return view('frontend.pages.timeLine');
     }
+
+    public function customerLogin(){
+        return  view('frontend.pages.customerLogin');
+    }
 }

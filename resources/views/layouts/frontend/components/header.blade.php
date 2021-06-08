@@ -9,7 +9,10 @@
 				MAKE A FRIEND.</strong></p>
 			</div>
 			<div class="col-lg-6 dis-flex-end">
-				<a href="#" class="btn btn-business">login</a>
+
+                <a href="{{route('customer.login')}}" class="btn btn-business">login</a>
+          
+
 			</div>
 		</div>
 	</div>
