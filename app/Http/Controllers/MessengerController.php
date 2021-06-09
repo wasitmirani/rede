@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 class MessengerController extends Controller
 {
     //
-    public function getMessages(){
+    public function index(){
 
-        return view('frontend.pages.messenger.index');
+        return view('frontend.pages.messenger.messages');
     }
 }

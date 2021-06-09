@@ -1,5 +1,10 @@
+
+
+
+
+
 @extends('layouts.frontend.messengermaster')
 
 @section('content')
-<feeds-component></feeds-component>
+<messages-component></messages-component>
 @endsection

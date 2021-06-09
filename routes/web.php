@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FeedsController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\MessengerController;
 
@@ -25,7 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/customer/login',[FrontEndController::class,'customerLogin'])->name('customer.login');
     Route::post('/customer/login',[FrontEndController::class,'LoginUser'])->name('customer.user.login');
     Route::get('soon',[FrontEndController::class,'soon']);
-    Route::get('/inbox/messenger',[MessengerController::class,'getMessages'])->name('messages');
+    Route::get('/new/feeds',[FeedsController::class,'newFeeds'])->name('new.feeds');
+    Route::get('inbox/messages',[MessengerController::class,'index'])->name('messages');
 });
 
 
