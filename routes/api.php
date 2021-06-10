@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\MessengerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,6 @@ Route::post('/user/register',[FrontEndController::class,'register']);
 
 Route::prefix('message')->name('message')->group(function () {
     Route::get('/messages',[MessengerController::class,'getMessages']);
+  
+    // conversations
 });

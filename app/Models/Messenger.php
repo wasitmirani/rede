@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Messenger extends Model
 {
     use HasFactory;
+    public function conversation(){
+        return  $this->belongsTo(Conversation::class, 'conversation_id', 'id')->with(['getUser1:id,name,email','getUser2:id,name,email']);
+    }
 }

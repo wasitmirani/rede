@@ -25,6 +25,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "moment": "^2.29.1",
+        "socket.io-client": "^4.1.2",
         "sweetalert2": "^10.16.7",
         "vue-form-wizard": "^0.8.4",
         "vuelidate": "^0.7.6"

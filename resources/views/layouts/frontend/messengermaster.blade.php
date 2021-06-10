@@ -554,6 +554,15 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script>
+
+        @auth
+            window.user = {!! json_encode(Auth::user(), true) !!};
+        @else
+            window.user = [];
+            window.Permissions = [];
+        @endauth
+    </script>
 
     <script src="../ionicons@5.2.3/dist/ionicons.js"></script>
 </body>

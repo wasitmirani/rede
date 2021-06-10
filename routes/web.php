@@ -40,5 +40,7 @@ Auth::routes(['register'=>false,'password.request'=>false,
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+Route::prefix('api')->group(function () {
 
-
+    Route::get('/conversations',[MessengerController::class,'getConversations']);
+});
