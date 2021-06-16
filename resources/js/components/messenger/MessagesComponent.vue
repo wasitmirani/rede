@@ -19,13 +19,13 @@
                         <div class="pb-16 w-full">
                             <ul class="dark:text-gray-100">
                                 <li v-for="item in conversations" :key="item.id">
-                                    <a href="#" class="block flex items-center py-3 px-4 space-x-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <a role="button" @click="get_conversation(item)" class="block flex items-center py-3 px-4 space-x-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                                         <div class="w-12 h-12 rounded-full relative flex-shrink-0">
                                             <img :src="getImg('profile.jpg')" alt="" class="absolute h-full rounded-full w-full">
                                             <span class="absolute bg-green-500 border-2 border-white bottom-0 h-3 m-0.5 right-0 rounded-full shadow-md w-3"></span>
                                         </div>
                                         <div class="flex-1 min-w-0 relative text-gray-500">
-                                            <h4 class="text-black font-semibold dark:text-white">David Peterson</h4>
+                                            <h4 class="text-black font-semibold dark:text-white">{{getName(item).substr(0,10)}}</h4>
                                             <span class="absolute right-0 top-1 text-xs">{{dateFormate(item.created_at)}}</span>
                                             <p class="truncate">{{messageLimit(item.message)}}</p>
                                         </div>
@@ -60,40 +60,29 @@
 
                         <div class="border-t dark:border-gray-600">
 
-                            <div class="lg:p-8 p-4 space-y-5">
+                            <div class="lg:p-8 p-4 space-y-5" v-for="item in messages" :key="item.id">
 
-                                <h3 class="lg:w-60 mx-auto text-sm uk-heading-line uk-text-center lg:pt-2"><span> 28 June, 2018 </span></h3>
 
-                                <!-- my message-->
-                                <div class="flex lg:items-center flex-row-reverse">
-                                    <div class="w-14 h-14 rounded-full relative flex-shrink-0">
-                                        <img :src="getImg('profile.jpg')" alt="" class="absolute h-full rounded-full w-full">
-                                    </div>
-                                    <div class="text-white py-2 px-3 rounded bg-blue-600 relative h-full lg:mr-5 mr-2 lg:ml-20">
-                                        <p class="leading-6">consectetuer adipiscing elit, sed diam nonummy nibh euismod laoreet dolore magna <i class="uil-grin-tongue-wink"></i> </p>
-                                        <div class="absolute w-3 h-3 top-3 -right-1 bg-blue-600 transform rotate-45"></div>
-                                    </div>
-                                </div>
 
-                                <h3 class="lg:w-60 mx-auto text-sm uk-heading-line uk-text-center lg:pt-2"><span> 28 June, 2018 </span></h3>
+                                <!-- <h3 class="lg:w-60 mx-auto text-sm uk-heading-line uk-text-center lg:pt-2"><span> 28 June, 2018 </span></h3> -->
 
-                                <div class="flex lg:items-center">
+                                <div class="flex lg:items-center" v-if="item.sender_id!=auth_user.id & item.receiver_id!=auth_user.id">
                                     <div class="w-14 h-14 rounded-full relative flex-shrink-0">
                                         <img :src="getImg('profile.jpg')" alt="" class="absolute h-full rounded-full w-full">
                                     </div>
                                     <div class="text-gray-700 py-2 px-3 rounded bg-gray-100 h-full relative lg:ml-5 ml-2 lg:mr-20 dark:bg-gray-700 dark:text-white">
-                                        <p class="leading-6">In ut odio libero vulputate <urna class="i uil-heart"></urna> <i class="uil-grin-tongue-wink"> </i> </p>
+                                        <p class="leading-6"> {{item.message}} <i class="uil-grin-tongue-wink"> </i> </p>
                                         <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-700"></div>
                                     </div>
                                 </div>
 
                                 <!-- my message-->
-                                <div class="flex lg:items-center flex-row-reverse">
+                                <div class="flex lg:items-center flex-row-reverse" v-else>
                                     <div class="w-14 h-14 rounded-full relative flex-shrink-0">
                                         <img :src="getImg('profile.jpg')" alt="" class="absolute h-full rounded-full w-full">
                                     </div>
                                     <div class="text-white py-2 px-3 rounded bg-blue-600 relative h-full lg:mr-5 mr-2 lg:ml-20">
-                                        <p class="leading-6">Nam liber tempor cum soluta nobis eleifend option <i class="uil-grin-tongue-wink-alt"></i></p>
+                                        <p class="leading-6"> {{item.message}} <i class="uil-grin-tongue-wink-alt"></i></p>
                                         <div class="absolute w-3 h-3 top-3 -right-1 bg-blue-600 transform rotate-45"></div>
                                     </div>
                                 </div>
@@ -127,10 +116,27 @@ data(){
         users:[],
         message:null,
         message_body:'',
+        auth_user:null,
         conversations:[],
+        messages:[],
     };
 },
 methods:{
+   get_conversation(item){
+       axios.get('/message/messages/'+item.conversation.id).then((res)=>{
+           this.messages=res.data;
+       });
+   },
+   getName(item){
+       console.log("item",item);
+       console.log("yy",user.id);
+       if(item.conversation.get_user1.id!=user.id){
+           return item.conversation.get_user1.name;
+       }
+       if(item.conversation.get_user2.id!=user.id){
+           return item.conversation.get_user2.name;
+       }
+   },
    dateFormate(val){
        return moment.utc(val).startOf('day').fromNow();
    },
@@ -151,7 +157,15 @@ methods:{
 },
 created(){
 this.getConversations();
+this.auth_user=user;
 console.log(user);
+    window.onbeforeunload = () => {
+      socket.emit("leaved", this.name);
+    };
+    socket.on("noOfConnections", count => {
+      this.connectionCount = count;
+    });
+
 }
 }
 </script>

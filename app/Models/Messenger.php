@@ -11,4 +11,8 @@ class Messenger extends Model
     public function conversation(){
         return  $this->belongsTo(Conversation::class, 'conversation_id', 'id')->with(['getUser1:id,name,email','getUser2:id,name,email']);
     }
+
+    public function messages($conversation_id){
+        return Messenger::latest()->where('conversation_id',$conversation_id)->get();
+    }
 }

@@ -24,7 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/user/register',[FrontEndController::class,'register']);
 
 Route::prefix('message')->name('message')->group(function () {
-    Route::get('/messages',[MessengerController::class,'getMessages']);
-  
+    Route::get('/messages/{conversation_id?}',[MessengerController::class,'getMessages']);
+
     // conversations
 });
