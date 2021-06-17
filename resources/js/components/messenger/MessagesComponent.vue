@@ -19,7 +19,7 @@
                         <div class="pb-16 w-full">
                             <ul class="dark:text-gray-100">
                                 <li v-for="item in conversations" :key="item.id">
-                                    <a role="button" @click="get_conversation(item)" class="block flex items-center py-3 px-4 space-x-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <a role="button" @click="getConversation(item)" class="block flex items-center py-3 px-4 space-x-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                                         <div class="w-12 h-12 rounded-full relative flex-shrink-0">
                                             <img :src="getImg('profile.jpg')" alt="" class="absolute h-full rounded-full w-full">
                                             <span class="absolute bg-green-500 border-2 border-white bottom-0 h-3 m-0.5 right-0 rounded-full shadow-md w-3"></span>
@@ -27,7 +27,7 @@
                                         <div class="flex-1 min-w-0 relative text-gray-500">
                                             <h4 class="text-black font-semibold dark:text-white">{{getName(item).substr(0,10)}}</h4>
                                             <span class="absolute right-0 top-1 text-xs">{{dateFormate(item.created_at)}}</span>
-                                            <p class="truncate">{{messageLimit(item.message)}}</p>
+                                            <p class="truncate">{{messageLimit(item.message.message)}}</p>
                                         </div>
                                     </a>
                                 </li>
@@ -41,7 +41,7 @@
 
                         <div class="px-5 py-4 flex uk-flex-between">
 
-                            <a href="#" class="flex items-center space-x-3">
+                            <!-- <a href="#" class="flex items-center space-x-3">
                                 <div class="w-10 h-10 rounded-full relative flex-shrink-0">
                                     <img src="assets/images/avatars/avatar-1.jpg" alt="" class="h-full rounded-full w-full">
                                     <span class="absolute bg-green-500 border-2 border-white bottom-0 h-3 m-0.5 right-0 rounded-full shadow-md w-3"></span>
@@ -55,51 +55,56 @@
 
                             <a href="#" class="flex hover:text-red-400 items-center leading-8 space-x-2 text-red-500 font-medium">
                                 <i class="uil-trash-alt"></i> <span class="lg:block hidden"> Delete Conversation </span>
-                            </a>
+                            </a> -->
                         </div>
 
-                        <div class="border-t dark:border-gray-600">
+                        <div class="border-t dark:border-gray-600" style="overflow-y: auto;height: 400px;">
 
-                            <div class="lg:p-8 p-4 space-y-5" v-for="item in messages" :key="item.id">
+                            <div class="lg:p-8 p-4 space-y-5" v-for="item in messages" :key="item.id" >
 
 
 
                                 <!-- <h3 class="lg:w-60 mx-auto text-sm uk-heading-line uk-text-center lg:pt-2"><span> 28 June, 2018 </span></h3> -->
 
-                                <div class="flex lg:items-center" v-if="item.sender_id!=auth_user.id & item.receiver_id!=auth_user.id">
+                                <div class="flex lg:items-center" v-if="item.sender_id!=auth_user.id">
                                     <div class="w-14 h-14 rounded-full relative flex-shrink-0">
                                         <img :src="getImg('profile.jpg')" alt="" class="absolute h-full rounded-full w-full">
                                     </div>
                                     <div class="text-gray-700 py-2 px-3 rounded bg-gray-100 h-full relative lg:ml-5 ml-2 lg:mr-20 dark:bg-gray-700 dark:text-white">
-                                        <p class="leading-6"> {{item.message}} <i class="uil-grin-tongue-wink"> </i> </p>
+                                        <p class="leading-6"> {{item.message}} </p>
                                         <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-700"></div>
                                     </div>
                                 </div>
-
-                                <!-- my message-->
                                 <div class="flex lg:items-center flex-row-reverse" v-else>
                                     <div class="w-14 h-14 rounded-full relative flex-shrink-0">
                                         <img :src="getImg('profile.jpg')" alt="" class="absolute h-full rounded-full w-full">
                                     </div>
                                     <div class="text-white py-2 px-3 rounded bg-blue-600 relative h-full lg:mr-5 mr-2 lg:ml-20">
-                                        <p class="leading-6"> {{item.message}} <i class="uil-grin-tongue-wink-alt"></i></p>
+                                        <p class="leading-6"> {{item.message}}  </p>
                                         <div class="absolute w-3 h-3 top-3 -right-1 bg-blue-600 transform rotate-45"></div>
                                     </div>
                                 </div>
 
-
-
-
+                                <!-- my message-->
+                                <!-- <div class="flex lg:items-center flex-row-reverse" v-if="item.sender_id==auth_user.id & item.receiver_id==auth_user.id">
+                                    <div class="w-14 h-14 rounded-full relative flex-shrink-0">
+                                        <img :src="getImg('profile.jpg')" alt="" class="absolute h-full rounded-full w-full">
+                                    </div>
+                                    <div class="text-white py-2 px-3 rounded bg-blue-600 relative h-full lg:mr-5 mr-2 lg:ml-20">
+                                        <p class="leading-6"> {{item.message}}  4</p>
+                                        <div class="absolute w-3 h-3 top-3 -right-1 bg-blue-600 transform rotate-45"></div>
+                                    </div>
+                                </div> -->
                             </div>
 
-                            <div class="border-t flex p-6 dark:border-gray-700">
-                                <textarea cols="1" rows="1" placeholder="Your Message.." class="border-0 flex-1 h-10 min-h-0 resize-none min-w-0 shadow-none dark:bg-transparent"></textarea>
-                                <div class="flex h-full space-x-2">
-                                    <button type="submit" class="bg-blue-600 font-semibold px-6 py-2 rounded-md text-white">Send</button>
-                                </div>
-                            </div>
 
                         </div>
+                         <div class="border-t flex p-6 dark:border-gray-700">
+                                <input type="text" v-model="message_body" placeholder="Your Message.." class="border-0 flex-1 h-10 min-h-0 resize-none min-w-0 shadow-none dark:bg-transparent" v-on:keyup.enter="sendMessage">
+                                <div class="flex h-full space-x-2">
+                                    <button type="submit" class="bg-blue-600 font-semibold px-6 py-2 rounded-md text-white" @click="sendMessage">Send</button>
+                                </div>
+                            </div>
 
                     </div>
                 </div>
@@ -118,23 +123,67 @@ data(){
         message_body:'',
         auth_user:null,
         conversations:[],
+        conversation_id:null,
         messages:[],
+        receiver:{},
+        connectionCount: 0,
     };
 },
 methods:{
-   get_conversation(item){
-       axios.get('/message/messages/'+item.conversation.id).then((res)=>{
+  async sendMessage(){
+         let formdata=new FormData();
+        formdata.append('receiver_id',this.receiver.id);
+        formdata.append('sender_id',this.auth_user.id);
+        formdata.append('conversation_id',this.conversation_id);
+        formdata.append('message',this.message_body);
+     await   axios.post('message/send',formdata).then((res)=>{
+         this.send(this.message_body,this.receiver.name);
+        axios.get('/message/messages/'+this.conversation_id).then((res)=>{
+                            this.messages=res.data;
+
+
+        });
+                    this.message_body="";
+                    console.log('sended success')
+
+                });
+   },
+   send(message,receiver) {
+       console.log("socket io",socket);
+      socket.emit(
+        "chat-message",
+        {
+          message: message,
+          receiver_id: receiver.id,
+          sender_id:this.auth_user.id,
+        },
+      );
+    //   this.messages.push({
+    //     message: this.message,
+    //   });
+      message = null;
+    },
+  async getConversation(item){
+       if(item.get_user1.id!=user.id){
+            this.receiver=item.get_user1;
+             this.conversation_id=item.id;
+       }
+       if(item.get_user2.id!=user.id){
+            this.receiver=item.get_user2;
+            this.conversation_id=item.id;
+       }
+
+     await  axios.get('/message/messages/'+item.id).then((res)=>{
            this.messages=res.data;
        });
    },
    getName(item){
-       console.log("item",item);
-       console.log("yy",user.id);
-       if(item.conversation.get_user1.id!=user.id){
-           return item.conversation.get_user1.name;
+
+       if(item.get_user1.id!=user.id){
+           return item.get_user1.name;
        }
-       if(item.conversation.get_user2.id!=user.id){
-           return item.conversation.get_user2.name;
+       if(item.get_user2.id!=user.id){
+           return item.get_user2.name;
        }
    },
    dateFormate(val){
@@ -155,16 +204,28 @@ methods:{
        });
    }
 },
-created(){
-this.getConversations();
-this.auth_user=user;
-console.log(user);
+ mounted() {
     window.onbeforeunload = () => {
       socket.emit("leaved", this.name);
     };
     socket.on("noOfConnections", count => {
       this.connectionCount = count;
     });
+  },
+created(){
+this.getConversations();
+this.auth_user=user;
+console.log("socket",socket);
+ socket.on("chat-message", data => {
+     console.log("socket io",data);
+      this.messages.push({
+        message: data.message,
+        receiver_id: data.receiver_id,
+        sender_id: data.sender_id
+      });
+
+    });
+// console.log(user);
 
 }
 }

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cache;
 
 class FrontEndController extends Controller
 {
@@ -72,5 +74,19 @@ class FrontEndController extends Controller
 
     public function customerLogin(){
         return  view('frontend.pages.customerLogin');
+    }
+
+    public function LoginUser(Request $request){
+        $password=$request->password;
+        $credentials = $request->only('email', 'password');
+        if(Auth::attempt($credentials)) {
+
+            Cache::put('customer_login',1);
+            return redirect()->route('new.feeds');
+
+        } else {
+            Cache::forget('customer_login');
+            return back()->with('message','Please check your email or password not matched try agin');
+        }
     }
 }

@@ -8,12 +8,17 @@
 				<p><strong>SHARE AN ADVENTURE.<br>
 				MAKE A FRIEND.</strong></p>
 			</div>
+    
+            @if(!cache()->get('customer_login'))
 			<div class="col-lg-6 dis-flex-end">
-
                 <a href="{{route('customer.login')}}" class="btn btn-business">login</a>
-          
-
 			</div>
+            @else
+
+            <div class="col-lg-6 dis-flex-end">
+                <a href="{{route('new.feeds')}}" class="btn btn-business">Dashboard</a>
+			</div>
+            @endif
 		</div>
 	</div>
 </header>

@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mb-5"> Feeds </h1>
+    <h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mb-5"> Feeds  Section is Soon</h1>
 
        <!-- <div class="lg:flex justify-center lg:space-x-10 lg:space-y-0 space-y-5">
 

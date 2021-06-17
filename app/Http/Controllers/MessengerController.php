@@ -17,7 +17,7 @@ class MessengerController extends Controller
 
     public function getConversations(Request $request){
         $conversation=new Conversation();
-        $conversations=$conversation->getLatestMessage();
+        $conversations=$conversation->getConversations();
 
         return response()->json($conversations,200);
     }
@@ -25,5 +25,15 @@ class MessengerController extends Controller
         $messenger=new Messenger();
         $messages=$messenger->messages($request->conversation_id);
         return response()->json($messages,200);
+    }
+
+    public function sendMessage(Request $request){
+
+        Messenger::create([
+            'sender_id'=>$request->sender_id,
+            'receiver_id'=>$request->receiver_id,
+            'message'=>$request->message,
+            'conversation_id'=>$request->conversation_id,
+        ]);
     }
 }

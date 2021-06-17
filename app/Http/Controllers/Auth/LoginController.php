@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cache;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -47,7 +48,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $input = $request->all();
-
+        Cache::forget('customer_login');
         $this->validate($request, [
             'username' => 'required',
             'password' => 'required',
