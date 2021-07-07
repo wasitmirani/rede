@@ -27,7 +27,6 @@
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/tailwind.css')}}">
 
-
 </head>
 
 <body>
@@ -524,7 +523,6 @@
 
     <script>
 
-
         (function (window, document, undefined) {
             'use strict';
             if (!('localStorage' in window)) return;
@@ -571,7 +569,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script>
-
 
         @auth
             window.user = {!! json_encode(Auth::user(), true) !!};

@@ -27,7 +27,6 @@
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/tailwind.css')}}">
 
-
 </head>
 
 <body>
@@ -407,10 +406,9 @@
                             </a>
                             <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
                                 <ul>
-                                    <li><a href="{{route('profile')}}"> Account setting </a> </li>
+                                    <li><a href="#"> Account setting </a> </li>
                                     <li><a href="#"> Payments </a> </li>
                                     <li><a href="#"> Help </a> </li>
-
                                     <li><a href="form-login.html"> Log Out</a></li>
                                 </ul>
                             </div>
@@ -524,7 +522,6 @@
 
     <script>
 
-
         (function (window, document, undefined) {
             'use strict';
             if (!('localStorage' in window)) return;
@@ -571,7 +568,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script>
-
 
         @auth
             window.user = {!! json_encode(Auth::user(), true) !!};

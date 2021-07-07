@@ -17,7 +17,7 @@ class UserDetailController extends Controller
     }
 
     public function editProfile(Request $request){
-
+        dd($request->all());
 
         $user = User::where('id',1)->first();
 
@@ -38,12 +38,7 @@ class UserDetailController extends Controller
         $user->phone_number = $request->phone_number;
         $user->username = $request->username;
 
-        if($user->save()){
-            return back()->with('message','Profile Updated');
-        }else{
-            return back()->with('message','Failed To Update Profile');
-
-        }
+        $user->save();
 
     }
 }

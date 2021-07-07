@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class UserDetailController extends Controller
@@ -18,7 +17,6 @@ class UserDetailController extends Controller
 
     public function editProfile(Request $request){
 
-
         $user = User::where('id',1)->first();
 
         if ($request->hasfile('image')) {
@@ -26,10 +24,6 @@ class UserDetailController extends Controller
 
             $name = Str::slug($name, '-')  . "-" . time() . '.' . $request->image->extension();
             $request->image->move(public_path("/user/images/"), $name);
-            $user->image = $name;
-
-        }else{
-            $user->image = $request->old_image;
 
         }
 
@@ -37,13 +31,8 @@ class UserDetailController extends Controller
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
         $user->username = $request->username;
-
-        if($user->save()){
-            return back()->with('message','Profile Updated');
-        }else{
-            return back()->with('message','Failed To Update Profile');
-
-        }
+        $user->image = $name;
+        $user->save();
 
     }
 }

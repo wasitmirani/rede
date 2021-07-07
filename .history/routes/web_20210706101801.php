@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FeedsController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\MessengerController;
-use App\Http\Controllers\UserDetailController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,7 +32,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/new/feeds',[FeedsController::class,'newFeeds'])->name('new.feeds');
 Route::get('inbox/messages',[MessengerController::class,'index'])->name('messages');
 Route::get('account/setting',[UserDetailController::class,'profileSetting'])->name('profile');
-Route::post('/edit/profile',[UserDetailController::class,'editProfile'])->name('edit.profile');
 
 
 Auth::routes(['register'=>false,'password.request'=>false,

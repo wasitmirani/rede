@@ -18,7 +18,6 @@ class UserDetailController extends Controller
 
     public function editProfile(Request $request){
 
-
         $user = User::where('id',1)->first();
 
         if ($request->hasfile('image')) {
@@ -38,12 +37,7 @@ class UserDetailController extends Controller
         $user->phone_number = $request->phone_number;
         $user->username = $request->username;
 
-        if($user->save()){
-            return back()->with('message','Profile Updated');
-        }else{
-            return back()->with('message','Failed To Update Profile');
-
-        }
+        $user->save();
 
     }
 }
