@@ -187,10 +187,10 @@
                         </div>
                         <div class="right-side lg:pr-4">
                              <!-- upload -->
-                            {{-- <a href="#" class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">
+                            <a href="#" class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">
                                 <ion-icon name="add-circle" class="-mb-1
                                  mr-1 opacity-90 text-xl uilus-circle"></ion-icon> Upload
-                            </a> --}}
+                            </a>
                              <!-- upload dropdown box -->
                             <div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small" class="header_dropdown">
 
@@ -408,15 +408,10 @@
                             <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
                                 <ul>
                                     <li><a href="{{route('profile')}}"> Account setting </a> </li>
+                                    <li><a href="#"> Payments </a> </li>
+                                    <li><a href="#"> Help </a> </li>
 
-
-                                    <li><a   href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                      document.getElementById('logout-form').submit();"> Log Out</a>
-                                                       <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                        @csrf
-                                                    </form>
-                                                      </li>
+                                    <li><a href="form-login.html"> Log Out</a></li>
                                 </ul>
                             </div>
 

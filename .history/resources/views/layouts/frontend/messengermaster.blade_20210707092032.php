@@ -410,7 +410,7 @@
                                     <li><a href="{{route('profile')}}"> Account setting </a> </li>
 
 
-                                    <li><a   href="{{ route('logout') }}"
+                                    <li><a href="form-login.html"  href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                       document.getElementById('logout-form').submit();"> Log Out</a>
                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
