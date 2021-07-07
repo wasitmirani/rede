@@ -16,15 +16,15 @@
     <div class="grid lg:grid-cols-3 mt-12 gap-8">
 
         <div class="bg-white rounded-md lg:shadow-lg shadow col-span-2">
-
+            <div class="alert-content ml-4">
+				<div class="alert-title font-semibold text-lg text-green-800">
+					Success
+				</div>
+				<div class="alert-description text-sm text-green-600">
+					This is an alert message, alert message goes here..!
+				</div>
+			</div>
             @if(Session::has('message'))
-            <div class="bg-indigo-900 text-center py-4 lg:px-4">
-              <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
-                <span class="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3"></span></span>
-                <span class="font-semibold mr-2 text-left flex-auto">{{Session::get('message')}}</span>
-                <svg class="fill-current opacity-75 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>
-              </div>
-            </div>
 
             @endif
 <form action="{{route('edit.profile')}}" method="post" enctype="multipart/form-data">

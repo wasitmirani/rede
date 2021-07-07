@@ -13,13 +13,10 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .vue()
-    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/app.scss', 'public/css');
 
 
-
-
-
-const path_css = "resources/assets/css";
+    const path_css="resources/assets/css";
 mix.styles([
     `${path_css+'/all.min.css'}`,
     `${path_css+'/bootstrap.min.css'}`,
@@ -27,11 +24,9 @@ mix.styles([
     `${path_css+'/fontawesome.css'}`,
     `${path_css+'/slick-theme.css'}`,
     `${path_css+'/style.css'}`,
-], 'public/css/style.css');
+],'public/css/style.css');
 
-
-
-const path_js = "resources/assets/js";
+const path_js="resources/assets/js";
 mix.scripts([
     `${path_js+'/bootstrap.bundle.min.js'}`,
     `${path_js+'/bootstrap.min.js'}`,
@@ -41,4 +36,4 @@ mix.scripts([
     `${path_js+'/popper.min.js'}`,
     `${path_js+'/slick.min.js'}`,
     `${path_js+'/slim.min.js'}`,
-], 'public/js/custom.js');
+],'public/js/custom.js');

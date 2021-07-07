@@ -25,8 +25,8 @@
         ================================================== -->
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/uikit.css')}}">
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/style.css')}}">
-
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('/messenger/assets/css/tailwind.css')}}">
+    <link href="{{asset('css/app.css')}}">
 
 
 

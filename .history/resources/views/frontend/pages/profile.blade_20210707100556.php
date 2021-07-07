@@ -16,7 +16,6 @@
     <div class="grid lg:grid-cols-3 mt-12 gap-8">
 
         <div class="bg-white rounded-md lg:shadow-lg shadow col-span-2">
-
             @if(Session::has('message'))
             <div class="bg-indigo-900 text-center py-4 lg:px-4">
               <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
