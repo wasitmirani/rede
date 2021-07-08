@@ -13,9 +13,12 @@ import VueFormWizard from 'vue-form-wizard'
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 import Swal from 'sweetalert2'
 import moment from 'moment';
-import io from 'socket.io-client';
-window.io = io;
-window.socket = io("http://localhost:3000");
+import { io } from "socket.io-client";
+const socket = io("http://localhost:3000");
+
+// Vue.use(io);
+// window.io = io;
+window.socket =socket;
 window.moment=moment;
 
 Vue.use(VueFormWizard)

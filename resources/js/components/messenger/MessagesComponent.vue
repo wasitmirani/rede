@@ -112,7 +112,6 @@
             </div>
 
 </template>
-
 <script>
 export default {
 name:"messages",
@@ -120,49 +119,70 @@ data(){
     return {
         users:[],
         message:null,
-        message_body:'',
+        message_body:null,
         auth_user:null,
         conversations:[],
         conversation_id:null,
         messages:[],
         receiver:{},
+        info: [],
+        online:[],
+        typing:false,
         connectionCount: 0,
     };
 },
 methods:{
-  async sendMessage(){
-         let formdata=new FormData();
-        formdata.append('receiver_id',this.receiver.id);
-        formdata.append('sender_id',this.auth_user.id);
-        formdata.append('conversation_id',this.conversation_id);
-        formdata.append('message',this.message_body);
-     await   axios.post('message/send',formdata).then((res)=>{
-         this.send(this.message_body,this.receiver.name);
-        axios.get('/message/messages/'+this.conversation_id).then((res)=>{
-                            this.messages=res.data;
+    sendMessage() {
+                    socket.emit('chat-message', {
+                        message:  this.message_body,
+                        receiver_id: this.receiver.id,
+                        sender_id:this.auth_user.id,
+                    }, this.receiver.name)
+                    this.messages.push({
+                        message: this.message_body,
+                        receiver_id: this.receiver.id,
+                        sender_id:this.auth_user.id,
+                        by: this.auth_user.name
+                    })
+                    this.message_body = null
+                },
+                 setName() {
+                     console.log("recvi",this.receiver.name);
+                    socket.emit('joined', this.receiver.name)
+
+                },
+//   async sendMessage(){
+//          let formdata=new FormData();
+//         formdata.append('receiver_id',this.receiver.id);
+//         formdata.append('sender_id',this.auth_user.id);
+//         formdata.append('conversation_id',this.conversation_id);
+//         formdata.append('message',this.message_body);
+//      await   axios.post('message/send',formdata).then((res)=>{
+
+//                     axios.get('/message/messages/'+this.conversation_id).then((res)=>{
+//                                         this.messages=res.data;
 
 
-        });
-                    this.message_body="";
-                    console.log('sended success')
+//                     });
+//                    socket.emit('chat-message', {
+//                         message: message,
+//                         receiver_id:  this.receiver.id,
+//                         sender_id:this.auth_user.id,
+//                     }, this.receiver.name)
+//                     this.messages.push({
+//                         message: this.message_body,
+//                         receiver_id:  this.receiver.id,
+//                         sender_id:this.auth_user.id,
+//                         type: 0,
+//                         by: this.auth_user
+//                     })
+//                     this.message_body = null
 
-                });
-   },
-   send(message,receiver) {
-       console.log("socket io",socket);
-      socket.emit(
-        "chat-message",
-        {
-          message: message,
-          receiver_id: receiver.id,
-          sender_id:this.auth_user.id,
-        },
-      );
-    //   this.messages.push({
-    //     message: this.message,
-    //   });
-      message = null;
-    },
+//                     console.log('sended success')
+
+//                 });
+//    },
+
   async getConversation(item){
        if(item.get_user1.id!=user.id){
             this.receiver=item.get_user1;
@@ -172,10 +192,11 @@ methods:{
             this.receiver=item.get_user2;
             this.conversation_id=item.id;
        }
-
+    this.setName();
      await  axios.get('/message/messages/'+item.id).then((res)=>{
            this.messages=res.data;
        });
+
    },
    getName(item){
 
@@ -204,26 +225,59 @@ methods:{
        });
    }
 },
- mounted() {
+  mounted() {
     window.onbeforeunload = () => {
       socket.emit("leaved", this.name);
     };
-    socket.on("noOfConnections", count => {
-      this.connectionCount = count;
-    });
+    // socket.on("noOfConnections", count => {
+    //   this.connectionCount = count;
+    // });
+  },
+  watch: {
+    newmessage(value) {
+      value ? socket.emit("typing", this.name) : socket.emit("stoptyping");
+    }
   },
 created(){
 this.getConversations();
 this.auth_user=user;
-console.log("socket",socket);
- socket.on("chat-message", data => {
-     console.log("socket io",data);
-      this.messages.push({
-        message: data.message,
-        receiver_id: data.receiver_id,
-        sender_id: data.sender_id
-      });
 
+     socket.on('chat-message', (data) => {
+         console.loog("newmsg",data);
+                    this.messages.push({
+                        message: data.message,
+                        by: data.user
+                    })
+                    this.typing = false
+                })
+
+
+    socket.on("typing", data => {
+      console.log(data);
+      this.typing = data;
+    });
+    socket.on("stoptyping", () => {
+      this.typing = false;
+    });
+    socket.on("leaved", name => {
+      this.online.splice(this.online.indexOf(name));
+      this.info.push({
+        name: name,
+        type: "Leaved"
+      });
+      setTimeout(() => {
+        this.info = [];
+      }, 5000);
+    });
+    socket.on("joined", name => {
+      this.online.push(name);
+      this.info.push({
+        name: name,
+        type: "Joined"
+      });
+      setTimeout(() => {
+        this.info = [];
+      }, 5000);
     });
 // console.log(user);
 
