@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/tailwind.css')}}">
 
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ asset('lib/css/emoji.css') }}" rel="stylesheet">
 
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
@@ -148,10 +150,10 @@
                             </div>
 
                              <!-- Notification -->
-                             <button type="button" id="addPostBtn" class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white" aria-expanded="false">
+                             {{-- <button type="button" id="addPostBtn" class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white" aria-expanded="false">
                                 <ion-icon name="add-circle" class="-mb-1
                                  mr-1 opacity-90 text-xl uilus-circle"></ion-icon> Upload Feed
-                            </button>
+                            </button> --}}
                             <a href="" class="header-links-item">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
@@ -309,10 +311,10 @@
                             <a href="#">
                                 @if(Auth::user()->image != null)
                                 <img src="{{asset('user/images/'.Auth::user()->image)}}" class="header-avatar" alt="">
-                                @else 
+                                @else
                                 <img src="{{asset('user/images/user.jpg')}}" class="header-avatar" alt="">
                                 @endif
-                               
+
                             </a>
                             <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
                                 <ul>
@@ -439,6 +441,8 @@
     <script>
 
 
+
+
         (function (window, document, undefined) {
             'use strict';
             if (!('localStorage' in window)) return;
@@ -481,6 +485,10 @@
     <script src="{{asset('/messenger/assets/js/uikit.js')}}"></script>
     <script src="{{asset('/messenger/assets/js/simplebar.js')}}"></script>
     <script src="{{asset('/messenger/assets/js/custom.js')}}"></script>
+    <script src="{{ asset('lib/js/config.js') }}"></script>
+  <script src="{{ asset('lib/js/util.js') }}"></script>
+  <script src="{{ asset('lib/js/jquery.emojiarea.js') }}"></script>
+  <script src="{{ asset('lib/js/emoji-picker.js') }}"></script>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

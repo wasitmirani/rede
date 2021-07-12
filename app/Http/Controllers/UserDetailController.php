@@ -13,7 +13,7 @@ class UserDetailController extends Controller
 {
     public function profileSetting(){
 
-        $user = User::find(1);
+        $user = User::find(Auth::user()->id);
 
         return view('frontend.pages.profile',compact('user'));
 
@@ -22,8 +22,7 @@ class UserDetailController extends Controller
     public function editProfile(Request $request){
 
 
-        $user = User::where('id',1)->first();
-
+        $user = User::where('id',Auth::user()->id)->first();
         if ($request->hasfile('image')) {
             $name = !empty($request->title) ? $request->title : config('app.name');
 

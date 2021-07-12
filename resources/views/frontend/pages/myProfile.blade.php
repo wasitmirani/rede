@@ -8,7 +8,13 @@
 
         <div>
             <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-1 rounded-full m-0.5 mr-2  w-56 h-56 relative overflow-hidden uk-transition-toggle">
+                @if(Auth::user()->image)
                 <img src="{{asset('/user/images/'.Auth::user()->image)}}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full dark:border-gray-900">
+                @else
+                <img src="{{asset('/user/images/user.jpg')}}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full dark:border-gray-900">
+
+                @endif
+
 
                 <div class="absolute -bottom-3 custom-overly1 flex justify-center pt-4 pb-7 space-x-3 text-2xl text-white uk-transition-slide-bottom-medium w-full">
                     <a href="#" class="hover:text-white">
@@ -82,7 +88,7 @@
 
                 <div class="divide-gray-300 divide-transparent divide-x grid grid-cols-3 lg:text-left lg:text-lg mt-3 text-center w-full dark:text-gray-100">
                     <div class="flex lg:flex-row flex-col"> 120k <strong class="lg:pl-2">Posts</strong></div>
-                    <div class="lg:pl-4 flex lg:flex-row flex-col"> {{ $following }}k <strong class="lg:pl-2">Followers</strong></div>
+                    <div class="lg:pl-4 flex lg:flex-row flex-col"> {{ $following }} <strong class="lg:pl-2">Followers</strong></div>
                     <div class="lg:pl-4 flex lg:flex-row flex-col"> {{ $followers }} <strong class="lg:pl-2">Following</strong></div>
                 </div>
 

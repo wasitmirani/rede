@@ -13,7 +13,9 @@ class FeedsController extends Controller
     //
     public function newFeeds(){
         $users = User::latest()->get();
-        return view('frontend.pages.messenger.index',compact('users'));
+        $posts = Feed::where('user_id',Auth::user()->id)->get();
+
+        return view('frontend.pages.messenger.index',compact('posts','users'));
     }
     public function feeds(){
         return view('frontend.pages.feeds');
