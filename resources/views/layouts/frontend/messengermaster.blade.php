@@ -307,7 +307,12 @@
                             <!-- profile -->
 
                             <a href="#">
+                                @if(Auth::user()->image != null)
                                 <img src="{{asset('user/images/'.Auth::user()->image)}}" class="header-avatar" alt="">
+                                @else 
+                                <img src="{{asset('user/images/user.jpg')}}" class="header-avatar" alt="">
+                                @endif
+                               
                             </a>
                             <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
                                 <ul>

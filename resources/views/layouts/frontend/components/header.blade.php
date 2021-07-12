@@ -2,7 +2,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-2 ">
+				@if(Auth::user()->image != null)
 				<div class="logo"><a href="/"><img src="{{asset('user/images/'.Auth::user()->image)}}" alt=""></a></div>
+				@else
+				<div class="logo"><a href="/"><img src="{{asset('user/images/user.jpg')}}" alt=""></a></div>
+				@endif
+				
 			</div>
 			<div class="col-lg-4 dis-flex-start">
 				<p><strong>SHARE AN ADVENTURE.<br>
