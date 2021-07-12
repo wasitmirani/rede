@@ -4,7 +4,7 @@
 <div class="flex justify-between items-baseline uk-visible@s">
     <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> Add Your Interests
     </h1>
-    <a href="#" class="text-blue-400 hover:text-blue-500"> See all</a>
+    <a href="#" class="text-blue-400 hover:text-blue-500"> Your Interest</a>
 </div>
 <div class="relative uk-slider" uk-slider="finite: true">
     @if(Session::has('message'))
@@ -16,7 +16,7 @@
             <div class="mb-4">
         <select class="js-example-tokenizer form-control " data-select2-id="select2-data-10-o7oq" name="interests[]"  multiple="multiple">
             @foreach($interests as $interest)
-            <option value="{{$interest->interest}}">{{$interest->interest}}</option>
+            <option value="{{$interest->id}}">{{$interest->interest}}</option>
             @endforeach
 
         </select>

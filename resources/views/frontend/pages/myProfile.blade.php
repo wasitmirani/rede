@@ -23,12 +23,17 @@
 
         <div class="lg:w/8/12 flex-1 flex flex-col lg:items-start items-center">
 
-            <h2 class="font-semibold lg:text-2xl text-lg mb-2"> Stella Jonathan</h2>
+            <h2 class="font-semibold lg:text-2xl text-lg mb-2"> {{Auth::user()->name}}</h2>
             <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
                 doming id quod mazim placerat facer possim assum</p>
 
                 <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
-                    <a href="#">Travailing</a> , <a href="#">Sports</a>  , <a href="#">Movies</a>
+                    @foreach($myInterests as $int)
+                      @foreach ($int->interests as $i)
+                      <a href="#">{{ $i->interest }}</a>
+                      @endforeach
+
+                    @endforeach
                 </div>
 
 
@@ -77,8 +82,8 @@
 
                 <div class="divide-gray-300 divide-transparent divide-x grid grid-cols-3 lg:text-left lg:text-lg mt-3 text-center w-full dark:text-gray-100">
                     <div class="flex lg:flex-row flex-col"> 120k <strong class="lg:pl-2">Posts</strong></div>
-                    <div class="lg:pl-4 flex lg:flex-row flex-col"> 420k <strong class="lg:pl-2">Followers</strong></div>
-                    <div class="lg:pl-4 flex lg:flex-row flex-col"> 530k <strong class="lg:pl-2">Following</strong></div>
+                    <div class="lg:pl-4 flex lg:flex-row flex-col"> {{ $following }}k <strong class="lg:pl-2">Followers</strong></div>
+                    <div class="lg:pl-4 flex lg:flex-row flex-col"> {{ $followers }} <strong class="lg:pl-2">Following</strong></div>
                 </div>
 
         </div>
@@ -96,13 +101,13 @@
             </div>
         </a>
         <a href="#story-modal" uk-toggle="">
-            <img src="assets/images/avatars/avatar-lg-1.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+            <img src="{{ asset('assets/images/avatars/avatar-lg-1.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
         </a>
         <a href="#story-modal" uk-toggle="">
-            <img src="assets/images/post/img2.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+            <img src="{{ asset('assets/images/post/img2.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
         </a>
         <a href="#story-modal" uk-toggle="">
-            <img src="assets/images/post/img7.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover uk-visible@s">
+            <img src="{{ asset('assets/images/post/img7.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover uk-visible@s">
         </a>
     </div>
 

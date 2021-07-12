@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/add/interest',[InterestController::class,'addInterests'])->name('add.interest');
     Route::get('/my/interest/{id}',[InterestController::class,'myInterests'])->name('my.interest');
     Route::get('/my/profile',[App\Http\Controllers\UserDetailController::class,'myProfile'])->name('my.profile');
+    Route::post('/follow/request',[FeedsController::class,'follow_request'])->name('follow.request');
     // Route::post('/upload/feed',[FeedsController::class,'storeFeed'])->name('store.feed');
     Route::post('/store/feed',[FeedsController::class , 'storeFeed'])->name('create.feeds');
 

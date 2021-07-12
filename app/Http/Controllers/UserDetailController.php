@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\FollowRequest;
+
 
 class UserDetailController extends Controller
 {
@@ -49,6 +52,13 @@ class UserDetailController extends Controller
     }
 
     public function myProfile(){
-        return view('frontend.pages.myProfile');
+        $id = Auth::user()->id;
+        $followers = FollowRequest::where('following',$id)->get()->count();
+
+        $following =  FollowRequest::where('follower',$id)->count();
+
+        $myInterests = User::with('interests')->where('id',Auth::user()->id)->get();
+
+        return view('frontend.pages.myProfile',compact('myInterests','following','followers'));
     }
 }
