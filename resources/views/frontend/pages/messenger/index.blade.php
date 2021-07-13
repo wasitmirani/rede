@@ -25,17 +25,25 @@
 
 
         <!-- post 1-->
+        @foreach($posts as $post)
         <div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0">
 
 
 
             <!-- post header-->
-            @foreach($posts as $post)
+
             <div class="flex justify-between items-center px-4 py-3">
                 <div class="flex flex-1 items-center space-x-4">
                     <a href="#">
                         <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-0.5 rounded-full">
+
+                            @if (Auth::user()->image != null)
+                            <img src="{{asset('user/images/'.Auth::user()->image)}}" class="bg-gray-200 border border-white rounded-full w-8 h-8">
+                            @else
+
                             <img src="{{asset('assets/images/avatars/avatar-2.jpg')}}" class="bg-gray-200 border border-white rounded-full w-8 h-8">
+                            @endif
+
                         </div>
                     </a>
                     <span class="block capitalize font-semibold dark:text-gray-100"> {{Auth::user()->name}} </span>
@@ -116,22 +124,12 @@
                         <div> Share</div>
                     </a>
                 </div>
-                <div class="flex items-center space-x-3">
-                    <div class="flex items-center">
-                        <img src="{{asset('assets/images/avatars/avatar-1.jpg')}}" alt="" class="w-6 h-6 rounded-full border-2 border-white dark:border-gray-900">
-                        <img src="{{asset('assets/images/avatars/avatar-4.jpg')}}" alt="" class="w-6 h-6 rounded-full border-2 border-white dark:border-gray-900 -ml-2">
-                        <img src="{{asset('assets/images/avatars/avatar-2.jpg')}}" alt="" class="w-6 h-6 rounded-full border-2 border-white dark:border-gray-900 -ml-2">
-                    </div>
-                    <div class="dark:text-gray-100">
-                        Liked <strong> Johnson</strong> and <strong> 209 Others </strong>
-                    </div>
-                </div>
 
                 <div class="border-t pt-4 space-y-4 dark:border-gray-600">
                     <div class="flex">
 
 
-
+                        {!! $post->feed !!}
 
 
 
@@ -151,8 +149,9 @@
                 </div>
 
             </div>
-            @endforeach
+
         </div>
+        @endforeach
 
 
         <!-- post 2-->
@@ -227,7 +226,7 @@
 
             <div class="p-3 border-b dark:border-gray-700">
 
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim laoreet dolore magna aliquam erat volutpat
+
 
             </div>
 
@@ -284,7 +283,7 @@
                             <img src="{{asset('assets/images/avatars/avatar-1.jpg')}}" alt="" class="absolute h-full rounded-full w-full">
                         </div>
                         <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 h-full relative lg:ml-5 ml-2 lg:mr-20  dark:bg-gray-800 dark:text-gray-100">
-                            <p class="leading-6">Nam liber tempor cum soluta nobis eleifend option <i class="uil-grin-tongue-wink-alt"></i>
+                            <p class="leading-6"> <i class="uil-grin-tongue-wink-alt"></i>
                             </p>
                             <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
                         </div>
@@ -322,26 +321,14 @@
               <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700 uk-drop" uk-drop="mode: hover;pos: top-right">
 
                   <ul class="space-y-1">
-                    <li>
-                        <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                         <i class="uil-share-alt mr-1"></i> Share
-                        </a>
-                    </li>
+
                     <li>
                         <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
                          <i class="uil-edit-alt mr-1"></i>  Edit Post
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                         <i class="uil-comment-slash mr-1"></i>   Disable comments
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                         <i class="uil-favorite mr-1"></i>  Add favorites
-                        </a>
-                    </li>
+
+
                     <li>
                       <hr class="-mx-2 my-2 dark:border-gray-800">
                     </li>
@@ -454,19 +441,29 @@
 
             <div class="divide-gray-300 divide-gray-50 divide-opacity-50 divide-y px-4 dark:divide-gray-800 dark:text-gray-100">
                 @foreach($users as $user)
+                  @foreach($follower as $follow)
+
                 <div class="flex items-center justify-between py-3">
                     <div class="flex flex-1 items-center space-x-4">
                         <a href="profile.html">
-                            <img src="{{ asset('assets/images/avatars/avatar-2.jpg') }}" class="bg-gray-200 rounded-full w-10 h-10">
+                            <img src="{{ asset('user/images/user.jpg') }}" class="bg-gray-200 rounded-full w-10 h-10">
                         </a>
                         <div class="flex flex-col">
                             <span class="block capitalize font-semibold"> {{ $user->name }} </span>
                             {{-- <span class="block capitalize text-sm"> Australia </span> --}}
                         </div>
                     </div>
+                     @if($follow->following == $user->id && $follow->follower == Auth::user()->id)
+                     @php
 
+                     @endphp
+                    <button type="button" id="followBtn{{ $user->id }}"  data-id="{{ $user->id }}" data-follower="{{ Auth::user()->id }}" class="border followBtn border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800"> Follower </button>
+                    @else
                     <button type="button" id="followBtn{{ $user->id }}"  data-id="{{ $user->id }}" data-follower="{{ Auth::user()->id }}" class="border followBtn border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800"> Follow </button>
+
+                    @endif
                 </div>
+                @endforeach
                 @endforeach
 
             </div>
@@ -557,7 +554,7 @@
                 contentType: false,
                 success:function(msg){
 
-                    $("#postCollection").append('<div class="flex justify-between items-center px-4 py-3"><div class="flex flex-1 items-center space-x-4"><a href="#"></a><div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-0.5 rounded-full"><img src="{{asset('assets/images/avatars/avatar-2.jpg')}}" class="bg-gray-200 border border-white rounded-full w-8 h-8"></div></a><span class="block capitalize font-semibold dark:text-gray-100"></span></div><div><a href="#" aria-expanded="false"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i> </a><div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700 uk-drop" uk-drop="mode: hover;pos: top-right"><ul class="space-y-1"><li><a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800"><i class="uil-share-alt mr-1"></i> Share</a></li><li><a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800"><i class="uil-edit-alt mr-1"></i>  Edit Post</a></li><li><a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800"><i class="uil-comment-slash mr-1"></i>   Disable comments</a></li><li><a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800"><i class="uil-favorite mr-1"></i>  Add favorites</a> </li><li><hr class="-mx-2 my-2 dark:border-gray-800"></li><li><a href="#" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600"><i class="uil-trash-alt mr-1"></i> Delete</a></li></ul></div><div class="p-3 border-b dark:border-gray-700">'+msg.feed+'</div></div></div>');
+                    $("#postCollection").append('<div id="postArea" class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0"><div class="grid grid-cols-2 gap-3 lg:p-6 p-4"><div class="flex justify-between items-center px-4 py-3"><div class="flex flex-1 items-center space-x-4"><a href="#"></a><div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-0.5 rounded-full"><img src="{{asset('assets/images/avatars/avatar-2.jpg')}}" class="bg-gray-200 border border-white rounded-full w-8 h-8"></div></a><span class="block capitalize font-semibold dark:text-gray-100"></span></div><div><a href="#" aria-expanded="false"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i> </a><div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700 uk-drop" uk-drop="mode: hover;pos: top-right"><ul class="space-y-1"><li><a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800"><i class="uil-share-alt mr-1"></i> Share</a></li><li><a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800"><i class="uil-edit-alt mr-1"></i>  Edit Post</a></li><li><a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800"><i class="uil-comment-slash mr-1"></i>   Disable comments</a></li><li><a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800"><i class="uil-favorite mr-1"></i>  Add favorites</a> </li><li><hr class="-mx-2 my-2 dark:border-gray-800"></li><li><a href="#" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600"><i class="uil-trash-alt mr-1"></i> Delete</a></li></ul></div><div class="p-3 border-b dark:border-gray-700">'+msg.feed+'</div></div></div></div></div>');
 
 
                 },

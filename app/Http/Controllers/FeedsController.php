@@ -12,10 +12,12 @@ class FeedsController extends Controller
 {
     //
     public function newFeeds(){
-        $users = User::latest()->get();
-        $posts = Feed::where('user_id',Auth::user()->id)->get();
 
-        return view('frontend.pages.messenger.index',compact('posts','users'));
+        $users = User::latest()->get();
+        $posts = Feed::where('user_id',Auth::user()->id)->orderby('id','desc')->get();
+        $follower = FollowRequest::where('following',Auth::user()->id)->get();
+
+        return view('frontend.pages.messenger.index',compact('posts','users','follower'));
     }
     public function feeds(){
         return view('frontend.pages.feeds');
