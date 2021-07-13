@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use App\Models\Feed;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -43,5 +43,9 @@ class User extends Authenticatable
     public function interests(){
 
         return $this->belongsToMany(Interest::class);
+    }
+
+    public function feeds(){
+        return $this->hasMany(Feed::class);
     }
 }

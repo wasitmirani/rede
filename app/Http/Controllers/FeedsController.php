@@ -7,19 +7,53 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\FollowRequest;
+use App\Models\Comment;
 
 class FeedsController extends Controller
 {
-    //
+
     public function newFeeds(){
 
-        $users = User::latest()->get();
-        $posts = Feed::where('user_id',Auth::user()->id)->orderby('id','desc')->get();
-        $follower = FollowRequest::where('following',Auth::user()->id)->get();
+        $follower = FollowRequest::where('follower',Auth::user()->id)->get();
+        $followerId = FollowRequest::where('follower',Auth::user()->id)->get();
+        $posts = '';
+        $users = '';
 
-        return view('frontend.pages.messenger.index',compact('posts','users','follower'));
+
+       if(!$followerId){
+
+        foreach($followerId  as $fid){
+            $users = User::where([['id','!=',Auth::user()->id],['id','!=',$fid->following]])
+            ->orderby('id','desc')
+            ->get();
+        }
+        foreach($followerId  as $fid){
+            $posts = Feed::with('user')->with('comments')->where('user_id','=',Auth::user()->id)->orWhere('user_id','=',$fid->following)->orderBy('id','desc')
+            ->get();
+
+        }
+
+       }else{
+        $users = User::where('id','!=',Auth::user()->id)
+        ->orderby('id','desc')
+        ->get();
+        $posts = Feed::with('user')->with('comments')->where('user_id','=',Auth::user()->id)->orderBy('id','desc')
+        ->get();
+
+    }
+
+
+
+
+
+
+
+        $comments = Comment::with('user')->get();
+        $totalPost = Feed::where('user_id',Auth::user()->id)->count();
+        return view('frontend.pages.messenger.index',compact('posts','users','follower','totalPost','comments'));
     }
     public function feeds(){
+
         return view('frontend.pages.feeds');
     }
 
@@ -44,20 +78,48 @@ class FeedsController extends Controller
     }
 
     public function follow_request(Request $request){
+        $user = FollowRequest::where([['following','=',$request->following],['follower','=',$request->follower]])->count();
+if($user == "0"){
+    $requested = FollowRequest::create([
+        'following' => $request->following,
+        'follower' => $request->follower,
+        'status' => $request->status,
+    ]);
 
-        $request = FollowRequest::create([
-            'following' => $request->following,
-            'follower' => $request->follower,
-            'status' => $request->status,
-        ]);
 
-        if($request){
+    if($requested){
 
-            return response()->json("Following");
+        return response()->json("Following");
 
-        }else{
-            return '';
+    }
+}
+    else{
+            return response()->json('Alreading Following');
         }
 
     }
+
+
+    public function likeFeed(Request $request){
+
+
+           $update = Feed::where('id',$request->id)->update([
+               'like_status' => 1,
+               'liked_by' => $request->likedBy
+           ]);
+
+           if($update){
+
+              return response()->json($update);
+
+           }else{
+               return response()->json('Failed To Like');
+           }
+
+
+    }
+
+
+
+
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\MessengerController;
 use App\Http\Controllers\UserDetailController;
 use App\Http\Controllers\InterestController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/my/interest/{id}',[InterestController::class,'myInterests'])->name('my.interest');
     Route::get('/my/profile',[App\Http\Controllers\UserDetailController::class,'myProfile'])->name('my.profile');
     Route::post('/follow/request',[FeedsController::class,'follow_request'])->name('follow.request');
+    Route::post('/like/feed',[FeedsController::class,'likeFeed'])->name('like.feed');
+    Route::post('/post/comment',[CommentController::class,'PostComment'])->name('post.comment');
     // Route::post('/upload/feed',[FeedsController::class,'storeFeed'])->name('store.feed');
     Route::post('/store/feed',[FeedsController::class , 'storeFeed'])->name('create.feeds');
 

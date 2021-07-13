@@ -36,7 +36,7 @@
                 <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
                     @foreach($myInterests as $int)
                       @foreach ($int->interests as $i)
-                      <a href="#">{{ $i->interest }}</a>
+                      <a class="bg-white py-2 px-4 rounded inline-block font-bold shadow" href="#">{{ $i->interest }}</a>
                       @endforeach
 
                     @endforeach
@@ -87,9 +87,9 @@
                 </div> --}}
 
                 <div class="divide-gray-300 divide-transparent divide-x grid grid-cols-3 lg:text-left lg:text-lg mt-3 text-center w-full dark:text-gray-100">
-                    <div class="flex lg:flex-row flex-col"> 120k <strong class="lg:pl-2">Posts</strong></div>
-                    <div class="lg:pl-4 flex lg:flex-row flex-col"> {{ $following }} <strong class="lg:pl-2">Followers</strong></div>
-                    <div class="lg:pl-4 flex lg:flex-row flex-col"> {{ $followers }} <strong class="lg:pl-2">Following</strong></div>
+                    <div class="flex lg:flex-row flex-col"> {{ App\Models\Feed::where('user_id',Auth::user()->id)->count() }}<strong class="lg:pl-2">Posts</strong></div>
+                    <div class="lg:pl-4 flex lg:flex-row flex-col"> {{ $followers }} <strong class="lg:pl-2">Followers</strong></div>
+                    <div class="lg:pl-4 flex lg:flex-row flex-col">{{ $following }}  <strong class="lg:pl-2">Following</strong></div>
                 </div>
 
         </div>
