@@ -159,13 +159,13 @@
 
                     </div>
                 </form>
-                <div ></div>
+                <div class="commentDisplay" ></div>
                 </div>
 
             </div>
             @foreach($comments as $comment)
               @if($comment->post_id == $post->id)
-            <div class="flex">
+            {{-- <div class="flex">
                 <div class="w-10 h-10 rounded-full relative flex-shrink-0 ml-4 mb-4">
                     <img src="{{asset('user/images/'.$comment->user->image)}}" alt="" class="absolute h-full rounded-full w-full">
                 </div>
@@ -173,9 +173,12 @@
                     <p class="leading-6" >{{$comment->comment }} <urna class="i uil-heart"></urna> <i class="uil-grin-tongue-wink"> </i> </p>
                     <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
                 </div>
-            </div>
+            </div> --}}
+
             @endif
             @endforeach
+            <div  id="moreComment{{ $post->id }}"></div>
+            <button class="showMore" data-id="{{ $post->id }}" class="flex items-center space-x-2 comment">Show Comments</button>
 
         </div>
 
@@ -463,22 +466,27 @@
         <div class="bg-white dark:bg-gray-900 shadow-md rounded-md overflow-hidden">
 
             <div class="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 flex items-baseline justify-between py-4 px-6 dark:border-gray-800">
-                <h2 class="font-semibold text-lg">Who to follow</h2>
+                <h2 class="font-semibold text-lg">Followers</h2>
                 <a href="#"> Refresh</a>
             </div>
 
             <div class="divide-gray-300 divide-gray-50 divide-opacity-50 divide-y px-4 dark:divide-gray-800 dark:text-gray-100">
-                @if(!empty($users))
-                @foreach($users as $user)
+
+                @foreach($follower as $req)
 
 
                 <div class="flex items-center justify-between py-3">
                     <div class="flex flex-1 items-center space-x-4">
                         <a href="profile.html">
+                            @if ($req->followersreq->image == null)
                             <img src="{{ asset('user/images/user.jpg') }}" class="bg-gray-200 rounded-full w-10 h-10">
+                            @else
+                            <img src="{{ asset('user/images/'.$req->followersreq->image) }}" class="bg-gray-200 rounded-full w-10 h-10">
+                            @endif
+
                         </a>
                         <div class="flex flex-col">
-                            <span class="block capitalize font-semibold"> {{ $user->name }} </span>
+                            <span class="block capitalize font-semibold"> {{ $req->followersreq->name }} </span>
                             {{-- <span class="block capitalize text-sm"> Australia </span> --}}
                         </div>
                     </div>
@@ -486,7 +494,7 @@
 
 
 
-                     <button type="button" id="followBtn{{ $user->id }}"  data-id="{{ $user->id }}" data-follower="{{ Auth::user()->id }}" class="border followBtn border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800"> Follow </button>
+                     <button type="button" id="followBtn{{ $req->followersreq->id }}"  data-id="{{ $req->followersreq->id }}" data-follower="{{ Auth::user()->id }}" class="border followBtn border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800"> Follow </button>
 
 
 
@@ -495,7 +503,7 @@
                 </div>
 
                 @endforeach
-                @endif
+
 
             </div>
 
@@ -505,53 +513,45 @@
             <div class="bg-white dark:bg-gray-900 shadow-md rounded-md overflow-hidden">
 
                 <div class="bg-gray-50 border-b border-gray-100 flex items-baseline justify-between py-4 px-6 dark:bg-gray-800 dark:border-gray-700">
-                    <h2 class="font-semibold text-lg">Latest</h2>
+                    <h2 class="font-semibold text-lg">who to follow</h2>
                     <a href="explore.html"> See all</a>
                 </div>
+                @foreach($NotFollowing as $followthem)
+                 <div class="flex items-center justify-between py-3 ml-3">
+                    <div class="flex flex-1 items-center space-x-4">
+                        <a href="profile.html">
+                            @if ($followthem->followings->image == null)
+                            <img src="{{ asset('user/images/user.jpg') }}" class="bg-gray-200 rounded-full w-10 h-10">
+                            @else
+                            <img src="{{ asset('user/images/'.$followthem->followings->image) }}" class="bg-gray-200 rounded-full w-10 h-10">
+                            @endif
 
-                <div class="grid grid-cols-2 gap-2 p-3 uk-link-reset">
-
-                    <div class="bg-red-500 max-w-full h-32 rounded-lg relative overflow-hidden uk-transition-toggle">
-                        <a href="#story-modal" uk-toggle="">
-                            <img src="{{asset('assets/images/post/img2.jpg')}}" class="w-full h-full absolute object-cover inset-0">
                         </a>
-                        <div class="flex flex-1 justify-around items-center absolute bottom-0 w-full p-2 text-white custom-overly1 uk-transition-slide-bottom-medium">
-                            <a href="#"> <i class="uil-heart"></i> 150 </a>
-                            <a href="#"> <i class="uil-heart"></i> 30 </a>
+                        <div class="flex flex-col">
+                            <span class="block capitalize font-semibold"> {{ $followthem->followings->name }} </span>
+                            {{-- <span class="block capitalize text-sm"> Australia </span> --}}
                         </div>
                     </div>
 
-                    <div class="bg-red-500 max-w-full h-40 rounded-lg relative overflow-hidden uk-transition-toggle">
-                        <a href="#story-modal" uk-toggle="">
-                            <img src="{{asset('assets/images/post/img7.jpg')}}" class="w-full h-full absolute object-cover inset-0">
-                        </a>
-                        <div class="flex flex-1 justify-around items-center absolute bottom-0 w-full p-2 text-white custom-overly1 uk-transition-slide-bottom-medium">
-                            <a href="#"> <i class="uil-heart"></i> 150 </a>
-                            <a href="#"> <i class="uil-heart"></i> 30 </a>
-                        </div>
-                    </div>
 
-                    <div class="bg-red-500 max-w-full h-40 -mt-8 rounded-lg relative overflow-hidden uk-transition-toggle">
-                        <a href="#story-modal" uk-toggle="">
-                            <img src="{{asset('assets/images/post/img5.jpg')}}" class="w-full h-full absolute object-cover inset-0">
-                        </a>
-                        <div class="flex flex-1 justify-around  items-center absolute bottom-0 w-full p-2 text-white custom-overly1 uk-transition-slide-bottom-medium">
-                            <a href="#"> <i class="uil-heart"></i> 150 </a>
-                            <a href="#"> <i class="uil-heart"></i> 30 </a>
-                        </div>
-                    </div>
 
-                    <div class="bg-red-500 max-w-full h-32 rounded-lg relative overflow-hidden uk-transition-toggle">
-                        <a href="#story-modal" uk-toggle="">
-                            <img src="{{asset('assets/images/post/img3.jpg')}}" class="w-full h-full absolute object-cover inset-0">
-                        </a>
-                        <div class="flex flex-1 justify-around  items-center absolute bottom-0 w-full p-2 text-white custom-overly1 uk-transition-slide-bottom-medium">
-                            <a href="#"> <i class="uil-heart"></i> 150 </a>
-                            <a href="#"> <i class="uil-heart"></i> 30 </a>
-                        </div>
-                    </div>
+
+                     <button type="button" id="followBtn{{ $followthem->followings->id }}"  data-id="{{ $followthem->followings->id }}" data-follower="{{ Auth::user()->id }}" class="border followBtn border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800"> Follow </button>
+
+
+
+
 
                 </div>
+                    @endforeach
+
+
+
+
+
+
+                </div>
+
 
             </div>
         </div><div class="uk-sticky-placeholder" hidden="" style="height: 381px; margin: 20px 0px 0px;"></div>
@@ -610,8 +610,16 @@
                     status : status
                 },
                 success:function(msg){
-                 $("followBtn"+following).html(msg);
-                 console.log("followBtn"+follower)
+                 $("followBtn"+following).html("Following");
+                 if(msg == "Alreading Following"){
+                    toastr.success("Alreading Following")
+
+                 }else{
+                    toastr.success("Following")
+
+                 }
+
+
 
                 }
             })
@@ -657,6 +665,9 @@
                 succss:function(msg){
 
                   toastr.success('Comment Posted');
+                  alert('done')
+
+                  $(".commentDisplay").html(msg);
 
 
 
@@ -672,6 +683,34 @@
 
 
         })
+
+        $('.showMore').on('click',function(){
+          var id = $(this).data('id');
+          $.ajax({
+              url:"/show/more/"+id,
+              type:"POST",
+              data:{_token:"{{ csrf_token() }}", id:id},
+              success:function(msg){
+                var output = "";
+                  jQuery.each(msg,function(index, item){
+
+
+                      output +='<div class="flex"><div class="w-10 h-10 rounded-full relative flex-shrink-0 ml-4 mb-4">'
+                               +'<img src="{{asset('user/images/')}}/'+item.user.image+'" alt="" class="absolute h-full rounded-full w-full">'
+                               +'</div>'
+                               +'<div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 h-full relative lg:ml-5 ml-2 lg:mr-20  dark:bg-gray-800 dark:text-gray-100">'
+                                +'<p class="leading-6" >'+item.comment+'<urna class="i uil-heart"></urna> <i class="uil-grin-tongue-wink"></i></p>'
+                                +'<div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>'
+                               +'</div></div>'
+
+                  })
+                  $("#moreComment"+id).fadeIn().append(output);
+
+
+
+              }
+          })
+        });
     })
 
 </script>

@@ -7,6 +7,8 @@ use App\Http\Controllers\MessengerController;
 use App\Http\Controllers\UserDetailController;
 use App\Http\Controllers\InterestController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\GroupController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,8 +42,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/follow/request',[FeedsController::class,'follow_request'])->name('follow.request');
     Route::post('/like/feed',[FeedsController::class,'likeFeed'])->name('like.feed');
     Route::post('/post/comment',[CommentController::class,'PostComment'])->name('post.comment');
+    Route::get('/events',[EventController::class,'index'])->name('events.list');
+    Route::get('/create/event',[EventController::class,'createEvent'])->name('create.event');
+    Route::post('/store/event',[EventController::class,'storeEvent'])->name('store.event');
+    Route::get('/event/detail/{id}',[EventController::class,'eventDetail'])->name('event.detail');
     // Route::post('/upload/feed',[FeedsController::class,'storeFeed'])->name('store.feed');
     Route::post('/store/feed',[FeedsController::class , 'storeFeed'])->name('create.feeds');
+    Route::get('/groups',[GroupController::class,'index'])->name('group.list');
+    Route::get('/create/group',[GroupController::class,'createGroup'])->name('create.group');
+    Route::post('/store/group',[GroupController::class,'storeGroup'])->name('store.group');
+    Route::get('/group/detail/{id}',[GroupController::class,'groupDetail'])->name('event.group');
+    Route::post('/show/more/{id}',[FeedsController::class,'showMore'])->name('show.more');
 
 
 });

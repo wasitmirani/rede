@@ -53,11 +53,13 @@ class UserDetailController extends Controller
     public function myProfile(){
         $id = Auth::user()->id;
         $followers = FollowRequest::where('following',$id)->get()->count();
+        $followingList = FollowRequest::with('followings')->where('follower',$id)->get();
+        $followerslist = FollowRequest::with('followersreq')->where('following',$id)->get();
+        $follower = "";
+
 
         $following =  FollowRequest::where('follower',$id)->count();
-
         $myInterests = User::with('interests')->where('id',Auth::user()->id)->get();
-
-        return view('frontend.pages.myProfile',compact('myInterests','following','followers'));
+        return view('frontend.pages.myProfile',compact('myInterests','following','followers','followerslist','followingList'));
     }
 }

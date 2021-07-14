@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <!-- Main Banner -->
 <section class="banner" style="background:url(/assets/images/signup-banner.jpg); " data-aos="fade-up">
 	<div class="container">

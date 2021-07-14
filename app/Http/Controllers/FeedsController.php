@@ -14,16 +14,20 @@ class FeedsController extends Controller
 
     public function newFeeds(){
 
-        $follower = FollowRequest::where('follower',Auth::user()->id)->get();
-        $followerId = FollowRequest::where('follower',Auth::user()->id)->get();
+        // $follower = FollowRequest::where('follower',Auth::user()->id)->get();
+        $followerId = FollowRequest::where('following',Auth::user()->id)->get();
         $posts = '';
         $users = '';
-
-
+        $totalPost = Feed::where('user_id',Auth::user()->id)->count();
+        $comments = Comment::with('user')->get();
+        $follower = FollowRequest::with('followersreq')->where('following','=',Auth::user()->id)->get();
+        $following = FollowRequest::with('followings')->where('follower','=',Auth::user()->id)->get();
+        $NotFollowing = FollowRequest::with('followersreq')->with('followings')->groupBy('id')->where([['following','!=',Auth::user()->id],['follower','!=',Auth::user()->id]])->get();
+        $feeds = FollowRequest::with('posts')->with('postComments')->with('followersreq')->where('follower','=',Auth::user()->id)->orWhere('following','=',Auth::user()->id)->get();
        if(!$followerId){
 
         foreach($followerId  as $fid){
-            $users = User::where([['id','!=',Auth::user()->id],['id','!=',$fid->following]])
+            $users = User::where([['id','!=',$fid->following],['id','!=',Auth::user()->id]])
             ->orderby('id','desc')
             ->get();
         }
@@ -42,16 +46,9 @@ class FeedsController extends Controller
 
     }
 
-
-
-
-
-
-
-        $comments = Comment::with('user')->get();
-        $totalPost = Feed::where('user_id',Auth::user()->id)->count();
-        return view('frontend.pages.messenger.index',compact('posts','users','follower','totalPost','comments'));
+    return view('frontend.pages.messenger.index',compact('posts','feeds','users','follower','totalPost','comments','NotFollowing'));
     }
+
     public function feeds(){
 
         return view('frontend.pages.feeds');
@@ -115,6 +112,16 @@ if($user == "0"){
            }else{
                return response()->json('Failed To Like');
            }
+
+
+    }
+
+
+    public function showMore(Request $request){
+
+        $comments = Comment::with('user')->where('post_id',$request->id)->get();
+        return response()->json($comments);
+
 
 
     }
