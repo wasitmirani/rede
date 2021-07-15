@@ -22,7 +22,7 @@ class FeedsController extends Controller
         $comments = Comment::with('user')->get();
         $follower = FollowRequest::with('followersreq')->where('following','=',Auth::user()->id)->get();
         $following = FollowRequest::with('followings')->where('follower','=',Auth::user()->id)->get();
-        $NotFollowing = FollowRequest::with('followersreq')->with('followings')->groupBy('id')->where([['following','!=',Auth::user()->id],['follower','!=',Auth::user()->id]])->get();
+        $NotFollowing = FollowRequest::with('followersreq')->with('followings')->groupBy('following')->where([['following','!=',Auth::user()->id],['follower','!=',Auth::user()->id]])->take(5)->get();
         $feeds = FollowRequest::with('posts')->with('postComments')->with('followersreq')->where('follower','=',Auth::user()->id)->orWhere('following','=',Auth::user()->id)->get();
        if(!$followerId){
 
