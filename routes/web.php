@@ -53,6 +53,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/store/group',[GroupController::class,'storeGroup'])->name('store.group');
     Route::get('/group/detail/{id}',[GroupController::class,'groupDetail'])->name('event.group');
     Route::post('/show/more/{id}',[FeedsController::class,'showMore'])->name('show.more');
+    Route::post('/search/people',[FeedsController::class,'searchPeople'])->name('search.people');
+    Route::get('/show/member/{id}',[FeedsController::class,'showMember'])->name('show.member');
+    Route::get('/group/{id}',[GroupController::class,'showGroup'])->name('show.group');
+    Route::get('/join/group',[GroupController::class,'join'])->name('join.group');
+    Route::post('/create/group/post',[GroupController::class,'createPost'])->name('create.group.post');
+    Route::get('/create/group/event/{id}',[EventController::class,'createGroupEvent'])->name('create.group.event');
+
+
 
 
 });

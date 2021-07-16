@@ -4,7 +4,7 @@
 <div class="flex justify-between items-baseline uk-visible@s">
     <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> Add Your Interests
     </h1>
-    <a href="#" class="text-blue-400 hover:text-blue-500"> Your Interest</a>
+    <a href="" class="text-blue-400 hover:text-blue-500"> Your Interest</a>
 </div>
 <div class="relative uk-slider" uk-slider="finite: true">
     @if(Session::has('message'))
@@ -78,7 +78,8 @@
     tokenSeparators: [',', ' ']
 })
 
-$(".addInterest").on("click",function(){
+$(".addInterest").on("click",function(e){
+    e.preventDefault();
 
     var interest_id = $(this).data('id');
     $.ajax({

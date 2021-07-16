@@ -8,6 +8,7 @@
                 <input type="text" placeholder="Group Title" name="title" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
 
             </div>
+            <input type="text" name="interest" placeholder="Group Interest" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
             <textarea placeholder="Group Detail" name="description" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;"></textarea>
             {{-- <input type="text" placeholder="Password" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
             <input type="text" placeholder="Confirm Password" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;"> --}}
@@ -32,6 +33,12 @@
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+
+$(".js-example-tokenizer").select2({
+    tags: true,
+    tokenSeparators: [',', ' ']
+});
+$(".select2-selection").css({"height": "2px"})
 $('#groupForm').on('submit',function(e){
 
     e.preventDefault();

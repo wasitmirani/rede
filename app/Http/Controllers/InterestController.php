@@ -26,21 +26,33 @@ class InterestController extends Controller
     public function addInterests(Request $request){
 
         $id = Auth::user()->id;
-     
 
-        $interest = json_encode($request->interests);
-        $interests = MyInterest::where('user_Id',$id)->count();
-        
-       
-        foreach($request->interests as $int){
-            $added = DB::table('interest_user')->insert([
-                'user_id' => Auth::user()->id,
-                'interest_id' => $int,
+
+        // $interest = json_encode($request->interests);
+
+        // $interests = MyInterest::where('user_Id',$id)->count();
+        $added = "";
+
+        foreach($request->interests as $interest){
+
+            $added = MyInterest::create([
+                'user_id' => $id,
+                'interest' => $interest
             ]);
 
 
-
         }
+
+
+        // foreach($request->interests as $int){
+        //     $added = DB::table('interest_user')->insert([
+        //         'user_id' => Auth::user()->id,
+        //         'interest_id' => $int,
+        //     ]);
+
+
+
+        // }
 
         // switch ($interests) {
         //     case '0':
@@ -69,8 +81,9 @@ class InterestController extends Controller
 
     public function myInterests($id){
 
-        $myInterests = User::with('interests')->where('id',$id)->get();
+        // $myInterests = User::with('interests')->where('id',$id)->get();
 
+        $myInterests = MyInterest::where('user_id',$id)->get();
 
         return view('frontend.pages.myinterest',compact('myInterests'));
 

@@ -19,6 +19,8 @@
 
         <ul class="uk-slider-items uk-child-width-1-5@m uk-child-width-1-3@s uk-child-width-1-2 uk-grid-small uk-grid">
   @foreach($groups as $group)
+
+
             <li>
                 <a href="#" uk-toggle="target: #offcanvas-preview">
                     <div class="market-list">
@@ -28,9 +30,9 @@
                             <div class="item-price">{{ $group->title }} </div>
                             <div class="item-title"> {!! $group->description !!} </div>
                             <div class="item-statistic">
+                                <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> {{ $group->interest }}</a>
 
-
-                                <a href="{{ route('groups.detail',$group->id) }}" uk-toggle="target: #offcanvas-create" class="bg-pink-500 hover:bg-pink-600 hover:text-white flex font-bold inline-block items-center px-4 py-2 rounded shadow text-white lg:block hidden">Detail</a>
+                                <a href="{{ route('show.group',$group->id) }}" uk-toggle="target: #offcanvas-create" class="bg-pink-500 hover:bg-pink-600 hover:text-white flex font-bold inline-block items-center px-4 py-2 rounded shadow text-white lg:block hidden">Explore</a>
                             </div>
                         </div>
                     </div>

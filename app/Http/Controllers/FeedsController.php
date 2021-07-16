@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feed;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\FollowRequest;
 use App\Models\Comment;
+use App\Models\MyInterest;
+use Illuminate\Http\Request;
+use App\Models\FollowRequest;
+use Illuminate\Support\Facades\Auth;
 
 class FeedsController extends Controller
 {
@@ -123,6 +124,25 @@ if($user == "0"){
         return response()->json($comments);
 
 
+
+    }
+
+    public function searchPeople(Request $request){
+
+        $result = MyInterest::with('users')->where('interest',$request->keyword)->get();
+
+
+        return  view('frontend.pages.searchresult',compact('result'));
+
+
+
+    }
+
+    public function showMember($id){
+
+        $member = User::with('interests')->where('id',$id)->first();
+
+        return view('frontend.pages.showuser',compact('member'));
 
     }
 

@@ -9,12 +9,12 @@
 
         <div class="uk-slider-container pb-3">
     @foreach($myInterests as $myInterest)
-     
 
-      @foreach($myInterest->interests as $int)
-          
-     <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow">  {{$int->interest}}</a> 
-     @endforeach
+
+
+
+     <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow">  {{$myInterest->interest}}</a>
+
 
 
   @endforeach

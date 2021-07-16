@@ -10,13 +10,18 @@ use Illuminate\Support\Facades\Auth;
 class EventController extends Controller
 {
     public function index(){
-        $events = Event::where('user_id',Auth::user()->id)->get();
+        $events = Event::with('user')->with('group')->get();
         return view('frontend.pages.events',compact('events'));
     }
 
     public function createEvent(){
 
         return view('frontend.pages.createevent');
+    }
+
+    public function createGroupEvent($id){
+        $id = $id;
+        return view('frontend.pages.createevent',compact('id'));
     }
 
     public function storeEvent(Request $request){
@@ -28,6 +33,7 @@ class EventController extends Controller
             'description' => 'required',
             'date' => 'required',
             'image' => 'required',
+            'interest' => 'required'
 
 
            ]);
@@ -48,6 +54,8 @@ class EventController extends Controller
            $event->description = $request->description;
            $event->event_date = $request->date;
            $event->user_id = Auth::user()->id;
+           $event->interest = $request->interest;
+           $event->group_id = $request->group_id;
            $event->image = $name;
            if($event->save()){
 

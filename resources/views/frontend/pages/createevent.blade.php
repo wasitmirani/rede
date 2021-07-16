@@ -8,9 +8,16 @@
                 <input type="text" placeholder="Event Title" name="title" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
                 <input type="date" placeholder="Event Date" name="date" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
             </div>
+            <div class="flex lg:flex-row flex-col" >
+                <input type="text" placeholder="Event Interest" name="interest" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+                @if(isset($id))
+                <input type="hidden" name="group_id" value="{{ $id }}">
+                @endif
+            </div>
+            <div class="flex lg:flex-row flex-col" >
             <textarea placeholder="Event Detail" name="description" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;"></textarea>
-            {{-- <input type="text" placeholder="Password" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-            <input type="text" placeholder="Confirm Password" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;"> --}}
+            </div>
+            {{--<input type="text" placeholder="Confirm Password" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;"> --}}
             <div class="flex justify-start my-4 space-x-1">
                 <div class="checkbox">
                     <input type="file" id="chekcbox1" name="image">

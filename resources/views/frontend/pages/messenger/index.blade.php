@@ -17,7 +17,13 @@
 
                     <div class="col-span-2">
                         <button type="submit" class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white" aria-expanded="false" id="uploadBtn">Upload</button>
+                        <div class="checkbox">
+                            <input type="file" id="chekcbox1" name="image">
+                            <label for="chekcbox1"><span class="checkbox-icon"></span></label>
+                        </div>
+
                     </div>
+
                 </form>
             </div>
         </div>
@@ -665,7 +671,7 @@
                 succss:function(msg){
 
                   toastr.success('Comment Posted');
-                  alert('done')
+
 
                   $(".commentDisplay").html(msg);
 

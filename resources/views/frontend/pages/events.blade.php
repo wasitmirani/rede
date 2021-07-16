@@ -13,39 +13,49 @@
     </div>
     <a href="{{ route('create.event') }}" uk-toggle="target: #offcanvas-create" class="bg-pink-500 hover:bg-pink-600 hover:text-white flex font-bold inline-block items-center px-4 py-2 rounded shadow text-white lg:block hidden"> <i class="-mb-1 mr-1 uil-plus"></i> Create</a>
 </div>
-<div class="relative mt-4" uk-slider="finite: true">
+@foreach($events as $event)
+<div class="flex lg:flex-row flex-col items-center lg:py-12 lg:space-x-12">
 
-    <div class="uk-slider-container pb-3">
+    <div>
+        <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-1 rounded-full m-0.5 mr-2  w-56 h-56 relative overflow-hidden uk-transition-toggle">
+            <img src="{{ asset('/user/event/images/'.$event->image) }}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full dark:border-gray-900">
+        </div>
+    </div>
 
-        <ul class="uk-slider-items uk-child-width-1-5@m uk-child-width-1-3@s uk-child-width-1-2 uk-grid-small uk-grid">
-  @foreach($events as $event)
-            <li>
-                <a href="#" uk-toggle="target: #offcanvas-preview">
-                    <div class="market-list">
-                        <div class="item-media"> <img src="{{ asset('/user/event/images/'.$event->image) }}" alt=""></div>
+    <div class="lg:w/8/12 flex-1 flex flex-col lg:items-start items-center">
 
-                        <div class="item-inner">
-                            <div class="item-price">{{ $event->title }} </div>
-                            <div class="item-title"> {!! $event->description !!} </div>
-                            <div class="item-statistic">
-                                <span> <span class="count">Event Date</span> {{ $event->event_date }}  </span>
-                                <span> <span class="count">106</span> views </span>
-                                <a href="{{ route('event.detail',$event->id) }}" uk-toggle="target: #offcanvas-create" class="bg-pink-500 hover:bg-pink-600 hover:text-white flex font-bold inline-block items-center px-4 py-2 rounded shadow text-white lg:block hidden">Detail</a>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </li>
-  @endforeach
+        <h2 class="font-semibold lg:text-2xl text-lg mb-2"> {{ $event->title }}</h2>
+        <h4 class="font-semibold lg:text-2xl text-lg mb-2">Creater: {{ $event->user->name }}</h4>
+        <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> {!! $event->description !!}</p>
+        @if(isset($event->group))
+        <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> Group: {{ $event->group->title }}</p>
+        @endif
 
-        </ul>
+            <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
+                <a href="#">{{ $event->interest }}</a>
+            </div>
 
-        <a class="-left-5 absolute bg-white bottom-1/2 flex h-11 items-center justify-center mb-8 p-2 rounded-full shadow text-2xl w-11 z-10 dark:bg-gray-800 dark:text-white" href="#" uk-slider-item="previous"> <i class="icon-feather-chevron-left"></i> </a>
-        <a class="-right-5 absolute bg-white bottom-1/2 flex h-11 items-center justify-center mb-8 p-2 rounded-full shadow text-2xl w-11 z-10 dark:bg-gray-800 dark:text-white" href="#" uk-slider-item="next"> <i class="icon-feather-chevron-right"></i></a>
+
+            <div class="capitalize flex font-semibold space-x-3 text-center text-sm my-2">
+                <a href="#" class="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700">Join Event</a>
+                <a href="#" class="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600">Visit</a>
+                <div>
+
+
+
+                </div>
+
+            </div>
+
+            <div class="divide-gray-300 divide-transparent divide-x grid grid-cols-3 lg:text-left lg:text-lg mt-3 text-center w-full dark:text-gray-100">
+
 
     </div>
 
+    <div class="w-20"></div>
+
 </div>
+@endforeach
 
 
 

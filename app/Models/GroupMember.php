@@ -4,20 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Comment;
 
-class Feed extends Model
+class GroupMember extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
 
-    public function user(){
+    public function members(){
         return $this->belongsTo(User::class,'user_id','id');
     }
 
-    public function comments(){
-        return $this->hasMany(Comment::class,'post_id','id');
-    }
+
 
 }

@@ -80,16 +80,19 @@
                             </div>
 
                             <div class="header_search">
-                                <input type="text" placeholder="Search..">
-                                <div class="icon-search">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                                <form action="{{ route('search.people') }}" method="post">
+                                    @csrf
+                                <input type="text" id="searchKeyword" placeholder="Search.." name="keyword">
+                               <button class="icon-search" type="submit">
+                                    <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
-                                </div>
+                                </button>
+                            </form>
                             </div>
 
                         </div>
-                        <div class="right-side lg:pr-4">
+                        <div class="right-side lg:pr-4" >
                              <!-- upload -->
                             {{-- <a href="#" class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">
                                 <ion-icon name="add-circle" class="-mb-1
@@ -336,7 +339,7 @@
                     </div>
                 </header>
 
-                <div class="container m-auto">
+                <div class="container m-auto" id="searchResult">
 
                     @yield('content')
 
@@ -518,9 +521,37 @@
     </script>
 
     <script src="../ionicons@5.2.3/dist/ionicons.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#searchBtn").click(function(){
 
+            var keyword = $("#searchKeyword").val();
+            $.ajax({
+                url:'/search/people',
+                type:'POST',
+                data:{_token:"{{ csrf_token() }}",keyword:keyword},
+                success:function(msg){
+                    var output = "";
+                  jQuery.each(msg,function(index, item){
+
+                  });
+
+
+
+                }
+            })
+
+
+
+    })
+ })
+
+</script>
 
     @yield('scripts')
+
+
+
 </body>
 
 </html>
