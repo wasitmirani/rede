@@ -1,19 +1,20 @@
 @extends('layouts.frontend.messengermaster')
 @section('content')
 <div class="container m-auto">
-
+    {{-- <a href="{{ route('create.event') }}" uk-toggle="target: #offcanvas-create" class="bg-pink-500 hover:bg-pink-600 hover:text-white flex font-bold inline-block items-center px-4 py-2 rounded shadow text-white lg:block hidden"> <i class="-mb-1 mr-1 uil-plus"></i> Create Event</a>
+    <a href="" uk-toggle="target: #offcanvas-create" class="bg-pink-500 hover:bg-pink-600 hover:text-white flex font-bold inline-block items-center px-4 py-2 rounded shadow text-white lg:block hidden"> <i class="-mb-1 mr-1 uil-plus"></i> Create Group</a> --}}
     <h1 class="text-2xl leading-none text-gray-900 tracking-tight mt-3"> Account Setting </h1>
     <ul class="mt-5 -mr-3 flex-nowrap lg:overflow-hidden overflow-x-scroll uk-tab">
-        <li class="uk-active"><a href="#">General</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Privacy</a></li>
-        <li><a href="#">Notification</a></li>
-        <li><a href="#">Social links</a></li>
-        <li><a href="#">Billing</a></li>
-        <li><a href="#">Security</a></li>
+        <li class="uk-active"><a href="#general">General</a></li>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="#potification">Notification</a></li>
+        <li><a href="#sociallinks">Social links</a></li>
+        <li><a href="#billing">Billing</a></li>
+        <li><a href="#security">Security</a></li>
     </ul>
 
-    <div class="grid lg:grid-cols-3 mt-12 gap-8">
+    <div class="grid lg:grid-cols-3 mt-12 gap-8" id="general">
 
         <div class="bg-white rounded-md lg:shadow-lg shadow col-span-2">
 
@@ -70,6 +71,7 @@
 
 
     </div>
+
 
 </div>
 

@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\FollowRequest;
+
 
 class UserDetailController extends Controller
 {
     public function profileSetting(){
 
-        $user = User::find(1);
+        $user = User::find(Auth::user()->id);
 
         return view('frontend.pages.profile',compact('user'));
 
@@ -19,13 +22,13 @@ class UserDetailController extends Controller
     public function editProfile(Request $request){
 
 
-        $user = User::where('id',1)->first();
-
+        $user = User::where('id',Auth::user()->id)->first();
         if ($request->hasfile('image')) {
             $name = !empty($request->title) ? $request->title : config('app.name');
 
             $name = Str::slug($name, '-')  . "-" . time() . '.' . $request->image->extension();
             $request->image->move(public_path("/user/images/"), $name);
+
             $user->image = $name;
 
         }else{
@@ -45,5 +48,18 @@ class UserDetailController extends Controller
 
         }
 
+    }
+
+    public function myProfile(){
+        $id = Auth::user()->id;
+        $followers = FollowRequest::where('following',$id)->get()->count();
+        $followingList = FollowRequest::with('followings')->where('follower',$id)->get();
+        $followerslist = FollowRequest::with('followersreq')->where('following',$id)->get();
+        $follower = "";
+
+
+        $following =  FollowRequest::where('follower',$id)->count();
+        $myInterests = User::with('interests')->where('id',Auth::user()->id)->get();
+        return view('frontend.pages.myProfile',compact('myInterests','following','followers','followerslist','followingList'));
     }
 }
