@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Feed;
 use App\Models\User;
+use App\Models\Event;
+use App\Models\Group;
 use App\Models\Comment;
 use App\Models\MyInterest;
 use Illuminate\Http\Request;
@@ -130,9 +132,11 @@ if($user == "0"){
     public function searchPeople(Request $request){
 
         $result = MyInterest::with('users')->where('interest',$request->keyword)->get();
+        $groups = Group::where('interest',$request->keyword)->get();
+        $events = Event::where('interest',$request->keyword)->get();
 
 
-        return  view('frontend.pages.searchresult',compact('result'));
+        return  view('frontend.pages.searchresult',compact('result','events','groups'));
 
 
 
@@ -145,6 +149,8 @@ if($user == "0"){
         return view('frontend.pages.showuser',compact('member'));
 
     }
+
+
 
 
 

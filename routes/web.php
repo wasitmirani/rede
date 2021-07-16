@@ -59,9 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/join/group',[GroupController::class,'join'])->name('join.group');
     Route::post('/create/group/post',[GroupController::class,'createPost'])->name('create.group.post');
     Route::get('/create/group/event/{id}',[EventController::class,'createGroupEvent'])->name('create.group.event');
-
-
-
+    Route::post('/accept/join/request',[GroupController::class,'acceptJoinRequest'])->name('accept.join.request');
 
 });
 

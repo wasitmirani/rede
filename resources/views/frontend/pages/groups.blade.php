@@ -32,7 +32,7 @@
                             <div class="item-statistic">
                                 <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> {{ $group->interest }}</a>
 
-                                <a href="{{ route('show.group',$group->id) }}" uk-toggle="target: #offcanvas-create" class="bg-pink-500 hover:bg-pink-600 hover:text-white flex font-bold inline-block items-center px-4 py-2 rounded shadow text-white lg:block hidden">Explore</a>
+                                <a href="{{ route('show.group',$group->id) }}" uk-toggle="target: #offcanvas-create" class="bg-pink-500 hover:bg-pink-600 hover:text-white flex font-bold inline-block items-center px-4 py-2 rounded shadow text-white lg:block hidden">Visit</a>
                             </div>
                         </div>
                     </div>

@@ -25,7 +25,7 @@
     <div class="lg:w/8/12 flex-1 flex flex-col lg:items-start items-center">
 
         <h2 class="font-semibold lg:text-2xl text-lg mb-2"> {{ $event->title }}</h2>
-        <h4 class="font-semibold lg:text-2xl text-lg mb-2">Creater: {{ $event->user->name }}</h4>
+        <h4 class="font-semibold lg:text-2xl text-lg mb-2">Creator: {{ $event->user->name }}</h4>
         <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> {!! $event->description !!}</p>
         @if(isset($event->group))
         <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> Group: {{ $event->group->title }}</p>
@@ -47,12 +47,12 @@
 
             </div>
 
-            <div class="divide-gray-300 divide-transparent divide-x grid grid-cols-3 lg:text-left lg:text-lg mt-3 text-center w-full dark:text-gray-100">
+
 
 
     </div>
 
-    <div class="w-20"></div>
+
 
 </div>
 @endforeach

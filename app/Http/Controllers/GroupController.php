@@ -65,12 +65,16 @@ class GroupController extends Controller
 
         $group = Group::with('members')->where('id',$id)->first();
         $posts = GroupPost::with('member')->orderBy('id','desc')->where('group_id',$id)->get();
-
+        $status = $this->memberStatus($id);
         $member = $this->singleMember($id);
         $groupMembers = GroupMember::with('members')->where('group_id',$group->id)->get();
+        return view('frontend.pages.group',compact('group','member','groupMembers','posts','status'));
 
-        return view('frontend.pages.group',compact('group','member','groupMembers','posts'));
+    }
 
+    public function memberStatus($id){
+        $status = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$id]])->first();
+       return $status;
     }
 
     public function singleMember($id){
@@ -100,6 +104,29 @@ class GroupController extends Controller
 
         }
 
+
+
+
+    }
+
+
+
+    public function acceptJoinRequest(Request $request){
+
+        $id = $request->request_id;
+
+        $request =  GroupMember::where('id',$id)->first();
+
+        $accepted = $request->update([
+            'status' => 1
+        ]);
+        if($accepted){
+
+            return response()->json('Accepted');
+
+        }else{
+            return response()->json('Spmething Went Wrong');
+        }
 
 
 

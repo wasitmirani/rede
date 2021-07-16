@@ -40,16 +40,24 @@
                         <div class="capitalize flex font-semibold space-x-3 text-center text-sm my-2">
                             <a type="button" data-id={{ $group->id }} id="joinBtn" class="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700">
 
-                                @if($member != null)
-                                @if($member->user_id == $group->user_id && $member->group_id == $group->id)
-
-                                Joined
 
 
-                                @endif
-                                @endif
+                              @switch($status)
+                                  @case('1')
+                                      Joined
+                                      @break
+                                  @case('0')
+                                      Join
+                                      @break
+                                  @default
+                                     Join
+                              @endswitch
 
-                                Join Group
+
+
+
+
+
 
                             </a>
                             <a href="#" class="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"> Send message</a>
@@ -133,7 +141,7 @@
                 </div>
                 <div uk-lightbox="">
                     <a href="{{ asset('/user/group/post/images/'.$post->file) }}">
-                        <img src="{{ asset('/user/group/post/images/'.$post->file) }}" alt="">
+                        <img src="{{ asset('/user/group/post/images/'.$post->file) }}" alt="" style="width: 665px;">
                     </a>
                 </div>
 
@@ -204,9 +212,10 @@
 
                 </div>
 
-                <div class="divide-gray-300 divide-gray-50 divide-opacity-50 divide-y px-4 dark:divide-gray-800 dark:text-gray-100">
-                    @foreach($groupMembers as $groupMember)
+                <div class="divide-gray-300 divide-gray-50 divide-opacity-50 divide-y px-4 dark:divide-gray-800 dark:text-gray-100" id="memberDiv">
 
+                    @foreach($groupMembers as $groupMember)
+                       @if($groupMember->status == 1)
 
                     <div class="flex items-center justify-between py-3">
                         <div class="flex flex-1 items-center space-x-4">
@@ -221,6 +230,8 @@
 
 
                     </div>
+
+                    @endif
 
                     @endforeach
 
@@ -237,7 +248,51 @@
                 </div>
             </div><div class="uk-sticky-placeholder" hidden="" style="height: 381px; margin: 20px 0px 0px;"></div>
 
+@if($group->user_id == Auth::user()->id)
+            <div class="bg-white dark:bg-gray-900 shadow-md rounded-md overflow-hidden">
+
+                <div class="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 flex items-baseline justify-between py-4 px-6 dark:border-gray-800">
+                    <h2 class="font-semibold text-lg">Join Requests</h2>
+
+                </div>
+
+                <div class="divide-gray-300 divide-gray-50 divide-opacity-50 divide-y px-4 dark:divide-gray-800 dark:text-gray-100" id="memberDiv">
+                    @foreach($groupMembers as $groupMember)
+
+                        @if($groupMember->status == 0)
+                    <div class="flex items-center justify-between py-3">
+                        <div class="flex flex-1 items-center space-x-4">
+                            <a href="profile.html">
+                                <img src="{{ asset('user/images/'.$groupMember->members->image) }}" class="bg-gray-200 rounded-full w-10 h-10">
+                            </a>
+                            <div class="flex flex-col">
+                                <span class="block capitalize font-semibold">{{ $groupMember->members->name }} </span>
+
+                            </div>
+                            <a type="button"  class="border border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800 acceptRequest" data-id="{{ $groupMember->id }}"> Accept </a>
+                        </div>
+
+
+                    </div>
+                        @endif
+
+                    @endforeach
+
+
+                </div>
+
+            </div>
+
+            <div class="mt-5 uk-sticky" uk-sticky="offset:28; bottom:true ; media @m">
+                <div class="bg-white dark:bg-gray-900 shadow-md rounded-md overflow-hidden">
+
+
+
+                </div>
+            </div><div class="uk-sticky-placeholder" hidden="" style="height: 381px; margin: 20px 0px 0px;"></div>
         </div>
+@endif
+
 
     </div>
 
@@ -258,6 +313,7 @@
         $('#joinBtn').click(function(){
 
               var group_id = $(this).data('id');
+              var memberDiv = $("#memberDiv");
               $.ajax({
                   url:"/join/group",
                   type:"get",
@@ -268,8 +324,12 @@
                         $("#joinBtn").html(msg)
                         toastr.success('Group Join Successfully');
 
+
                       }else if(msg == 'Join'){
+
+
                         $("#joinBtn").html('Join Group')
+                        toastr.success('You Leave The Group');
 
                       }
 
@@ -308,7 +368,7 @@
                             +'<a href="#" aria-expanded="false"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i> </a></div></div><div uk-lightbox="">'
                             +'<p>'+msg.content+'</p>'
                             +'<a href="{{ asset('/user/group/post/images/') }}/'+msg.file+'">'
-                            +'<img src="assets/images/post/img4.jpg" alt="">'
+                            +'<img src="{{ asset('/user/group/post/images/') }}/'+msg.file+'" alt="" style="width:665px;">'
                             +'</a></div><div class="py-3 px-4 space-y-3"><div class="flex space-x-4 lg:font-bold">'
                             +'<a href="#" class="flex items-center space-x-2">'
                             +'<div class="p-2 rounded-full text-black">'
@@ -326,6 +386,30 @@
                         +'</div></div></div></div>';
 
                         $("#postArea").append(output);
+
+
+                }
+            })
+
+
+
+        });
+
+        $(".acceptRequest").click(function(){
+
+            var req_id = $(this).data('id');
+            $.ajax({
+                url:"/accept/join/request",
+                type:'POST',
+                data:{
+                    _token:"{{ csrf_token() }}",
+                    request_id:req_id
+                },
+                success:function(msg){
+                    if(msg == "Accepted"){
+                        toastr.success('Accepted');
+
+                    }
 
 
                 }
