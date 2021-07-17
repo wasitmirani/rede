@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\MyInterest;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\FollowRequest;
+use Illuminate\Support\Facades\Auth;
 
 
 class UserDetailController extends Controller
@@ -14,8 +15,9 @@ class UserDetailController extends Controller
     public function profileSetting(){
 
         $user = User::find(Auth::user()->id);
+        $interests = MyInterest::where('id',Auth::user()->id)->get();
 
-        return view('frontend.pages.profile',compact('user'));
+        return view('frontend.pages.profile',compact('user','interests'));
 
     }
 
@@ -23,6 +25,7 @@ class UserDetailController extends Controller
 
 
         $user = User::where('id',Auth::user()->id)->first();
+
         if ($request->hasfile('image')) {
             $name = !empty($request->title) ? $request->title : config('app.name');
 

@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/tailwind.css')}}">
     <link rel="stylesheet" href="{{ asset('/assets/css/toaster.css') }}">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ asset('lib/css/emoji.css') }}" rel="stylesheet">

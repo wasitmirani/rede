@@ -7,6 +7,8 @@ use App\Models\GroupPost;
 use App\Models\GroupMember;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\GroupPostLike;
+use App\Models\GroupPostComment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,7 +35,6 @@ class GroupController extends Controller
 
            if ($request->hasfile('image')) {
             $name = !empty($request->title) ? $request->title : config('app.name');
-
             $name = Str::slug($name, '-')  . "-" . time() . '.' . $request->image->extension();
             $request->image->move(public_path("/user/group/images/"), $name);
 
@@ -65,16 +66,34 @@ class GroupController extends Controller
 
         $group = Group::with('members')->where('id',$id)->first();
         $posts = GroupPost::with('member')->orderBy('id','desc')->where('group_id',$id)->get();
+
+        $comments = GroupPostComment::with('members')->where('group_id',$id)->orderBy('id','desc')->limit(3)->get();
+       $likes = GroupPostLike::where('id',$id)->get();
+
+
         $status = $this->memberStatus($id);
+
+
         $member = $this->singleMember($id);
         $groupMembers = GroupMember::with('members')->where('group_id',$group->id)->get();
-        return view('frontend.pages.group',compact('group','member','groupMembers','posts','status'));
+        return view('frontend.pages.group',compact('group','member','groupMembers','posts','status','comments','likes'));
+
+    }
+
+    public function showGroupComments(Request $request){
+
+        $id = $request->post_id;
+        $comments = GroupPostComment::with('members')->where('post_id',$id)->orderBy('id','desc')->limit(5)->get();
+        return response()->json($comments);
+
+
 
     }
 
     public function memberStatus($id){
         $status = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$id]])->first();
-       return $status;
+
+       return $status->status;
     }
 
     public function singleMember($id){
@@ -163,6 +182,81 @@ class GroupController extends Controller
             return response()->json("Something Went Wrong");
 
           }
+
+
+
+    }
+
+
+    public function groupPostComment(Request $request){
+
+
+        $added = GroupPostComment::create([
+            'user_id'=>$request->user_id,
+            'group_id' => $request->group_id,
+            'post_id' => $request->post_id,
+            'content' => $request->content
+        ]);
+
+        if($added){
+            $id = $added->id;
+
+            $comments = GroupPostComment::with('members')->where('id',$id)->first();
+
+            return response()->json($comments);
+
+
+
+        }
+
+
+
+
+
+
+
+    }
+
+    public function likeGroupPost(Request $request){
+
+        if(!GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id]])->exists()){
+
+            $liked =  GroupPostLike::create([
+                'user_id' => Auth::user()->id,
+                'post_id' => $request->post_id,
+                'group_id' => $request->group_id,
+                'like_status' => 1
+            ]);
+            return response()->json(1);
+        }elseif(GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id],['like_status','=',1]])->exists()){
+            $liked =  GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id]])->update([
+                'user_id' => Auth::user()->id,
+                'post_id' => $request->post_id,
+                'group_id' => $request->group_id,
+                'like_status' => 0
+            ]);
+            return response()->json(0);
+
+
+
+        }elseif(GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id],['like_status','=',0]])->exists()){
+            $liked =  GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id]])->update([
+                'user_id' => Auth::user()->id,
+                'post_id' => $request->post_id,
+                'group_id' => $request->group_id,
+                'like_status' => 1
+            ]);
+            return response()->json(1);
+
+
+
+        }
+
+
+
+
+
+
 
 
 

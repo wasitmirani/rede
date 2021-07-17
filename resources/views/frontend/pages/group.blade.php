@@ -39,26 +39,16 @@
 
                         <div class="capitalize flex font-semibold space-x-3 text-center text-sm my-2">
                             <a type="button" data-id={{ $group->id }} id="joinBtn" class="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700">
-
-
-
                               @switch($status)
-                                  @case('1')
+                                  @case(1)
                                       Joined
                                       @break
-                                  @case('0')
+                                  @case(0)
                                       Join
                                       @break
                                   @default
                                      Join
                               @endswitch
-
-
-
-
-
-
-
                             </a>
                             <a href="#" class="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"> Send message</a>
                             <div>
@@ -149,13 +139,21 @@
                 <div class="py-3 px-4 space-y-3">
 
                     <div class="flex space-x-4 lg:font-bold">
-                        <a href="#" class="flex items-center space-x-2">
-                            <div class="p-2 rounded-full text-black">
+                        <a  class="flex items-center space-x-2 likeBtn" data-post="{{ $post->id }}" data-group="{{ $group->id }}">
+                            <div class="p-2 rounded-full text-black" >
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
                                     <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"></path>
                                 </svg>
                             </div>
-                            <div> Like</div>
+                            @if(isset($likes))
+                               @if(App\Models\GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$group->id],['post_id','=',$post->id],['like_status','=',1]])->exists())
+                            <div class="like"> Liked</div>
+                            @endif
+                            @else
+                            <div class="like"> Like</div>
+                            @endif
+                            <div class="like"></div>
+
                         </a>
                         <a href="#" class="flex items-center space-x-2">
                             <div class="p-2 rounded-full text-black">
@@ -169,14 +167,33 @@
                     </div>
 
 
+                     <div id="commentArea{{ $post->id }}"></div>
+                     @foreach($comments as $comment)
+                       @if($comment->post_id == $post->id)
+                     <div class="flex">
+                        <div class="w-10 h-10 rounded-full relative flex-shrink-0">
+                         <img src="{{ asset('user/images/'.$comment->members->image) }}" alt="" class="absolute h-full rounded-full w-full">
+                         </div><div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 h-full relative lg:ml-5 ml-2 lg:mr-20  dark:bg-gray-800 dark:text-gray-100">
+                         <p class="leading-6">{{ $comment->content }}<urna class="i uil-heart"></urna> <i class="uil-grin-tongue-wink"></i></p>
+                         <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
+                         </div></div>
 
+                         @endif
+                         @endforeach
+                         <div><a type="button" class="showMore" style="cursor: pointer;" data-id="{{ $post->id }}">Show More.....</a></div>
 
                     <div class="bg-gray-100 bg-gray-100 rounded-full rounded-md relative dark:bg-gray-800">
-                        <input type="text" placeholder="Add your Comment.." class="bg-transparent max-h-10 shadow-none">
-                        <div class="absolute bottom-0 flex h-full items-center right-0 right-3 text-xl space-x-2">
-                            <a href="#"> <i class="uil-image"></i></a>
-                            <a href="#"> <i class="uil-video"></i></a>
-                        </div>
+                                <form class="commentForm" data-id="{{ Auth::user()->id }}" data-post="{{ $post->id }}">
+                                <input  type="text" placeholder="Add your Comment.." class="bg-transparent max-h-10 shadow-none content"  name="comment">
+                                <input type="hidden" name="id" value="{{ Auth::user()->id }}" class="id">
+                                <input type="hidden" id="postId{{ $post->id }}" name="postId" value="{{ $post->id }}" class="post_id">
+                                <input type="hidden" id="" name="group_id" value="{{ $group->id }}" class="group_id">
+                                <div class="absolute bottom-0 flex h-full items-center right-0 right-3 text-xl space-x-2">
+                                <button type="submit" id="send{{ $post->id }}" class="commentBtn"> <i class="uil-comment"></i></button>
+
+                                </div>
+                        </form>
+
                     </div>
 
                 </div>
@@ -416,6 +433,99 @@
             })
 
 
+
+        })
+        $(".commentBtn").on('click',function(e){
+            e.preventDefault();
+
+            var content = $(".content").val();
+            var user_id = $(".id").val();
+            var post_id = $(".post_id").val();
+            var group_id = $(".group_id").val();
+
+            $.ajax({
+                url:"/group/post/comment",
+                type:"POST",
+                data:{_token:"{{ csrf_token() }}",
+                group_id:group_id,
+                user_id:user_id,
+                post_id:post_id,
+                content:content
+            },
+                success:function(msg){
+
+                   var output = "";
+                   output +='<div class="flex">'
+                          +'<div class="w-10 h-10 rounded-full relative flex-shrink-0">'
+                           +'<img src="{{ asset('user/images') }}/'+msg.members.image+'" alt="" class="absolute h-full rounded-full w-full">'
+                           +'</div><div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 h-full relative lg:ml-5 ml-2 lg:mr-20  dark:bg-gray-800 dark:text-gray-100">'
+                           +'<p class="leading-6">'+msg.content+'<urna class="i uil-heart"></urna> <i class="uil-grin-tongue-wink"></i></p>'
+                           +'<div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>'
+                           +'</div></div>'
+                    $("#commentArea").html(output);
+
+                }
+            })
+
+
+
+
+
+        });
+
+        $(".showMore").click(function(){
+
+            var post_id = $(this).data('id');
+            $.ajax({
+                url:"/show/group/comments",
+                type:'POSt',
+                data:{_token:"{{ csrf_token() }}", post_id:post_id},
+                success:function(msg){
+                    var output = "";
+                    jQuery.each(msg, (index, item) => {
+                        output +='<div class="flex">'
+                          +'<div class="w-10 h-10 rounded-full relative flex-shrink-0">'
+                           +'<img src="{{ asset('user/images') }}/'+item.members.image+'" alt="" class="absolute h-full rounded-full w-full">'
+                           +'</div><div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 h-full relative lg:ml-5 ml-2 lg:mr-20  dark:bg-gray-800 dark:text-gray-100">'
+                           +'<p class="leading-6">'+item.content+'<urna class="i uil-heart"></urna> <i class="uil-grin-tongue-wink"></i></p>'
+                           +'<div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>'
+                           +'</div></div>'
+
+
+                           $("#commentArea"+post_id).html(output);
+
+                    });
+
+
+                }
+            })
+
+        });
+
+        $(".likeBtn").click(function(){
+
+            var post_id = $(this).data('post');
+            var group_id = $(this).data('group');
+
+            $.ajax({
+                url:"/like/group/post",
+                type:'post',
+                data:{_token:"{{ csrf_token() }}",group_id:group_id,post_id:post_id},
+                success:function(msg){
+                    if(msg == '1'){
+                    toastr.success('You Liked This Post');
+                    $('.like').html("Liked");
+
+                    }else{
+                        toastr.success('You Disliked This Post');
+
+
+
+                    }
+
+
+                }
+            })
 
         })
 

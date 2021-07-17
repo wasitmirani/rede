@@ -60,6 +60,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/create/group/post',[GroupController::class,'createPost'])->name('create.group.post');
     Route::get('/create/group/event/{id}',[EventController::class,'createGroupEvent'])->name('create.group.event');
     Route::post('/accept/join/request',[GroupController::class,'acceptJoinRequest'])->name('accept.join.request');
+    Route::post('/group/post/comment',[GroupController::class,'groupPostComment'])->name('group.post.comment');
+    Route::post('/show/group/comments',[GroupController::class,'showGroupComments'])->name('show.group.comments');
+    Route::post('/like/group/post',[GroupController::class,'likeGroupPost'])->name('like.group.post');
+
 
 });
 

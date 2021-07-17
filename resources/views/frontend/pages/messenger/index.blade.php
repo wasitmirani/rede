@@ -8,20 +8,19 @@
     <!-- left sidebar-->
     <div class="space-y-5 flex-shrink-0 lg:w-7/12">
         <div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0" id="postArea">
-            <div class="grid grid-cols-2 gap-3 lg:p-6 p-4">
+            <div class="grid p-4">
                 <form id="postForm" method="post">
                     <div class="col-span-2">
                         <label for="about">Write Your Feed Here</label>
-                        <textarea id="about" name="post"  class="shadow-none bg-gray-100" data-emojiable="true"></textarea>
+                        <textarea id="about" name="post"  class="resize-none border rounded-md"></textarea>
+
                     </div>
 
-                    <div class="col-span-2">
-                        <button type="submit" class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white" aria-expanded="false" id="uploadBtn">Upload</button>
-                        <div class="checkbox">
-                            <input type="file" id="chekcbox1" name="image">
-                            <label for="chekcbox1"><span class="checkbox-icon"></span></label>
+                    <div class="col-span-2 m-4	">
+                        <div class="grid grid-cols-3 gap-4">
+                        <button type="submit" class="bg-blue-500 flex font-bold hidden hover:bg--600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white" aria-expanded="false" id="uploadBtn">Post</button>
+                        <input type="file"  id="chekcbox1" name="image">
                         </div>
-
                     </div>
 
                 </form>
@@ -157,7 +156,7 @@
 
                 <div class="bg-gray-100 bg-gray-100 rounded-full rounded-md relative dark:bg-gray-800">
                     <form class="commentForm" data-id="{{ Auth::user()->id }}" data-post="{{ $post->id }}">
-                    <input  type="text" placeholder="Add your Comment.." class="bg-transparent max-h-10 shadow-none" name="comment">
+                    <input  type="text" placeholder="Add your Comment.." class="bg-transparent max-h-10 shadow-none comment-input"  name="comment">
                     <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                     <input type="hidden" id="postId{{ $post->id }}" name="postId" value="{{ $post->id }}">
                     <div class="absolute bottom-0 flex h-full items-center right-0 right-3 text-xl space-x-2">
@@ -659,6 +658,7 @@
 
         $('.commentForm').on('submit',function(e){
             e.preventDefault();
+
             var data = new FormData(this);
             var id = $(this).data('post')
             console.log(id)
@@ -673,6 +673,7 @@
                   toastr.success('Comment Posted');
 
 
+
                   $(".commentDisplay").html(msg);
 
 
@@ -680,6 +681,8 @@
 
                 }
             })
+
+            $(".comment-input").val("");
 
 
 

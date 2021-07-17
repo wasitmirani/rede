@@ -19,14 +19,14 @@
             </div>
             <div>
                 <a href="#">
-                    <strong>Followers</strong>
-                    <div> {{ App\Models\FollowRequest::where('following',Auth::user()->id)->count() }}</div>
+                    <strong>Group</strong>
+                    <div> {{ App\Models\Group::where('user_id',Auth::user()->id)->count() }}</div>
                 </a>
             </div>
             <div>
                 <a href="#">
-                    <strong>Following</strong>
-                    <div> {{ App\Models\FollowRequest::where('follower',Auth::user()->id)->count() }}</div>
+                    <strong>Event</strong>
+                    <div> {{ App\Models\Event::where('user_id',Auth::user()->id)->count() }}</div>
                 </a>
             </div>
         </div>
