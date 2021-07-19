@@ -1,11 +1,11 @@
 @extends('layouts.frontend.messengermaster')
 @section('content')
 @if ($result != null)
-<p>Search People By Interest....</p>
+<p>Search  By Interest....</p>
 <div class="relative mt-4 uk-slider" uk-slider="finite: true">
 
     <div class="uk-slider-container pb-3">
-<h2>Persons</h2>
+<h2>Individuals</h2>
         <ul class="uk-slider-items uk-child-width-1-5@m uk-child-width-1-3@s uk-child-width-1-2 uk-grid-small uk-grid" style="transform: translate3d(0px, 0px, 0px);">
 
            @foreach($result as $res)
