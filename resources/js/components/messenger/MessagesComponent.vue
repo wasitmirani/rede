@@ -132,56 +132,56 @@ data(){
     };
 },
 methods:{
-    sendMessage() {
-                    socket.emit('chat-message', {
-                        message:  this.message_body,
-                        receiver_id: this.receiver.id,
-                        sender_id:this.auth_user.id,
-                    }, this.receiver.name)
+    // sendMessage() {
+    //                 socket.emit('chat-message', {
+    //                     message:  this.message_body,
+    //                     receiver_id: this.receiver.id,
+    //                     sender_id:this.auth_user.id,
+    //                 }, this.receiver.name)
+    //                 this.messages.push({
+    //                     message: this.message_body,
+    //                     receiver_id: this.receiver.id,
+    //                     sender_id:this.auth_user.id,
+    //                     by: this.auth_user.name
+    //                 })
+    //                 this.message_body = null
+    //             },
+    //              setName() {
+    //                  console.log("recvi",this.receiver.name);
+    //                 socket.emit('joined', this.receiver.name)
+
+    //             },
+  async sendMessage(){
+         let formdata=new FormData();
+        formdata.append('receiver_id',this.receiver.id);
+        formdata.append('sender_id',this.auth_user.id);
+        formdata.append('conversation_id',this.conversation_id);
+        formdata.append('message',this.message_body);
+     await   axios.post('message/send',formdata).then((res)=>{
+
+                    axios.get('/message/messages/'+this.conversation_id).then((res)=>{
+                                        this.messages=res.data;
+
+
+                    });
+                //    socket.emit('chat-message', {
+                //         message: message,
+                //         receiver_id:  this.receiver.id,
+                //         sender_id:this.auth_user.id,
+                //     }, this.receiver.name)
                     this.messages.push({
                         message: this.message_body,
-                        receiver_id: this.receiver.id,
+                        receiver_id:  this.receiver.id,
                         sender_id:this.auth_user.id,
-                        by: this.auth_user.name
+                        type: 0,
+                        by: this.auth_user
                     })
                     this.message_body = null
-                },
-                 setName() {
-                     console.log("recvi",this.receiver.name);
-                    socket.emit('joined', this.receiver.name)
 
-                },
-//   async sendMessage(){
-//          let formdata=new FormData();
-//         formdata.append('receiver_id',this.receiver.id);
-//         formdata.append('sender_id',this.auth_user.id);
-//         formdata.append('conversation_id',this.conversation_id);
-//         formdata.append('message',this.message_body);
-//      await   axios.post('message/send',formdata).then((res)=>{
+                    console.log('sended success')
 
-//                     axios.get('/message/messages/'+this.conversation_id).then((res)=>{
-//                                         this.messages=res.data;
-
-
-//                     });
-//                    socket.emit('chat-message', {
-//                         message: message,
-//                         receiver_id:  this.receiver.id,
-//                         sender_id:this.auth_user.id,
-//                     }, this.receiver.name)
-//                     this.messages.push({
-//                         message: this.message_body,
-//                         receiver_id:  this.receiver.id,
-//                         sender_id:this.auth_user.id,
-//                         type: 0,
-//                         by: this.auth_user
-//                     })
-//                     this.message_body = null
-
-//                     console.log('sended success')
-
-//                 });
-//    },
+                });
+   },
 
   async getConversation(item){
        if(item.get_user1.id!=user.id){
