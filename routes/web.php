@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::get('inbox/messages',[MessengerController::class,'index'])->name('messages');
     Route::get('account/setting',[UserDetailController::class,'profileSetting'])->name('profile');
     Route::post('/edit/profile',[UserDetailController::class,'editProfile'])->name('edit.profile');
+    Route::post('/edit/interest',[UserDetailController::class,'editMyInterest'])->name('edit.myInterest');
+    Route::post('/edit/event',[UserDetailController::class,'editEvent'])->name('edit.event');
     Route::get('/all/interest',[InterestController::class,'interests'])->name('all.interest');
     Route::post('/add/interest',[InterestController::class,'addInterests'])->name('add.interest');
     Route::get('/my/interest/{id}',[InterestController::class,'myInterests'])->name('my.interest');
@@ -46,7 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/create/event',[EventController::class,'createEvent'])->name('create.event');
     Route::post('/store/event',[EventController::class,'storeEvent'])->name('store.event');
     Route::get('/event/detail/{id}',[EventController::class,'eventDetail'])->name('event.detail');
-    // Route::post('/upload/feed',[FeedsController::class,'storeFeed'])->name('store.feed');
+  // Route::post('/upload/feed',[FeedsController::class,'storeFeed'])->name('store.feed');
     Route::post('/store/feed',[FeedsController::class , 'storeFeed'])->name('create.feeds');
     Route::get('/groups',[GroupController::class,'index'])->name('group.list');
     Route::get('/create/group',[GroupController::class,'createGroup'])->name('create.group');
@@ -63,6 +65,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/group/post/comment',[GroupController::class,'groupPostComment'])->name('group.post.comment');
     Route::post('/show/group/comments',[GroupController::class,'showGroupComments'])->name('show.group.comments');
     Route::post('/like/group/post',[GroupController::class,'likeGroupPost'])->name('like.group.post');
+
 
 
 });

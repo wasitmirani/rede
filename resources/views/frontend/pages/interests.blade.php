@@ -16,7 +16,7 @@
             <div class="mb-4">
         <select class="js-example-tokenizer form-control " data-select2-id="select2-data-10-o7oq" name="interests[]"  multiple="multiple">
             @foreach($interests as $interest)
-            <option value="{{$interest->id}}">{{$interest->interest}}</option>
+            <option value="{{$interest->interest}}">{{$interest->interest}}</option>
             @endforeach
 
         </select>

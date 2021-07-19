@@ -93,7 +93,12 @@ class GroupController extends Controller
     public function memberStatus($id){
         $status = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$id]])->first();
 
-       return $status->status;
+
+        if(isset($status)){
+            return $status->status;
+
+        }
+
     }
 
     public function singleMember($id){

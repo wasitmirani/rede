@@ -73,13 +73,13 @@
   </div>
   <div class="grid lg:grid-cols-3 mt-12 gap-8 tab-content" id="tab2">
     <div class="bg-white rounded-md lg:shadow-lg shadow col-span-2">
-
+        <form>
         <div class="grid grid-cols-2 gap-3 lg:p-6 p-4">
             <div>
                 <label for=""> Interest</label>
-                <select class="js-example-tokenizer form-control " data-select2-id="select2-data-10-o7oq" name="interests[]"  multiple="multiple">
+                <select class="js-example-tokenizer form-control " data-select2-id="select2-data-10-o7oq" name="interests[]" id="interests"   multiple="multiple">
                     @foreach($interests as $interest)
-                    <option value="{{$interest->id}}" @if($interest->user_id == Auth::user()->id) selected @endif>{{$interest->interest}}</option>
+                    <option value="{{$interest->interest}}" @if($interest->user_id == Auth::user()->id) selected @endif>{{$interest->interest}}</option>
                     @endforeach
 
 
@@ -93,44 +93,44 @@
         </div>
 
         <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
-            <button class="p-2 px-4 rounded bg-gray-50 text-red-500"> Cancel </button>
-            <button type="button" class="button bg-blue-700"> Save </button>
-        </div>
 
+            <button id="updateInterest" type="button" class="button bg-blue-700"> Save </button>
+        </div>
+    </form>
      </div>
   </div>
   <div class="grid lg:grid-cols-3 mt-12 gap-8 tab-content" id="tab3">
     <div class="bg-white rounded-md lg:shadow-lg shadow col-span-2">
-
+     <form id="updateEvents">
         <div class="grid grid-cols-2 gap-3 lg:p-6 p-4">
             <div>
                 <label for=""> Event Title</label>
-                <input type="text" placeholder="Your name.." class="shadow-none bg-gray-100">
+                <input type="text" name="title" placeholder="Event Title" class="shadow-none bg-gray-100">
             </div>
             <div>
                 <label for="">Event Date</label>
-                <input type="text" placeholder="Your name.." class="shadow-none bg-gray-100">
-             </div>
-             <div class="col-span-2">
+                <input type="date" name="date" class="shadow-none bg-gray-100">
+            </div>
+            <div class="col-span-2">
                  <label for="">Event Description</label>
-                 <input type="text" placeholder="Your name.." class="shadow-none bg-gray-100">
-             </div>
-             <div class="col-span-2">
+                 <input type="text" name="description" placeholder="Event Description" class="shadow-none bg-gray-100">
+            </div>
+            <div class="col-span-2">
                  <label for="about">Interest</label>
-                 <textarea id="about" name="about" rows="3" class="shadow-none bg-gray-100"></textarea>
-             </div>
-             <div class="col-span-2">
+                 <textarea id="about" name="interest" rows="3" class="shadow-none bg-gray-100" placeholder="Interest"></textarea>
+            </div>
+            <div class="col-span-2">
                  <label for=""> Image</label>
-                 <input type="text" placeholder="" class="shadow-none bg-gray-100">
-             </div>
+                 <input type="text" placeholder="" name="image" class="shadow-none bg-gray-100">
+            </div>
 
         </div>
 
         <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
-            <button class="p-2 px-4 rounded bg-gray-50 text-red-500"> Cancel </button>
-            <button type="button" class="button bg-blue-700"> Save </button>
-        </div>
 
+            <button type="submit" class="button bg-blue-700"> Update </button>
+        </div>
+    </form>
      </div>
   </div>
   <div class="grid lg:grid-cols-3 mt-12 gap-8 tab-content" id="tab4">
@@ -175,29 +175,64 @@
 
 
     $(document).ready(function(){
-        $(".js-example-tokenizer").select2({
-    tags: true,
-    tokenSeparators: [',', ' ']
+        $.ajaxSetup({
+             headers: {
+               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-})
-$('.select2-selection').css({"width": "604px","height":"1px"});
+        $(".js-example-tokenizer").select2({
+                tags: true,
+               tokenSeparators: [',', ' ']
+
+        })
+        $('.select2-selection').css({"width": "604px","height":"1px"});
         $('#tabs-nav li:first-child').addClass('active');
-console.log($('#tabs-nav li:first-child'))
-$('.tab-content').hide();
-$('.tab-content:first').show();
+         console.log($('#tabs-nav li:first-child'))
+        $('.tab-content').hide();
+        $('.tab-content:first').show();
 
 // Click function
-$('#tabs-nav li').click(function(){
-  $('#tabs-nav li').removeClass('active');
-  $(this).addClass('active');
-  $('.tab-content').hide();
+        $('#tabs-nav li').click(function(){
+            $('#tabs-nav li').removeClass('active');
+            $(this).addClass('active');
+            $('.tab-content').hide();
 
-  var activeTab = $(this).find('a').attr('href');
-  $(activeTab).fadeIn();
-  return false;
-});
+              var activeTab = $(this).find('a').attr('href');
+           $(activeTab).fadeIn();
+              return false;
+        });
+
+        $("#updateInterest").on('click',function(){
 
 
+            // var interest = $("#interests").val();
+            var interests = $( "#interests" ).val() || [];
+            $.ajax({
+                url:'/edit/interest',
+                type:"POST",
+                data:{_token:"{{ csrf_token() }}",interests:interests},
+                success:function(msg){
+                    toastr.success(' '+msg)
+
+                }
+            });
+
+        });
+
+        $("#updateEvents").on('submit',function(e){
+            e.preventDefault();
+            var data = new FormData(this);
+            $.ajax({
+                url:'/edit/event',
+                type:"POSt",
+                data:data,
+                success:function(msg){
+                    console.log(msg);
+                }
+            });
+
+        })
     })
     // Show the first tab and hide the rest
 

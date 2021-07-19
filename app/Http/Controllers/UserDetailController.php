@@ -15,7 +15,8 @@ class UserDetailController extends Controller
     public function profileSetting(){
 
         $user = User::find(Auth::user()->id);
-        $interests = MyInterest::where('id',Auth::user()->id)->get();
+        $interests = MyInterest::where('user_id',Auth::user()->id)->get();
+
 
         return view('frontend.pages.profile',compact('user','interests'));
 
@@ -64,5 +65,41 @@ class UserDetailController extends Controller
         $following =  FollowRequest::where('follower',$id)->count();
         $myInterests = User::with('interests')->where('id',Auth::user()->id)->get();
         return view('frontend.pages.myProfile',compact('myInterests','following','followers','followerslist','followingList'));
+    }
+
+    public function editMyInterest(Request $request){
+
+
+        $interest = MyInterest::where('user_id',Auth::user()->id)->delete();
+        $updated = '';
+     $count = count($request->interests);
+     foreach($request->interests as $interest){
+
+        $updated = MyInterest::create([
+             'user_id' => Auth::user()->id,
+            'interest' => $interest
+        ]);
+
+
+    }
+
+
+if($updated){
+
+    return response()->json('Interest Update Successfully');
+
+}else{
+    return response()->json('Something Went Wrong');
+
+}
+
+
+
+    }
+
+    public function editEvent(Request $request){
+
+        return response()->json($request->all());
+
     }
 }
