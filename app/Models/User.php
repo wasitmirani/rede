@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Feed;
 use App\Models\Interest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Feed;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -47,6 +49,20 @@ class User extends Authenticatable
 
     public function feeds(){
         return $this->hasMany(Feed::class);
+    }
+
+    public static function followStatus($id){
+
+        $exist = FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$id]])->exists();
+        if($exist){
+            return 'Unfollow';
+
+        } else if(!$exist){
+            return 'Follow';
+
+
+        }
+
     }
 
 

@@ -9,6 +9,8 @@ use App\Http\Controllers\InterestController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GroupController;
+use Illuminate\Support\Facades\URL;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/my/interest/{id}',[InterestController::class,'myInterests'])->name('my.interest');
     Route::get('/my/profile',[App\Http\Controllers\UserDetailController::class,'myProfile'])->name('my.profile');
     Route::post('/follow/request',[FeedsController::class,'follow_request'])->name('follow.request');
+    Route::post('/accept/follow/request',[FeedsController::class,'followRequestAccepted'])->name('accept.follow.request');
     Route::post('/like/feed',[FeedsController::class,'likeFeed'])->name('like.feed');
     Route::post('/post/comment',[CommentController::class,'PostComment'])->name('post.comment');
     Route::get('/events',[EventController::class,'index'])->name('events.list');
@@ -67,6 +70,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/like/group/post',[GroupController::class,'likeGroupPost'])->name('like.group.post');
 
 
+
+});
+
+Route::get('kuch',function(){
+
+    return ;
 
 });
 

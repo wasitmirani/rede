@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Event;
 use App\Models\Group;
 use App\Models\Comment;
+use App\Models\FeedLike;
 use App\Models\MyInterest;
 use Illuminate\Http\Request;
 use App\Models\FollowRequest;
@@ -19,13 +20,18 @@ class FeedsController extends Controller
 
         // $follower = FollowRequest::where('follower',Auth::user()->id)->get();
         $followerId = FollowRequest::where('following',Auth::user()->id)->get();
+
         $posts = '';
         $users = '';
         $totalPost = Feed::where('user_id',Auth::user()->id)->count();
+        $interest = MyInterest::where('user_id',Auth::user()->id)->first()->pluck('interest');
+
         $comments = Comment::with('user')->get();
-        $follower = FollowRequest::with('followersreq')->where('following','=',Auth::user()->id)->get();
-        $following = FollowRequest::with('followings')->where('follower','=',Auth::user()->id)->get();
-        $NotFollowing = FollowRequest::with('followersreq')->with('followings')->groupBy('following')->where([['following','!=',Auth::user()->id],['follower','!=',Auth::user()->id]])->take(5)->get();
+        $follower = FollowRequest::with('followings')->where([['follower','=',Auth::user()->id],['status','=',1]])->get();
+        $following = FollowRequest::with('followersreq')->where([['following','=',Auth::user()->id],['status','=',0]])->get();
+
+        $NotFollowing = MyInterest::with('users')->where('interest', $interest)->get();
+
         $feeds = FollowRequest::with('posts')->with('postComments')->with('followersreq')->where('follower','=',Auth::user()->id)->orWhere('following','=',Auth::user()->id)->get();
        if(!$followerId){
 
@@ -49,8 +55,10 @@ class FeedsController extends Controller
 
     }
 
-    return view('frontend.pages.messenger.index',compact('posts','feeds','users','follower','totalPost','comments','NotFollowing'));
+    return view('frontend.pages.messenger.index',compact('posts','feeds','users','follower','following','totalPost','comments','NotFollowing'));
     }
+
+
 
     public function feeds(){
 
@@ -78,43 +86,67 @@ class FeedsController extends Controller
     }
 
     public function follow_request(Request $request){
-        $user = FollowRequest::where([['following','=',$request->following],['follower','=',$request->follower]])->count();
-if($user == "0"){
-    $requested = FollowRequest::create([
-        'following' => $request->following,
-        'follower' => $request->follower,
-        'status' => $request->status,
-    ]);
+  // check post already liked
+
+  $follower = FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$request->following],['status','=',1]])->exists();
+  $requested = FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$request->following],['status','=',0]])->exists();
 
 
-    if($requested){
+       if($follower){
 
-        return response()->json("Following");
+       $disliked =  FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$request->following]])->delete();
+       return response()->json('Following');
 
+
+       }elseif($requested){
+
+       $disliked =  FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$request->following]])->delete();
+       return response()->json('Follow');
+
+
+       }
+
+       else{
+           $liked = FollowRequest::create(['follower'=>Auth::user()->id,'following'=>$request->following]);
+            return response()->json('Requested');
+
+
+       }
     }
-}
-    else{
-            return response()->json('Alreading Following');
-        }
+
+    public function followRequestAccepted(Request $request){
+
+        $requested = FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$request->id],['status','=',0]])->first();
+
+       $accepted = $requested->update(['status'=>1]);
+       if($accepted){
+
+        return response()->json('Following');
+
+       }
 
     }
 
 
     public function likeFeed(Request $request){
 
+            // check post already liked
+            $exist = FeedLike::where([['user_id','=',Auth::user()->id],['post_id','=',$request->id]])->exists();
+            // if liked than dislike or delete
+                 if($exist){
 
-           $update = Feed::where('id',$request->id)->update([
-               'like_status' => 1,
-               'liked_by' => $request->likedBy
-           ]);
+                 $disliked = FeedLike::where([['user_id','=',Auth::user()->id],['post_id','=',$request->id]])->delete();
 
-           if($update){
+                 return response()->json('Like');
 
-              return response()->json($update);
+                 }
+                 //else like the post
+                 else{
+                     $liked = FeedLike::create(['user_id'=>Auth::user()->id,'post_id'=>$request->id]);
+                    return response()->json('dislike');
 
-           }else{
-               return response()->json('Failed To Like');
-           }
+
+                 }
 
 
     }

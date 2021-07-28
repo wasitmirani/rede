@@ -131,11 +131,10 @@
                                 <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"></path>
                             </svg>
                         </div>
-                        @if ($post->like_status == 1)
-                        <div class="likeStatus{{ $post->id }}"> Liked</div>
-                        @else
-                        <div class="likeStatus{{ $post->id }}"> Like</div>
-                        @endif
+
+
+                        <div class="likeStatus{{ $post->id }}">@php echo App\Models\FeedLike::likeStatus($post->id) @endphp</div>
+
 
                     </button>
                     <button type="button" data-id="{{ $post->user->id }}" data-post={{ $post->id }} class="flex items-center space-x-2 comment">
@@ -472,7 +471,7 @@
 
             <div class="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 flex items-baseline justify-between py-4 px-6 dark:border-gray-800">
                 <h2 class="font-semibold text-lg">Followers</h2>
-                <a href="#"> Refresh</a>
+
             </div>
 
             <div class="divide-gray-300 divide-gray-50 divide-opacity-50 divide-y px-4 dark:divide-gray-800 dark:text-gray-100">
@@ -499,7 +498,7 @@
 
 
 
-                     <button type="button" id="followBtn{{ $req->followersreq->id }}"  data-id="{{ $req->followersreq->id }}" data-follower="{{ Auth::user()->id }}" class="border followBtn border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800"> Follow </button>
+                     <button type="button" id="followBtn{{ $req->followersreq->id }}"  data-id="{{ $req->followersreq->id }}" data-follower="{{ Auth::user()->id }}" class="border followBtn border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800"> @php echo App\Models\FollowRequest::followStatus($req->followersreq->id) @endphp </button>
 
 
 
@@ -513,6 +512,52 @@
             </div>
 
         </div>
+        <div class="mt-5 uk-sticky" uk-sticky="offset:28; bottom:true ; media @m">
+        <div class="bg-white dark:bg-gray-900 shadow-md rounded-md overflow-hidden">
+
+            <div class="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 flex items-baseline justify-between py-4 px-6 dark:border-gray-800">
+                <h2 class="font-semibold text-lg">Followe Request </h2>
+
+            </div>
+
+            <div class="divide-gray-300 divide-gray-50 divide-opacity-50 divide-y px-4 dark:divide-gray-800 dark:text-gray-100">
+
+                @foreach($following as $follow)
+
+
+                <div class="flex items-center justify-between py-3">
+                    <div class="flex flex-1 items-center space-x-4">
+                        <a href="profile.html">
+                            @if ($follow->followersreq->image == null)
+                            <img src="{{ asset('user/images/user.jpg') }}" class="bg-gray-200 rounded-full w-10 h-10">
+                            @else
+                            <img src="{{ asset('user/images/'.$follow->followersreq->image) }}" class="bg-gray-200 rounded-full w-10 h-10">
+                            @endif
+
+                        </a>
+                        <div class="flex flex-col">
+                            <span class="block capitalize font-semibold"> {{ $follow->followersreq->name }} </span>
+                            {{-- <span class="block capitalize text-sm"> Australia </span> --}}
+                        </div>
+                    </div>
+
+
+
+                    <button type="button" id="acceptBtn{{ $follow->followersreq->id }}"  data-id="{{ $follow->followersreq->id }}" data-follower="{{ Auth::user()->id }}" class="border  border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800 acceptBtn"> @php echo App\Models\FollowRequest::followStatus($follow->followersreq->id) @endphp </button>
+
+
+
+
+
+                </div>
+
+                @endforeach
+
+
+            </div>
+
+        </div>
+    </div>
 
         <div class="mt-5 uk-sticky" uk-sticky="offset:28; bottom:true ; media @m">
             <div class="bg-white dark:bg-gray-900 shadow-md rounded-md overflow-hidden">
@@ -525,15 +570,15 @@
                  <div class="flex items-center justify-between py-3 ml-3">
                     <div class="flex flex-1 items-center space-x-4">
                         <a href="profile.html">
-                            @if ($followthem->followings->image == null)
+                            @if ($followthem->users->image == null)
                             <img src="{{ asset('user/images/user.jpg') }}" class="bg-gray-200 rounded-full w-10 h-10">
                             @else
-                            <img src="{{ asset('user/images/'.$followthem->followings->image) }}" class="bg-gray-200 rounded-full w-10 h-10">
+                            <img src="{{ asset('user/images/'.$followthem->users->image) }}" class="bg-gray-200 rounded-full w-10 h-10">
                             @endif
 
                         </a>
                         <div class="flex flex-col">
-                            <span class="block capitalize font-semibold"> {{ $followthem->followings->name }} </span>
+                            <span class="block capitalize font-semibold"> {{ $followthem->users->name }} </span>
                             {{-- <span class="block capitalize text-sm"> Australia </span> --}}
                         </div>
                     </div>
@@ -541,7 +586,7 @@
 
 
 
-                     <button type="button" id="followBtn{{ $followthem->followings->id }}"  data-id="{{ $followthem->followings->id }}" data-follower="{{ Auth::user()->id }}" class="border followBtn border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800"> Follow </button>
+                     <button type="button" id="followBtn{{ $followthem->users->id }}"  data-id="{{ $followthem->users->id }}" data-follower="{{ Auth::user()->id }}" class="border followBtn border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800"> @php echo App\Models\FollowRequest::followStatus($followthem->users->id) @endphp </button>
 
 
 
@@ -570,6 +615,7 @@
 <script >
 
     $(document).ready(function(){
+
         $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -615,14 +661,15 @@
                     status : status
                 },
                 success:function(msg){
-                 $("followBtn"+following).html("Following");
-                 if(msg == "Alreading Following"){
-                    toastr.success("Alreading Following")
 
-                 }else{
-                    toastr.success("Following")
+                 $("#followBtn"+following).html(msg);
+                //  if(msg == "Following"){
+                //     toastr.success(msg)
 
-                 }
+                //  }else{
+                //     toastr.success(msg)
+
+                //  }
 
 
 
@@ -646,10 +693,9 @@
                     id:postId
                 },
                 success:function(msg){
-                    if(msg == 1)
-                    {
-                        $(".likeStatus"+postId).html('Liked');
-                    }
+
+                        $(".likeStatus"+postId).html(msg);
+
 
                 }
             })
@@ -720,6 +766,23 @@
               }
           })
         });
+
+        $('.acceptBtn').on('click',function(){
+
+            var id = $(this).data('id');
+
+            $.ajax({
+                url:"/accept/follow/request",
+                type:'POST',
+                data:{id:id},
+                success:function(msg){
+                     $('#acceptBtn'+id).html(msg)
+
+
+                }
+            });
+
+        })
     })
 
 </script>

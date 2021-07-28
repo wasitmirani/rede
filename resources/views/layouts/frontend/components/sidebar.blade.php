@@ -13,8 +13,8 @@
         <div class="flex justify-around w-full items-center text-center uk-link-reset text-gray-800 mt-6">
             <div>
                 <a href="#">
-                    <strong>Post</strong>
-                    <div>{{ App\Models\Feed::where('user_id',Auth::user()->id)->count() }}</div>
+                    {{-- <strong>Post</strong> --}}
+
                 </a>
             </div>
             <div>

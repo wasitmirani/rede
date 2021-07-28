@@ -29,9 +29,13 @@
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/tailwind.css')}}">
     <link rel="stylesheet" href="{{ asset('/assets/css/toaster.css') }}">
+
+
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ asset('lib.buttonLoader.css') }}" rel="stylesheet">
+
     <link href="{{ asset('lib/css/emoji.css') }}" rel="stylesheet">
 
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
@@ -496,6 +500,7 @@
   <script src="{{ asset('lib/js/emoji-picker.js') }}"></script>
 
   <script src="{{ asset('/assets/js/toaster.js') }}"></script>
+  <script src="{{ asset('/lib/jquery.buttonLoader.js') }}"></script>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

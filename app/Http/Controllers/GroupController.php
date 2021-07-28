@@ -223,8 +223,8 @@ class GroupController extends Controller
     }
 
     public function likeGroupPost(Request $request){
-
-        if(!GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id]])->exists()){
+        $exists = GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id]])->exists();
+        if(!$exists){
 
             $liked =  GroupPostLike::create([
                 'user_id' => Auth::user()->id,
@@ -232,26 +232,11 @@ class GroupController extends Controller
                 'group_id' => $request->group_id,
                 'like_status' => 1
             ]);
-            return response()->json(1);
-        }elseif(GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id],['like_status','=',1]])->exists()){
-            $liked =  GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id]])->update([
-                'user_id' => Auth::user()->id,
-                'post_id' => $request->post_id,
-                'group_id' => $request->group_id,
-                'like_status' => 0
-            ]);
-            return response()->json(0);
-
-
-
-        }elseif(GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id],['like_status','=',0]])->exists()){
-            $liked =  GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id]])->update([
-                'user_id' => Auth::user()->id,
-                'post_id' => $request->post_id,
-                'group_id' => $request->group_id,
-                'like_status' => 1
-            ]);
-            return response()->json(1);
+            return response()->json('Liked');
+        }
+        elseif($exists){
+            $liked =  GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id]])->delete();
+            return response()->json('Like');
 
 
 

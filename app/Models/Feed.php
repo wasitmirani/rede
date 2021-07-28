@@ -20,4 +20,8 @@ class Feed extends Model
         return $this->hasMany(Comment::class,'post_id','id');
     }
 
+    public function likes(){
+        return $this->hasMany(FeedLike::class,'post_id','id');
+    }
+
 }

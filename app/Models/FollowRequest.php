@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Feed;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 class FollowRequest extends Model
@@ -30,6 +31,42 @@ class FollowRequest extends Model
     public function postComments(){
         $comment = new Feed();
         return $comment->comments();
+
+    }
+
+    public function follow($id){
+        // check post already liked
+           $exist = FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$id]])->exists();
+      // if liked than dislike or delete
+           if($exist){
+
+           $disliked =  FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$id]])->delete();
+           return response()->json('Follow');
+
+           }
+           //else like the post
+           else{
+               $liked = FollowRequest::create(['follower'=>Auth::user()->id,'following'=>$id]);
+              return response()->json('Following');
+
+
+           }
+
+       }
+
+
+       public static function followStatus($id){
+        $follower = FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$id],['status','=',1]])->exists();
+        $requested = FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$id],['status','=',0]])->exists();
+         if($follower){
+
+            return 'Follower';
+
+         }else if($requested){
+             return 'Requested';
+         }else{
+             return "Follow";
+         }
 
     }
 
