@@ -516,7 +516,7 @@
         <div class="bg-white dark:bg-gray-900 shadow-md rounded-md overflow-hidden">
 
             <div class="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 flex items-baseline justify-between py-4 px-6 dark:border-gray-800">
-                <h2 class="font-semibold text-lg">Followe Request </h2>
+                <h2 class="font-semibold text-lg">Follow Request </h2>
 
             </div>
 

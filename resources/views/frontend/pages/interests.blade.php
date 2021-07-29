@@ -78,9 +78,10 @@
     tokenSeparators: [',', ' ']
 })
 
+
 $(".addInterest").on("click",function(e){
     e.preventDefault();
-
+ var bas_url = '{{ URL::to('/') }}'
     var interest_id = $(this).data('id');
     $.ajax({
         url: "/add/interest",
@@ -93,6 +94,8 @@ $(".addInterest").on("click",function(e){
 
             var output = "";
             $("#addInterest"+interest_id).html(msg)
+            toastr.success('Interest Added')
+
 
         },
         error:function(err){

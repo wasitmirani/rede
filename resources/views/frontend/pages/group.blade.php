@@ -74,6 +74,8 @@
                 <div class="w-20"></div>
 
             </div>
+
+            @if(App\Models\GroupMember::joinStatus($group->id) == "Joined")
             <div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0" id="postArea">
                 <div class="grid grid-cols-2 gap-3 lg:p-6 p-4">
                     <form id="postForm" method="post">
@@ -95,6 +97,7 @@
                     </form>
                 </div>
             </div>
+            @endif
 
             <!-- post 1-->
             <div id="postArea"></div>

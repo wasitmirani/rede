@@ -17,10 +17,14 @@ class GroupMember extends Model
     }
 
     public static function joinStatus($id){
-        $exist = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$id]])->exists();
-         if($exist){
+        $joined = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$id],['status','=',1]])->exists();
+        $requested = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$id],['status','=',0]])->exists();
+         if($joined){
 
             return 'Joined';
+
+         }else if($requested){
+            return 'Requested';
 
          }else{
              return 'Join';

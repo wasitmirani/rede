@@ -109,22 +109,30 @@ class GroupController extends Controller
 
 
     public function join(Request $request){
+        $joined = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['status','=',1]])->exists();
+        $requested = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['status','=',0]])->exists();
 
-        if(!GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id]])->exists()){
-
-        $joined = GroupMember::create([
-            'user_id' => Auth::user()->id,
-            'group_id' => $request->group_id,
-        ]);
+        if($joined){
 
 
+        $unjoin = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['status','=',1]])->delete();
 
-        return response()->json('Joined');
 
+
+        return response()->json('Join');
+
+        }else if($requested){
+            $unjoin = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['status','=',0]])->delete();
+            return response()->json('Join');
         }else{
 
-            $unjoin = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id]])->delete();
-            return response()->json('Join');
+
+
+            $joined = GroupMember::create([
+                'user_id' => Auth::user()->id,
+                'group_id' => $request->group_id,
+            ]);
+            return response()->json('Requested');
 
         }
 
@@ -146,7 +154,7 @@ class GroupController extends Controller
         ]);
         if($accepted){
 
-            return response()->json('Accepted');
+            return response()->json('Joined');
 
         }else{
             return response()->json('Spmething Went Wrong');
@@ -249,6 +257,10 @@ class GroupController extends Controller
 
 
 
+
+    }
+
+    public function joinRequest(){
 
     }
 }
