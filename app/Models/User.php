@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Feed;
 use App\Models\Interest;
+use App\Models\BookEvent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -49,6 +50,10 @@ class User extends Authenticatable
 
     public function feeds(){
         return $this->hasMany(Feed::class);
+    }
+
+    public function bookedevents(){
+        return $this->hasMany(BookEvent::class);
     }
 
     public static function followStatus($id){

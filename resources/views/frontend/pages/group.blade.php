@@ -279,7 +279,7 @@
                                 <span class="block capitalize font-semibold">{{ $groupMember->members->name }} </span>
 
                             </div>
-                            <a type="button"  class="border border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800 acceptRequest" data-id="{{ $groupMember->id }}"> Accept </a>
+                            <a type="button" id="acceptRequest{{ $groupMember->id  }}"  class="border border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800 acceptRequest" data-id="{{ $groupMember->id }}"> Accept </a>
                         </div>
 
 
@@ -408,10 +408,7 @@
                     request_id:req_id
                 },
                 success:function(msg){
-                    if(msg == "Accepted"){
-                        toastr.success('Accepted');
-
-                    }
+                     $("#acceptRequest").html(msg)
 
 
                 }

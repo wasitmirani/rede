@@ -47,6 +47,11 @@
                 <span> Messages </span> <span class="nav-tag"> 0</span> </a>
         </li>
         <li>
+            <a href="{{route('all.interest')}}">
+                <i class="uil-film"></i>
+                <span>Interests </span> </a>
+        </li>
+        <li>
             <a href="{{route('my.interest',Auth::user()->id)}}">
                 <i class="uil-film"></i>
                 <span> My Interests </span> </a>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJoinGroupsTable extends Migration
+class CreateBookEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateJoinGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('join_groups', function (Blueprint $table) {
+        Schema::create('book_events', function (Blueprint $table) {
             $table->id();
+            $table->string('event_title');
+            $table->integer('event_id');
+            $table->integer('participent_id');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateJoinGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('join_groups');
+        Schema::dropIfExists('book_events');
     }
 }

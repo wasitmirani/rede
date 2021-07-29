@@ -1,140 +1,120 @@
 @extends('layouts.frontend.messengermaster')
 @section('content')
 @if ($result != null)
-<p>Search People By Interest....</p>
-<div class="relative mt-4 uk-slider" uk-slider="finite: true">
+<p>Search  By Interest....</p>
+<h2>Individuals</h2>
+<div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
 
-    <div class="uk-slider-container pb-3">
-<h2>Persons</h2>
-        <ul class="uk-slider-items uk-child-width-1-5@m uk-child-width-1-3@s uk-child-width-1-2 uk-grid-small uk-grid" style="transform: translate3d(0px, 0px, 0px);">
+    @foreach($result as $res)
+<div>
 
-           @foreach($result as $res)
+    <img src="{{ asset('/user/images/'.$res->users->image) }}" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">
 
-        <li tabindex="-1" class="uk-active">
-
-            <a href="#" uk-toggle="target: #offcanvas-preview">
-                <div class="market-list">
-                    <div class="item-media"> <img src="{{ asset('user/images/'.$res->users->image) }}" alt=""></div>
-
-                    <div class="item-inner">
-                        <div class="item-price">  </div>
-                        <div class="item-title">{{ $res->users->name }}  </div>
-                        <div class="item-statistic">
-                            <span> <span class="count"></span> {{ $res->interest }} </span>
-                            <a href="{{ route('show.member',$res->user_id) }}"><span class="bg-white py-2 px-4 rounded inline-block font-bold shadow">  views </span></a>
-
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </li>
-        @endforeach
-
-
-
-
-        </ul>
-
-        <a class="-left-5 absolute bg-white bottom-1/2 flex h-11 items-center justify-center mb-8 p-2 rounded-full shadow text-2xl w-11 z-10 dark:bg-gray-800 dark:text-white uk-invisible" href="#" uk-slider-item="previous"> <i class="icon-feather-chevron-left"></i> </a>
-        <a class="-right-5 absolute bg-white bottom-1/2 flex h-11 items-center justify-center mb-8 p-2 rounded-full shadow text-2xl w-11 z-10 dark:bg-gray-800 dark:text-white" href="#" uk-slider-item="next"> <i class="icon-feather-chevron-right"></i></a>
-
+ <div class="relative px-4 -mt-16  ">
+   <div class="bg-white p-6 rounded-lg shadow-lg">
+    <div class="flex items-baseline">
+      <span class="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
+      {{ $res->interest }}
+      </span>
+      <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
+    2 baths  &bull; 3 rooms
+  </div>
     </div>
 
+    <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">{{ $res->users->name }}</h4>
+
+  <div class="mt-1">
+    <a href="{{ route('show.member',$res->users->id) }}"><span class="bg-white py-2 px-4 rounded inline-block font-bold shadow">  views </span></a>
+    {{-- <span class="text-gray-600 text-sm">   /wk</span> --}}
+  </div>
+  <div class="mt-4">
+    {{-- <span class="text-teal-600 text-md font-semibold">4/5 ratings </span>
+    <span class="text-sm text-gray-600">(based on 234 ratings)</span> --}}
+  </div>
+  </div>
+ </div>
 
 </div>
-@endif
-@if($result == null)
-<div class="bg-white py-2 px-4 rounded inline-block font-bold shadow">
- Sorry No Matches Found
-
+@endforeach
 </div>
-
 @endif
-@if (isset($groups))
-
-<div class="relative mt-4 uk-slider" uk-slider="finite: true">
-
-    <div class="uk-slider-container pb-3">
-<h2>Groups</h2>
-        <ul class="uk-slider-items uk-child-width-1-5@m uk-child-width-1-3@s uk-child-width-1-2 uk-grid-small uk-grid" style="transform: translate3d(0px, 0px, 0px);">
-
-           @foreach($groups as $group)
-
-        <li tabindex="-1" class="uk-active">
-
-            <a href="#" uk-toggle="target: #offcanvas-preview">
-                <div class="market-list">
-                    <div class="item-media"> <img src="{{ asset('/user/group/images/'.$group->image) }}" alt=""></div>
-
-                    <div class="item-inner">
-                        <div class="item-price">  </div>
-                        <div class="item-title">{{ $group->title }}  </div>
-                        <div class="item-statistic">
-                            <span> <span class="count"></span> {{ $group->interest }} </span>
-                            <a href=""><span class="bg-white py-2 px-4 rounded inline-block font-bold shadow">  views </span></a>
-
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </li>
-        @endforeach
+<h1>Groups</h1>
+<div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
 
 
+@foreach($groups as $group)
+<div>
 
+    <img src="{{ asset('/user/group/images/'.$group->image) }}" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">
 
-        </ul>
-
-        <a class="-left-5 absolute bg-white bottom-1/2 flex h-11 items-center justify-center mb-8 p-2 rounded-full shadow text-2xl w-11 z-10 dark:bg-gray-800 dark:text-white uk-invisible" href="#" uk-slider-item="previous"> <i class="icon-feather-chevron-left"></i> </a>
-        <a class="-right-5 absolute bg-white bottom-1/2 flex h-11 items-center justify-center mb-8 p-2 rounded-full shadow text-2xl w-11 z-10 dark:bg-gray-800 dark:text-white" href="#" uk-slider-item="next"> <i class="icon-feather-chevron-right"></i></a>
-
+ <div class="relative px-4 -mt-16  ">
+   <div class="bg-white p-6 rounded-lg shadow-lg">
+    <div class="flex items-baseline">
+      <span class="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
+        {{ $group->interest }}
+      </span>
+      <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
+    2 baths  &bull; 3 rooms
+  </div>
     </div>
 
+    <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">{{ $group->title }}</h4>
+
+  <div class="mt-1">
+    <a href="{{ route('show.group',$group->id) }}"><span class="bg-white py-2 px-4 rounded inline-block font-bold shadow">  views </span></a>
+    <span class="text-gray-600 text-sm">   /wk</span>
+  </div>
+  <div class="mt-4">
+    <span class="text-teal-600 text-md font-semibold">4/5 ratings </span>
+    <span class="text-sm text-gray-600">(based on 234 ratings)</span>
+  </div>
+  </div>
+ </div>
 
 </div>
-@endif
-@if ($events != null)
+@endforeach
+</div>
+<h1>Events</h1>
+<div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
 
-<div class="relative mt-4 uk-slider" uk-slider="finite: true">
+@foreach($events as $event)
+<div>
 
-    <div class="uk-slider-container pb-3">
-<h2>Events</h2>
-        <ul class="uk-slider-items uk-child-width-1-5@m uk-child-width-1-3@s uk-child-width-1-2 uk-grid-small uk-grid" style="transform: translate3d(0px, 0px, 0px);">
+    <img src="{{ asset('/user/event/images/'.$event->image) }}" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">
 
-           @foreach($events as $event)
-
-        <li tabindex="-1" class="uk-active">
-
-            <a href="#" uk-toggle="target: #offcanvas-preview">
-                <div class="market-list">
-                    <div class="item-media"> <img src="{{ asset('/user/event/images/'.$event->image) }}" alt=""></div>
-
-                    <div class="item-inner">
-                        <div class="item-price">  </div>
-                        <div class="item-title">{{ $event->title }}  </div>
-                        <div class="item-statistic">
-                            <span> <span class="count"></span> {{ $event->interest }} </span>
-                            <a href=""><span class="bg-white py-2 px-4 rounded inline-block font-bold shadow">  views </span></a>
-
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </li>
-        @endforeach
-
-
-
-
-        </ul>
-
-        <a class="-left-5 absolute bg-white bottom-1/2 flex h-11 items-center justify-center mb-8 p-2 rounded-full shadow text-2xl w-11 z-10 dark:bg-gray-800 dark:text-white uk-invisible" href="#" uk-slider-item="previous"> <i class="icon-feather-chevron-left"></i> </a>
-        <a class="-right-5 absolute bg-white bottom-1/2 flex h-11 items-center justify-center mb-8 p-2 rounded-full shadow text-2xl w-11 z-10 dark:bg-gray-800 dark:text-white" href="#" uk-slider-item="next"> <i class="icon-feather-chevron-right"></i></a>
-
+ <div class="relative px-4 -mt-16  ">
+   <div class="bg-white p-6 rounded-lg shadow-lg">
+    <div class="flex items-baseline">
+      <span class="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
+        New
+      </span>
+      <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
+    2 baths  &bull; 3 rooms
+  </div>
     </div>
 
+    <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">{{ $event->title }}</h4>
+
+  <div class="mt-1">
+    <a href="{{ route('book.event',$event->id) }}"><span class="bg-white py-2 px-4 rounded inline-block font-bold shadow">  views </span></a>
+    <span class="text-gray-600 text-sm">   /wk</span>
+  </div>
+  <div class="mt-4">
+    {{-- <span class="text-teal-600 text-md font-semibold">4/5 ratings </span>
+    <span class="text-sm text-gray-600">(based on 234 ratings)</span> --}}
+  </div>
+  </div>
+ </div>
 
 </div>
-@endif
+@endforeach
+</div>
+
+
+
+
+
+
+
 
 @endsection

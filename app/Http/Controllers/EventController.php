@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\BookEvent;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
     public function index(){
-        $events = Event::with('user')->with('group')->get();
+        $events = Event::with('user')->with('group')->orderby('id','desc')->paginate(5);
+
         return view('frontend.pages.events',compact('events'));
     }
 
@@ -75,6 +77,33 @@ class EventController extends Controller
         $id = $request->id;
         $event = Event::where('id',$id)->first();
         return view('frontend.pages.detail',compact('event'));
+
+    }
+
+    public function bookEvent($id){
+
+        $event = Event::with('group')->where('id',$id)->first();
+        $participants= BookEvent::with('participents')->get();
+
+        return view('frontend.pages.bookevent',compact('event','participants'));
+
+    }
+
+    public function eventBooking(Request $request){
+
+        $exists = BookEvent::where([['participent_id','=',Auth::user()->id],['event_id','=',$request->event_id]])->exists();
+         if(!$exists){
+
+            $booked = BookEvent::create($request->all());
+         }else{
+             $booking = BookEvent::where([['participent_id','=',Auth::user()->id],['event_id','=',$request->event_id]])->delete();
+         }
+
+
+
+
+         $events = Event::with('user')->with('group')->get();
+         return view('frontend.pages.events',compact('events'));
 
     }
 }
