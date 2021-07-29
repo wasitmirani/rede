@@ -16,7 +16,7 @@ class GroupController extends Controller
 {
     public function index(){
 
-        $groups = Group::orderBy('created_at','desc')->get();
+        $groups = Group::orderBy('created_at','desc')->paginate(9);
 
         return view('frontend.pages.groups',compact('groups'));
     }

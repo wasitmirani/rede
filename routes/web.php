@@ -75,13 +75,12 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('kuch',function(){
 
-    return ;
+
+Route::prefix('api')->group(function(){
+    Route::get('/all/interest', [InterestController::class,'getinterest']);
 
 });
-
-
 
 Auth::routes(['register'=>false,'password.request'=>false,
             'password.reset'=>false,

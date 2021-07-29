@@ -45,6 +45,7 @@
 
 
   @endforeach
+  {{ $myInterests->links() }}
 
 </div>
 

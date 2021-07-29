@@ -17,7 +17,7 @@
       {{ $res->interest }}
       </span>
       <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-    2 baths  &bull; 3 rooms
+    {{-- 2 baths  &bull; 3 rooms --}}
   </div>
     </div>
 
@@ -54,7 +54,7 @@
         {{ $group->interest }}
       </span>
       <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-    2 baths  &bull; 3 rooms
+    {{-- 2 baths  &bull; 3 rooms --}}
   </div>
     </div>
 
@@ -89,7 +89,7 @@
         New
       </span>
       <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-    2 baths  &bull; 3 rooms
+    {{-- 2 baths  &bull; 3 rooms --}}
   </div>
     </div>
 

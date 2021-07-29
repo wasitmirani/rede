@@ -4,7 +4,7 @@
 <div class="flex justify-between items-baseline uk-visible@s">
     <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> Add Your Interests
     </h1>
-    <a href="" class="text-blue-400 hover:text-blue-500"> Your Interest</a>
+    <a href="{{ route('my.interest',Auth::user()->id) }}" class="text-blue-400 hover:text-blue-500"> Your Interest</a>
 </div>
 <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
     @foreach($interests as $interest)
@@ -108,6 +108,23 @@
 <script>
 
     $(document).ready(function(){
+
+
+        $.ajax({
+            url:'/api/all/interest',
+            type:"GET",
+            success:function(response){
+
+
+
+
+                jQuery.each(response, (index, item) => {
+                    console.log(item.data)
+
+                })
+
+            }
+        });
         $(".js-example-tokenizer").select2({
     tags: true,
     tokenSeparators: [',', ' ']
@@ -131,8 +148,10 @@ $(".addInterest").on("click",function(e){
 
             var output = "";
             $("#addInterest"+interest_id).html(msg)
+
             if(msg == 'Added'){
                 toastr.success('Interest Added')
+                $("#addInterest"+interest_id).css({"background-color":"red"});
 
             }else{
                 toastr.success('Interest Removed From Your List')

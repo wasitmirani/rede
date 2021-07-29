@@ -49,7 +49,7 @@
                             <a href="#" class="bg-gray-300 flex h-12 h-full items-center justify-center rounded-full text-xl w-9 dark:bg-gray-700" aria-expanded="false">
                                 <i class="icon-feather-chevron-down"></i>
                             </a>
-
+                           @if(App\Models\GroupMember::joinStatus($group->id) == "Joined"))
                             <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base dark:bg-gray-900 uk-drop" uk-drop="mode: click">
 
                                 <ul class="space-y-1">
@@ -62,6 +62,7 @@
                                   </ul>
 
                             </div>
+                            @endif
 
                             </div>
 
@@ -256,7 +257,8 @@
 
 
                 </div>
-            </div><div class="uk-sticky-placeholder" hidden="" style="height: 381px; margin: 20px 0px 0px;"></div>
+            </div>
+            <div class="uk-sticky-placeholder" hidden="" style="height: 381px; margin: 20px 0px 0px;"></div>
 
 @if($group->user_id == Auth::user()->id)
             <div class="bg-white dark:bg-gray-900 shadow-md rounded-md overflow-hidden">
@@ -287,6 +289,7 @@
                         @endif
 
                     @endforeach
+                   
 
 
                 </div>

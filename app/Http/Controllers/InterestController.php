@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Interest;
 use App\Models\MyInterest;
@@ -15,9 +16,9 @@ class InterestController extends Controller
     public function interests(){
 
         $id = Auth::user()->id;
-
-        $interests = Interest::orderby('id','desc')->paginate(15);
-        $myInterests = User::with('interests')->where('id',$id)->orderby('id','desc')->get();
+        $tags = Tag::all();
+        $interests = Interest::orderby('id','desc')->paginate(9);
+        $myInterests = User::with('interests')->where('id',$id)->orderby('id','desc','tags')->get();
 
 
 
@@ -100,11 +101,26 @@ class InterestController extends Controller
 
         // $myInterests = User::with('interests')->where('id',$id)->get();
 
-        $myInterests = MyInterest::where('user_id',$id)->orderby('id','desc')->get();
+        $myInterests = MyInterest::where('user_id',$id)->orderby('id','desc')->paginate(6);
 
         return view('frontend.pages.myinterest',compact('myInterests'));
 
     }
+
+
+    public function getinterest(){
+
+
+        $id = Auth::user()->id;
+        $interests = Interest::orderby('id','desc')->paginate(15);
+        $myInterests = User::with('interests')->where('id',$id)->orderby('id','desc')->get();
+        $data['interests'] = $interests;
+        $data['myInterests'] = $myInterests;
+        return response()->json($data);
+    }
+
+
+
 
 
 
