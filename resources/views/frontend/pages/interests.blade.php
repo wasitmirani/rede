@@ -4,7 +4,13 @@
 <div class="flex justify-between items-baseline uk-visible@s">
     <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> Add Your Interests
     </h1>
-    <a href="{{ route('my.interest',Auth::user()->id) }}" class="text-blue-400 hover:text-blue-500"> Your Interest</a>
+    <a  href="{{ route('my.interest',Auth::user()->id) }}" class="text-blue-400 hover:text-blue-500"> Your Interest</a>
+</div>
+<div class="flex space-x-2">
+    @foreach($tags as $tag)
+    <a data-tag="{{ $tag->tag }}" type="button" data-id="{{ $tag->id }}" class="tag"><div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-sm px-3 bg-red-200 text-red-800 rounded-full">{{ $tag->tag }}</div></a>
+    @endforeach
+
 </div>
 <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
     @foreach($interests as $interest)
@@ -169,6 +175,23 @@ $(".addInterest").on("click",function(e){
 
     })
 
+})
+$(".tag").click(function(){
+    var tag = $(this).data('tag')
+    var id = $(this).data('id')
+
+    $.ajax({
+        url:'/search/tag/'+tag,
+        type:"POST",
+        data:{_token:"{{ csrf_token() }}",
+        id:id,
+        tag:tag
+    },
+        success:function(response){
+            console.log(response)
+
+        }
+    })
 })
 
     })

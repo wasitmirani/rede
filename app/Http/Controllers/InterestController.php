@@ -22,7 +22,7 @@ class InterestController extends Controller
 
 
 
-        return view('frontend.pages.interests',compact('interests','myInterests'));
+        return view('frontend.pages.interests',compact('interests','myInterests','tags'));
     }
 
     public static function my_interest($interest){
@@ -117,6 +117,13 @@ class InterestController extends Controller
         $data['interests'] = $interests;
         $data['myInterests'] = $myInterests;
         return response()->json($data);
+    }
+
+
+
+    public function searchByTag(Request $request){
+           return response()->json($request->all());
+
     }
 
 

@@ -16,6 +16,7 @@
 
 </div>
 
+
     @foreach($events as $event)
 
 

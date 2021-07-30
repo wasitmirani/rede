@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/like/group/post',[GroupController::class,'likeGroupPost'])->name('like.group.post');
     Route::get('/book/event/{id}',[EventController::class,'bookEvent'])->name('book.event');
     Route::post('/store/event/booking',[EventController::class,'eventBooking'])->name('event.booking');
+    Route::post('search/tag/{tag}',[InterestController::class,'searchByTag'])->name('tag.search');
 
 
 
