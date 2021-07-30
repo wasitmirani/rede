@@ -16,12 +16,18 @@ class Feed extends Model
         return $this->belongsTo(User::class,'user_id','id');
     }
 
+
+
     public function comments(){
         return $this->hasMany(Comment::class,'post_id','id');
     }
 
     public function likes(){
         return $this->hasMany(FeedLike::class,'post_id','id');
+    }
+
+    public function feedShareBy(){
+        return $this->belongsTo(User::class,'share_id','id');
     }
 
 }

@@ -51,6 +51,17 @@ class GroupController extends Controller
            $group->image = $name;
 
            if($group->save()){
+
+            $data = Group::all();
+            $last_group = collect($data)->last();
+            $group_id = $last_group->id;
+
+            GroupMember::create([
+                'user_id' => Auth::user()->id,
+                'group_id' => $group_id,
+                'status' => 1
+            ]);
+
                return response()->json('Group Created');
 
            }else{
@@ -263,4 +274,6 @@ class GroupController extends Controller
     public function joinRequest(){
 
     }
+
+
 }

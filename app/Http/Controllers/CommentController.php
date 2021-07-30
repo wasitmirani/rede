@@ -20,7 +20,11 @@ class CommentController extends Controller
         ]);
         if($added){
 
-            return response()->json($request->comment);
+            $data = Comment::with('user')->get();
+            $comment = collect($data)->last();
+
+
+            return response()->json($comment);
 
         }else{
 

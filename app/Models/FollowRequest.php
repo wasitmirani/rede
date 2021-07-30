@@ -16,6 +16,11 @@ class FollowRequest extends Model
 
     protected $guarded = [];
 
+
+
+// Request Sender = Follower
+// Request Send To = Following
+
     public function followersreq(){
         return $this->belongsTo(User::class,'follower','id');
     }
@@ -56,8 +61,8 @@ class FollowRequest extends Model
 
 
        public static function followStatus($id){
-        $follower = FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$id],['status','=',1]])->exists();
-        $requested = FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$id],['status','=',0]])->exists();
+        $follower = FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$id],['status','=',1]])->exists();
+        $requested = FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$id],['status','=',0]])->exists();
          if($follower){
 
             return 'Follower';

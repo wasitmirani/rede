@@ -48,6 +48,18 @@ class User extends Authenticatable
         return $this->belongsToMany(Interest::class);
     }
 
+    public function followers()
+    {
+        return $this->hasMany(FollowRequest::class, 'following', 'id');
+    }
+
+    public function following()
+    {
+        return $this->hasMany(FollowRequest::class, 'follower', 'id');
+    }
+
+
+
     public function feeds(){
         return $this->hasMany(Feed::class);
     }
