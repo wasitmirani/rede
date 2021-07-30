@@ -234,11 +234,6 @@ class GroupController extends Controller
         }
 
 
-
-
-
-
-
     }
 
     public function likeGroupPost(Request $request){
@@ -260,14 +255,6 @@ class GroupController extends Controller
 
 
         }
-
-
-
-
-
-
-
-
 
     }
 
