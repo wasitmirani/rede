@@ -121,13 +121,11 @@
             type:"GET",
             success:function(response){
 
+                $.map(response, function(u) {
+
+                    })
 
 
-
-                jQuery.each(response, (index, item) => {
-                    console.log(item.data)
-
-                })
 
             }
         });

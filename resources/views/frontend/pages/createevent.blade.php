@@ -41,6 +41,7 @@ $(document).ready(function(){
     }
 });
 
+
 $('#eventForm').on('submit',function(e){
 
     e.preventDefault();

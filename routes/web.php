@@ -71,6 +71,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/book/event/{id}',[EventController::class,'bookEvent'])->name('book.event');
     Route::post('/store/event/booking',[EventController::class,'eventBooking'])->name('event.booking');
     Route::post('search/tag/{tag}',[InterestController::class,'searchByTag'])->name('tag.search');
+    Route::post('/search/interest',[InterestController::class, 'searchInterest'])->name('search.interest');
     Route::post('share/feed',[FeedsController::class,'shareFeed'])->name('share.feed');
 });
 

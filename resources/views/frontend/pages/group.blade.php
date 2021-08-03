@@ -49,7 +49,7 @@
                             <a href="#" class="bg-gray-300 flex h-12 h-full items-center justify-center rounded-full text-xl w-9 dark:bg-gray-700" aria-expanded="false">
                                 <i class="icon-feather-chevron-down"></i>
                             </a>
-                           @if(App\Models\GroupMember::joinStatus($group->id) == "Joined"))
+                           @if(App\Models\GroupMember::joinStatus($group->id) == "Joined")
                             <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base dark:bg-gray-900 uk-drop" uk-drop="mode: click">
 
                                 <ul class="space-y-1">
@@ -83,16 +83,25 @@
                         <div class="col-span-2">
                             <label for="about">Share Your Ideas....</label>
                             <textarea id="about" name="post"  class="shadow-none bg-gray-100" data-emojiable="true"></textarea>
+                            <img id="blah"  style="width:548px;"/>
                             <input type="hidden" name="group_id" value="{{ $group->id }}">
+
                         </div>
 
-                        <div class="col-span-2">
+
+                        {{-- <div class="col-span-2">
                             <button type="submit" class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white" aria-expanded="false" id="uploadBtn">Upload</button>
                             <div class="checkbox">
                                 <input type="file" id="chekcbox1" name="image">
                                 <label for="chekcbox1"><span class="checkbox-icon"></span></label>
                             </div>
 
+                        </div> --}}
+                        <div class="col-span-2 m-4	">
+                            <div class="grid grid-cols-3 gap-4">
+                            <button type="submit" class="bg-blue-500 flex font-bold hidden hover:bg--600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white" aria-expanded="false" id="uploadBtn">Post</button>
+                            <input type="file"  id="chekcbox1" name="image">
+                            </div>
                         </div>
 
                     </form>
@@ -289,7 +298,7 @@
                         @endif
 
                     @endforeach
-                   
+
 
 
                 </div>
@@ -314,6 +323,7 @@
 @endsection
 @section('scripts')
 <script>
+
     $(document).ready(function(){
 
         $.ajaxSetup({
@@ -322,6 +332,15 @@
     }
 
 });
+chekcbox1.onchange = evt => {
+  const [file] = chekcbox1.files
+  if (file) {
+
+    // blah.src = URL.createObjectURL(file)
+    blah.src = URL.createObjectURL(event.target.files[0]);
+
+  }
+}
 
 
         $('#joinBtn').click(function(){
@@ -393,6 +412,15 @@
                         $("#postArea").append(output);
 
 
+                },
+                error:function(err){
+                    if(err.status == 422){
+                        toastr.error("You Can't Share Empty Feed")
+
+
+
+
+                    }
                 }
             })
 

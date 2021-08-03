@@ -25,8 +25,9 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "laravel-echo": "^1.11.0",
         "@tailwindcss/ui": "^0.7.2",
+        "jquery-typeahead": "^2.11.1",
+        "laravel-echo": "^1.11.0",
         "moment": "^2.29.1",
         "pusher-js": "^7.0.3",
         "socket.io-client": "^4.1.2",

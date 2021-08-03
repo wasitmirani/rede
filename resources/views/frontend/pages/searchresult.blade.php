@@ -2,7 +2,7 @@
 @section('content')
 @if ($result != null)
 <p>Search  By Interest....</p>
-<h2>Individuals</h2>
+
 <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
 
     @foreach($result as $res)
@@ -38,7 +38,7 @@
 @endforeach
 </div>
 @endif
-<h1>Groups</h1>
+
 <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
 
 
@@ -74,7 +74,7 @@
 </div>
 @endforeach
 </div>
-<h1>Events</h1>
+
 <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
 
 @foreach($events as $event)

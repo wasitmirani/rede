@@ -52,7 +52,6 @@
 
     @endforeach
 
-    {{ $events->links() }}
 
 
 @endsection

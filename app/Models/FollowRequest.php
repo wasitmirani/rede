@@ -40,9 +40,9 @@ class FollowRequest extends Model
     }
 
     public function follow($id){
-        // check post already liked
+
            $exist = FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$id]])->exists();
-      // if liked than dislike or delete
+
            if($exist){
 
            $disliked =  FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$id]])->delete();
@@ -61,8 +61,10 @@ class FollowRequest extends Model
 
 
        public static function followStatus($id){
+
         $follower = FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$id],['status','=',1]])->exists();
         $requested = FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$id],['status','=',0]])->exists();
+
          if($follower){
 
             return 'Follower';

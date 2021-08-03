@@ -126,6 +126,12 @@ class InterestController extends Controller
 
     }
 
+    public function searchInterest(Request $request){
+
+       $interests = Interest::where('interest',$request->keyword)->get();
+        return response()->json($interests);
+    }
+
 
 
 

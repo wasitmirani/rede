@@ -60,9 +60,7 @@ public function storeFeed(Request $request){
         else{
             $name = "";
         }
-        $validate = $request->validate([
-            'feed' => 'required'
-        ]);
+
          $feed->feed = $request->post;
          $feed->user_id =  Auth::user()->id;
          $feed->image = $name;
@@ -82,9 +80,10 @@ public function storeFeed(Request $request){
 
     public function follow_request(Request $request){
         // check follower exist
-        $follower = FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$request->following],['status','=',1]])->exists();
+        $follower = FollowRequest::where([['follower','=',$request->following],['following','=',Auth::user()->id],['status','=',1]])->exists();
+
         // check check any follow request exists
-        $requested = FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$request->following],['status','=',0]])->exists();
+        $requested = FollowRequest::where([['follower','=',$request->following],['following','=',Auth::user()->id],['status','=',0]])->exists();
         if($follower){
             $disliked =  FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$request->following],['status','=',1]])->delete();
             return response()->json('Follow');
@@ -116,6 +115,7 @@ public function storeFeed(Request $request){
             // check post already liked
             $exist = FeedLike::where([['user_id','=',Auth::user()->id],['post_id','=',$request->id]])->exists();
             // if liked than dislike or delete
+
                  if($exist){
 
                  $disliked = FeedLike::where([['user_id','=',Auth::user()->id],['post_id','=',$request->id]])->delete();

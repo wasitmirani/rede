@@ -13,7 +13,7 @@
                     <div class="col-span-2">
                         <label for="about">Write Your Feed Here</label>
                         <textarea id="about" name="post"  class="resize-none border rounded-md"></textarea>
-
+                        <img id="blah"  style="width:548px;"  />
                     </div>
 
                     <div class="col-span-2 m-4	">
@@ -367,6 +367,17 @@
     }
 });
 
+
+chekcbox1.onchange = evt => {
+  const [file] = chekcbox1.files
+  if (file) {
+
+    // blah.src = URL.createObjectURL(file)
+    image.src = URL.createObjectURL(event.target.files[0]);
+
+  }
+}
+
         $('#postForm').on('submit',function(e){
 
             e.preventDefault();
@@ -496,9 +507,9 @@
             $.ajax({
                 url:"/post/comment",
                 type:"POST",
-                data:data,
                 processData: false,
                 contentType: false,
+                data:data,
                 succss:function(msg){
 
                   var output = "";

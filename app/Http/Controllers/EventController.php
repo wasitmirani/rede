@@ -81,28 +81,19 @@ class EventController extends Controller
     }
 
     public function bookEvent($id){
-
+        
         $event = Event::with('group')->where('id',$id)->first();
-        $participants= BookEvent::with('participents')->get();
-
+        $participants= BookEvent::where('event_id',$id)->with('participents')->get();
         return view('frontend.pages.bookevent',compact('event','participants'));
 
     }
 
     public function eventBooking(Request $request){
 
-        $exists = BookEvent::where([['participent_id','=',Auth::user()->id],['event_id','=',$request->event_id]])->exists();
-         if(!$exists){
 
-            $booked = BookEvent::create($request->all());
-         }else{
-             $booking = BookEvent::where([['participent_id','=',Auth::user()->id],['event_id','=',$request->event_id]])->delete();
-         }
-
-
-
-
-         $events = Event::with('user')->with('group')->get();
+        $exists = BookEvent::where(['participent_id'=>Auth::user()->id,'event_id'=>$request->event_id])->first();
+        empty($exists) ?  $booked=BookEvent::create($request->all()) : $exists->delete();
+        $events = Event::with('user')->with('group')->paginate(5);
          return view('frontend.pages.events',compact('events'));
 
     }

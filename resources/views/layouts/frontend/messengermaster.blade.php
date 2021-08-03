@@ -31,14 +31,16 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/toaster.css') }}">
 
 
+
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ asset('lib.buttonLoader.css') }}" rel="stylesheet">
 
     <link href="{{ asset('lib/css/emoji.css') }}" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.11.0/jquery.typeahead.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
 
 
 
@@ -87,13 +89,15 @@
                             <div class="header_search">
                                 <form action="{{ route('search.people') }}" method="post">
                                     @csrf
-                                <input type="text" id="searchKeyword" placeholder="Search Interest, Groups and Events By Interest.." name="keyword">
+                                <input type="text" id="searchKeyword" autocomplete="off" placeholder="Search Interest, Groups and Events By Interest.." name="keyword" class="js-typeahead">
+
                                <button class="icon-search" type="submit">
                                     <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
                                 </button>
                             </form>
+                            <div id="suggestions" class="bg-white lg:pr-4"></div>
                             </div>
 
                         </div>
@@ -123,7 +127,7 @@
                                             </svg>
                                         </div>
 
-                                        <p class="my-3 leading-6"> Do you have a video wants to share us <br> please upload her ..
+                                        <p class="my-3 leading-6"> Do you have a video wants to share us <br> please upload here ..
                                         </p>
                                         <div uk-form-custom="">
                                             <input type="file">
@@ -143,7 +147,7 @@
                                         <p class="my-3 leading-6"> Import videos from YouTube <br> Copy / Paste your video link here </p>
                                         <form class="uk-grid-small" uk-grid="">
                                             <div class="uk-width-expand">
-                                                <input type="text" class="uk-input uk-form-small  bg-gray-200 dark:bg-gray-700" style="box-shadow:none" placeholder="Paste link">
+                                                <input type="text" class="uk-input uk-form-small  bg-gray-200 dark:bg-gray-700" style="box-shadow:none" placeholder="Paste link" >
                                             </div>
                                             <div class="uk-width-auto"> <button type="submit" class="button soft-warning -ml-2">
                                                     Import </button> </div>
@@ -495,9 +499,10 @@
     <script src="{{asset('/messenger/assets/js/simplebar.js')}}"></script>
     <script src="{{asset('/messenger/assets/js/custom.js')}}"></script>
     <script src="{{ asset('lib/js/config.js') }}"></script>
-  <script src="{{ asset('lib/js/util.js') }}"></script>
-  <script src="{{ asset('lib/js/jquery.emojiarea.js') }}"></script>
-  <script src="{{ asset('lib/js/emoji-picker.js') }}"></script>
+    <script src="{{ asset('lib/js/util.js') }}"></script>
+    <script src="{{ asset('lib/js/jquery.emojiarea.js') }}"></script>
+    <script src="{{ asset('lib/js/emoji-picker.js') }}"></script>
+
 
   <script src="{{ asset('/assets/js/toaster.js') }}"></script>
   <script src="{{ asset('/lib/jquery.buttonLoader.js') }}"></script>
@@ -505,6 +510,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.11.0/jquery.typeahead.min.js"></script>
     <script>
 
 
@@ -528,7 +534,32 @@
 
     <script src="../ionicons@5.2.3/dist/ionicons.js"></script>
 <script>
+
     $(document).ready(function(){
+
+        $("#searchKeyword").on('keyup',function(){
+
+            var keyword = $("#searchKeyword").val();
+            $.ajax({
+                url:"/search/interest",
+                type:"POST",
+                data:{_token:"{{ csrf_token() }}",keyword:keyword},
+                success:function(msg){
+
+                    $.each(msg,function(item, value){
+
+                        $("#suggestions").html("<ul><li class='list-item'>"+value.interest+"</li></ul>")
+                    })
+
+
+               }
+            })
+
+
+
+
+        })
+
         $("#searchBtn").click(function(){
 
             var keyword = $("#searchKeyword").val();
@@ -537,7 +568,7 @@
                 type:'POST',
                 data:{_token:"{{ csrf_token() }}",keyword:keyword},
                 success:function(msg){
-                    var output = "";
+
                   jQuery.each(msg,function(index, item){
 
                   });
