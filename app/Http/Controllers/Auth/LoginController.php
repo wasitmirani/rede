@@ -67,7 +67,7 @@ $user = User::where(array($fieldType => $input['username'], 'pass_key' => $input
         }else{
 
             return redirect()->route('login')
-                ->with('message',' Password Are Wrong.');
+                ->with('message',' Incorrect Password');
         }
 
     }

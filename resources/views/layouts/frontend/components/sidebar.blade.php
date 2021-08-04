@@ -8,7 +8,7 @@
             @endif
         </div>
         <a href="profile.html" class="text-xl font-medium capitalize mt-4 uk-link-reset">
-            {{Auth::user()->name}}
+            {{Auth::user()->username}}
         </a>
         <div class="flex justify-around w-full items-center text-center uk-link-reset text-gray-800 mt-6">
             <div>
@@ -19,14 +19,14 @@
             </div>
             <div>
                 <a href="#">
-                    <strong>Group</strong>
-                    <div> {{ App\Models\Group::where('user_id',Auth::user()->id)->count() }}</div>
+                    <strong></strong>
+                    <div> </div>
                 </a>
             </div>
             <div>
                 <a href="#">
-                    <strong>Event</strong>
-                    <div> {{ App\Models\Event::where('user_id',Auth::user()->id)->count() }}</div>
+                    <strong></strong>
+                    <div> </div>
                 </a>
             </div>
         </div>
@@ -34,32 +34,32 @@
     <hr class="-mx-4 -mt-1 uk-visible@s">
     <ul>
         <li class="active">
-            <a href="{{route('new.feeds')}}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-                </svg>
-                <span> Feed </span> </a>
+            <a href="{{route('my.profile')}}">  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+
+                <span> My Profile</span> </a>
         </li>
 
         <li>
             <a href="{{route('messages')}}">
-                <i class="uil-location-arrow"></i>
-                <span> Messages </span> <span class="nav-tag"> 0</span> </a>
+                <i class="uil-comment-alt-plus"></i>
+                <span> My Connections </span> <span class="nav-tag"> 0</span> </a>
         </li>
         <li>
             <a href="{{route('all.interest')}}">
                 <i class="uil-film"></i>
-                <span>Interests </span> </a>
+                <span> My McGuffins </span> </a>
         </li>
         <li>
             <a href="{{route('my.interest',Auth::user()->id)}}">
-                <i class="uil-film"></i>
-                <span> My Interests </span> </a>
+                <i class="uil-comments"></i>
+                <span> My Crew </span> </a>
         </li>
         <li>
             <a href="{{route('events.list')}}">
                 <i class="uil-square"></i>
-                <span> Events </span> </a>
+                <span> My Bookmarks </span> </a>
         </li>
         <li>
             <a href="{{route('group.list')}}">
@@ -71,7 +71,35 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
-                <span> My Profile </span> </a>
+                <span> Search By Interest </span> </a>
+        </li>
+        <li>
+            <a href="{{route('my.profile')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                <span> Spin The Wheel </span> </a>
+        </li>
+        <li>
+            <a href="{{route('my.profile')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                <span> Mail </span> </a>
+        </li>
+        <li>
+            <a href="{{route('my.profile')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                <span> Calendars </span> </a>
+        </li>
+        <li>
+            <a href="">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                </svg>
+                <span> News </span> </a>
         </li>
 
 

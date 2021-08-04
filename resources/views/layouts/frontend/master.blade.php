@@ -61,7 +61,7 @@
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input id="email" type="email" name="email" class="form-control input_user  @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Username*">
+                        <input id="username" type="text" name="username" class="form-control input_user  @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" placeholder="Username*">
 
                         @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -149,7 +149,7 @@
                 contentType: false,
                 success:function(msg){
                     if(msg == '1'){
-                        window.location.replace(base_url+'/new/feeds')
+                        window.location.replace(base_url+'/my/profile')
                     }else{
                         var output = ""
                         output += "<p class='alert alert-danger'>Incorrect Credentials</p>"

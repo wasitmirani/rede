@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\URL;
 Route::middleware('auth')->group(function () {
     Route::get('/',[FrontEndController::class,'index'])->name('index');
     Route::get('/welcome',[FrontEndController::class,'welcome'])->name('welcome');
-    Route::get('/signup',[FrontEndController::class,'signup'])->name('signup');
+
     Route::get('/congs',[FrontEndController::class,'congs'])->name('congs');
     Route::get('/timeline',[FrontEndController::class,'timeLine'])->name('timeline');
     Route::get('/customer/login',[FrontEndController::class,'customerLogin'])->name('customer.login');
@@ -75,7 +75,8 @@ Route::middleware('auth')->group(function () {
     Route::post('share/feed',[FeedsController::class,'shareFeed'])->name('share.feed');
 });
 
-
+Route::get('/signup',[FrontEndController::class,'signup'])->name('signup');
+Route::post('/signup',[FrontEndController::class,'signupUser'])->name('signup.user');
 
 Route::prefix('api')->group(function(){
     Route::get('/all/interest', [InterestController::class,'getinterest']);

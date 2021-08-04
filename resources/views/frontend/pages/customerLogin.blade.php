@@ -38,7 +38,7 @@
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
-							<input id="email" type="email" name="email" class="form-control input_user  @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email*">
+							<input id="username" type="text" name="username" class="form-control input_user  @error('username') is-invalid @enderror"  value="{{ old('username') }}" required autocomplete="username" placeholder="Username*">
 
                             @error('email')
                                 <span class="invalid-feedback" role="alert">

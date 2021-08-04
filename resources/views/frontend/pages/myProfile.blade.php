@@ -30,8 +30,7 @@
         <div class="lg:w/8/12 flex-1 flex flex-col lg:items-start items-center">
 
             <h2 class="font-semibold lg:text-2xl text-lg mb-2"> {{Auth::user()->name}}</h2>
-            <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                doming id quod mazim placerat facer possim assum</p>
+
 
                 <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
                     @foreach($myInterests as $int)
@@ -41,6 +40,7 @@
 
                     @endforeach
                 </div>
+
 
 
                 {{-- <div class="capitalize flex font-semibold space-x-3 text-center text-sm my-2">
@@ -86,10 +86,14 @@
 
                 </div> --}}
 
-                <div class="divide-gray-300 divide-transparent divide-x grid grid-cols-3 lg:text-left lg:text-lg mt-3 text-center w-full dark:text-gray-100">
-                    <div class="flex lg:flex-row flex-col"> {{ App\Models\Feed::where('user_id',Auth::user()->id)->count() }}<strong class="lg:pl-2">Posts</strong></div>
-                    <div class="lg:pl-4 flex lg:flex-row flex-col"> {{ $followers }} <strong class="lg:pl-2">Followers</strong></div>
-                    <div class="lg:pl-4 flex lg:flex-row flex-col">{{ $following }}  <strong class="lg:pl-2">Following</strong></div>
+                <div class="lg:m-0 -mx-5 flex justify-between items-center py-2 relative space-x-3 dark-tabs uk-sticky" uk-sticky="cls-active: bg-gray-100 bg-opacity-95; media : @m ; media @m">
+                    <div class="flex overflow-x-scroll lg:overflow-hidden lg:pl-0 pl-5 space-x-3 lg:py-2">
+                        <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> My Story</a>
+                        <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> My Particulars </a>
+                        <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> My Crew</a>
+                        <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> My Calendar</a>
+
+                    </div>
                 </div>
 
         </div>
@@ -123,55 +127,28 @@
 
 
         <div class="flex justify-between items-baseline uk-visible@s">
-            <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> Followers
+            <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> My Connections
             </h1>
             {{-- <a href="#" class="text-blue-400 hover:text-blue-500"> See all</a> --}}
         </div>
 
 
 </div>
-<div class="relative uk-slider" uk-slider="finite: true">
-
-    <div class="uk-slider-container pb-3 -ml-3">
-
-        <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-grid-small" style="transform: translate3d(0px, 0px, 0px);">
-            @foreach($followerslist as $followers)
-            <li tabindex="-1" class="uk-active">
-                <div class="bg-gray-200 max-w-full lg:h-64 h-52 rounded-lg relative overflow-hidden">
-                    <a href="profile.html">
-                        <img src="{{ asset('user/images/'.$followers->followersreq->image) }}" class="w-full h-full absolute object-cover inset-0">
-                    </a>
-                    <a href="#" class="absolute right-3 top-3 bg-black bg-opacity-60 rounded-full" data-tippy-placement="left" data-tippy="" data-original-title="Hide">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="fill-current h-6 m-1.5 text-white w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </a>
-
-                    <div class="absolute bottom-0 p-4 w-full custom-overly1">
-                        <div class="flex justify-between align-bottom flex-wrap text-white">
-                            <div class="w-full truncate text-lg"> {{ $followers->followersreq->name }} </div>
-                            <div class="leading-5 text-sm">
-                                <div> 21, Turkey </div>
-
-                            </div>
-                            <a href="#" class="absolute right-3 bottom-3 rounded-full bg-gradient-to-tr from-blue-500 to-purple-700">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="fill-current h-6 m-1.5 text-white w-6">
-                                    <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            @endforeach
-
-        </ul>
-
-        <a class="uk-position-center-left uk-position-small p-3.5 bg-white rounded-full w-10 h-10 flex justify-center items-center -mx-4 mb-6 shadow-md dark:bg-gray-800 dark:text-white uk-icon uk-slidenav-previous uk-slidenav uk-invisible" href="#" uk-slidenav-previous="" uk-slider-item="previous"><svg width="14px" height="24px" viewBox="0 0 14 24" xmlns="http://www.w3.org/2000/svg" data-svg="slidenav-previous"><polyline fill="none" stroke="#000" stroke-width="1.4" points="12.775,1 1.225,12 12.775,23 "></polyline></svg></a>
-        <a class="uk-position-center-right uk-positsion-small p-3.5 bg-white rounded-full w-10 h-10 flex justify-center items-center -mx-4 shadow-md dark:bg-gray-800 dark:text-white uk-icon uk-slidenav-next uk-slidenav" href="#" uk-slidenav-next="" uk-slider-item="next"><svg width="14px" height="24px" viewBox="0 0 14 24" xmlns="http://www.w3.org/2000/svg" data-svg="slidenav-next"><polyline fill="none" stroke="#000" stroke-width="1.4" points="1.225,23 12.775,12 1.225,1 "></polyline></svg></a>
-
-    </div>
-
+<div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
+    <a href="#">
+        <div class="bg-gray-100 border-4 border-dashed flex flex-col h-full items-center justify-center relative rounded-2xl w-full">
+            <i class="text-4xl uil-plus-circle"></i> <span> Add new </span>
+        </div>
+    </a>
+    <a href="#story-modal" uk-toggle="">
+        <img src="assets/images/avatars/avatar-lg-1.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+    </a>
+    <a href="#story-modal" uk-toggle="">
+        <img src="assets/images/post/img2.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+    </a>
+    <a href="#story-modal" uk-toggle="">
+        <img src="assets/images/post/img7.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover uk-visible@s">
+    </a>
 </div>
 
 <div class="my-6 grid lg:grid-cols-4 grid-cols-2 gap-1.5 hover:text-yellow-700 uk-link-reset">
@@ -179,7 +156,7 @@
 
 
     <div class="flex justify-between items-baseline uk-visible@s">
-        <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> Followings
+        <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> My McGuffins
         </h1>
 
     </div>
@@ -187,52 +164,21 @@
 
 </div>
 
-<div class="relative uk-slider" uk-slider="finite: true">
-
-    <div class="uk-slider-container pb-3 -ml-3">
-
-        <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-grid-small" style="transform: translate3d(0px, 0px, 0px);">
-            @foreach($followingList as $followin)
-            <li tabindex="-1" class="uk-active">
-                <div class="bg-gray-200 max-w-full lg:h-64 h-52 rounded-lg relative overflow-hidden">
-                    <a href="profile.html">
-                        @if($followin->followings->image == null)
-                        <img src="{{ asset('user/images/user.jpg') }}" class="w-full h-full absolute object-cover inset-0">
-                        @else
-                        <img src="{{ asset('user/images/'.$followin->followings->image) }}" class="w-full h-full absolute object-cover inset-0">
-                        @endif
-                    </a>
-                    <a href="#" class="absolute right-3 top-3 bg-black bg-opacity-60 rounded-full" data-tippy-placement="left" data-tippy="" data-original-title="Hide">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="fill-current h-6 m-1.5 text-white w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </a>
-
-                    <div class="absolute bottom-0 p-4 w-full custom-overly1">
-                        <div class="flex justify-between align-bottom flex-wrap text-white">
-                            <div class="w-full truncate text-lg"> {{ $followin->followings->name }} </div>
-                            <div class="leading-5 text-sm">
-                                <div> 21, Turkey </div>
-
-                            </div>
-                            <a href="#" class="absolute right-3 bottom-3 rounded-full bg-gradient-to-tr from-blue-500 to-purple-700">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="fill-current h-6 m-1.5 text-white w-6">
-                                    <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            @endforeach
-
-        </ul>
-
-        <a class="uk-position-center-left uk-position-small p-3.5 bg-white rounded-full w-10 h-10 flex justify-center items-center -mx-4 mb-6 shadow-md dark:bg-gray-800 dark:text-white uk-icon uk-slidenav-previous uk-slidenav uk-invisible" href="#" uk-slidenav-previous="" uk-slider-item="previous"><svg width="14px" height="24px" viewBox="0 0 14 24" xmlns="http://www.w3.org/2000/svg" data-svg="slidenav-previous"><polyline fill="none" stroke="#000" stroke-width="1.4" points="12.775,1 1.225,12 12.775,23 "></polyline></svg></a>
-        <a class="uk-position-center-right uk-positsion-small p-3.5 bg-white rounded-full w-10 h-10 flex justify-center items-center -mx-4 shadow-md dark:bg-gray-800 dark:text-white uk-icon uk-slidenav-next uk-slidenav" href="#" uk-slidenav-next="" uk-slider-item="next"><svg width="14px" height="24px" viewBox="0 0 14 24" xmlns="http://www.w3.org/2000/svg" data-svg="slidenav-next"><polyline fill="none" stroke="#000" stroke-width="1.4" points="1.225,23 12.775,12 1.225,1 "></polyline></svg></a>
-
-    </div>
-
+<div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
+    <a href="#">
+        <div class="bg-gray-100 border-4 border-dashed flex flex-col h-full items-center justify-center relative rounded-2xl w-full">
+            <i class="text-4xl uil-plus-circle"></i> <span> Add new </span>
+        </div>
+    </a>
+    <a href="#story-modal" uk-toggle="">
+        <img src="assets/images/avatars/avatar-lg-1.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+    </a>
+    <a href="#story-modal" uk-toggle="">
+        <img src="assets/images/post/img2.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+    </a>
+    <a href="#story-modal" uk-toggle="">
+        <img src="assets/images/post/img7.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover uk-visible@s">
+    </a>
 </div>
 
 
