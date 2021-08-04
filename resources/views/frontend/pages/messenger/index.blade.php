@@ -15,13 +15,13 @@
                     <div class="col-span-2">
                         <label for="about">Update Your Story.....</label>
                         <textarea id="about" name="post"  class="resize-none border rounded-md"></textarea>
-                        <img id="blah"  style="width:548px;"  />
+                        <img id=""  style="width:548px;"  />
                     </div>
 
                     <div class="col-span-2 m-4	">
                         <div class="grid grid-cols-3 gap-4">
                         <button type="submit" class="bg-blue-500 flex font-bold hidden hover:bg--600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white" aria-expanded="false" id="uploadBtn">Update Story</button>
-                        <input type="file"  id="chekcbox1" name="image">
+                        <input type="file"  id="" name="image">
                         </div>
                     </div>
 
