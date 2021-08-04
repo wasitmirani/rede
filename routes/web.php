@@ -73,6 +73,8 @@ Route::middleware('auth')->group(function () {
     Route::post('search/tag/{tag}',[InterestController::class,'searchByTag'])->name('tag.search');
     Route::post('/search/interest',[InterestController::class, 'searchInterest'])->name('search.interest');
     Route::post('share/feed',[FeedsController::class,'shareFeed'])->name('share.feed');
+    Route::get('/friend/list',[UserDetailController::class,'friendlist'])->name('friend.list');
+    Route::get('/my/feeds',[FeedsController::class,'myNews'])->name('my.news');
 });
 
 Route::get('/signup',[FrontEndController::class,'signup'])->name('signup');

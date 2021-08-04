@@ -6,7 +6,28 @@
 
 
     <!-- left sidebar-->
-    <div class="space-y-5 flex-shrink-0 lg:w-7/12">
+
+
+    <div class="space-y-5 flex-shrink-0 lg:w-10/12">
+        <div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0" id="postArea">
+            <div class="grid p-4">
+                <form id="postForm" method="post">
+                    <div class="col-span-2">
+                        <label for="about">Update Your Story.....</label>
+                        <textarea id="about" name="post"  class="resize-none border rounded-md"></textarea>
+                        <img id="blah"  style="width:548px;"  />
+                    </div>
+
+                    <div class="col-span-2 m-4	">
+                        <div class="grid grid-cols-3 gap-4">
+                        <button type="submit" class="bg-blue-500 flex font-bold hidden hover:bg--600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white" aria-expanded="false" id="uploadBtn">Update Story</button>
+                        <input type="file"  id="chekcbox1" name="image">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
         <div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0" id="postArea">
             <div class="grid p-4">
                 <form id="postForm" method="post">
@@ -210,146 +231,7 @@
     </div>
 
     <!-- right sidebar-->
-    <div class="lg:w-5/12">
 
-        <div class="bg-white dark:bg-gray-900 shadow-md rounded-md overflow-hidden">
-
-            <div class="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 flex items-baseline justify-between py-4 px-6 dark:border-gray-800">
-                <h2 class="font-semibold text-lg">Followers</h2>
-
-            </div>
-
-            <div class="divide-gray-300 divide-gray-50 divide-opacity-50 divide-y px-4 dark:divide-gray-800 dark:text-gray-100">
-
-                @foreach($follower as $req)
-
-
-                <div class="flex items-center justify-between py-3">
-                    <div class="flex flex-1 items-center space-x-4">
-                        <a href="profile.html">
-                            @if ($req->followersreq->image == null)
-                            <img src="{{ asset('user/images/user.jpg') }}" class="bg-gray-200 rounded-full w-10 h-10">
-                            @else
-                            <img src="{{ asset('user/images/'.$req->followersreq->image) }}" class="bg-gray-200 rounded-full w-10 h-10">
-                            @endif
-
-                        </a>
-                        <div class="flex flex-col">
-                            <span class="block capitalize font-semibold"> {{ $req->followersreq->name }} </span>
-                            {{-- <span class="block capitalize text-sm"> Australia </span> --}}
-                        </div>
-                    </div>
-
-
-
-
-                     <button type="button" id="followBtn{{ $req->followersreq->id }}"  data-id="{{ $req->followersreq->id }}" data-follower="{{ Auth::user()->id }}" class="border followBtn border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800"> @php echo App\Models\FollowRequest::followStatus($req->followersreq->id) @endphp </button>
-
-
-
-
-
-                </div>
-
-                @endforeach
-
-
-            </div>
-
-        </div>
-        <div class="mt-5 uk-sticky" uk-sticky="offset:28; bottom:true ; media @m">
-        <div class="bg-white dark:bg-gray-900 shadow-md rounded-md overflow-hidden">
-
-            <div class="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 flex items-baseline justify-between py-4 px-6 dark:border-gray-800">
-                <h2 class="font-semibold text-lg">Follow Request </h2>
-
-            </div>
-
-            <div class="divide-gray-300 divide-gray-50 divide-opacity-50 divide-y px-4 dark:divide-gray-800 dark:text-gray-100">
-
-                @foreach($followReq as $follreq)
-
-
-                <div class="flex items-center justify-between py-3">
-                    <div class="flex flex-1 items-center space-x-4">
-                        <a href="profile.html">
-                            @if ($follreq->followersreq->image == null)
-                            <img src="{{ asset('user/images/user.jpg') }}" class="bg-gray-200 rounded-full w-10 h-10">
-                            @else
-                            <img src="{{ asset('user/images/'.$follreq->followersreq->image) }}" class="bg-gray-200 rounded-full w-10 h-10">
-                            @endif
-
-                        </a>
-                        <div class="flex flex-col">
-                            <span class="block capitalize font-semibold"> {{ $follreq->followersreq->name }} </span>
-                            {{-- <span class="block capitalize text-sm"> Australia </span> --}}
-                        </div>
-                    </div>
-
-
-
-                    <button type="button" id="acceptBtn{{ $follreq->followersreq->id }}"  data-id="{{ $follreq->followersreq->id }}" data-follower="{{ Auth::user()->id }}" class="border  border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800 acceptBtn"> @php echo App\Models\FollowRequest::followStatus($follreq->followersreq->id) @endphp </button>
-
-
-
-
-
-                </div>
-
-                @endforeach
-
-
-            </div>
-
-        </div>
-    </div>
-
-        <div class="mt-5 uk-sticky" uk-sticky="offset:28; bottom:true ; media @m">
-            <div class="bg-white dark:bg-gray-900 shadow-md rounded-md overflow-hidden">
-
-                <div class="bg-gray-50 border-b border-gray-100 flex items-baseline justify-between py-4 px-6 dark:bg-gray-800 dark:border-gray-700">
-                    <h2 class="font-semibold text-lg">who to follow</h2>
-                    <a href="explore.html"> See all</a>
-                </div>
-                @foreach($NotFollowing as $followthem)
-                 <div class="flex items-center justify-between py-3 ml-3">
-                    <div class="flex flex-1 items-center space-x-4">
-                        <a href="profile.html">
-                            @if ($followthem->users->image == null)
-                            <img src="{{ asset('user/images/user.jpg') }}" class="bg-gray-200 rounded-full w-10 h-10">
-                            @else
-                            <img src="{{ asset('user/images/'.$followthem->users->image) }}" class="bg-gray-200 rounded-full w-10 h-10">
-                            @endif
-
-                        </a>
-                        <div class="flex flex-col">
-                            <span class="block capitalize font-semibold"> {{ $followthem->users->name }} </span>
-                            {{-- <span class="block capitalize text-sm"> Australia </span> --}}
-                        </div>
-                    </div>
-
-
-
-
-                     <button type="button" id="followBtn{{ $followthem->users->id }}"  data-id="{{ $followthem->users->id }}" data-follower="{{ Auth::user()->id }}" class="border followBtn border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 dark:border-gray-800"> @php echo App\Models\FollowRequest::followStatus($followthem->users->id) @endphp </button>
-
-
-
-
-
-                </div>
-                    @endforeach
-
-
-
-
-
-
-                </div>
-
-
-            </div>
-        </div><div class="uk-sticky-placeholder" hidden="" style="height: 381px; margin: 20px 0px 0px;"></div>
 
     </div>
 

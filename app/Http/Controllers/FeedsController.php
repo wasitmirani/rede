@@ -219,6 +219,12 @@ public function storeFeed(Request $request){
     }
 
 
+    public function myNews(){
+
+        return view('frontend.pages.feeds');
+    }
+
+
 
 
 

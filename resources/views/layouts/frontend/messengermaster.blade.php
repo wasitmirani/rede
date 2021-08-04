@@ -325,7 +325,7 @@
                                 @if(Auth::user()->image != null)
                                 <img src="{{asset('user/images/'.Auth::user()->image)}}" class="header-avatar" alt="">
                                 @else
-                                <img src="{{asset('user/images/user.jpg')}}" class="header-avatar" alt="">
+                                <img src="{{asset('/assets/images/dummyuser.jpg')}}" class="header-avatar" alt="">
                                 @endif
 
                             </a>

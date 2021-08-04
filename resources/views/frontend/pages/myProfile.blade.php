@@ -11,7 +11,7 @@
                 @if(Auth::user()->image)
                 <img src="{{asset('/user/images/'.Auth::user()->image)}}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full dark:border-gray-900">
                 @else
-                <img src="{{asset('/user/images/user.jpg')}}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full dark:border-gray-900">
+                <img src="{{asset('/assets/images/dummyuser.jpg')}}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full dark:border-gray-900">
 
                 @endif
 
@@ -25,21 +25,20 @@
                     </a>
                 </div>
             </div>
+
         </div>
 
         <div class="lg:w/8/12 flex-1 flex flex-col lg:items-start items-center">
 
             <h2 class="font-semibold lg:text-2xl text-lg mb-2"> {{Auth::user()->name}}</h2>
+            <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
+                doming id quod mazim placerat facer possim assum
+            </p>
+            <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
+                <a href="#">Portland</a> , <a href="#">Oregon</a>  , <a href="#">USA</a>
+            </div>
 
 
-                <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
-                    @foreach($myInterests as $int)
-                      @foreach ($int->interests as $i)
-                      <a class="bg-white py-2 px-4 rounded inline-block font-bold shadow" href="#">{{ $i->interest }}</a>
-                      @endforeach
-
-                    @endforeach
-                </div>
 
 
 
@@ -86,23 +85,30 @@
 
                 </div> --}}
 
-                <div class="lg:m-0 -mx-5 flex justify-between items-center py-2 relative space-x-3 dark-tabs uk-sticky" uk-sticky="cls-active: bg-gray-100 bg-opacity-95; media : @m ; media @m">
-                    <div class="flex overflow-x-scroll lg:overflow-hidden lg:pl-0 pl-5 space-x-3 lg:py-2">
-                        <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> My Story</a>
-                        <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> My Particulars </a>
-                        <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> My Crew</a>
-                        <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> My Calendar</a>
 
-                    </div>
-                </div>
 
         </div>
 
         <div class="w-20"></div>
 
     </div>
+    <div class="lg:m-0 -mx-5 flex justify-between items-center py-2 relative space-x-3 dark-tabs uk-sticky" uk-sticky="cls-active: bg-gray-100 bg-opacity-95; media : @m ; media @m">
+        <div class="flex overflow-x-scroll lg:overflow-hidden lg:pl-0 pl-5 space-x-3 lg:py-2">
+            <a href="{{ route("new.feeds") }}" class="bg-white py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+            color: #fff;">My Story</a>
+            <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+            color: #fff;">My Particulars </a>
+            <a href="{{ route('friend.list') }}" class="bg-white py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+            color: #fff;">My Crew</a>
+            <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+            color: #fff;">My Calendar</a>
+
+        </div>
+    </div>
 
     <h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mt-8">My Interests </h1>
+
+
 
     <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
         <a href="{{route('all.interest')}}"  >
@@ -141,13 +147,13 @@
         </div>
     </a>
     <a href="#story-modal" uk-toggle="">
-        <img src="assets/images/avatars/avatar-lg-1.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+        <img src="{{ asset('assets/images/avatars/avatar-lg-1.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
     </a>
     <a href="#story-modal" uk-toggle="">
-        <img src="assets/images/post/img2.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+        <img src="{{ asset('assets/images/post/img2.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
     </a>
     <a href="#story-modal" uk-toggle="">
-        <img src="assets/images/post/img7.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover uk-visible@s">
+        <img src="{{ asset('assets/images/post/img7.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover uk-visible@s">
     </a>
 </div>
 
@@ -171,13 +177,13 @@
         </div>
     </a>
     <a href="#story-modal" uk-toggle="">
-        <img src="assets/images/avatars/avatar-lg-1.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+        <img src="{{ asset('assets/images/avatars/avatar-lg-1.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
     </a>
     <a href="#story-modal" uk-toggle="">
-        <img src="assets/images/post/img2.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+        <img src="{{ asset('assets/images/post/img2.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
     </a>
     <a href="#story-modal" uk-toggle="">
-        <img src="assets/images/post/img7.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover uk-visible@s">
+        <img src="{{ asset('assets/images/post/img7.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover uk-visible@s">
     </a>
 </div>
 

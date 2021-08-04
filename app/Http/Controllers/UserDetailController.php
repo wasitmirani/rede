@@ -102,4 +102,8 @@ if($updated){
         return response()->json($request->all());
 
     }
+
+    public function friendlist(){
+        return view('frontend.pages.friendlist');
+    }
 }

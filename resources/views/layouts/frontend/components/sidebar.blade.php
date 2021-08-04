@@ -4,7 +4,7 @@
             @if(Auth::user()->image != null)
             <img src="{{asset('user/images/'.Auth::user()->image)}}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full">
             @else
-            <img src="{{asset('user/images/user.jpg')}}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full">
+            <img src="{{asset('/assets/images/dummyuser.jpg')}}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full">
             @endif
         </div>
         <a href="profile.html" class="text-xl font-medium capitalize mt-4 uk-link-reset">
@@ -42,18 +42,18 @@
         </li>
 
         <li>
-            <a href="{{route('messages')}}">
+            <a href="{{route('group.list')}}">
                 <i class="uil-comment-alt-plus"></i>
                 <span> My Connections </span> <span class="nav-tag"> 0</span> </a>
         </li>
         <li>
-            <a href="{{route('all.interest')}}">
+            <a href="{{route('events.list')}}">
                 <i class="uil-film"></i>
                 <span> My McGuffins </span> </a>
         </li>
         <li>
-            <a href="{{route('my.interest',Auth::user()->id)}}">
-                <i class="uil-comments"></i>
+            <a href="{{route('friend.list',Auth::user()->id)}}">
+                <i class="uil-users-alt"></i>
                 <span> My Crew </span> </a>
         </li>
         <li>
@@ -61,41 +61,34 @@
                 <i class="uil-square"></i>
                 <span> My Bookmarks </span> </a>
         </li>
-        <li>
-            <a href="{{route('group.list')}}">
-                <i class="uil-circle"></i>
-                <span> Groups</span> </a>
-        </li>
+
         <li>
             <a href="{{route('my.profile')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
                 <span> Search By Interest </span> </a>
         </li>
         <li>
+
             <a href="{{route('my.profile')}}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
+                <i class="uil-bullseye"></i>
                 <span> Spin The Wheel </span> </a>
         </li>
         <li>
             <a href="{{route('my.profile')}}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
+
+                <i class="uil-fast-mail"></i>
                 <span> Mail </span> </a>
         </li>
         <li>
             <a href="{{route('my.profile')}}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
+                <i class="uil-calendar-alt"></i>
+
                 <span> Calendars </span> </a>
         </li>
         <li>
-            <a href="">
+            <a href="{{ route('my.news') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                 </svg>
