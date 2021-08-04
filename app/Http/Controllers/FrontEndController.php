@@ -82,11 +82,13 @@ class FrontEndController extends Controller
         if(Auth::attempt($credentials)) {
 
             Cache::put('customer_login',1);
-            return redirect()->route('new.feeds');
+            // return redirect()->route('new.feeds');
+            return response()->json('1');
 
         } else {
             Cache::forget('customer_login');
-            return back()->with('message','Please check your email or password not matched try agin');
+            // return back()->with('message','Please check your email or password not matched try agin');
+            return response()->json('0');
         }
     }
 }

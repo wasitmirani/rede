@@ -21,8 +21,7 @@
 				<p class="para-one">Then use <strong class="color-black bold">RedE</strong> to connect with people who
 					share your enthusiasm.
 				</p>
-				<p class="para-one">But be careful. When we play together,
-				we can't help but become <strong class="color-red">Friends</strong>.</p>
+				<p class="para-one"> “sometimes” – thus “But be careful. Sometimes, when we play together, we can’t help but become ”<strong class="color-red">Friends</strong>.</p>
 			</div>
 			<div class="col-sm-12 col-md-5 col-lg-5 ">
 				<div class="img-box">
@@ -111,7 +110,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="#" class="btn btn-business">Are you <strong class="color-red">RedE</strong>?  Take our quiz to find out.</a>
+				<a href="#" class="btn btn-business">Take our quiz to find out if you’re ready for  <strong class="color-red">RedE</strong>?  </a>
 			</div>
 		</div>
 	</div>
@@ -123,12 +122,12 @@
 		<div class="row">
 			<div class="col-lg-6 dis-flex">
 				<p class="para-two">Sometimes, all that we need to make a new friend is an excuse to get together. It’s something we like to call a <strong class="color-red">“McGuffin.” </strong></p>
-				<p class="para-two">In the movies, a McGuffin can be a snitch, a magical ring of power, or even a Maltese falcon. In life, it’s more likely to be a boardgame, a cup of coffee, or a hike in the woods. </p>
-				<p class="para-two">It doesn’t matter what we choose to do. All that matters is that we do it together. For when we share our interests and pursue the same goals, we can’t help but build mutual respect and understanding. And from that comes true friendship.</p>
+				<p class="para-two">It’s something that film makers call a “McGuffin.” . </p>
+				<p class="para-two">It doesn’t matter what we choose to do. All that matters is that we do it together. Because when we share our interests and pursue the same goals, we can’t help but build mutual respect and understanding. And those are the foundations of real friendship. </p>
 			</div>
 			<div class="col-lg-6 text-center">
 				<div class="img-box"><img src="/assets/images/img-side.jpg" class="img-fluid" alt=""></div>
-				<a href="#" class="btn btn-business">Learn More About The Mcguffin</a>
+				<a href="#" class="btn btn-business">Learn More About McGuffins</a>
 			</div>
 		</div>
 	</div>
@@ -148,5 +147,12 @@
 		</div>
 	</div>
 </section>
+
 <!-- Try It Out   -->
+
+@endsection
+@section('scripts')
+<script>
+
+</script>
 @endsection

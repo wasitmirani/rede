@@ -2,12 +2,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-2 ">
-				@if(Auth::user()->image != null)
-				<div class="logo"><a href="/"><img src="{{asset('user/images/'.Auth::user()->image)}}" alt="" style="width: 65px"></a></div>
-				@else
-				<div class="logo"><a href="/"><img src="{{asset('user/images/user.jpg')}}" alt="" style="width: 65px"></a></div>
-				@endif
-				
+
+				<div class="logo"><a href="/"><img src="{{asset('assets/images/logo.png')}}" alt="" style="width: 100px"></a></div>
+
+
 			</div>
 			<div class="col-lg-4 dis-flex-start">
 				<p><strong>SHARE AN ADVENTURE.<br>
@@ -17,8 +15,10 @@
 
             @if(!cache()->get('customer_login'))
 			<div class="col-lg-6 dis-flex-end">
-                <a href="{{route('customer.login')}}" class="btn btn-business">login</a>
+                <a type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-business">login</a>
+                <a href="{{ route('signup') }}"  class="btn btn-business">Sign Up</a>
 			</div>
+
             @else
             <div class="row">
                 <div class="col-lg-6 dis-flex-end">

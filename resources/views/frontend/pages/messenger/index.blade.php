@@ -373,7 +373,7 @@ chekcbox1.onchange = evt => {
   if (file) {
 
     // blah.src = URL.createObjectURL(file)
-    image.src = URL.createObjectURL(event.target.files[0]);
+    blah.src = URL.createObjectURL(event.target.files[0]);
 
   }
 }

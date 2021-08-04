@@ -100,7 +100,7 @@
                         <div class="col-span-2 m-4	">
                             <div class="grid grid-cols-3 gap-4">
                             <button type="submit" class="bg-blue-500 flex font-bold hidden hover:bg--600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white" aria-expanded="false" id="uploadBtn">Post</button>
-                            <input type="file"  id="chekcbox1" name="image">
+                            <input type="file"  id="checkbox1" name="image">
                             </div>
                         </div>
 
@@ -326,21 +326,16 @@
 
     $(document).ready(function(){
 
+
+        })
+
         $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 
 });
-chekcbox1.onchange = evt => {
-  const [file] = chekcbox1.files
-  if (file) {
 
-    // blah.src = URL.createObjectURL(file)
-    blah.src = URL.createObjectURL(event.target.files[0]);
-
-  }
-}
 
 
         $('#joinBtn').click(function(){
