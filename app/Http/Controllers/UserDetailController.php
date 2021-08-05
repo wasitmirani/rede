@@ -106,4 +106,36 @@ if($updated){
     public function friendlist(){
         return view('frontend.pages.friendlist');
     }
+
+    public function myCalendar(){
+        return view('frontend.pages.calendar');
+    }
+
+    public function updateImage(Request $request){
+
+        $user = User::find(Auth::user()->id);
+        if ($request->hasfile('image')) {
+            $name = !empty($request->post) ? $request->post : config('app.name');
+            $name = Str::slug($name, '-')  . "-" . time() . '.' . $request->image->extension();
+            $request->image->move(public_path("/user/images/"), $name);
+        }
+        else{
+            $name = "";
+        }
+
+        $user->image = $name;
+        $updated = $user->save();
+        if($updated){
+
+            return response()->json('200');
+        }else{
+            return response()->json('402');
+        }
+
+
+
+
+
+
+    }
 }

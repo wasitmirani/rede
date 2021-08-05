@@ -26,8 +26,6 @@ class FrontEndController extends Controller
 
     public function signupUser(Request $request){
 
-
-
         $request->validate([
         'username' => ['required', 'string', 'max:255', 'unique:users'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -35,7 +33,6 @@ class FrontEndController extends Controller
         'status' => ['required'],
         'zipcode' => ['required'],
         ]);
-
 
        $user= User::create([
             'name'=>$request->name,
@@ -53,14 +50,12 @@ class FrontEndController extends Controller
         UserDetail::create([
             'user_id'=>$user->id,
             'social'=>json_encode($social),
-            'zip_code'=>$request->zip_code,
+            'zip_code'=>$request->zipcode,
             'covid_status' => $request->status,
-            'pronouns' => $request->pronouns
-
-
+            'pronouns' => $request->pronouns,
+            'age' => $request->age,
 
        ]);
-
 
         // return response()->json(['message'=>'success'],200);
         return back()->with('message','You Are Register Successfully');

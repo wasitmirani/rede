@@ -181,7 +181,8 @@
                             </div>
                             <select class="form-control float-center" name="status">
                                 <option value="">Covid Status</option>
-                                <option value="Vaccinated">Vaccinated</option>
+                                <option value="Fully Vaccinated">Fully Vaccinated</option>
+                                <option value="Vaccination Inprogress">Vaccination Inprogress</option>
                                 <option value="Not Vaccinated">Not Vaccinated</option>
                             </select>
                        @error('status')

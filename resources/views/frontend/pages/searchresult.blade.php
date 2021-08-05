@@ -1,121 +1,175 @@
 @extends('layouts.frontend.messengermaster')
 @section('content')
 
-@if ($result != null)
-<p>Search  By Interest....</p>
+<h1 class="text-2xl leading-none text-gray-900 tracking-tight mt-3"> Search Here.... </h1>
+<div class="tabs">
+<ul class="mt-5 -mr-3 flex-nowrap lg:overflow-hidden overflow-x-scroll uk-tab" id="tabs-nav">
 
-<div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
 
-    @foreach($result as $res)
-<div>
+    <li><a href="#tab1">People</a></li>
+    <li><a href="#tab2">Groups</a></li>
+    <li><a href="#tab3">Events</a></li>
 
-    <img src="{{ asset('/user/images/'.$res->users->image) }}" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">
+</ul>
+<div id="tabs-content">
+    <div id="tab1" class="tab-content">
 
- <div class="relative px-4 -mt-16  ">
-   <div class="bg-white p-6 rounded-lg shadow-lg">
-    <div class="flex items-baseline">
-      <span class="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
-      {{ $res->interest }}
-      </span>
-      <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-    {{-- 2 baths  &bull; 3 rooms --}}
-  </div>
+      <div class="">
+        <div class="wrapper wrapper--w1070">
+            <div class="card card-7">
+                <div class="card-body">
+                    <form class="form" action="{{ route('search.people') }}" method="post">
+                        @csrf
+                        <div class="input-group input--medium">
+                            <label class="label">Interest</label>
+                            <input type="text" name="interest" list="productName"/>
+                            <datalist id="productName">
+                                @foreach($interests as $interest)
+                                <option value="{{ $interest->interest }}">{{ $interest->interest }}</option>
+                                @endforeach
+
+
+                            </datalist>
+                        </div>
+                        {{-- <div class="input-group input--medium">
+                            <label class="label">Location</label>
+                            <input type="text" name="location" list="productName"/>
+                            <datalist id="productName">
+                                <option value="Pen">Pen</option>
+                                <option value="Pencil">Pencil</option>
+                                <option value="Paper">Paper</option>
+                            </datalist>
+                        </div> --}}
+                        <div class="input-group input--medium">
+                            <label class="label">Age</label>
+                            <input type="text" name="age" list="age"/>
+                            <datalist id="age">
+                                <option value="18-25">18-25</option>
+                                <option value="26-30">26-30</option>
+                                <option value="31-35">31-35</option>
+                                <option value="36-40">36-40</option>
+
+                            </datalist>
+                        </div>
+                        <div class="input-group input--medium">
+                            <label class="label">Covide Status</label>
+                            <input type="text" name="covid_status" list="covid_status"/>
+                            <datalist id="covid_status">
+
+                                <option value="Fully Vaccinated">Fully Vaccinated</option>
+                                <option value="Vaccination Inprogress">Vaccination Inprogress</option>
+                                <option value="Not Vaccinated">Not Vaccinated</option>
+                            </datalist>
+
+                        </div>
+                        <input type="hidden" value="1" name="id">
+                        <button type="submit" class="btn-submit" type="submit">search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div id="tab2" class="tab-content">
+
+      <div class="">
+        <div class="wrapper wrapper--w1070">
+            <div class="card card-7">
+                <div class="card-body">
+                    <form class="form" method="POST" action="#">
+                        <div class="input-group input--large">
+                            <label class="label">Interest</label>
+                            <input type="text" name="product" list="productName"/>
+                            <datalist id="productName">
+                                <option value="Pen">Pen</option>
+                                <option value="Pencil">Pencil</option>
+                                <option value="Paper">Paper</option>
+                            </datalist>
+
+                        </div>
+                        {{-- <div class="input-group input--medium">
+                            <label class="label">Location</label>
+                            <input class="input--style-1" type="text" name="checkin" placeholder="mm/dd/yyyy" id="input-start">
+                        </div> --}}
+                        {{-- <div class="input-group input--medium">
+                            <label class="label">Age</label>
+                            <input class="input--style-1" type="text" name="checkout" placeholder="mm/dd/yyyy" id="input-end">
+                        </div> --}}
+                        {{-- <div class="input-group input--medium">
+                            <label class="label">Covide Status</label>
+                            <div class="input-group-icon js-number-input">
+                                <div class="icon-con">
+                                    <span class="plus">+</span>
+                                    <span class="minus">-</span>
+                                </div>
+                                <input class="input--style-1 quantity" type="text" name="guests" value="2 Guests">
+                            </div>
+                        </div> --}}
+                        <button class="btn-submit" type="submit">search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div id="tab3" class="tab-content">
+
+      <div class="">
+        <div class="wrapper wrapper--w1070">
+            <div class="card card-7">
+                <div class="card-body">
+                    <form class="form" method="POST" action="#">
+                        <div class="input-group input--large">
+                            <label class="label">Interest</label>
+                            <input class="input--style-1" type="text" placeholder="Destination, hotel name" name="going">
+                        </div>
+                        {{-- <div class="input-group input--medium">
+                            <label class="label">Location</label>
+                            <input class="input--style-1" type="text" name="checkin" placeholder="mm/dd/yyyy" id="input-start">
+                        </div> --}}
+                        {{-- <div class="input-group input--medium">
+                            <label class="label">Age</label>
+                            <input class="input--style-1" type="text" name="checkout" placeholder="mm/dd/yyyy" id="input-end">
+                        </div> --}}
+                        {{-- <div class="input-group input--medium">
+                            <label class="label">Covide Status</label>
+                            <div class="input-group-icon js-number-input">
+                                <div class="icon-con">
+                                    <span class="plus">+</span>
+                                    <span class="minus">-</span>
+                                </div>
+                                <input class="input--style-1 quantity" type="text" name="guests" value="2 Guests">
+                            </div>
+                        </div> --}}
+                        <button class="btn-submit" type="submit">search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
     </div>
 
-    <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">{{ $res->users->name }}</h4>
-
-  <div class="mt-1">
-    <a href="{{ route('show.member',$res->users->id) }}"><span class="bg-white py-2 px-4 rounded inline-block font-bold shadow">  views </span></a>
-    {{-- <span class="text-gray-600 text-sm">   /wk</span> --}}
   </div>
-  <div class="mt-4">
-    {{-- <span class="text-teal-600 text-md font-semibold">4/5 ratings </span>
-    <span class="text-sm text-gray-600">(based on 234 ratings)</span> --}}
-  </div>
-  </div>
- </div>
-
-</div>
-@endforeach
-</div>
-@endif
-
-<div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-
-
-@foreach($groups as $group)
-<div>
-
-    <img src="{{ asset('/user/group/images/'.$group->image) }}" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">
-
- <div class="relative px-4 -mt-16  ">
-   <div class="bg-white p-6 rounded-lg shadow-lg">
-    <div class="flex items-baseline">
-      <span class="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
-        {{ $group->interest }}
-      </span>
-      <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-    {{-- 2 baths  &bull; 3 rooms --}}
-  </div>
-    </div>
-
-    <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">{{ $group->title }}</h4>
-
-  <div class="mt-1">
-    <a href="{{ route('show.group',$group->id) }}"><span class="bg-white py-2 px-4 rounded inline-block font-bold shadow">  views </span></a>
-    <span class="text-gray-600 text-sm">   /wk</span>
-  </div>
-  <div class="mt-4">
-    <span class="text-teal-600 text-md font-semibold">4/5 ratings </span>
-    <span class="text-sm text-gray-600">(based on 234 ratings)</span>
-  </div>
-  </div>
- </div>
-
-</div>
-@endforeach
 </div>
 
-<div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+@endsection
+@section('scripts')
+<script>
+    $(document).ready(function(){
+        $('#tabs-nav li:first-child').addClass('active');
+$('.tab-content').hide();
+$('.tab-content:first').show();
 
-@foreach($events as $event)
-<div>
+// Click function
+$('#tabs-nav li').click(function(){
+  $('#tabs-nav li').removeClass('active');
+  $(this).addClass('active');
+  $('.tab-content').hide();
 
-    <img src="{{ asset('/user/event/images/'.$event->image) }}" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">
-
- <div class="relative px-4 -mt-16  ">
-   <div class="bg-white p-6 rounded-lg shadow-lg">
-    <div class="flex items-baseline">
-      <span class="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
-        New
-      </span>
-      <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-    {{-- 2 baths  &bull; 3 rooms --}}
-  </div>
-    </div>
-
-    <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">{{ $event->title }}</h4>
-
-  <div class="mt-1">
-    <a href="{{ route('book.event',$event->id) }}"><span class="bg-white py-2 px-4 rounded inline-block font-bold shadow">  views </span></a>
-    <span class="text-gray-600 text-sm">   /wk</span>
-  </div>
-  <div class="mt-4">
-    {{-- <span class="text-teal-600 text-md font-semibold">4/5 ratings </span>
-    <span class="text-sm text-gray-600">(based on 234 ratings)</span> --}}
-  </div>
-  </div>
- </div>
-
-</div>
-@endforeach
-</div>
-
-
-
-
-
-
-
-
+  var activeTab = $(this).find('a').attr('href');
+  $(activeTab).fadeIn();
+  return false;
+});
+    })
+</script>
 @endsection

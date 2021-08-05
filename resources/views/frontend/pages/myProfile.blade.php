@@ -16,8 +16,8 @@
                 @endif
 
 
-                <div class="absolute -bottom-3 custom-overly1 flex justify-center pt-4 pb-7 space-x-3 text-2xl text-white uk-transition-slide-bottom-medium w-full">
-                    <a href="#" class="hover:text-white">
+                <div class="absolute -bottom-3 custom-overly1 flex justify-center pt-4 pb-7 space-x-3 text-2xl text-white uk-transition-slide-bottom-medium w-full uk-transition-toggle">
+                    <a href="#story-modal" class="hover:text-white" uk-toggle="">
                         <i class="uil-camera"></i>
                     </a>
                     <a href="#" class="hover:text-white">
@@ -100,7 +100,7 @@
             color: #fff;">My Particulars </a>
             <a href="{{ route('friend.list') }}" class="bg-white py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
             color: #fff;">My Crew</a>
-            <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+            <a href="{{ route('my.calendar') }}" class="bg-white py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
             color: #fff;">My Calendar</a>
 
         </div>
@@ -188,13 +188,89 @@
 </div>
 
 
+<!-- Modal -->
+<div id="story-modal" class="uk-modal-container uk-modal" uk-modal="">
+    <div class="uk-modal-dialog story-modal">
+        <button class="uk-modal-close-default  shadow-lg bg-white rounded-full p-4 transition dark:bg-gray-200 dark:text-white uk-icon uk-close" type="button" uk-close="">
+            <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" data-svg="close-icon">
+                <line fill="none" stroke="#000" stroke-width="1.1" x1="1" y1="1" x2="13" y2="13"></line>
+                <line fill="none" stroke="#000" stroke-width="1.1" x1="13" y1="1" x2="1" y2="13"></line>
+            </svg>
+        </button>
+        <img id="blah"  style="width:548px;"  />
+        <div class="flex-1 bg-white dark:bg-gray-900 dark:text-gray-100" style="margin-left: 282px; margin-top: 329px;">
 
+            <div class="border-b flex items-center justify-between px-5 py-3 dark:border-gray-600">
+                <form id="profileImageForm">
+                    <div class="flex lg:flex-row flex-col lg:space-x-2">
+                    <input type="file" name="image" id="imageField">
+                    </div>
+                    <button type="submit" class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Upload</button>
+                </form>
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+</div>
 
 
 
 @endsection
 @section('scripts')
 <script>
+$(document).ready(function(){
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+    imageField.onchange = evt => {
+
+  const [file] = imageField.files
+  if (file) {
+
+    // blah.src = URL.createObjectURL(file)
+    blah.src = URL.createObjectURL(event.target.files[0]);
+
+  }
+}
+
+$('#profileImageForm').on('submit',function(e){
+
+ e.preventDefault();
+ var data = new FormData(this);
+ $.ajax({
+     url:"/update/image",
+     type:"POST",
+     data:data,
+     processData: false,
+    contentType: false,
+     success:function(msg){
+         if(msg == '200'){
+
+            location.reload();
+
+         }else{
+             toastr.success('Something Went Wrong!')
+         }
+
+
+     }
+
+ })
+
+})
+})
 
 </script>
 @endsection

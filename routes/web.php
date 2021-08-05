@@ -75,6 +75,9 @@ Route::middleware('auth')->group(function () {
     Route::post('share/feed',[FeedsController::class,'shareFeed'])->name('share.feed');
     Route::get('/friend/list',[UserDetailController::class,'friendlist'])->name('friend.list');
     Route::get('/my/feeds',[FeedsController::class,'myNews'])->name('my.news');
+    Route::get('/my/calendar',[UserDetailController::class,'myCalendar'])->name('my.calendar');
+    Route::post('/update/image',[UserDetailController::class,'updateImage'])->name('update.image');
+    Route::get('/search',[FeedsController::class,'searchForm'])->name('search.form');
 });
 
 Route::get('/signup',[FrontEndController::class,'signup'])->name('signup');

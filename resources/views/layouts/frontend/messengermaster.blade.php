@@ -20,6 +20,7 @@
 
     <!-- icons
         ================================================== -->
+        <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/icons.css')}}">
 
     <!-- CSS
@@ -41,7 +42,16 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.11.0/jquery.typeahead.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
-
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/events/css/vendor/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/lightbox.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/search.css') }}">
+    <script src="{{ asset('/assets/events/js/vendor/modernizr-2.8.3.min.js') }}"></script>
 
 
 
@@ -495,6 +505,8 @@
     ================================================== -->
     <script src="{{asset('/messenger/assets/js/tippy.all.min.js')}}"></script>
     <script src="{{asset('/messenger/assets/js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/popper-1.12.9.min.js') }}"></script>
+<script src="{{ asset('/assets/events/js/vendor/bootstrap.min.js') }}"></script>
     <script src="{{asset('/messenger/assets/js/uikit.js')}}"></script>
     <script src="{{asset('/messenger/assets/js/simplebar.js')}}"></script>
     <script src="{{asset('/messenger/assets/js/custom.js')}}"></script>
@@ -503,9 +515,21 @@
     <script src="{{ asset('lib/js/jquery.emojiarea.js') }}"></script>
     <script src="{{ asset('lib/js/emoji-picker.js') }}"></script>
 
-
+    <script src="{{ asset('/assets/events/js/vendor/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/waypoints-jquery.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/lightbox.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/jquery.appear.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/countdown.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/wow.min.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/plugins.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/main.js') }}"></script>
   <script src="{{ asset('/assets/js/toaster.js') }}"></script>
   <script src="{{ asset('/lib/jquery.buttonLoader.js') }}"></script>
+  <script src="./maps/api/js_key_aizasyblujtsii_frurx0i2wugoxf_kanohmc4o.js"></script>
+<script src="{{ asset('/assets/events/js/vendor/map.js') }}"></script>
+<script src="{{ asset('/assets/events/js/vendor/jquery-migrate.js') }}"></script>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

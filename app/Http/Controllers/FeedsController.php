@@ -8,7 +8,9 @@ use App\Models\Event;
 use App\Models\Group;
 use App\Models\Comment;
 use App\Models\FeedLike;
+use App\Models\Interest;
 use App\Models\MyInterest;
+use App\Models\UserDetail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\FollowRequest;
@@ -146,13 +148,28 @@ public function storeFeed(Request $request){
 
     public function searchPeople(Request $request){
 
-        $result = MyInterest::with('users')->where('interest',$request->keyword)->get();
+
+        MyInterest::with('user')->where('interest','LIKE',"%$request->interest%")->get();
+        $data = UserDetail::with('user')
+        ->where('age','LIKE',"%$request->age%")
+        ->orwhere('covid_status','LIKE',"%$request->covid_status%")
+        ->get();
+        dd($data);
+
+
+        $result =  UserDetail::where('interest', 'LIKE', "%$request->interest%")->orwhere('age', 'LIKE', "%$request->age%")->get();
+
         $groups = Group::where('interest',$request->keyword)->get();
         $events = Event::where('interest',$request->keyword)->get();
         return  view('frontend.pages.searchresult',compact('result','events','groups'));
 
 
 
+    }
+
+    public function searchForm(){
+        $interests = Interest::all();
+        return view('frontend.pages.searchresult',compact('interests'));
     }
 
     public function showMember($id){
