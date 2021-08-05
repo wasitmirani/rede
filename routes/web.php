@@ -78,6 +78,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/my/calendar',[UserDetailController::class,'myCalendar'])->name('my.calendar');
     Route::post('/update/image',[UserDetailController::class,'updateImage'])->name('update.image');
     Route::get('/search',[FeedsController::class,'searchForm'])->name('search.form');
+    Route::get('/spin/the/wheel',[UserDetailController::class,'spinTheWheel'])->name('spin.the.wheel');
 });
 
 Route::get('/signup',[FrontEndController::class,'signup'])->name('signup');

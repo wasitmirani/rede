@@ -138,4 +138,8 @@ if($updated){
 
 
     }
+
+    public function spinTheWheel(){
+        return view('frontend.pages.wheel');
+    }
 }

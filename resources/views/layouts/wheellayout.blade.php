@@ -1,62 +1,18 @@
-
 <!DOCTYPE html>
-<html lang="en">
-
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Favicon -->
-    <link href="/messenger//messenger/assets/images/favicon.png" rel="icon" type="image/png">
-
-    <!-- Basic Page Needs
-        ================================================== -->
-    <title>{{config('app.name')}}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Instello - Sharing Photos platform HTML Template">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <!-- icons
-        ================================================== -->
-        <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{asset('/messenger/assets/css/icons.css')}}">
-
-    <!-- CSS
-        ================================================== -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('/messenger/assets/css/uikit.css')}}">
-    <link rel="stylesheet" href="{{asset('/messenger/assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('/messenger/assets/css/tailwind.css')}}">
-    <link rel="stylesheet" href="{{ asset('/assets/css/toaster.css') }}">
-
-
-
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+	<meta charset="utf-8">
+	<title></title>
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="{{ asset('lib.buttonLoader.css') }}" rel="stylesheet">
-
-    <link href="{{ asset('lib/css/emoji.css') }}" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.11.0/jquery.typeahead.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('/messenger/assets/css/uikit.css')}}">
+    <link rel="stylesheet" href="{{asset('/messenger/assets/css/icons.css')}}">
+    <link rel="stylesheet" href="{{asset('/messenger/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('/messenger/assets/css/tailwind.css')}}">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/flaticon.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/owl.theme.default.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/events/css/vendor/animate.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/jquery-ui.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/lightbox.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/events/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/events/css/responsive.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/events/css/search.css') }}">
-    <script src="{{ asset('/assets/events/js/vendor/modernizr-2.8.3.min.js') }}"></script>
-
-@yield('style')
-
+    @yield('style')
 </head>
-
 <body>
 
     <div id="wrapper">
@@ -458,161 +414,15 @@
 
         </div>
     </div>
-
-
-
-    <script>
-
-
-
-
-        (function (window, document, undefined) {
-            'use strict';
-            if (!('localStorage' in window)) return;
-            var nightMode = localStorage.getItem('gmtNightMode');
-            if (nightMode) {
-                document.documentElement.className += ' dark';
-            }
-        })(window, document);
-
-
-        (function (window, document, undefined) {
-
-            'use strict';
-
-            // Feature test
-            if (!('localStorage' in window)) return;
-
-            // Get our newly insert toggle
-            var nightMode = document.querySelector('#night-mode');
-            if (!nightMode) return;
-
-            // When clicked, toggle night mode on or off
-            nightMode.addEventListener('click', function (event) {
-                event.preventDefault();
-                document.documentElement.classList.toggle('dark');
-                if (document.documentElement.classList.contains('dark')) {
-                    localStorage.setItem('gmtNightMode', true);
-                    return;
-                }
-                localStorage.removeItem('gmtNightMode');
-            }, false);
-
-        })(window, document);
-    </script>
-
- <!-- Scripts
-    ================================================== -->
-    <script src="{{asset('/messenger/assets/js/tippy.all.min.js')}}"></script>
-    <script src="{{asset('/messenger/assets/js/jquery-3.3.1.min.js')}}"></script>
-    <script src="{{ asset('/assets/events/js/vendor/popper-1.12.9.min.js') }}"></script>
-<script src="{{ asset('/assets/events/js/vendor/bootstrap.min.js') }}"></script>
-    <script src="{{asset('/messenger/assets/js/uikit.js')}}"></script>
-    <script src="{{asset('/messenger/assets/js/simplebar.js')}}"></script>
-    <script src="{{asset('/messenger/assets/js/custom.js')}}"></script>
-    <script src="{{ asset('lib/js/config.js') }}"></script>
-    <script src="{{ asset('lib/js/util.js') }}"></script>
-    <script src="{{ asset('lib/js/jquery.emojiarea.js') }}"></script>
-    <script src="{{ asset('lib/js/emoji-picker.js') }}"></script>
-
-    <script src="{{ asset('/assets/events/js/vendor/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('/assets/events/js/vendor/jquery.counterup.min.js') }}"></script>
-    <script src="{{ asset('/assets/events/js/vendor/waypoints-jquery.js') }}"></script>
-    <script src="{{ asset('/assets/events/js/vendor/lightbox.js') }}"></script>
-    <script src="{{ asset('/assets/events/js/vendor/jquery.appear.js') }}"></script>
-    <script src="{{ asset('/assets/events/js/vendor/countdown.js') }}"></script>
-    <script src="{{ asset('/assets/events/js/vendor/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('/assets/events/js/vendor/wow.min.js') }}"></script>
-    <script src="{{ asset('/assets/events/js/vendor/plugins.js') }}"></script>
-    <script src="{{ asset('/assets/events/js/main.js') }}"></script>
-  <script src="{{ asset('/assets/js/toaster.js') }}"></script>
-  <script src="{{ asset('/lib/jquery.buttonLoader.js') }}"></script>
-  <script src="./maps/api/js_key_aizasyblujtsii_frurx0i2wugoxf_kanohmc4o.js"></script>
-<script src="{{ asset('/assets/events/js/vendor/map.js') }}"></script>
-<script src="{{ asset('/assets/events/js/vendor/jquery-migrate.js') }}"></script>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    <script>
-
-
-        @auth
-            window.user = {!! json_encode(Auth::user(), true) !!};
-        @else
-            window.user = [];
-            window.Permissions = [];
-        @endauth
-
-  $(document).ready(function () {
-    $("#addPostBtn").on('click',function(){
-
-       $("#postArea").html('');
-
-});
-
-  });
-
-    </script>
-
-    <script src="../ionicons@5.2.3/dist/ionicons.js"></script>
-<script>
-
-    $(document).ready(function(){
-
-        $("#searchKeyword").on('keyup',function(){
-
-            var keyword = $("#searchKeyword").val();
-            $.ajax({
-                url:"/search/interest",
-                type:"POST",
-                data:{_token:"{{ csrf_token() }}",keyword:keyword},
-                success:function(msg){
-
-                    $.each(msg,function(item, value){
-
-                        $("#suggestions").html("<ul><li class='list-item'>"+value.interest+"</li></ul>")
-                    })
-
-
-               }
-            })
-
-
-
-
-        })
-
-        $("#searchBtn").click(function(){
-
-            var keyword = $("#searchKeyword").val();
-            $.ajax({
-                url:'/search/people',
-                type:'POST',
-                data:{_token:"{{ csrf_token() }}",keyword:keyword},
-                success:function(msg){
-
-                  jQuery.each(msg,function(index, item){
-
-                  });
-
-
-
-                }
-            })
-
-
-
-    })
- })
-
-</script>
-
-    @yield('scripts')
-
-
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
 
 </body>
+@yield('scripts')
+<script src="{{asset('/messenger/assets/js/tippy.all.min.js')}}"></script>
+<script src="{{asset('/messenger/assets/js/jquery-3.3.1.min.js')}}"></script>
 
+<script src="{{asset('/messenger/assets/js/uikit.js')}}"></script>
+<script src="{{asset('/messenger/assets/js/simplebar.js')}}"></script>
+<script src="{{asset('/messenger/assets/js/custom.js')}}"></script>
 </html>

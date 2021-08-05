@@ -71,7 +71,7 @@
         </li>
         <li>
 
-            <a href="{{route('my.profile')}}">
+            <a href="{{route('spin.the.wheel')}}">
                 <i class="uil-bullseye"></i>
                 <span> Spin The Wheel </span> </a>
         </li>
