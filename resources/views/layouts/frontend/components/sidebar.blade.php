@@ -1,11 +1,9 @@
 <div class="sidebar_inner" data-simplebar="">
     <div class="flex flex-col items-center my-6 uk-visible@s">
         <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-1 rounded-full transition m-0.5 mr-2  w-24 h-24">
-            @if(Auth::user()->image != null)
+
             <img src="{{asset('user/images/'.Auth::user()->image)}}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full">
-            @else
-            <img src="{{asset('/assets/images/dummyuser.jpg')}}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full">
-            @endif
+
         </div>
         <a href="profile.html" class="text-xl font-medium capitalize mt-4 uk-link-reset">
             {{Auth::user()->username}}
