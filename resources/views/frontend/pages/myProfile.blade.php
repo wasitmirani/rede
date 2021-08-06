@@ -94,13 +94,13 @@
     </div>
     <div class="lg:m-0 -mx-5 flex justify-between items-center py-2 relative space-x-3 dark-tabs uk-sticky" uk-sticky="cls-active: bg-gray-100 bg-opacity-95; media : @m ; media @m">
         <div class="flex overflow-x-scroll lg:overflow-hidden lg:pl-0 pl-5 space-x-3 lg:py-2">
-            <a href="{{ route("new.feeds") }}" class="bg-white py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+            <a href="{{ route("new.feeds") }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
             color: #fff;">My Story</a>
-            <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+            <a href="#" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
             color: #fff;">My Particulars </a>
-            <a href="{{ route('friend.list') }}" class="bg-white py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+            <a href="{{ route('friend.list') }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
             color: #fff;">My Crew</a>
-            <a href="{{ route('my.calendar') }}" class="bg-white py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+            <a href="{{ route('my.calendar') }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
             color: #fff;">My Calendar</a>
 
         </div>
