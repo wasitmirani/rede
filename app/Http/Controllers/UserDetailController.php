@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Event;
+use App\Models\Group;
 use App\Models\MyInterest;
+use App\Models\UserDetail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\FollowRequest;
@@ -56,15 +59,16 @@ class UserDetailController extends Controller
 
     public function myProfile(){
         $id = Auth::user()->id;
-        $followers = FollowRequest::where('following',$id)->get()->count();
-        $followingList = FollowRequest::with('followings')->where('follower',$id)->get();
+        $user = User::with('profile')->where('id',$id)->first();
+        $profile = $user->profile;
+        // $followers = FollowRequest::where('following',$id)->get()->count();
+        // $followingList = FollowRequest::with('followings')->where('follower',$id)->get();
         $followerslist = FollowRequest::with('followersreq')->where('following',$id)->get();
-        $follower = "";
-
-
-        $following =  FollowRequest::where('follower',$id)->count();
+        $events = Event::with('user')->where('user_id',$id)->get();
+        $groups = Group::with('members')->where('user_id',$id)->get();
+        // $follower = "";
         $myInterests = User::with('interests')->where('id',Auth::user()->id)->get();
-        return view('frontend.pages.myProfile',compact('myInterests','following','followers','followerslist','followingList'));
+        return view('frontend.pages.myProfile',compact('myInterests','user','profile','groups','events'));
     }
 
     public function editMyInterest(Request $request){
@@ -72,7 +76,7 @@ class UserDetailController extends Controller
 
         $interest = MyInterest::where('user_id',Auth::user()->id)->delete();
         $updated = '';
-     $count = count($request->interests);
+        $count = count($request->interests);
      foreach($request->interests as $interest){
 
         $updated = MyInterest::create([
@@ -104,7 +108,12 @@ if($updated){
     }
 
     public function friendlist(){
-        return view('frontend.pages.friendlist');
+        $id = Auth::user()->id;
+        $followerslist = FollowRequest::with('followersreq')->where('following',$id)->get();
+
+        $crews = User::with('profile')->get();
+
+        return view('frontend.pages.friendlist',compact('crews','followerslist'));
     }
 
     public function myCalendar(){
@@ -141,5 +150,35 @@ if($updated){
 
     public function spinTheWheel(){
         return view('frontend.pages.wheel');
+    }
+
+    public function updateStory(Request $request){
+
+        $id = Auth::user()->id;
+        $user = User::with('profile')->where('id',$id)->first();
+        $profile = $user->profile;
+        // $followers = FollowRequest::where('following',$id)->get()->count();
+        // $followingList = FollowRequest::with('followings')->where('follower',$id)->get();
+        $followerslist = FollowRequest::with('followersreq')->where('following',$id)->get();
+        $events = Event::with('user')->where('user_id',$id)->get();
+        $groups = Group::with('members')->where('user_id',$id)->get();
+
+        $myInterests = User::with('interests')->where('id',Auth::user()->id)->get();
+
+         $ind = UserDetail::where('user_id',Auth::user()->id)->first();
+         $ind ->description = $request->description;
+         $updated = $ind->save();
+
+         if($updated){
+            return view('frontend.pages.myProfile',compact('myInterests','user','profile','groups','events'));
+         }else{
+             return back()->with('message','Your Story Updated');
+         }
+
+
+
+
+
+
     }
 }

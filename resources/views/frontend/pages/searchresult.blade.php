@@ -151,6 +151,77 @@
 
   </div>
 </div>
+<div class="my-3 grid lg:grid-cols-4 grid-cols-2 gap-3 hover:text-yellow-700 uk-link-reset">
+    @if(isset($users))
+    @foreach($users as $user)
+
+
+    <div>
+        <div class="bg-red-400 max-w-full lg:h-56 h-48 rounded-lg relative overflow-hidden shadow uk-transition-toggle">
+            <a href="#story-modal" uk-toggle="">
+                <img src="{{ asset('/user/images/'.$user->user->image) }}" class="w-full h-full absolute object-cover inset-0 scale-150 transform">
+            </a>
+            <div class="flex flex-1 items-center absolute bottom-0 w-full p-3 text-white custom-overly1 uk-transition-slide-bottom-medium">
+                <a href="profile.html" class="lg:flex flex-1 items-center hidden">
+                    <div> {{ $user->user->name }} </div>
+                </a>
+                <div class="flex space-x-2 flex-1 lg:flex-initial justify-around">
+                    <a href="#"> <i class="uil-heart"></i> 150 </a>
+                    <a href="#"> <i class="uil-heart"></i> 30 </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @endforeach
+    @endif
+    @if(isset($groups))
+      @foreach($groups as $group)
+    <div>
+        <div class="bg-yellow-400 max-w-full lg:h-56 h-48 rounded-lg relative overflow-hidden shadow uk-transition-toggle">
+            <a href="#story-modal" uk-toggle="">
+                <img src="{{ asset('/user/group/images/'.$group->image) }}" class="w-full h-full absolute object-cover inset-0 scale-150 transform">
+            </a>
+            <div class="flex flex-1 items-center absolute bottom-0 w-full p-3 text-white custom-overly1 uk-transition-slide-bottom-medium">
+                <a href="#" class="lg:flex flex-1 items-center hidden">
+                    <div> {{ $group->title }} </div>
+                </a>
+                <div class="flex space-x-2 flex-1 lg:flex-initial justify-around">
+                    <a href="#"> <i class="uil-heart"></i> 150 </a>
+                    <a href="#"> <i class="uil-heart"></i> 30 </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @endforeach
+@endif
+@if(isset($data))
+    @foreach($data as $dat)
+
+    <div>
+        <div class="bg-green-400 max-w-full lg:h-56 h-48 rounded-lg relative overflow-hidden shadow uk-transition-toggle">
+            <a href="#story-modal" uk-toggle="">
+                <img src="{{ asset('/user/images/'.$dat->user->image) }}" class="w-full h-full absolute object-cover inset-0">
+            </a>
+            <div class="flex flex-1 items-center absolute bottom-0 w-full p-3 text-white custom-overly1 uk-transition-slide-bottom-medium">
+                <a href="#" class="lg:flex flex-1 items-center hidden">
+                    <div> {{ $dat->user->name }} </div>
+                </a>
+                <div class="flex space-x-2 flex-1 lg:flex-initial justify-around">
+                    <a href="#"> <i class="uil-heart"></i> 150 </a>
+                    <a href="#"> <i class="uil-heart"></i> 30 </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @endforeach
+@endif
+
+
+</div>
 
 @endsection
 @section('scripts')

@@ -57,7 +57,7 @@
                 <span> My Crew </span> </a>
         </li>
         <li>
-            <a href="{{route('events.list')}}">
+            <a href="">
                 <i class="uil-square"></i>
                 <span> My Bookmarks </span> </a>
         </li>
@@ -76,13 +76,13 @@
                 <span> Spin The Wheel </span> </a>
         </li>
         <li>
-            <a href="{{route('my.profile')}}">
+            <a href="">
 
                 <i class="uil-fast-mail"></i>
                 <span> Mail </span> </a>
         </li>
         <li>
-            <a href="{{route('my.profile')}}">
+            <a href="{{route('my.calendar')}}">
                 <i class="uil-calendar-alt"></i>
 
                 <span> Calendars </span> </a>

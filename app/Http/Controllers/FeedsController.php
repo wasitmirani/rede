@@ -148,20 +148,16 @@ public function storeFeed(Request $request){
 
     public function searchPeople(Request $request){
 
-
-        MyInterest::with('user')->where('interest','LIKE',"%$request->interest%")->get();
+        $interests = Interest::all();
+        $users = MyInterest::with('user')->where('interest','LIKE',"%$request->interest%")->get();
         $data = UserDetail::with('user')
         ->where('age','LIKE',"%$request->age%")
         ->orwhere('covid_status','LIKE',"%$request->covid_status%")
         ->get();
-        dd($data);
-
-
-        $result =  UserDetail::where('interest', 'LIKE', "%$request->interest%")->orwhere('age', 'LIKE', "%$request->age%")->get();
 
         $groups = Group::where('interest',$request->keyword)->get();
         $events = Event::where('interest',$request->keyword)->get();
-        return  view('frontend.pages.searchresult',compact('result','events','groups'));
+        return  view('frontend.pages.searchresult',compact('users','events','groups','data','interests'));
 
 
 
@@ -237,8 +233,8 @@ public function storeFeed(Request $request){
 
 
     public function myNews(){
-
-        return view('frontend.pages.feeds');
+      $posts = $this->posts();
+      return view('frontend.pages.feeds',compact('posts'));
     }
 
 

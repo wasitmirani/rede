@@ -44,11 +44,11 @@ class User extends Authenticatable
     ];
 
    public function profile(){
-       return $this->hasOne(UserDetail::class);
+       return $this->hasOne(UserDetail::class,'user_id','id');
    }
     public function interests(){
 
-        return $this->belongsToMany(Interest::class);
+        return $this->hasMany(MyInterest::class);
     }
 
     public function followers()

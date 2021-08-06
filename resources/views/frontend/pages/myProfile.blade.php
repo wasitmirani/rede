@@ -31,11 +31,13 @@
         <div class="lg:w/8/12 flex-1 flex flex-col lg:items-start items-center">
 
             <h2 class="font-semibold lg:text-2xl text-lg mb-2"> {{Auth::user()->name}}</h2>
-            <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                doming id quod mazim placerat facer possim assum
+            <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> {{ $profile->description }}
             </p>
             <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
                 <a href="#">Portland</a> , <a href="#">Oregon</a>  , <a href="#">USA</a>
+            </div>
+            <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
+                <a href="#">{{ $profile->covid_status }}</a>
             </div>
 
 
@@ -116,15 +118,17 @@
                 <i class="text-4xl uil-plus-circle"></i> <span>Add new </span>
             </div>
         </a>
+
+        @foreach($myInterests as $myinterest)
+          @foreach($myinterest->interests as $interest)
+
         <a href="#story-modal" uk-toggle="">
-            <img src="{{ asset('assets/images/avatars/avatar-lg-1.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+            <img src="https://source.unsplash.com/random/350x350" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
         </a>
-        <a href="#story-modal" uk-toggle="">
-            <img src="{{ asset('assets/images/post/img2.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
-        </a>
-        <a href="#story-modal" uk-toggle="">
-            <img src="{{ asset('assets/images/post/img7.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover uk-visible@s">
-        </a>
+        @endforeach
+
+        @endforeach
+
     </div>
 
 
@@ -141,20 +145,17 @@
 
 </div>
 <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
-    <a href="#">
+    <a href="{{ route('create.group') }}">
         <div class="bg-gray-100 border-4 border-dashed flex flex-col h-full items-center justify-center relative rounded-2xl w-full">
             <i class="text-4xl uil-plus-circle"></i> <span> Add new </span>
         </div>
     </a>
+    @foreach($groups as $group)
     <a href="#story-modal" uk-toggle="">
-        <img src="{{ asset('assets/images/avatars/avatar-lg-1.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+        <img src="{{ asset('/user/group/images/'.$group->image) }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
     </a>
-    <a href="#story-modal" uk-toggle="">
-        <img src="{{ asset('assets/images/post/img2.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
-    </a>
-    <a href="#story-modal" uk-toggle="">
-        <img src="{{ asset('assets/images/post/img7.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover uk-visible@s">
-    </a>
+    @endforeach
+
 </div>
 
 <div class="my-6 grid lg:grid-cols-4 grid-cols-2 gap-1.5 hover:text-yellow-700 uk-link-reset">
@@ -171,20 +172,17 @@
 </div>
 
 <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
-    <a href="#">
+    <a href="{{ route('create.event') }}">
         <div class="bg-gray-100 border-4 border-dashed flex flex-col h-full items-center justify-center relative rounded-2xl w-full">
             <i class="text-4xl uil-plus-circle"></i> <span> Add new </span>
         </div>
     </a>
+    @foreach($events as $event)
     <a href="#story-modal" uk-toggle="">
-        <img src="{{ asset('assets/images/avatars/avatar-lg-1.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+        <img src="{{ asset('/user/event/images/'.$event->image) }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
     </a>
-    <a href="#story-modal" uk-toggle="">
-        <img src="{{ asset('assets/images/post/img2.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
-    </a>
-    <a href="#story-modal" uk-toggle="">
-        <img src="{{ asset('assets/images/post/img7.jpg') }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover uk-visible@s">
-    </a>
+    @endforeach
+
 </div>
 
 

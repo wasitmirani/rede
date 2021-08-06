@@ -5,12 +5,7 @@
 
 <div class="lg:m-0 -mx-5 flex justify-between py-4 relative space-x-3 uk-sticky dark-tabs" uk-sticky="cls-active: bg-gray-100 bg-opacity-95" style="">
   <div class="flex overflow-x-scroll lg:overflow-hidden lg:pl-0 pl-5 space-x-3">
-    <input type="text" name="product" list="productName"/>
-    <datalist id="productName">
-        <option value="Pen">Pen</option>
-        <option value="Pencil">Pencil</option>
-        <option value="Paper">Paper</option>
-    </datalist
+
         {{-- <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> Shop</a>
         <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> headphones  </a>
         <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> Parfums </a>
