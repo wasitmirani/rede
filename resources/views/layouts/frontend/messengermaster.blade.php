@@ -527,8 +527,8 @@
     <script src="{{ asset('/assets/events/js/main.js') }}"></script>
   <script src="{{ asset('/assets/js/toaster.js') }}"></script>
   <script src="{{ asset('/lib/jquery.buttonLoader.js') }}"></script>
-  <script src="./maps/api/js_key_aizasyblujtsii_frurx0i2wugoxf_kanohmc4o.js"></script>
-<script src="{{ asset('/assets/events/js/vendor/map.js') }}"></script>
+  {{-- <script src="./maps/api/js_key_aizasyblujtsii_frurx0i2wugoxf_kanohmc4o.js"></script>
+<script src="{{ asset('/assets/events/js/vendor/map.js') }}"></script> --}}
 <script src="{{ asset('/assets/events/js/vendor/jquery-migrate.js') }}"></script>
 
     <!-- Scripts -->

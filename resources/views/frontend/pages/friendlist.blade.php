@@ -21,7 +21,7 @@
                         <img src="{{asset('/assets/images/dummyuser.jpg')}}" class="w-full h-full absolute object-cover inset-0">
                         @endif
                     </a>
-                    <a href="#" class="absolute right-3 top-3 bg-black bg-opacity-60 rounded-full" data-tippy-placement="left" data-tippy="" data-original-title="Hide">
+                    <a href="#" class="absolute right-3 top-3 bg-black bg-opacity-60 rounded-full " data-tippy-placement="left" data-tippy="" data-original-title="Hide">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="fill-current h-6 m-1.5 text-white w-6">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
@@ -34,10 +34,9 @@
                                 {{-- <div> 21, Turkey </div> --}}
 
                             </div>
-                            <a href="#" class="absolute right-3 bottom-3 rounded-full bg-gradient-to-tr from-blue-500 to-purple-700">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="fill-current h-6 m-1.5 text-white w-6">
-                                    <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
-                                </svg>
+                            <a type="button" id="followBtn{{ $crew->id }}" class="absolute right-3 bottom-3 rounded-full bg-gradient-to-tr from-blue-500 to-purple-700 followBtn" data-id="{{ $crew->id }}" data-follower="{{ Auth::user()->id }}">
+
+                                {{ App\Models\FollowRequest::followStatus($crew->id) }}
                             </a>
                         </div>
                     </div>
@@ -59,11 +58,11 @@
     <div>
         <div class="bg-red-400 max-w-full lg:h-56 h-48 rounded-lg relative overflow-hidden shadow uk-transition-toggle">
             <a href="#story-modal" uk-toggle="">
-                <img src="{{ asset('assets/images/post/img2.jpg') }}" class="w-full h-full absolute object-cover inset-0 scale-150 transform">
+                <img src="{{ asset('user/images/'.$follower->followersreq->image) }}" class="w-full h-full absolute object-cover inset-0 scale-150 transform">
             </a>
             <div class="flex flex-1 items-center absolute bottom-0 w-full p-3 text-white custom-overly1 uk-transition-slide-bottom-medium">
                 <a href="profile.html" class="lg:flex flex-1 items-center hidden">
-                    <div> {{ $follower->name }}</div>
+                    <div> {{ $follower->followersreq->name }}</div>
                 </a>
                 <div class="flex space-x-2 flex-1 lg:flex-initial justify-around">
                     <a href="#"> <i class="uil-heart"></i> 150 </a>
@@ -74,57 +73,6 @@
         </div>
     </div>
 @endforeach
-    <div>
-        <div class="bg-yellow-400 max-w-full lg:h-56 h-48 rounded-lg relative overflow-hidden shadow uk-transition-toggle">
-            <a href="#story-modal" uk-toggle="">
-                <img src="{{ asset('assets/images/post/img6.jpg') }}" class="w-full h-full absolute object-cover inset-0 scale-150 transform">
-            </a>
-            <div class="flex flex-1 items-center absolute bottom-0 w-full p-3 text-white custom-overly1 uk-transition-slide-bottom-medium">
-                <a href="#" class="lg:flex flex-1 items-center hidden">
-                    <div> James Lewis </div>
-                </a>
-                <div class="flex space-x-2 flex-1 lg:flex-initial justify-around">
-                    <a href="#"> <i class="uil-heart"></i> 150 </a>
-                    <a href="#"> <i class="uil-heart"></i> 30 </a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div>
-        <div class="bg-green-400 max-w-full lg:h-56 h-48 rounded-lg relative overflow-hidden shadow uk-transition-toggle">
-            <a href="#story-modal" uk-toggle="">
-                <img src="{{ asset('assets/images/avatars/avatar-1.jpg') }}" class="w-full h-full absolute object-cover inset-0">
-            </a>
-            <div class="flex flex-1 items-center absolute bottom-0 w-full p-3 text-white custom-overly1 uk-transition-slide-bottom-medium">
-                <a href="#" class="lg:flex flex-1 items-center hidden">
-                    <div> James Lewis </div>
-                </a>
-                <div class="flex space-x-2 flex-1 lg:flex-initial justify-around">
-                    <a href="#"> <i class="uil-heart"></i> 150 </a>
-                    <a href="#"> <i class="uil-heart"></i> 30 </a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div>
-        <div class="bg-blue-400 max-w-full lg:h-56 h-48 rounded-lg relative overflow-hidden shadow uk-transition-toggle">
-            <a href="#story-modal" uk-toggle="">
-                <img src="{{ asset('assets/images/post/img7.jpg') }}" class="w-full h-full absolute object-cover inset-0">
-            </a>
-            <div class="flex flex-1 items-center absolute bottom-0 w-full p-3 text-white custom-overly1 uk-transition-slide-bottom-medium">
-                <a href="#" class="lg:flex flex-1 items-center hidden">
-                    <div> James Lewis </div>
-                </a>
-                <div class="flex space-x-2 flex-1 lg:flex-initial justify-around">
-                    <a href="#"> <i class="uil-heart"></i> 150 </a>
-                    <a href="#"> <i class="uil-heart"></i> 30 </a>
-                </div>
-            </div>
-
-        </div>
-    </div>
 
 </div>
 <div id="story-modal" class="uk-modal-container uk-modal" uk-modal="" style="">
@@ -213,3 +161,43 @@
     </div>
 </div>
 @endsection
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('.followBtn').on('click',function(){
+
+            var following = $(this).data('id');
+            var follower = $(this).data('follower');
+            var status = 0;
+
+            $.ajax({
+                url:"/follow/request",
+                type:"POST",
+                data:{ _token:"{{csrf_token()}}",
+                    following : following,
+                    follower : follower,
+                    status : status
+                },
+                success:function(msg){
+
+                 $("#followBtn"+following).html(msg);
+                //  if(msg == "Following"){
+                //     toastr.success(msg)
+
+                //  }else{
+                //     toastr.success(msg)
+
+                //  }
+
+
+
+                }
+            })
+
+        })
+
+    })
+
+</script>
+@endsection
+
