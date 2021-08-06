@@ -10,9 +10,9 @@
     <h5 class="text-2xl   leading-none text-gray-900 tracking-tight "> Sort By</h5>
     <input type="text" name="product" list="productName"/>
     <datalist id="productName">
-        <option value="Pen">Pen</option>
-        <option value="Pencil">Pencil</option>
-        <option value="Paper">Paper</option>
+        <option value="Pen">Art</option>
+        <option value="Pencil">Books</option>
+        <option value="Paper">Religion</option>
     </datalist>
         {{-- <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> Shop</a>
         <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> headphones  </a>

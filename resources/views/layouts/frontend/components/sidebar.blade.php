@@ -11,20 +11,27 @@
         <div class="flex justify-around w-full items-center text-center uk-link-reset text-gray-800 mt-6">
             <div>
                 <a href="#">
-                    {{-- <strong>Post</strong> --}}
+                    <strong></strong>
 
                 </a>
             </div>
             <div>
                 <a href="#">
-                    <strong></strong>
-                    <div> </div>
+                    <strong>{{ Auth()->user()->profile->covid_status }}</strong>
+                    <div>{{ Auth()->user()->profile->age }}</div>
+                    <div>{{ Auth()->user()->profile->description }}</div>
                 </a>
             </div>
             <div>
                 <a href="#">
                     <strong></strong>
-                    <div> </div>
+                    <div>  </div>
+                </a>
+            </div>
+            <div>
+                <a href="#">
+                    <strong></strong>
+                    <div>  </div>
                 </a>
             </div>
         </div>
