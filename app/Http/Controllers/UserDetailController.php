@@ -129,7 +129,7 @@ if($updated){
             $request->image->move(public_path("/user/images/"), $name);
         }
         else{
-            $name = "";
+            $name = 'dummyuser.jpg';
         }
 
         $user->image = $name;

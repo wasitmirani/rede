@@ -39,6 +39,7 @@ class FrontEndController extends Controller
             'username'=>$request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'image' => 'dummyuser.jpg'
         ]);
 
         $social=[

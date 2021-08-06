@@ -12,9 +12,9 @@
 
         <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-grid-small" style="transform: translate3d(0px, 0px, 0px);">
             @foreach($crews as $crew)
-            <li tabindex="-1" class="uk-active">
-                <div class="bg-gray-200 max-w-full lg:h-64 h-52 rounded-lg relative overflow-hidden">
-                    <a href="profile.html">
+            <li tabindex="-1" class="uk-active" >
+                <div class="bg-gray-200 max-w-full lg:h-64 h-52 rounded-lg relative overflow-hidden" >
+                    <a uk-toggle=""  href="#story-modal{{ $crew->id }}">
                        @if($crew->image != null)
                         <img src="{{ asset('user/images/'.$crew->image) }}" class="w-full h-full absolute object-cover inset-0">
                         @else
@@ -42,6 +42,52 @@
                     </div>
                 </div>
             </li>
+            <div id="story-modal{{ $crew->id }}" class="uk-modal-container uk-modal" uk-modal="">
+                <div class="uk-modal-dialog story-modal">
+                    <button class="uk-modal-close-default lg:-mt-9 lg:-mr-9 -mt-5 -mr-5 shadow-lg bg-white rounded-full p-4 transition dark:bg-gray-600 dark:text-white uk-icon uk-close" type="button" uk-close=""><svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" data-svg="close-icon"><line fill="none" stroke="#000" stroke-width="1.1" x1="1" y1="1" x2="13" y2="13"></line><line fill="none" stroke="#000" stroke-width="1.1" x1="13" y1="1" x2="1" y2="13"></line></svg></button>
+
+                        <div class="story-modal-media">
+                            <img src="{{ asset('user/images/'.$crew->image) }}" alt="" class="inset-0 h-full w-full object-cover">
+                        </div>
+                        <div class="flex-1 bg-white dark:bg-gray-900 dark:text-gray-100">
+
+                            <!-- post header-->
+                            <div class="border-b flex items-center justify-between px-5 py-3 dark:border-gray-600">
+                                <div class="flex flex-1 items-center space-x-4">
+                                    <a href="#">
+                                        <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-0.5 rounded-full">
+                                            <img src="assets/images/avatars/avatar-2.jpg" class="bg-gray-200 border border-white rounded-full w-8 h-8">
+                                        </div>
+                                    </a>
+                                    <span class="block text-lg font-semibold"> {{ $crew->name }} </span>
+                                </div>
+                                <a href="#">
+                                    <i class="icon-feather-more-horizontal text-2xl rounded-full p-2 transition -mr-1"></i>
+                                </a>
+                            </div>
+                            <div class="story-content p-4" data-simplebar="init"><div class="simplebar-wrapper" style="margin: -16px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: -17px; bottom: 0px;"><div class="simplebar-content" style="padding: 16px; height: 100%; overflow: hidden scroll;">
+
+
+
+
+
+
+
+                            </div></div></div><div class="simplebar-placeholder" style="width: 313px; height: 341px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 233px; transform: translate3d(0px, 0px, 0px); visibility: visible;"></div></div></div>
+                            <div class="p-3 border-t dark:border-gray-600">
+                                <div class="bg-gray-200 dark:bg-gray-700 rounded-full rounded-md relative">
+                                    <input type="text" placeholder="Add your Comment.." class="bg-transparent max-h-8 shadow-none">
+                                    <div class="absolute bottom-0 flex h-full items-center right-0 right-3 text-xl space-x-2">
+                                        <a href="#"> <i class="uil-image"></i></a>
+                                        <a href="#"> <i class="uil-video"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                </div>
+            </div>
             @endforeach
 
         </ul>
@@ -64,102 +110,50 @@
                 <a href="profile.html" class="lg:flex flex-1 items-center hidden">
                     <div> {{ $follower->followersreq->name }}</div>
                 </a>
-                <div class="flex space-x-2 flex-1 lg:flex-initial justify-around">
-                    <a href="#"> <i class="uil-heart"></i> 150 </a>
-                    <a href="#"> <i class="uil-heart"></i> 30 </a>
-                </div>
+
             </div>
+
+        </div>
+    </div>
+    <div id="story-modal{{ $follower->followersreq->id }}" class="uk-modal-container uk-modal" uk-modal="" style="">
+        <div class="uk-modal-dialog story-modal">
+            <button class="uk-modal-close-default lg:-mt-9 lg:-mr-9 -mt-5 -mr-5 shadow-lg bg-white rounded-full p-4 transition dark:bg-gray-600 dark:text-white uk-icon uk-close" type="button" uk-close=""><svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" data-svg="close-icon"><line fill="none" stroke="#000" stroke-width="1.1" x1="1" y1="1" x2="13" y2="13"></line><line fill="none" stroke="#000" stroke-width="1.1" x1="13" y1="1" x2="1" y2="13"></line></svg></button>
+
+                <div class="story-modal-media">
+                    <img src="{{ asset('user/images/'.$follower->followersreq->image) }}" alt="" class="inset-0 h-full w-full object-cover">
+                </div>
+                <div class="flex-1 bg-white dark:bg-gray-900 dark:text-gray-100">
+
+                    <!-- post header-->
+                    <div class="border-b flex items-center justify-between px-5 py-3 dark:border-gray-600">
+                        <div class="flex flex-1 items-center space-x-4">
+
+                            <span class="block text-lg font-semibold"> {{ $follower->followersreq->name }} </span>
+                        </div>
+                        <a href="#">
+                            <i class="icon-feather-more-horizontal text-2xl rounded-full p-2 transition -mr-1"></i>
+                        </a>
+                    </div>
+                    <div class="story-content p-4" data-simplebar="init"><div class="simplebar-wrapper" style="margin: -16px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content" style="padding: 16px; height: auto; overflow: hidden;">
+
+
+
+
+
+
+
+
+                    </div></div></div><div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 290px; transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div></div>
+
+
+                </div>
 
         </div>
     </div>
 @endforeach
 
 </div>
-<div id="story-modal" class="uk-modal-container uk-modal" uk-modal="" style="">
-    <div class="uk-modal-dialog story-modal">
-        <button class="uk-modal-close-default lg:-mt-9 lg:-mr-9 -mt-5 -mr-5 shadow-lg bg-white rounded-full p-4 transition dark:bg-gray-600 dark:text-white uk-icon uk-close" type="button" uk-close=""><svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" data-svg="close-icon"><line fill="none" stroke="#000" stroke-width="1.1" x1="1" y1="1" x2="13" y2="13"></line><line fill="none" stroke="#000" stroke-width="1.1" x1="13" y1="1" x2="1" y2="13"></line></svg></button>
 
-            <div class="story-modal-media">
-                <img src="{{ asset('assets/images/post/img4.jpg') }}" alt="" class="inset-0 h-full w-full object-cover">
-            </div>
-            <div class="flex-1 bg-white dark:bg-gray-900 dark:text-gray-100">
-
-                <!-- post header-->
-                <div class="border-b flex items-center justify-between px-5 py-3 dark:border-gray-600">
-                    <div class="flex flex-1 items-center space-x-4">
-                        <a href="#">
-                            <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-0.5 rounded-full">
-                                <img src="{{ asset('assets/images/avatars/avatar-2.jpg') }}" class="bg-gray-200 border border-white rounded-full w-8 h-8">
-                            </div>
-                        </a>
-                        <span class="block text-lg font-semibold"> Johnson smith </span>
-                    </div>
-                    <a href="#">
-                        <i class="icon-feather-more-horizontal text-2xl rounded-full p-2 transition -mr-1"></i>
-                    </a>
-                </div>
-                <div class="story-content p-4" data-simplebar="init"><div class="simplebar-wrapper" style="margin: -16px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content" style="padding: 16px; height: auto; overflow: hidden;">
-
-                    <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
-
-                    <div class="py-4 ">
-                        <div class="flex justify-around">
-                            <a href="#" class="flex items-center space-x-3">
-                                <div class="flex font-bold items-baseline"> <i class="uil-heart mr-1"> </i> Like</div>
-                            </a>
-                            <a href="#" class="flex items-center space-x-3">
-                                <div class="flex font-bold items-baseline"> <i class="uil-heart mr-1"> </i> Comment</div>
-                            </a>
-                            <a href="#" class="flex items-center space-x-3">
-                                <div class="flex font-bold items-baseline"> <i class="uil-heart mr-1"> </i> Share</div>
-                            </a>
-                        </div>
-                        <hr class="-mx-4 my-3">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex items-center">
-                                <img src="{{ asset('assets/images/avatars/avatar-1.jpg') }}" alt="" class="w-6 h-6 rounded-full border-2 border-white">
-                                <img src="{{ asset('assets/images/avatars/avatar-4.jpg') }}" alt="" class="w-6 h-6 rounded-full border-2 border-white -ml-2">
-                                <img src="{{ asset('assets/images/avatars/avatar-2.jpg') }}" alt="" class="w-6 h-6 rounded-full border-2 border-white -ml-2">
-                            </div>
-                            <div>
-                                Liked <strong> Johnson</strong> and <strong> 209 Others </strong>
-                            </div>
-                        </div>
-                    </div>
-
-                <div class="-mt-1 space-y-1">
-                    <div class="flex flex-1 items-center space-x-2">
-                        <img src="{{ asset('assets/images/avatars/avatar-2.jpg') }}" class="rounded-full w-8 h-8">
-                        <div class="flex-1 p-2">
-                            consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                        </div>
-                    </div>
-
-                    <div class="flex flex-1 items-center space-x-2">
-                        <img src="{{ asset('assets/images/avatars/avatar-4.jpg') }}" class="rounded-full w-8 h-8">
-                        <div class="flex-1 p-2">
-                            consectetuer adipiscing elit
-                        </div>
-                    </div>
-
-                </div>
-
-
-                </div></div></div><div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 290px; transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div></div>
-                <div class="p-3 border-t dark:border-gray-600">
-                    <div class="bg-gray-200 dark:bg-gray-700 rounded-full rounded-md relative">
-                        <input type="text" placeholder="Add your Comment.." class="bg-transparent max-h-8 shadow-none">
-                        <div class="absolute bottom-0 flex h-full items-center right-0 right-3 text-xl space-x-2">
-                            <a href="#"> <i class="uil-image"></i></a>
-                            <a href="#"> <i class="uil-video"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-    </div>
-</div>
 @endsection
 @section('scripts')
 <script>
