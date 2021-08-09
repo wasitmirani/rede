@@ -34,15 +34,18 @@
 @section('scripts')
 <script>
 $(document).ready(function(){
+
     $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
 
+
 $('#eventForm').on('submit',function(e){
 
     e.preventDefault();
+
     var data = new FormData(this);
     $.ajax({
         url:"/store/event",
@@ -52,6 +55,8 @@ $('#eventForm').on('submit',function(e){
         contentType: false,
         success:function(msg){
             toastr.success("Event Created");
+
+             window.location.replace(base_url+'/events');
 
         },
        error:function(err){

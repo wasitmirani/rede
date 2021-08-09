@@ -63,11 +63,11 @@ $user = User::where(array($fieldType => $input['username'], 'pass_key' => $input
             Auth::loginUsingId($user->id);
         if(Auth::Check())
         {
-            return redirect()->route('home');
+            return redirect()->route('index');
         }else{
 
             return redirect()->route('login')
-                ->with('message',' Password Are Wrong.');
+                ->with('message',' Incorrect Password');
         }
 
     }

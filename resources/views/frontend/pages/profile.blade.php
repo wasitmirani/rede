@@ -16,7 +16,7 @@
 
         <div class="bg-white rounded-md lg:shadow-lg shadow col-span-2">
 
-            @if(Session::has('message'))
+
             <div class="bg-indigo-900 text-center py-4 lg:px-4">
               <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
                 <span class="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3"></span></span>
@@ -25,7 +25,7 @@
               </div>
             </div>
 
-            @endif
+
     <form action="{{route('edit.profile')}}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="grid grid-cols-2 gap-3 lg:p-6 p-4">

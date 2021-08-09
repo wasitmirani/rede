@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Feed;
 use App\Models\Interest;
+use App\Models\BookEvent;
+use App\Models\UserDetail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Feed;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -39,14 +43,46 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+   public function profile(){
+       return $this->hasOne(UserDetail::class,'user_id','id');
+   }
     public function interests(){
 
-        return $this->belongsToMany(Interest::class);
+        return $this->hasMany(MyInterest::class);
     }
+
+    public function followers()
+    {
+        return $this->hasMany(FollowRequest::class, 'following', 'id');
+    }
+
+    public function following()
+    {
+        return $this->hasMany(FollowRequest::class, 'follower', 'id');
+    }
+
+
 
     public function feeds(){
         return $this->hasMany(Feed::class);
+    }
+
+    public function bookedevents(){
+        return $this->hasMany(BookEvent::class);
+    }
+
+    public static function followStatus($id){
+
+        $exist = FollowRequest::where([['follower','=',Auth::user()->id],['following','=',$id]])->exists();
+        if($exist){
+            return 'Unfollow';
+
+        } else if(!$exist){
+            return 'Follow';
+
+
+        }
+
     }
 
 

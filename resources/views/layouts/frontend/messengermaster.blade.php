@@ -20,6 +20,7 @@
 
     <!-- icons
         ================================================== -->
+        <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/icons.css')}}">
 
     <!-- CSS
@@ -29,15 +30,30 @@
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('/messenger/assets/css/tailwind.css')}}">
     <link rel="stylesheet" href="{{ asset('/assets/css/toaster.css') }}">
+
+
+
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="{{ asset('lib/css/emoji.css') }}" rel="stylesheet">
+    <link href="{{ asset('lib.buttonLoader.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('lib/css/emoji.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.11.0/jquery.typeahead.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/events/css/vendor/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/lightbox.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/events/css/search.css') }}">
+    <script src="{{ asset('/assets/events/js/vendor/modernizr-2.8.3.min.js') }}"></script>
 
-
+@yield('style')
 
 </head>
 
@@ -90,6 +106,7 @@
                                     </svg>
                                 </button>
                             </form>
+                            <div id="suggestions" class="bg-white lg:pr-4"></div>
                             </div>
 
                         </div>
@@ -119,7 +136,7 @@
                                             </svg>
                                         </div>
 
-                                        <p class="my-3 leading-6"> Do you have a video wants to share us <br> please upload her ..
+                                        <p class="my-3 leading-6"> Do you have a video wants to share us <br> please upload here ..
                                         </p>
                                         <div uk-form-custom="">
                                             <input type="file">
@@ -139,7 +156,7 @@
                                         <p class="my-3 leading-6"> Import videos from YouTube <br> Copy / Paste your video link here </p>
                                         <form class="uk-grid-small" uk-grid="">
                                             <div class="uk-width-expand">
-                                                <input type="text" class="uk-input uk-form-small  bg-gray-200 dark:bg-gray-700" style="box-shadow:none" placeholder="Paste link">
+                                                <input type="text" class="uk-input uk-form-small  bg-gray-200 dark:bg-gray-700" style="box-shadow:none" placeholder="Paste link" >
                                             </div>
                                             <div class="uk-width-auto"> <button type="submit" class="button soft-warning -ml-2">
                                                     Import </button> </div>
@@ -317,7 +334,7 @@
                                 @if(Auth::user()->image != null)
                                 <img src="{{asset('user/images/'.Auth::user()->image)}}" class="header-avatar" alt="">
                                 @else
-                                <img src="{{asset('user/images/user.jpg')}}" class="header-avatar" alt="">
+                                <img src="{{asset('/assets/images/dummyuser.jpg')}}" class="header-avatar" alt="">
                                 @endif
 
                             </a>
@@ -487,19 +504,36 @@
     ================================================== -->
     <script src="{{asset('/messenger/assets/js/tippy.all.min.js')}}"></script>
     <script src="{{asset('/messenger/assets/js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/popper-1.12.9.min.js') }}"></script>
+<script src="{{ asset('/assets/events/js/vendor/bootstrap.min.js') }}"></script>
     <script src="{{asset('/messenger/assets/js/uikit.js')}}"></script>
     <script src="{{asset('/messenger/assets/js/simplebar.js')}}"></script>
     <script src="{{asset('/messenger/assets/js/custom.js')}}"></script>
     <script src="{{ asset('lib/js/config.js') }}"></script>
-  <script src="{{ asset('lib/js/util.js') }}"></script>
-  <script src="{{ asset('lib/js/jquery.emojiarea.js') }}"></script>
-  <script src="{{ asset('lib/js/emoji-picker.js') }}"></script>
+    <script src="{{ asset('lib/js/util.js') }}"></script>
+    <script src="{{ asset('lib/js/jquery.emojiarea.js') }}"></script>
+    <script src="{{ asset('lib/js/emoji-picker.js') }}"></script>
 
+    <script src="{{ asset('/assets/events/js/vendor/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/waypoints-jquery.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/lightbox.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/jquery.appear.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/countdown.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/wow.min.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/plugins.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/main.js') }}"></script>
   <script src="{{ asset('/assets/js/toaster.js') }}"></script>
+  <script src="{{ asset('/lib/jquery.buttonLoader.js') }}"></script>
+  {{-- <script src="./maps/api/js_key_aizasyblujtsii_frurx0i2wugoxf_kanohmc4o.js"></script>
+<script src="{{ asset('/assets/events/js/vendor/map.js') }}"></script> --}}
+<script src="{{ asset('/assets/events/js/vendor/jquery-migrate.js') }}"></script>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script>
 
 
@@ -523,7 +557,32 @@
 
     <script src="../ionicons@5.2.3/dist/ionicons.js"></script>
 <script>
+
     $(document).ready(function(){
+
+        $("#searchKeyword").on('keyup',function(){
+
+            var keyword = $("#searchKeyword").val();
+            $.ajax({
+                url:"/search/interest",
+                type:"POST",
+                data:{_token:"{{ csrf_token() }}",keyword:keyword},
+                success:function(msg){
+
+                    $.each(msg,function(item, value){
+
+                        $("#suggestions").html("<ul><li class='list-item'>"+value.interest+"</li></ul>")
+                    })
+
+
+               }
+            })
+
+
+
+
+        })
+
         $("#searchBtn").click(function(){
 
             var keyword = $("#searchKeyword").val();
@@ -532,7 +591,7 @@
                 type:'POST',
                 data:{_token:"{{ csrf_token() }}",keyword:keyword},
                 success:function(msg){
-                    var output = "";
+
                   jQuery.each(msg,function(index, item){
 
                   });

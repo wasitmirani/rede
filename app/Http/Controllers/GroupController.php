@@ -16,7 +16,7 @@ class GroupController extends Controller
 {
     public function index(){
 
-        $groups = Group::orderBy('created_at','desc')->get();
+        $groups = Group::orderBy('created_at','desc')->paginate(9);
 
         return view('frontend.pages.groups',compact('groups'));
     }
@@ -51,6 +51,17 @@ class GroupController extends Controller
            $group->image = $name;
 
            if($group->save()){
+
+            $data = Group::all();
+            $last_group = collect($data)->last();
+            $group_id = $last_group->id;
+
+            GroupMember::create([
+                'user_id' => Auth::user()->id,
+                'group_id' => $group_id,
+                'status' => 1
+            ]);
+
                return response()->json('Group Created');
 
            }else{
@@ -109,22 +120,30 @@ class GroupController extends Controller
 
 
     public function join(Request $request){
+        $joined = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['status','=',1]])->exists();
+        $requested = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['status','=',0]])->exists();
 
-        if(!GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id]])->exists()){
-
-        $joined = GroupMember::create([
-            'user_id' => Auth::user()->id,
-            'group_id' => $request->group_id,
-        ]);
+        if($joined){
 
 
+        $unjoin = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['status','=',1]])->delete();
 
-        return response()->json('Joined');
 
+
+        return response()->json('Join');
+
+        }else if($requested){
+            $unjoin = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['status','=',0]])->delete();
+            return response()->json('Join');
         }else{
 
-            $unjoin = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id]])->delete();
-            return response()->json('Join');
+
+
+            $joined = GroupMember::create([
+                'user_id' => Auth::user()->id,
+                'group_id' => $request->group_id,
+            ]);
+            return response()->json('Requested');
 
         }
 
@@ -146,7 +165,7 @@ class GroupController extends Controller
         ]);
         if($accepted){
 
-            return response()->json('Accepted');
+            return response()->json('Joined');
 
         }else{
             return response()->json('Spmething Went Wrong');
@@ -215,16 +234,11 @@ class GroupController extends Controller
         }
 
 
-
-
-
-
-
     }
 
     public function likeGroupPost(Request $request){
-
-        if(!GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id]])->exists()){
+        $exists = GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id]])->exists();
+        if(!$exists){
 
             $liked =  GroupPostLike::create([
                 'user_id' => Auth::user()->id,
@@ -232,38 +246,19 @@ class GroupController extends Controller
                 'group_id' => $request->group_id,
                 'like_status' => 1
             ]);
-            return response()->json(1);
-        }elseif(GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id],['like_status','=',1]])->exists()){
-            $liked =  GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id]])->update([
-                'user_id' => Auth::user()->id,
-                'post_id' => $request->post_id,
-                'group_id' => $request->group_id,
-                'like_status' => 0
-            ]);
-            return response()->json(0);
-
-
-
-        }elseif(GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id],['like_status','=',0]])->exists()){
-            $liked =  GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id]])->update([
-                'user_id' => Auth::user()->id,
-                'post_id' => $request->post_id,
-                'group_id' => $request->group_id,
-                'like_status' => 1
-            ]);
-            return response()->json(1);
+            return response()->json('Liked');
+        }
+        elseif($exists){
+            $liked =  GroupPostLike::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['post_id','=',$request->post_id]])->delete();
+            return response()->json('Like');
 
 
 
         }
 
-
-
-
-
-
-
-
-
     }
+
+
+
+
 }

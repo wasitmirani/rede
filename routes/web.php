@@ -9,6 +9,8 @@ use App\Http\Controllers\InterestController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GroupController;
+use Illuminate\Support\Facades\URL;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +26,7 @@ use App\Http\Controllers\GroupController;
 Route::middleware('auth')->group(function () {
     Route::get('/',[FrontEndController::class,'index'])->name('index');
     Route::get('/welcome',[FrontEndController::class,'welcome'])->name('welcome');
-    Route::get('/signup',[FrontEndController::class,'signup'])->name('signup');
+
     Route::get('/congs',[FrontEndController::class,'congs'])->name('congs');
     Route::get('/timeline',[FrontEndController::class,'timeLine'])->name('timeline');
     Route::get('/customer/login',[FrontEndController::class,'customerLogin'])->name('customer.login');
@@ -42,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/my/interest/{id}',[InterestController::class,'myInterests'])->name('my.interest');
     Route::get('/my/profile',[App\Http\Controllers\UserDetailController::class,'myProfile'])->name('my.profile');
     Route::post('/follow/request',[FeedsController::class,'follow_request'])->name('follow.request');
+    Route::post('/accept/follow/request',[FeedsController::class,'followRequestAccepted'])->name('accept.follow.request');
     Route::post('/like/feed',[FeedsController::class,'likeFeed'])->name('like.feed');
     Route::post('/post/comment',[CommentController::class,'PostComment'])->name('post.comment');
     Route::get('/events',[EventController::class,'index'])->name('events.list');
@@ -65,18 +68,34 @@ Route::middleware('auth')->group(function () {
     Route::post('/group/post/comment',[GroupController::class,'groupPostComment'])->name('group.post.comment');
     Route::post('/show/group/comments',[GroupController::class,'showGroupComments'])->name('show.group.comments');
     Route::post('/like/group/post',[GroupController::class,'likeGroupPost'])->name('like.group.post');
+    Route::get('/book/event/{id}',[EventController::class,'bookEvent'])->name('book.event');
+    Route::post('/store/event/booking',[EventController::class,'eventBooking'])->name('event.booking');
+    Route::post('search/tag/{tag}',[InterestController::class,'searchByTag'])->name('tag.search');
+    Route::post('/search/interest',[InterestController::class, 'searchInterest'])->name('search.interest');
+    Route::post('share/feed',[FeedsController::class,'shareFeed'])->name('share.feed');
+    Route::get('/friend/list',[UserDetailController::class,'friendlist'])->name('friend.list');
+    Route::get('/my/feeds',[FeedsController::class,'myNews'])->name('my.news');
+    Route::get('/my/calendar',[UserDetailController::class,'myCalendar'])->name('my.calendar');
+    Route::post('/update/image',[UserDetailController::class,'updateImage'])->name('update.image');
+    Route::get('/search',[FeedsController::class,'searchForm'])->name('search.form');
+    Route::get('/spin/the/wheel',[UserDetailController::class,'spinTheWheel'])->name('spin.the.wheel');
+    Route::post('updateStory',[UserDetailController::class,'updateStory'])->name('my.story');
+});
 
+Route::get('/signup',[FrontEndController::class,'signup'])->name('signup');
+Route::post('/signup',[FrontEndController::class,'signupUser'])->name('signup.user');
 
+Route::prefix('api')->group(function(){
+    Route::get('/all/interest', [InterestController::class,'getinterest']);
 
 });
 
-
-
-Auth::routes(['register'=>false,'password.request'=>false,
-            'password.reset'=>false,
-            'password.update'=>false,
-            'password.confirm'=>false,
-            ]);
+// Auth::routes(['register'=>false,'password.request'=>false,
+//             'password.reset'=>false,
+//             'password.update'=>false,
+//             'password.confirm'=>false,
+//             ]);
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

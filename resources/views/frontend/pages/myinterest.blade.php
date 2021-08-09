@@ -4,22 +4,49 @@
     <h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight"> My Interests </h1>
     <a href="{{route('all.interest')}}" class="text-blue-400 hover:text-blue-500 bg-white py-2 px-4 font-bold shadow"> Add More</a>
 </div>
-<div class="flex overflow-x-scroll lg:overflow-hidden lg:pl-0 pl-5 space-x-3 lg:py-2">
-    <div class="relative uk-slider" uk-slider="finite: true">
+<div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
 
-        <div class="uk-slider-container pb-3">
+
+
     @foreach($myInterests as $myInterest)
 
 
+    <div>
 
+        <img src="https://source.unsplash.com/random/350x350" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">
 
-     <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow">  {{$myInterest->interest}}</a>
+     <div class="relative px-4 -mt-16  ">
+       <div class="bg-white p-6 rounded-lg shadow-lg">
+     <div class="flex items-baseline">
+          {{-- <span class="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
+            New
+          </span> --}}
+          <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
+        {{-- 2 baths  &bull; 3 rooms --}}
+      </div>
+        </div>
+
+        <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">{{ $myInterest->interest }}</h4>
+
+      <div class="mt-1">
+
+        {{-- <span class="text-gray-600 text-sm">   /wk</span> --}}
+      </div>
+      <div class="mt-4">
+        {{-- <span class="text-teal-600 text-md font-semibold">4/5 ratings </span>
+        <span class="text-sm text-gray-600">(based on 234 ratings)</span> --}}
+      </div>
+      </div>
+     </div>
+
+    </div>
+
 
 
 
   @endforeach
-</div>
-</div>
+  {{ $myInterests->links() }}
+
 </div>
 
 

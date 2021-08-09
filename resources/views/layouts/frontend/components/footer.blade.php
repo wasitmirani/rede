@@ -14,37 +14,38 @@
 				<div class="row">
 					<div class="col-sm-12 col-md-4 col-lg-4">
 						<div class="menus">
-							<h2>Our Partners</h2>
+							<h2>Partners With Us</h2>
 							<ul class="list-unstyled">
+                                <li><a href="#">Investors</a></li>
 								<li><a href="#">Careers</a></li>
-								<li><a href="#">Investors</a></li>
+
 								<li><a href="#">Advertisers </a></li>
 								<li><a href="#">Scholars</a></li>
-								<li><a href="#">Parents/Safety</a></li>
+								<li><a href="#">Safety</a></li>
 
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4">
 						<div class="menus">
-							<h2>Ourselves</h2>
+							<h2>Learn More About Us</h2>
 							<ul class="list-unstyled">
-								<li><a href="#">News</a></li>
+								<li><a href="#">About us</a></li>
 								<li><a href="#">Blog </a></li>
-								<li><a href="#">User Stories</a></li>
-								<li><a href="#">User Stories</a></li>
+								<li><a href="#">News</a></li>
+								<li><a href="#">Tips & Advice</a></li>
 								<li><a href="#">FAQ </a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4">
-						<h2>Our Members</h2>
+						<h2>Communicate With Us</h2>
 						<ul class="list-unstyled">
-							<li><a href="#">Tips & Advice </a></li>
-							<li><a href="#">Terms & Conditions</a></li>
-							<li><a href="#">Suggest a New Passion</a></li>
-							<li><a href="#">Report a Problem</a></li>
+							<li><a href="#">Suggest an Interest</a></li>
+							<li><a href="#">Report Bad Behavior</a></li>
 							<li><a href="#">Provide Feedback</a></li>
+							<li><a href="#">Technical Support</a></li>
+							<li><a href="#">User Stories</a></li>
 						</ul>
 					</div>
 				</div>

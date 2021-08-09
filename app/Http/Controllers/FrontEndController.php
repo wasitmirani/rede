@@ -24,36 +24,42 @@ class FrontEndController extends Controller
         return view('frontend.pages.signup');
     }
 
-    public function register(Request $request){
+    public function signupUser(Request $request){
 
-        // $request->validate([
-        //  'username' => ['required', 'string', 'max:255', 'unique:users'],
-        //  'email' => ['required', 'string','email', 'max:255', 'unique:users'],
-        // ]);
+        $request->validate([
+        'username' => ['required', 'string', 'max:255', 'unique:users'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'string', 'min:8'],
+        'status' => ['required'],
+        'zipcode' => ['required'],
+        ]);
 
-    //    $user= User::create([
-    //         'name'=>$request->full_name,
-    //         'email' => $request->email,
-    //         'username'=>$request->username,
-    //         'phone_number'=>$request->phone_number,
-    //         'password' => Hash::make($request->password),
-    //     ]);
+       $user= User::create([
+            'name'=>$request->name,
+            'username'=>$request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'image' => 'dummyuser.jpg'
+        ]);
 
-    //     $social=[
-    //         'facebook'=>$request->fb,
-    //         'twitter'=>$request->twitter,
-    //         'google_plus'=>$request->google_plus,
-    //     ];
+        $social=[
+            'facebook'=>$request->fb,
+            'twitter'=>$request->twitter,
+            'google_plus'=>$request->google_plus,
+        ];
 
-    //     UserDetail::create([
-    //         'user_id'=>$user->id,
-    //         'social'=>json_encode($social),
-    //         'zip_code'=>$request->zip_code,
+        UserDetail::create([
+            'user_id'=>$user->id,
+            'social'=>json_encode($social),
+            'zip_code'=>$request->zipcode,
+            'covid_status' => $request->status,
+            'pronouns' => $request->pronouns,
+            'age' => $request->age,
 
-    //     ]);
+       ]);
 
-
-        return response()->json(['message'=>'success'],200);
+        // return response()->json(['message'=>'success'],200);
+        return back()->with('message','You Are Register Successfully');
 
     }
 
@@ -77,16 +83,19 @@ class FrontEndController extends Controller
     }
 
     public function LoginUser(Request $request){
+
         $password=$request->password;
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('username', 'password');
         if(Auth::attempt($credentials)) {
 
             Cache::put('customer_login',1);
-            return redirect()->route('new.feeds');
+            // return redirect()->route('new.feeds');
+            return response()->json('1');
 
         } else {
             Cache::forget('customer_login');
-            return back()->with('message','Please check your email or password not matched try agin');
+            // return back()->with('message','Please check your email or password not matched try agin');
+            return response()->json('0');
         }
     }
 }

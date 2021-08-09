@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class GroupMember extends Model
 {
@@ -14,6 +15,26 @@ class GroupMember extends Model
     public function members(){
         return $this->belongsTo(User::class,'user_id','id');
     }
+
+    public static function joinStatus($id){
+        $joined = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$id],['status','=',1]])->exists();
+        $requested = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$id],['status','=',0]])->exists();
+         if($joined){
+
+            return 'Joined';
+
+         }else if($requested){
+            return 'Requested';
+
+         }else{
+             return 'Join';
+         }
+
+        }
+
+
+
+
 
 
 

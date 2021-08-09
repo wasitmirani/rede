@@ -4,9 +4,50 @@
 <div class="flex justify-between items-baseline uk-visible@s">
     <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> Add Your Interests
     </h1>
-    <a href="" class="text-blue-400 hover:text-blue-500"> Your Interest</a>
+    <a  href="{{ route('my.interest',Auth::user()->id) }}" class="text-blue-400 hover:text-blue-500"> Your Interest</a>
 </div>
-<div class="relative uk-slider" uk-slider="finite: true">
+<div class="flex space-x-2">
+    @foreach($tags as $tag)
+    <a data-tag="{{ $tag->tag }}" type="button" data-id="{{ $tag->id }}" class="tag"><div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-sm px-3 bg-red-200 text-red-800 rounded-full">{{ $tag->tag }}</div></a>
+    @endforeach
+
+</div>
+<div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+    @foreach($interests as $interest)
+    <div>
+
+        <img src="https://source.unsplash.com/random/350x350" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">
+
+     <div class="relative px-4 -mt-16  ">
+       <div class="bg-white p-6 rounded-lg shadow-lg">
+        <div class="flex items-baseline">
+          {{-- <span class="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
+            New
+          </span> --}}
+          {{-- <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
+        2 baths  &bull; 3 rooms
+      </div> --}}
+        </div>
+
+        <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">{{ $interest->interest }}</h4>
+
+    <div class="mt-1">
+         <button class="btn btn-business addInterest" type="button" id="addInterest{{ $interest->id }}" data-interest="{{ $interest->interest }}" data-id="{{ $interest->id }}">{{ App\Http\Controllers\InterestController::my_interest($interest->interest) }}</button>
+        {{-- <span class="text-gray-600 text-sm">   /wk</span> --}}
+      </div>
+      <div class="mt-4">
+        {{-- <span class="text-teal-600 text-md font-semibold">4/5 ratings </span> --}}
+        {{-- <span class="text-sm text-gray-600">(based on 234 ratings)</span> --}}
+      </div>
+      </div>
+     </div>
+
+    </div>
+    @endforeach
+
+</div>
+{{ $interests->links() }}
+{{-- <div class="relative uk-slider" uk-slider="finite: true">
     @if(Session::has('message'))
           <div class="alert alert-select">{{Session::get('message')}}</div>
     @endif
@@ -60,12 +101,12 @@
 
         </ul>
 
-        <a class="uk-position-center-left uk-position-small p-3.5 bg-white rounded-full w-10 h-10 flex justify-center items-center -mx-4 mb-6 shadow-md dark:bg-gray-800 dark:text-white uk-icon uk-slidenav-previous uk-slidenav uk-invisible" href="#" uk-slidenav-previous="" uk-slider-item="previous"><svg width="14px" height="24px" viewBox="0 0 14 24" xmlns="http://www.w3.org/2000/svg" data-svg="slidenav-previous"><polyline fill="none" stroke="#000" stroke-width="1.4" points="12.775,1 1.225,12 12.775,23 "></polyline></svg></a>
+        {{-- <a class="uk-position-center-left uk-position-small p-3.5 bg-white rounded-full w-10 h-10 flex justify-center items-center -mx-4 mb-6 shadow-md dark:bg-gray-800 dark:text-white uk-icon uk-slidenav-previous uk-slidenav uk-invisible" href="#" uk-slidenav-previous="" uk-slider-item="previous"><svg width="14px" height="24px" viewBox="0 0 14 24" xmlns="http://www.w3.org/2000/svg" data-svg="slidenav-previous"><polyline fill="none" stroke="#000" stroke-width="1.4" points="12.775,1 1.225,12 12.775,23 "></polyline></svg></a>
         <a class="uk-position-center-right uk-positsion-small p-3.5 bg-white rounded-full w-10 h-10 flex justify-center items-center -mx-4 shadow-md dark:bg-gray-800 dark:text-white uk-icon uk-slidenav-next uk-slidenav" href="#" uk-slidenav-next="" uk-slider-item="next"><svg width="14px" height="24px" viewBox="0 0 14 24" xmlns="http://www.w3.org/2000/svg" data-svg="slidenav-next"><polyline fill="none" stroke="#000" stroke-width="1.4" points="1.225,23 12.775,12 1.225,1 "></polyline></svg></a>
 
     </div>
 
-</div>
+</div> --}}
 
 
 @endsection
@@ -73,26 +114,55 @@
 <script>
 
     $(document).ready(function(){
+
+
+        $.ajax({
+            url:'/api/all/interest',
+            type:"GET",
+            success:function(response){
+
+                $.map(response, function(u) {
+
+                    })
+
+
+
+            }
+        });
         $(".js-example-tokenizer").select2({
     tags: true,
     tokenSeparators: [',', ' ']
 })
 
+
 $(".addInterest").on("click",function(e){
     e.preventDefault();
 
     var interest_id = $(this).data('id');
+    var interest = $(this).data('interest');
     $.ajax({
         url: "/add/interest",
         type: "post",
         data:{
             interest_id: interest_id,
+            interest : interest,
             _token:"{{csrf_token()}}"
         },
         success:function(msg){
 
             var output = "";
             $("#addInterest"+interest_id).html(msg)
+
+            if(msg == 'Added'){
+                toastr.success('Interest Added')
+                $("#addInterest"+interest_id).css({"background-color":"red"});
+
+            }else{
+                toastr.success('Interest Removed From Your List')
+
+            }
+
+
 
         },
         error:function(err){
@@ -103,6 +173,23 @@ $(".addInterest").on("click",function(e){
 
     })
 
+})
+$(".tag").click(function(){
+    var tag = $(this).data('tag')
+    var id = $(this).data('id')
+
+    $.ajax({
+        url:'/search/tag/'+tag,
+        type:"POST",
+        data:{_token:"{{ csrf_token() }}",
+        id:id,
+        tag:tag
+    },
+        success:function(response){
+            console.log(response)
+
+        }
+    })
 })
 
     })

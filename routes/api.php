@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\MessengerController;
+use App\Http\Controllers\InterestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,4 @@ Route::prefix('message')->name('message')->group(function () {
     Route::post('/send',[MessengerController::class,'sendMessage']);
     // conversations
 });
+

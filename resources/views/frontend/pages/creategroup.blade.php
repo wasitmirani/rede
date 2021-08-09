@@ -42,6 +42,7 @@ $(".select2-selection").css({"height": "2px"})
 $('#groupForm').on('submit',function(e){
 
     e.preventDefault();
+    var base_url = '{{ URL::to('/') }}';
     var data = new FormData(this);
     $.ajax({
         url:"/store/group",
@@ -51,6 +52,9 @@ $('#groupForm').on('submit',function(e){
         contentType:false,
         success:function(msg){
              toastr.success(msg);
+window.location.replace(base_url+'/groups')
+
+
         },
         error:function(err){
             if (err.status == 422) {
@@ -72,5 +76,6 @@ $('#groupForm').on('submit',function(e){
 
      });
  </script>
+
 
 @endsection
