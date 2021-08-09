@@ -81,7 +81,7 @@
                 <span> Spin The Wheel </span> </a>
         </li>
         <li>
-            <a href="">
+            <a href="{{route('messages')}}">
 
                 <i class="uil-fast-mail"></i>
                 <span> Mail </span> </a>
