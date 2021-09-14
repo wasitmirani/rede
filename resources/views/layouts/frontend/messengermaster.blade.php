@@ -504,6 +504,7 @@
     ================================================== -->
     <script src="{{asset('/messenger/assets/js/tippy.all.min.js')}}"></script>
     <script src="{{asset('/messenger/assets/js/jquery-3.3.1.min.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
     <script src="{{ asset('/assets/events/js/vendor/popper-1.12.9.min.js') }}"></script>
 <script src="{{ asset('/assets/events/js/vendor/bootstrap.min.js') }}"></script>
     <script src="{{asset('/messenger/assets/js/uikit.js')}}"></script>

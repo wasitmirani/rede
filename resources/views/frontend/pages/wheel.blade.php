@@ -112,7 +112,7 @@
             });
         container.on("click", spin);
         function spin(d){
-            
+
 
             container.on("click", null);
             //all slices have been seen, all done
