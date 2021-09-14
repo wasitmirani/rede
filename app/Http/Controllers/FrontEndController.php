@@ -58,8 +58,22 @@ class FrontEndController extends Controller
 
        ]);
 
+       if($user){
+        $credentials = $request->only('username', 'password');
+        if(Auth::attempt($credentials)) {
+
+            Cache::put('customer_login',1);
+            // return redirect()->route('new.feeds');
+            return redirect()->route('my.profile');
+
+        }else{
+            
+        }
+
+       }
+
         // return response()->json(['message'=>'success'],200);
-        return back()->with('message','You Are Register Successfully');
+
 
     }
 

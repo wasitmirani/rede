@@ -25,9 +25,7 @@ use Illuminate\Support\Facades\URL;
 
 Route::middleware('auth')->group(function () {
     Route::get('/',[FrontEndController::class,'index'])->name('index');
-    Route::get('/welcome',[FrontEndController::class,'welcome'])->name('welcome');
-
-    Route::get('/congs',[FrontEndController::class,'congs'])->name('congs');
+    Route::get('/welcome',[FrontEndController::class,'welcome'])->name('welcome');    Route::get('/congs',[FrontEndController::class,'congs'])->name('congs');
     Route::get('/timeline',[FrontEndController::class,'timeLine'])->name('timeline');
     Route::get('/customer/login',[FrontEndController::class,'customerLogin'])->name('customer.login');
     Route::post('/customer/login',[FrontEndController::class,'LoginUser'])->name('customer.user.login');
