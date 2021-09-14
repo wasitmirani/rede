@@ -1,6 +1,6 @@
 @extends('layouts.frontend.messengermaster')
 @section('content')
-@if ($result != null)
+
 <p>Search  By Interest....</p>
 <div class="relative mt-4 uk-slider" uk-slider="finite: true">
 
