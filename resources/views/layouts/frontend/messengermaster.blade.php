@@ -96,7 +96,7 @@
                                 <i class="uil-bars"></i>
                             </div>
 
-                            <div class="header_search">
+                            {{-- <div class="header_search">
                                 <form action="{{ route('search.people') }}" method="post">
                                     @csrf
                                 <input type="text" id="searchKeyword" placeholder="Search  By Interest.." name="keyword">
@@ -107,7 +107,7 @@
                                 </button>
                             </form>
                             <div id="suggestions" class="bg-white lg:pr-4"></div>
-                            </div>
+                            </div> --}}
 
                         </div>
                         <div class="right-side lg:pr-4" >
