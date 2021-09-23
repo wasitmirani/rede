@@ -1,21 +1,21 @@
 @extends('layouts.frontend.messengermaster')
 @section('content')
-<h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mb-2">Create Events </h1>
+<h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mb-2">Create McGuffins </h1>
 <div>
 
         <form id="eventForm">
             <div class="flex lg:flex-row flex-col lg:space-x-2">
-                <input type="text" placeholder="Event Title" name="title" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                <input type="date" placeholder="Event Date" name="date" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+                <input type="text" placeholder="McGuffin Title" name="title" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+                <input type="date" placeholder="McGuffin Date" name="date" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
             </div>
             <div class="flex lg:flex-row flex-col" >
-                <input type="text" placeholder="Event Interest" name="interest" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+                <input type="text" placeholder="McGuffin Interest" name="interest" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
                 @if(isset($id))
                 <input type="hidden" name="group_id" value="{{ $id }}">
                 @endif
             </div>
             <div class="flex lg:flex-row flex-col" >
-            <textarea placeholder="Event Detail" name="description" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;"></textarea>
+            <textarea placeholder="McGiffun Detail" name="description" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;"></textarea>
             </div>
             {{--<input type="text" placeholder="Confirm Password" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;"> --}}
             <div class="flex justify-start my-4 space-x-1">

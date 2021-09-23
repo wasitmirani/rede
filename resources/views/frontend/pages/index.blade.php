@@ -38,7 +38,7 @@
 				</video>
 			</div>
 			<div class="col-sm-12 col-md-12 col-lg-6 dis-flex text-center">
-				<p class="para-two text-left pl-4">Don`t miss out an your chance for adventure
+				<p class="para-two text-left pl-4">Don't miss out an your chance for adventure
 				and community. Get <strong class="color-black bold" >RedE</strong> Now.</p>
 				<a href="{{route('signup')}}" class="btn btn-business">Try It Out!</a>
 				<p class="para-three"><strong class="color-black bold">FREE</strong>-no credit card needed <br>
