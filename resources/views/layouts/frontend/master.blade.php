@@ -175,11 +175,15 @@
 <script>
     $(".toggle-password").click(function() {
 
-$(this).toggleClass("fas fa-eye");
+$(this).removeClass("fa fa-eye-slash");
+$(this).addClass("fas fa-eye");
 var input = $($(this).attr("toggle"));
 if (input.attr("type") == "password") {
   input.attr("type", "text");
 } else {
+    $(this).addClass("fa fa-eye-slash");
+$(this).removeClass("fas fa-eye");
+   
   input.attr("type", "password");
 }
 });
