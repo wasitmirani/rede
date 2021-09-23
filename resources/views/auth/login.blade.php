@@ -36,9 +36,9 @@
                            </label>
 						<div class="input-group" id="show_hide_password">
                             <input type="hidden" name="username" value="$2y$10$92IX">
-							<input class="form-control" type="password" name="password">
+							<input id="password-field" class="form-control" type="password" name="password">
 							<div class="input-group-addon">
-								<a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+								<a ><span class="toggle-password fa fa-eye-slash" toggle="#password-field" aria-hidden="true"></span></a>
 							</div>
 						</div>
 

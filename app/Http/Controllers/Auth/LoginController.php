@@ -47,6 +47,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        dd($request->all());
         $input = $request->all();
         Cache::forget('customer_login');
         $this->validate($request, [
@@ -58,7 +59,7 @@ class LoginController extends Controller
 
 
 
-$user = User::where(array($fieldType => $input['username'], 'pass_key' => $input['password']))->first();
+        $user = User::where(array($fieldType => $input['username'], 'pass_key' => $input['password']))->first();
         if(!empty($user))
             Auth::loginUsingId($user->id);
         if(Auth::Check())
