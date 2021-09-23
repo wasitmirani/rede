@@ -17,9 +17,11 @@
             </div>
             <div>
                 <a href="#">
+                    @if(!empty(Auth()->profile))
                     <strong>{{ Auth()->user()->profile->covid_status }}</strong>
                     <div>{{ Auth()->user()->profile->age }}</div>
                     <div>{{ Auth()->user()->profile->description }}</div>
+                    @endif
                 </a>
             </div>
             <div>
