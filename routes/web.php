@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/create/event',[EventController::class,'createEvent'])->name('create.event');
     Route::post('/store/event',[EventController::class,'storeEvent'])->name('store.event');
     Route::get('/event/detail/{id}',[EventController::class,'eventDetail'])->name('event.detail');
-  // Route::post('/upload/feed',[FeedsController::class,'storeFeed'])->name('store.feed');
+  //Route::post('/upload/feed',[FeedsController::class,'storeFeed'])->name('store.feed');
     Route::post('/store/feed',[FeedsController::class , 'storeFeed'])->name('create.feeds');
     Route::get('/groups',[GroupController::class,'index'])->name('group.list');
     Route::get('/create/group',[GroupController::class,'createGroup'])->name('create.group');
