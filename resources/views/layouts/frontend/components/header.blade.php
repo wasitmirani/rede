@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-lg-2 ">
 
-				<div class="logo"><a href="/"><img src="{{asset('assets/images/logo.png')}}" alt="" style="width: 100px"></a></div>
+				<div class="logo"><a href="/"><img src="{{asset('assets/images/logo.png')}}" alt="" style="width: 115px"></a></div>
 
 
 			</div>
@@ -15,7 +15,7 @@
 
             @if(!cache()->get('customer_login'))
 			<div class="col-lg-6 dis-flex-end">
-                <a type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-business">login</a>
+                <a type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-business" style="margin-right: 12px;">login</a>
                 <a href="{{ route('signup') }}"  class="btn btn-business">Sign Up</a>
 			</div>
 
