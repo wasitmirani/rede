@@ -14,7 +14,7 @@
 			<div class="col-lg-7 pass-in dis-flex" data-aos="fade-left">
                 {{-- <h2 class="heading-one">Welcome to <strong class="color-red">RedE</strong></h2> --}}
 				<div class="content">
-                    <video controls poster="{{ asset('assets/images/video-img.jpg') }}" style="height: 550px;">
+                    <video muted autoplay loop controls poster="{{ asset('assets/images/video-img.jpg') }}" style="height: 550px;">
                         <source src="{{ asset('assets/images/dummy-video.mp4') }}" type="video/mp4">
                         <source src="movie.ogg" type="video/ogg">
                         Your browser does not support the video tag.
