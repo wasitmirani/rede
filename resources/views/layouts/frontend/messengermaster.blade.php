@@ -69,7 +69,7 @@
                         <img src="/messenger/assets/images/logo-light.png" class="logo_inverse">
                     </a>
                     <!-- btn night mode -->
-                    <a href="#" id="night-mode" class="btn-night-mode" data-tippy-placement="left" title="Switch to dark mode"></a>
+                    {{-- <a href="#" id="night-mode" class="btn-night-mode" data-tippy-placement="left" title="Switch to dark mode"></a> --}}
                 </div>
                 <div class="border-b border-gray-20 flex justify-between items-center p-3 pl-5 relative uk-hidden@s">
                     <h3 class="text-xl"> Navigation </h3>

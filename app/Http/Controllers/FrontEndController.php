@@ -61,10 +61,14 @@ class FrontEndController extends Controller
        if($user){
         $credentials = $request->only('username', 'password');
         if(Auth::attempt($credentials)) {
+        
 
+               $message = "Now Your Member Of Rede Community. Start Exploring!";// Flip the flag to true
+           // By that you tell it to save the new flag value into the users table
+         
             Cache::put('customer_login',1);
-            // return redirect()->route('new.feeds');
-            return redirect()->route('my.profile');
+         
+            return redirect()->route('my.profile')->with('loginMessage',$message);
 
         }else{
             
@@ -103,6 +107,7 @@ class FrontEndController extends Controller
         if(Auth::attempt($credentials)) {
 
             Cache::put('customer_login',1);
+           
             // return redirect()->route('new.feeds');
             return response()->json('1');
 
