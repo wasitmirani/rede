@@ -26,14 +26,14 @@ class FrontEndController extends Controller
 
     public function signupUser(Request $request){
 
-        $request->validate([
+
+       $request->validate([
         'username' => ['required', 'string', 'max:255', 'unique:users'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password' => ['required', 'string', 'min:8'],
         'status' => ['required'],
-        'zipcode' => ['required'],
+        'zip_code' => 'required|regex:/\b\d{5}\b/',
         ]);
-
        $user= User::create([
             'name'=>$request->name,
             'username'=>$request->username,
