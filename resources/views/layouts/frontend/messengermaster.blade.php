@@ -465,7 +465,7 @@
 
     <script>
 
- 
+
 
 
         (function (window, document, undefined) {
@@ -502,7 +502,7 @@
 
         })(window, document);
 
-  
+
     </script>
 
  <!-- Scripts
@@ -532,6 +532,7 @@
     <script src="{{ asset('/assets/events/js/main.js') }}"></script>
   <script src="{{ asset('/assets/js/toaster.js') }}"></script>
   <script src="{{ asset('/lib/jquery.buttonLoader.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   {{-- <script src="./maps/api/js_key_aizasyblujtsii_frurx0i2wugoxf_kanohmc4o.js"></script>
 <script src="{{ asset('/assets/events/js/vendor/map.js') }}"></script> --}}
 <script src="{{ asset('/assets/events/js/vendor/jquery-migrate.js') }}"></script>
@@ -550,6 +551,35 @@
             window.Permissions = [];
         @endauth
 
+
+        var zip_code = {!! Auth::user()->profile->zip_code !!}
+
+
+
+const options = {
+  method: 'GET',
+  url: 'https://us-zip-code-information.p.rapidapi.com/',
+  params: {zipcode: zip_code},
+  headers: {
+    'x-rapidapi-host': 'us-zip-code-information.p.rapidapi.com',
+    'x-rapidapi-key': '75af0047bbmsh032102303b45a74p195441jsn22d8edb85f85'
+  }
+};
+
+axios.request(options).then(function (response) {
+	console.log(response.data);
+    var res = response.data
+
+    res.forEach((element, index, array) => {
+        document.getElementById("city").innerHTML = element.City
+        document.getElementById("state").innerHTML = element.State
+ // 100, 200, 300
+
+});
+}).catch(function (error) {
+	console.error(error);
+});
+
   $(document).ready(function () {
     $("#addPostBtn").on('click',function(){
 
@@ -559,7 +589,7 @@
 
 
   });
- 
+
 
     </script>
 
