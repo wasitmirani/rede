@@ -47,7 +47,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-     
+
         $input = $request->all();
         Cache::forget('customer_login');
         $this->validate($request, [
@@ -57,11 +57,12 @@ class LoginController extends Controller
 
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         $user = User::where(array($fieldType => $input['username'], 'pass_key' => $input['password']))->first();
+        
         if(!empty($user))
             Auth::loginUsingId($user->id);
         if(Auth::Check())
         {
-          
+
             return redirect()->route('index');
         }else{
 
