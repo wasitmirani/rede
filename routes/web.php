@@ -78,7 +78,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/search',[FeedsController::class,'searchForm'])->name('search.form');
     Route::get('/spin/the/wheel',[UserDetailController::class,'spinTheWheel'])->name('spin.the.wheel');
     Route::post('updateStory',[UserDetailController::class,'updateStory'])->name('my.story');
+
 });
+Route::get('mcguffin',[FrontEndController::class,'mcguffin'])->name('mcguffin.deatil');
 
 Route::get('/signup',[FrontEndController::class,'signup'])->name('signup');
 Route::post('/signup',[FrontEndController::class,'signupUser'])->name('signup.user');

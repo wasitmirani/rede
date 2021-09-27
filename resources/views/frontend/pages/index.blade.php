@@ -1,6 +1,7 @@
 
 @extends('layouts.frontend.master')
 
+
 @section('content')
 <!-- Main Banner -->
 <section class="banner" style="background:url(assets/images/banner.jpg); ">
@@ -127,7 +128,7 @@
 			</div>
 			<div class="col-lg-6 text-center">
 				<div class="img-box"><img src="/assets/images/img-side.jpg" class="img-fluid" alt=""></div>
-				<a href="#" class="btn btn-business">Learn More About McGuffins</a>
+				<a href="{{ route('mcguffin.deatil') }}" class="btn btn-business" >Learn More About McGuffins</a>
 			</div>
 		</div>
 	</div>

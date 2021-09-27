@@ -20,6 +20,7 @@
         <title>{{config('app.name')}} </title>
         @livewireStyles
 </head>
+@yield('style')
 <body>
 <!-- Header -->
 
@@ -183,7 +184,7 @@ if (input.attr("type") == "password") {
 } else {
     $(this).addClass("fa fa-eye-slash");
 $(this).removeClass("fas fa-eye");
-   
+
   input.attr("type", "password");
 }
 });

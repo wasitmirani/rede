@@ -103,6 +103,7 @@ class FrontEndController extends Controller
     public function LoginUser(Request $request){
 
         $password=$request->password;
+
         $credentials = $request->only('username', 'password');
         if(Auth::attempt($credentials)) {
 
@@ -116,5 +117,11 @@ class FrontEndController extends Controller
             // return back()->with('message','Please check your email or password not matched try agin');
             return response()->json('0');
         }
+    }
+
+
+    public function mcguffin(){
+
+        return view('frontend.pages.mcguffin.mcguffin');
     }
 }
