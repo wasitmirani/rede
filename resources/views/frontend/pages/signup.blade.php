@@ -109,7 +109,7 @@
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-file-archive"></i></span>
                         </div>
-                        <input id="zipcode" type="text" name="zipcode" class="form-control input_pass @error('zipcode') is-invalid @enderror"  required autocomplete="zipcode" placeholder="Zipcode*">
+                        <input id="zipcode" type="text" name="zipcode" class="form-control input_pass @error('zipcode') is-invalid @enderror"  required autocomplete="zipcode" placeholder="Zipcode*  should contain 5 digits">
                     </div>
                     {{-- <input id="password" type="password" class="form-control float-center" placeholder="Your Password *" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"> --}}
 
@@ -137,7 +137,7 @@
                     </div>
                     {{-- <input id="password" type="password" class="form-control float-center" placeholder="Your Password *" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"> --}}
 
-                    @error('pronounce')
+                    @error('pronouns')
                         <span class="" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

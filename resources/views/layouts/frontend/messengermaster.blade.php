@@ -556,14 +556,7 @@
        $("#postArea").html('');
 
 });
- var  code = {!! Auth::user()->profile->zip_code !!}
-$.ajax({
-    type:"get",
-    url:"https://www.zipcodeapi.com/rest/sNTkZU8LRe2sHiry6JQYy7byM0yUQiHJ5X8Ok3nKJJNskpUHkcUe8Sa5WtjJX1Nf/info.json/"+code+"/degrees",
-    success:function(res){
-        console.log(res);
-    }
-})
+
 
   });
  

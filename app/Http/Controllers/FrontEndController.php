@@ -32,7 +32,7 @@ class FrontEndController extends Controller
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password' => ['required', 'string', 'min:8'],
         'status' => ['required'],
-        'zip_code' => 'required|regex:/\b\d{5}\b/',
+        'zipcode' => 'required|regex:/\b\d{5}\b/',
         ]);
        $user= User::create([
             'name'=>$request->name,
@@ -61,17 +61,17 @@ class FrontEndController extends Controller
        if($user){
         $credentials = $request->only('username', 'password');
         if(Auth::attempt($credentials)) {
-        
 
-               $message = "Now Your Member Of Rede Community. Start Exploring!";// Flip the flag to true
+
+               $message = "Now You Are Member Of Rede Community. Start Exploring!";// Flip the flag to true
            // By that you tell it to save the new flag value into the users table
-         
+
             Cache::put('customer_login',1);
-         
+
             return redirect()->route('my.profile')->with('loginMessage',$message);
 
         }else{
-            
+
         }
 
        }
@@ -107,7 +107,7 @@ class FrontEndController extends Controller
         if(Auth::attempt($credentials)) {
 
             Cache::put('customer_login',1);
-           
+
             // return redirect()->route('new.feeds');
             return response()->json('1');
 
