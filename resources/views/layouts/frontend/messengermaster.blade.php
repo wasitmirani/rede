@@ -551,8 +551,12 @@
             window.Permissions = [];
         @endauth
 
-
+        @auth
         var zip_code = {!! Auth::user()->profile->zip_code !!}
+        @else
+        var zip_code = ""
+
+        @endauth
 
 
 
