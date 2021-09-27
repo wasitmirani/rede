@@ -551,12 +551,12 @@
             window.Permissions = [];
         @endauth
 
-        @auth
+        @if(!empty(Auth::user()->profile))
         var zip_code = {!! Auth::user()->profile->zip_code !!}
         @else
         var zip_code = ""
 
-        @endauth
+        @endif
 
 
 
