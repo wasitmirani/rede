@@ -109,7 +109,7 @@ class InterestController extends Controller
 
 
     public function getinterest(){
-
+        
 
         $id = Auth::user()->id;
         $interests = Interest::orderby('id','desc')->paginate(15);

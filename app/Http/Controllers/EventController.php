@@ -60,8 +60,7 @@ class EventController extends Controller
            $event->group_id = $request->group_id;
            $event->image = $name;
            if($event->save()){
-
-               return response()->json('Event Create');
+               return response()->json('Event Created');
            }else{
                return response()->json('Something Went Wrong');
            }
@@ -81,7 +80,7 @@ class EventController extends Controller
     }
 
     public function bookEvent($id){
-        
+
         $event = Event::with('group')->where('id',$id)->first();
         $participants= BookEvent::where('event_id',$id)->with('participents')->get();
         return view('frontend.pages.bookevent',compact('event','participants'));
