@@ -79,11 +79,9 @@ class GroupController extends Controller
         $posts = GroupPost::with('member')->orderBy('id','desc')->where('group_id',$id)->get();
 
         $comments = GroupPostComment::with('members')->where('group_id',$id)->orderBy('id','desc')->limit(3)->get();
-       $likes = GroupPostLike::where('id',$id)->get();
-
+        $likes = GroupPostLike::where('id',$id)->get();
 
         $status = $this->memberStatus($id);
-
 
         $member = $this->singleMember($id);
         $groupMembers = GroupMember::with('members')->where('group_id',$group->id)->get();
@@ -96,9 +94,6 @@ class GroupController extends Controller
         $id = $request->post_id;
         $comments = GroupPostComment::with('members')->where('post_id',$id)->orderBy('id','desc')->limit(5)->get();
         return response()->json($comments);
-
-
-
     }
 
     public function memberStatus($id){
@@ -124,21 +119,13 @@ class GroupController extends Controller
         $requested = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['status','=',0]])->exists();
 
         if($joined){
-
-
         $unjoin = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['status','=',1]])->delete();
-
-
-
         return response()->json('Join');
 
         }else if($requested){
             $unjoin = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['status','=',0]])->delete();
             return response()->json('Join');
         }else{
-
-
-
             $joined = GroupMember::create([
                 'user_id' => Auth::user()->id,
                 'group_id' => $request->group_id,
@@ -146,9 +133,6 @@ class GroupController extends Controller
             return response()->json('Requested');
 
         }
-
-
-
 
     }
 
