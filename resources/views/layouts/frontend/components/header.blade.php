@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-lg-2 ">
 
-				<div class="logo"><a href="/"><img src="asset('assets/im }}ages/logo.png')}}" alt="" style="width: 115px"></a></div>
+				<div class="logo"><a href="/"><img src="{{asset('assets/images/logo.png')}}" alt="" style="width: 115px"></a></div>
 
 
 			</div>
