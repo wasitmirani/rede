@@ -34,7 +34,7 @@
                                 {{-- <div> 21, Turkey </div> --}}
 
                             </div>
-                            <a type="button" id="followBtn{{ $crew->id }}" class="absolute right-3 bottom-3 rounded-full bg-gradient-to-tr from-blue-500 to-purple-700 followBtn" data-id="{{ $crew->id }}" data-follower="{{ Auth::user()->id }}">
+                            <a type="button" id="followBtn{{ $crew->id }}" class=" right-3 bottom-3 rounded-full bg-gradient-to-tr from-blue-500 to-purple-700 followBtn" data-id="{{ $crew->id }}" data-follower="{{ Auth::user()->id }}">
 
                                 {{ App\Models\FollowRequest::followStatus($crew->id) }}
                             </a>

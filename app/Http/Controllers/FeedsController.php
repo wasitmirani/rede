@@ -95,7 +95,7 @@ public function storeFeed(Request $request){
             return response()->json('Follow');
         }
         else{
-           $liked = FollowRequest::create(['follower'=>Auth::user()->id,'following'=>$request->following,'status'=> 0]);
+           $liked = FollowRequest::create(['following'=>Auth::user()->id,'follower'=>$request->following,'status'=> 0]);
             return response()->json('Requested');
         }
     }
