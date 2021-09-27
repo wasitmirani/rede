@@ -313,8 +313,8 @@ html .ui-button.ui-state-disabled:active {
   transition: all 0.4s;
   opacity: 0; }
 
-#scrollUp {
-  text-decoration: none;
+/* #scrollUp {
+  /* text-decoration: none;
   bottom: 26px;
   background: url(../img/up.png);
   background-repeat: no-repeat;
@@ -325,7 +325,7 @@ html .ui-button.ui-state-disabled:active {
   width: 50px;
   z-index: 1000;
   border: none;
-  outline: none; }
+  outline: none; } */
 
 /*google map*/
 #googlemap {
