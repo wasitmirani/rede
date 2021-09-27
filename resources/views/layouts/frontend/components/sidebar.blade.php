@@ -51,7 +51,8 @@
         <li>
             <a href="{{route('group.list')}}">
                 <i class="uil-comment-alt-plus"></i>
-                <span> My Connections </span> <span class="nav-tag"> 0</span> </a>
+                <span> My Connections </span>  </a>
+                {{-- <span class="nav-tag"> 0</span> --}}
         </li>
         <li>
             <a href="{{route('events.list')}}">
