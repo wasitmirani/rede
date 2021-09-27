@@ -145,7 +145,7 @@
 
                 <p>So what do McGuffins have to do with friendship? We believe that the only thing people need in order to connect is an excuse to interact: let’s play tennis together. Or pickleball. Or soccer. Or a board game. Let’s go watch a Jazz band. Or a horror movie. Or the ballet. Let’s learn how to knit. Or to kayak. Or to restore an old arcade game. What it is that you do doesn’t matter. What matters is that you do it together.
                </p>
-               <a href="#" class="read-btn">Read More</a>
+
 			</div>
 			<div class="col-lg-5 text-center">
 				<img src="{{ asset('/assets/images/mc-sec-2.png') }}" alt="">
