@@ -3,12 +3,12 @@
 @section('content')
 
 <!-- Main Banner -->
-<section class="banner" style="background:url(/assets/images/signup-banner.jpg); " data-aos="fade-up">
+{{-- <section class="banner" style="background:url(/assets/images/signup-banner.jpg); " data-aos="fade-up">
 	<div class="container">
 		<div class="row">
 		</div>
 	</div>
-</section>
+</section> --}}
 <!-- Main Banner -->
 <!-- Signup -->
 <section class="signup">
