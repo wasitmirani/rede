@@ -109,7 +109,7 @@ if($updated){
 
     public function friendlist(){
         $id = Auth::user()->id;
-        $followerslist = FollowRequest::with('followersreq')->where('following',$id)->get();
+        $followerslist = FollowRequest::with('followersreq')->where([['following','=',$id],['status','=',1]])->get();
 
         $crews = User::with('profile')->get();
 
