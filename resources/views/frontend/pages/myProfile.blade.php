@@ -65,7 +65,7 @@
             <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> {{ $profile->description }}
             </p>
             <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
-                <a href="#" id="city"></a> , <a href="#" id="state"></a>  , <a href="#">USA</a>
+                <a href="#" id="city"></a> , <a href="#" id="state"></a>  , <a href="#">USA</a><a>({{ $profile->zip_code }})</a>
             </div>
             <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
                 <a href="#">{{ $profile->covid_status }}</a>

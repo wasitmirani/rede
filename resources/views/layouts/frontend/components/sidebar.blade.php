@@ -73,6 +73,7 @@
                 <i class="uil-square"></i>
                 <span> My Bookmarks </span> </a>
         </li>
+        <hr></hr>
 
         <li>
             <a href="{{route('search.form')}}">
@@ -87,6 +88,7 @@
                 <i class="uil-bullseye"></i>
                 <span> Spin The Wheel </span> </a>
         </li>
+        <hr></hr>
         <li>
             <a href="{{route('messages')}}">
 
@@ -94,10 +96,10 @@
                 <span> Mail </span> </a>
         </li>
         <li>
-            <a href="{{route('my.calendar')}}">
+        <a href="{{route('my.calendar')}}">
                 <i class="uil-calendar-alt"></i>
-
-                <span> Calendars </span> </a>
+                <span> Calendars </span>
+        </a>
         </li>
         <li>
             <a href="{{ route('my.news') }}">
@@ -106,7 +108,6 @@
                 </svg>
                 <span> The LowDown </span> </a>
         </li>
-
 
         <li>
             <hr class="my-2">
