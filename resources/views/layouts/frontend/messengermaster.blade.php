@@ -361,6 +361,7 @@
                 </header>
 
                 <div class="container m-auto" id="searchResult">
+                    
 
                     @yield('content')
 

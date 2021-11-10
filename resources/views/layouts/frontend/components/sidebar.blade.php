@@ -69,7 +69,7 @@
                 <span> My Crew </span> </a>
         </li>
         <li>
-            <a href="">
+            <a href="{{ route('my.bookmarks') }}">
                 <i class="uil-square"></i>
                 <span> My Bookmarks </span> </a>
         </li>

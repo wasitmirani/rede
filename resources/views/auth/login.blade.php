@@ -77,9 +77,7 @@
 				<form action="{{route('login')}}" method="POST">
                     @csrf
 					<div class="form-group">
-						<label>Password
-
-                           </label>
+						<label>Password</label>
 						<div class="input-group" id="show_hide_password">
                             <input type="hidden" name="username" value="$2y$10$92IX">
 							<input id="password-field" class="form-control" type="password" name="password">
@@ -87,9 +85,7 @@
 								<a ><span class="toggle-password fa fa-eye-slash" toggle="#password-field" aria-hidden="true"></span></a>
 							</div>
 						</div>
-
                         @if(session('message'))
-
                         <small class="alert alert-danger mt-4 mb-4" role="alert" style="padding: 0px;">
                             <strong>{{ session('message') }}</strong>
                         </small>

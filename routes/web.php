@@ -1,15 +1,16 @@
 <?php
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedsController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\InterestController;
 use App\Http\Controllers\MessengerController;
 use App\Http\Controllers\UserDetailController;
-use App\Http\Controllers\InterestController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\GroupController;
-use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/search',[FeedsController::class,'searchForm'])->name('search.form');
     Route::get('/spin/the/wheel',[UserDetailController::class,'spinTheWheel'])->name('spin.the.wheel');
     Route::post('updateStory',[UserDetailController::class,'updateStory'])->name('my.story');
+    Route::get('bookmarks',[BookmarkController::class,'myBookmarks'])->name('my.bookmarks');
+    Route::post('add/bookmarks',[BookmarkController::class,'addBookmarks'])->name('add.bookmarks');
 
 });
 Route::get('mcguffin',[FrontEndController::class,'mcguffin'])->name('mcguffin.deatil');

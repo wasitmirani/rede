@@ -24,6 +24,11 @@ class User extends Authenticatable
 
      protected $guarded=[];
 
+    //  protected $cast = [
+
+    //     'pass_key' => 'array', // Will convarted to (Array)
+    // ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
