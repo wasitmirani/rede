@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
+use App\Models\Event;
+use App\Models\Group;
 use App\Models\Bookmark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,8 +12,13 @@ class BookmarkController extends Controller
 {
     public function myBookmarks(){
 
+        $id = Auth::user()->id;
         $bookmarks = Bookmark::all();
-        return view('frontend.pages.mybookmark',compact('bookmarks'));
+        $events = Event::with('user')->where('user_id',$id)->get();
+        $groups = Group::with('members')->where('user_id',$id)->get();
+        // $follower = "";
+        $myInterests = User::with('interests')->where('id',Auth::user()->id)->get();
+        return view('frontend.pages.mybookmark',compact('bookmarks','events','groups','myInterests'));
 
     }
 

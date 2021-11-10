@@ -58,6 +58,13 @@
                 <span> My Circle </span>  </a>
                 {{-- <span class="nav-tag"> 0</span> --}}
         </li>
+
+        <li>
+            <a href="{{route('my.interest',Auth::user()->id)}}">
+                <i class="uil-comment-alt-plus"></i>
+                <span> My McGuffins </span>  </a>
+                {{-- <span class="nav-tag"> 0</span> --}}
+        </li>
         <li>
             <a href="{{route('events.list')}}">
                 <i class="uil-film"></i>
@@ -66,7 +73,7 @@
         <li>
             <a href="{{route('friend.list',Auth::user()->id)}}">
                 <i class="uil-users-alt"></i>
-                <span> My Crew </span> </a>
+                <span> My Follower </span> </a>
         </li>
         <li>
             <a href="{{ route('my.bookmarks') }}">

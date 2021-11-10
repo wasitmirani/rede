@@ -26,12 +26,14 @@ class GroupController extends Controller
     }
 
     public function storeGroup(Request $request){
-        
+
+       
         $validate = $request->validate([
 
-            'title' => 'required',
-            'description' => 'required',
-            'image' => 'required',
+            'name' => 'required',
+            'tagline' => 'required',
+            'type' => 'required',
+         
            ]);
 
            if ($request->hasfile('image')) {
@@ -45,10 +47,15 @@ class GroupController extends Controller
         }
 
            $group = new Group();
-           $group->title = $request->title;
-           $group->description = $request->description;
+           $group->title = $request->name;
+           $group->description = $request->tagline;
+           $group->type = $request->type;
+           $group->sponsor = $request->sponsor;
+           $group->membership = $request->membership;
+           $group->subscription =  $request->subscription;
+           $group->zip_code = $request->zip;
            $group->user_id = Auth::user()->id;
-           $group->interest = $request->interest;
+           $group->interest = $request->mcguffin;
            $group->image = $name;
 
            if($group->save()){
@@ -63,7 +70,7 @@ class GroupController extends Controller
                 'status' => 1
             ]);
 
-               return response()->json('Group Created');
+               return response()->json('200');
 
            }else{
                return response()->json('Something Went Wrong');

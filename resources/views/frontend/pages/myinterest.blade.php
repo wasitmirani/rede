@@ -7,8 +7,7 @@
 <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
     @foreach($myInterests as $myInterest)
     <div>
-        <img src="https://source.unsplash.com/random/350x350" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">
-
+        <img src="{{ Avatar::create($myInterest->interest)->toBase64() }}" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">
      <div class="relative px-4 -mt-16  ">
        <div class="bg-white p-6 rounded-lg shadow-lg">
      <div class="flex items-baseline">
