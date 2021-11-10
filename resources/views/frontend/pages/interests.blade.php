@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="flex justify-between items-baseline uk-visible@s">
-    <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> Add Your Interests
+    <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> Add Your McGuffin
     </h1>
-    <a  href="{{ route('my.interest',Auth::user()->id) }}" class="text-blue-400 hover:text-blue-500"> Your Interest</a>
+    <a  href="{{ route('my.interest',Auth::user()->id) }}" class="text-blue-400 hover:text-blue-500"> Your McGuffin</a>
 </div>
 <div class="flex space-x-2">
     @foreach($tags as $tag)

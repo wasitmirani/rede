@@ -7,9 +7,7 @@
 
 </div>
 <div class="relative uk-slider" uk-slider="finite: true">
-
     <div class="uk-slider-container pb-3 -ml-3">
-
         <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-grid-small" style="transform: translate3d(0px, 0px, 0px);">
             @foreach($crews as $crew)
             <li tabindex="-1" class="uk-active" >
@@ -26,7 +24,6 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </a>
-
                     <div class="absolute bottom-0 p-4 w-full custom-overly1">
                         <div class="flex justify-between align-bottom flex-wrap text-white">
                             <div class="w-full truncate text-lg"> {{ $crew->name }} </div>
@@ -66,12 +63,6 @@
                                 </a>
                             </div>
                             <div class="story-content p-4" data-simplebar="init"><div class="simplebar-wrapper" style="margin: -16px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: -17px; bottom: 0px;"><div class="simplebar-content" style="padding: 16px; height: 100%; overflow: hidden scroll;">
-
-
-
-
-
-
 
                             </div></div></div><div class="simplebar-placeholder" style="width: 313px; height: 341px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 233px; transform: translate3d(0px, 0px, 0px); visibility: visible;"></div></div></div>
                             <div class="p-3 border-t dark:border-gray-600">
@@ -123,11 +114,8 @@
                     <img src="{{ asset('user/images/'.$follower->followersreq->image) }}" alt="" class="inset-0 h-full w-full object-cover">
                 </div>
                 <div class="flex-1 bg-white dark:bg-gray-900 dark:text-gray-100">
-
-                    <!-- post header-->
                     <div class="border-b flex items-center justify-between px-5 py-3 dark:border-gray-600">
                         <div class="flex flex-1 items-center space-x-4">
-
                             <span class="block text-lg font-semibold"> {{ $follower->followersreq->name }} </span>
                         </div>
                         <a href="#">
@@ -135,19 +123,10 @@
                         </a>
                     </div>
                     <div class="story-content p-4" data-simplebar="init"><div class="simplebar-wrapper" style="margin: -16px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content" style="padding: 16px; height: auto; overflow: hidden;">
-
-
-
-
-
-
-
-
-                    </div></div></div><div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 290px; transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div></div>
-
-
+                    </div>
+                </div></div>
+                <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 290px; transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div></div>
                 </div>
-
         </div>
     </div>
 @endforeach

@@ -1,18 +1,12 @@
 @extends('layouts.frontend.messengermaster')
 @section('content')
 <div class="flex justify-between mt-6 mb-4">
-    <h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight"> My Interests </h1>
+    <h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight"> My McGuffins </h1>
     <a href="{{route('all.interest')}}" class="text-blue-400 hover:text-blue-500 bg-white py-2 px-4 font-bold shadow"> Add More</a>
 </div>
 <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-
-
-
     @foreach($myInterests as $myInterest)
-
-
     <div>
-
         <img src="https://source.unsplash.com/random/350x350" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">
 
      <div class="relative px-4 -mt-16  ">
@@ -38,12 +32,7 @@
       </div>
       </div>
      </div>
-
     </div>
-
-
-
-
   @endforeach
   {{ $myInterests->links() }}
 

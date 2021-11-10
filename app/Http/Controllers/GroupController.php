@@ -26,6 +26,7 @@ class GroupController extends Controller
     }
 
     public function storeGroup(Request $request){
+        
         $validate = $request->validate([
 
             'title' => 'required',

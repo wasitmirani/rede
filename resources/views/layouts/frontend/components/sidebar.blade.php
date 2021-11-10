@@ -1,9 +1,12 @@
 <div class="sidebar_inner" data-simplebar="">
     <div class="flex flex-col items-center my-6 uk-visible@s">
         <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-1 rounded-full transition m-0.5 mr-2  w-24 h-24">
-
             <img src="{{asset('user/images/'.Auth::user()->image)}}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full">
 
+
+        </div>
+        <div>
+            <a href="{{ route('profile') }}"  class="bg-red rounded inline-block font-bold shadow">Edit Profile</a>
         </div>
         <a href="{{ route('my.profile') }}" class="text-xl font-medium capitalize mt-4 uk-link-reset">
             {{Auth::user()->username}}
@@ -20,7 +23,8 @@
                     @if(!empty(Auth::user()->profile))
                     <strong>{{ Auth()->user()->profile->covid_status }}</strong>
                     <div>{{ Auth()->user()->profile->age }}</div>
-                    <div>{{ Auth()->user()->profile->description }}</div>
+                    <div>{{ Auth()->user()->profile->gender }}</div>
+                    <div>{{ Auth()->user()->profile->pronouns }}</div>
                     @endif
                 </a>
             </div>
@@ -51,13 +55,13 @@
         <li>
             <a href="{{route('group.list')}}">
                 <i class="uil-comment-alt-plus"></i>
-                <span> My Connections </span>  </a>
+                <span> My Circle </span>  </a>
                 {{-- <span class="nav-tag"> 0</span> --}}
         </li>
         <li>
             <a href="{{route('events.list')}}">
                 <i class="uil-film"></i>
-                <span> My McGuffins </span> </a>
+                <span> My Happening </span> </a>
         </li>
         <li>
             <a href="{{route('friend.list',Auth::user()->id)}}">
@@ -75,7 +79,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-                <span> Search By Interest </span> </a>
+                <span> Search By Mcguffin </span> </a>
         </li>
         <li>
 
@@ -100,7 +104,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                 </svg>
-                <span> News </span> </a>
+                <span> The LowDown </span> </a>
         </li>
 
 

@@ -26,14 +26,23 @@ class FrontEndController extends Controller
 
     public function signupUser(Request $request){
 
-
-       $request->validate([
+    $request->validate([
         'username' => ['required', 'string', 'max:255', 'unique:users'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        'password' => ['required', 'string', 'min:8'],
-        'status' => ['required'],
-        'zipcode' => 'required|regex:/\b\d{5}\b/',
+        'terms' => ['required'],
+        'password' => ['required',
+        'min:8',
+        'regex:/[a-z]/',      // must contain at least one lowercase letter
+        'regex:/[A-Z]/',      // must contain at least one uppercase letter
+        'regex:/[0-9]/',      // must contain at least one digit
+        'regex:/[@$!%*#?&]/',
+        'confirmed'],
+        'zipcode' => [
+            'regex:/[0-9]/',
+            'min:5'
+        ],
         ]);
+
        $user= User::create([
             'name'=>$request->name,
             'username'=>$request->username,
@@ -41,6 +50,7 @@ class FrontEndController extends Controller
             'password' => Hash::make($request->password),
             'pass_key' => "i'mrede",
             'image' => 'dummyuser.jpg'
+
         ]);
 
         $social=[
@@ -56,6 +66,7 @@ class FrontEndController extends Controller
             'covid_status' => $request->status,
             'pronouns' => $request->pronouns,
             'age' => $request->age,
+            'gender' => $request->gender
 
        ]);
 

@@ -14,11 +14,55 @@
 			<div class="col-lg-7 pass-in dis-flex" data-aos="fade-left">
                 {{-- <h2 class="heading-one">Welcome to <strong class="color-red">RedE</strong></h2> --}}
 				<div class="content">
-                    <video muted autoplay loop controls poster="{{ asset('assets/images/video-img.jpg') }}" style="height: 550px;">
+                    <div class="container">
+
+                        {{-- <h1 class="fw-light text-center text-lg-start mt-4 mb-0">Thumbnail Gallery</h1> --}}
+
+                        <hr class="mt-2 mb-5">
+
+                        <div class="row text-center text-lg-start">
+
+                          <div class="col-lg-4 col-md-6">
+                            <a href="#" class="d-block mb-4 h-100" data-toggle="modal" data-target="#exampleModal1">
+                              <img class="img-fluid img-thumbnail" src="{{ asset('assets/images/video-img.jpg') }}" alt="">
+                            </a>
+                          </div>
+                          <div class="col-lg-4 col-md-6">
+                            <a href="#" class="d-block mb-4 h-100" data-toggle="modal" data-target="#exampleModal2">
+                              <img class="img-fluid img-thumbnail" src="{{ asset('assets/images/video-img.jpg') }}" alt="">
+                            </a>
+                          </div>
+                          <div class="col-lg-4 col-md-6">
+                            <a href="#" class="d-block mb-4 h-100" data-toggle="modal" data-target="#exampleModal3">
+                              <img class="img-fluid img-thumbnail" src="{{ asset('assets/images/video-img.jpg') }}" alt="">
+                            </a>
+                          </div>
+                          <div class="col-lg-4 col-md-6">
+                            <a href="#" class="d-block mb-4 h-100" data-toggle="modal" data-target="#exampleModal4">
+                              <img class="img-fluid img-thumbnail" src="{{ asset('assets/images/video-img.jpg') }}" alt="">
+                            </a>
+                          </div>
+                          <div class="col-lg-4 col-md-6">
+                            <a href="#" class="d-block mb-4 h-100" data-toggle="modal" data-target="#exampleModal5">
+                              <img class="img-fluid img-thumbnail" src="{{ asset('assets/images/video-img.jpg') }}" alt="">
+                            </a>
+                          </div>
+                          <div class="col-lg-4 col-md-6">
+                            <a href="#" class="d-block mb-4 h-100" data-toggle="modal" data-target="#exampleModal6">
+                              <img class="img-fluid img-thumbnail" src="{{ asset('assets/images/video-img.jpg') }}" alt="">
+                            </a>
+                          </div>
+
+
+                        </div>
+
+                      </div>
+
+                    {{-- <video muted autoplay loop controls poster="{{ asset('assets/images/video-img.jpg') }}" style="height: 550px;">
                         <source src="{{ asset('assets/images/dummy-video.mp4') }}" type="video/mp4">
                         <source src="movie.ogg" type="video/ogg">
                         Your browser does not support the video tag.
-                    </video>
+                    </video> --}}
 					{{-- <p class="para-three">We want to transform the online world into a tool for making connections in the real world.</p>
 					<p class="para-three">We need your help.</p>
 					<p class="para-three">If you’ve been given the confidential password, please log on, create a free account, and play around a little. Then give us your feedback.</p>
@@ -27,7 +71,9 @@
 					<p class="para-three">There’s a link labeled <strong class="color-black">“Provide Feedback”</strong> on the bottom right corner of every page. You can use that link to share your impressions and insights, to take a brief survey, or to email us directly.</p>
 					<p class="para-three">Thank you. Your ideas, even if they may seem trivial to you, are important to us. So don’t hold back. Tell us everything you think or feel. Above all, we want to get this right.</p>
 					<p class="para-three">And have fun ... because we know you’re ready!</p> --}}
-				<h3 class="heading-one">Explore and Comment on RedE</h3>
+				<h3 class="heading-one">Explore our demo
+                    and give us
+                    feedback</h3>
 				<form action="{{route('login')}}" method="POST">
                     @csrf
 					<div class="form-group">
@@ -55,5 +101,7 @@
 		</div>
 	</div>
 </section>
+@include('layouts.frontend.components.modal')
+
 
 @endsection

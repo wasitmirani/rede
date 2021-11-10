@@ -531,7 +531,7 @@
     <script src="{{ asset('/assets/events/js/vendor/plugins.js') }}"></script>
     <script src="{{ asset('/assets/events/js/main.js') }}"></script>
   <script src="{{ asset('/assets/js/toaster.js') }}"></script>
-  <script src="{{ asset('/lib/jquery.buttonLoader.js') }}"></script>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   {{-- <script src="./maps/api/js_key_aizasyblujtsii_frurx0i2wugoxf_kanohmc4o.js"></script>
 <script src="{{ asset('/assets/events/js/vendor/map.js') }}"></script> --}}

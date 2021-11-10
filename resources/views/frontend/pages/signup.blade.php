@@ -11,6 +11,19 @@
 </section> --}}
 <!-- Main Banner -->
 <!-- Signup -->
+@section('style')
+<style>
+.col-md-12 .input-group-addon {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    opacity: .6;
+}
+</style>
+@endsection
 <section class="signup">
 	<div class="container">
 		<div class="row">
@@ -45,16 +58,14 @@
                 </div>
                </div>
                <div class="form-group row">
-                {{-- <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label> --}}
-
                 <div class="col-md-12">
                     <div class="input-group mb-2">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input id="username" type="text" name="username" class="form-control input_pass @error('username') is-invalid @enderror"  required autocomplete="username" placeholder="Username*">
+                        <input id="username" type="text" name="username" class="form-control input_pass @error('username') is-invalid @enderror" value="{{ old('username') }}" required autocomplete="username" placeholder="Username*">
                     </div>
-                    {{-- <input id="password" type="password" class="form-control float-center" placeholder="Your Password *" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"> --}}
+
 
                     @error('username')
                         <span class="" role="alert">
@@ -64,17 +75,13 @@
                 </div>
             </div>
             <div class="form-group row">
-                {{-- <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label> --}}
-
                 <div class="col-md-12">
                     <div class="input-group mb-2">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                         </div>
-                        <input id="email" type="email" name="email" class="form-control input_pass @error('email') is-invalid @enderror"  required autocomplete="email" placeholder="Email*">
+                        <input id="email" type="email" name="email" class="form-control input_pass @error('email') is-invalid @enderror"  required autocomplete="email" placeholder="Email*" value="{{ old('email') }}">
                     </div>
-                    {{-- <input id="password" type="password" class="form-control float-center" placeholder="Your Password *" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"> --}}
-
                     @error('email')
                         <span class="" role="alert">
                             <strong>{{ $message }}</strong>
@@ -83,17 +90,17 @@
                 </div>
             </div>
             <div class="form-group row">
-                {{-- <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label> --}}
-
                 <div class="col-md-12">
                     <div class="input-group mb-2">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-file-archive"></i></span>
                         </div>
-                        <input id="password" type="password" name="password" class="form-control input_pass @error('password') is-invalid @enderror"  required autocomplete="password" placeholder="Password*">
+                        <input id="password-field" type="password" name="password" class="form-control input_pass @error('password') is-invalid @enderror"  required autocomplete="password" placeholder="Password should be of atleast 8 characters*">
+                        <div class="input-group-addon">
+                            <a><span class="toggle-password fa fa-eye-slash" toggle="#password-field" aria-hidden="true"></span></a>
+                        </div>
                     </div>
-                    {{-- <input id="password" type="password" class="form-control float-center" placeholder="Your Password *" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"> --}}
-
+                    <div id="password-rule"></div>
                     @error('password')
                         <span class="" role="alert">
                             <strong>{{ $message }}</strong>
@@ -102,18 +109,49 @@
                 </div>
             </div>
             <div class="form-group row">
-                {{-- <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label> --}}
-
                 <div class="col-md-12">
                     <div class="input-group mb-2">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-file-archive"></i></span>
                         </div>
-                        <input id="zipcode" type="text" name="zipcode" class="form-control input_pass @error('zipcode') is-invalid @enderror"  required autocomplete="zipcode" placeholder="Zipcode*  should contain 5 digits">
+                        <input id="password" type="password" name="password_confirmation" class="form-control "  required autocomplete="password" placeholder="Confirm Password">
+                        <div class="input-group-addon">
+                            <a ><span class="toggle-password fa fa-eye-slash" toggle="#password" aria-hidden="true"></span></a>
+                        </div>
+                    </div>
+            </div>
+
+            </div>
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-file-archive"></i></span>
+                        </div>
+                        <select id="birth_year" name="year_of_birth" class="form-control" >
+                            <option>Select Year Of Birth</option>
+                        </select>
+
+                        {{-- <input id="birth_year" type="text" name="year_of_birth" class="form-control"   placeholder=""> --}}
+                    </div>
+                    <p id="age-msg">
+
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-exchange-alt"></i></span>
+                        </div>
+                        <input type="text" name="age" class="form-control" readonly id="age-range" placeholder="Age Range">
+
+                        {{-- <select class="form-control input_pass @error('age') is-invalid @enderror" name="age">
+
+                        </select> --}}
                     </div>
                     {{-- <input id="password" type="password" class="form-control float-center" placeholder="Your Password *" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"> --}}
 
-                    @error('zipcode')
+                    @error('age')
                         <span class="" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -121,18 +159,32 @@
                 </div>
             </div>
             <div class="form-group row">
-                {{-- <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label> --}}
-
-                <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-thermometer-half"></i></span>
+                        </div>
+                        <select class="form-control float-center" name="gender" id="gender-field">
+                            <option>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Binary">Binary</option>
+                            <option value="None">None</option>
+                            <option value="none specified">none specified</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
                     <div class="input-group mb-2">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
                         {{-- <input id="" type="text" name="zipcode" class="form-control input_pass @error('zipcode') is-invalid @enderror"  required autocomplete="zipcode" placeholder="Zipcode*"> --}}
                         <select class="form-control input_pass @error('pronounce') is-invalid @enderror" name="pronouns">
-                            <option value="null">Pronouns</option>
-                            <option value="null">Pronouns</option>
-                            <option value="null">Pronouns</option>
+                            <option>Pronoun</option>
+                            <option value="he/him">he/him</option>
+                            <option value="she/her">she/her</option>
+                            <option value="they/them">they/them</option>
                         </select>
                     </div>
                     {{-- <input id="password" type="password" class="form-control float-center" placeholder="Your Password *" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"> --}}
@@ -147,52 +199,56 @@
             <div class="form-group row">
                 {{-- <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label> --}}
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="input-group mb-2">
                         <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-exchange-alt"></i></span>
+                            <span class="input-group-text"><i class="fas fa-file-archive"></i></span>
                         </div>
-                        {{-- <input id="" type="text" name="zipcode" class="form-control input_pass @error('zipcode') is-invalid @enderror"  required autocomplete="zipcode" placeholder="Zipcode*"> --}}
-                        <select class="form-control input_pass @error('age') is-invalid @enderror" name="age">
-                            <option value="">Age Range</option>
-                            <option value="18-25">18-25</option>
-                            <option value="26-30">26-30</option>
-                            <option value="31-35">31-35</option>
-                            <option value="36-40">36-40</option>
-                        </select>
+                        <input id="zipcode" type="text" name="zipcode" class="form-control input_pass @error('zipcode') is-invalid @enderror"  required autocomplete="zipcode" placeholder="Zipcode*  should contain 5 digits">
                     </div>
                     {{-- <input id="password" type="password" class="form-control float-center" placeholder="Your Password *" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"> --}}
 
-                    @error('age')
+                    @error('zipcode')
                         <span class="" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
-            </div>
-
-                <div class="form-group row">
-                    {{-- <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label> --}}
-
-                    <div class="col-md-12">
-                        <div class="input-group mb-2">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-thermometer-half"></i></span>
-                            </div>
-                            <select class="form-control float-center" name="status">
-                                <option value="">Covid Status</option>
-                                <option value="Fully Vaccinated">Fully Vaccinated</option>
-                                <option value="Vaccination Inprogress">Vaccination Inprogress</option>
-                                <option value="Not Vaccinated">Not Vaccinated</option>
-                            </select>
-                       @error('status')
-                           <span class="" role="alert">
-                               <strong>{{ $message }}</strong>
-                           </span>
-                       @enderror
+                <div class="col-md-6">
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-thermometer-half"></i></span>
                         </div>
-                        {{-- <input id="password" type="password" class="form-control float-center" placeholder="Your Password *" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"> --}}
+                        <select class="form-control float-center" name="status">
+                            <option value="">Covid Status</option>
+                            <option value="Fully Vaccinated">Fully Vaccinated</option>
+                            <option value="Vaccination Inprogress">Vaccination Inprogress</option>
+                            <option value="Not Vaccinated">Not Vaccinated</option>
+                            <option value="Not Specified">Not Specified</option>
+                        </select>
+                   @error('status')
+                       <span class="" role="alert">
+                           <strong>{{ $message }}</strong>
+                       </span>
+                   @enderror
+                    </div>
 
+
+                </div>
+            </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="terms" value="Accepted" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                               Accept Terms & Privacy Policy
+                            </label>
+                          </div>
+                          @error('terms')
+                          <span class="" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                     </div>
                 </div>
 
@@ -214,3 +270,4 @@
 </section>
 <!-- Signup -->
 @endsection
+

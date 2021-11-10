@@ -134,10 +134,11 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'terms' => [
+            'accept-terms' => 'You Must Accept Terms And Plociy',
         ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------

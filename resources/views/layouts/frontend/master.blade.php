@@ -114,19 +114,21 @@
       </div>
     </div>
   </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" ></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" ></script> --}}
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
+ <script src="{{asset('/assets/js/popper.min.js')}}"></script>
+ {{-- <script src="{{asset('/assets/js/bootstrap.min.js')}}"></script> --}}
+<script src="{{ asset('js/app.js') }}" defer></script>
 <script src="{{asset('/assets/js/fontawesome.js')}}"></script>
 <script src="{{asset('/assets/js/fontawesome.min.js')}}"></script>
 <script src="{{asset('/assets/js/custom.js')}}"></script>
 <script src="{{asset('/assets/js/fancybox.js')}}"></script>
-<script src="{{asset('/assets/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('/assets/js/bootstrap.bundle.min.js')}}"></script> --}}
 
-<script src="{{asset('/assets/js/popper.min.js')}}"></script>
-<script src="{{asset('/assets/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('/assets/js/slick.min.js')}}"></script>
 @yield('scripts')
 <script>
@@ -164,16 +166,109 @@
                 }
             })
 
-
-
-
-
-
-
         })
     })
 </script>
 <script>
+
+$(document).ready(function(){
+
+    let startYear = 1800;
+    let endYear = new Date().getFullYear();
+
+    for (i = endYear; i > startYear; i--)
+    {
+      $('#birth_year').append($('<option/>').val(i).html(i));
+    }
+
+    $("#birth_year").on('change',function(){
+        var yob = $("#birth_year").val();
+
+if(yob != ""){
+
+var today = new Date();
+    var birthDate = new Date(yob);
+
+    var age = today.getFullYear() - birthDate.getFullYear();
+
+    var m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+   if(age == '13' || age== '14' || age == '15' || age == '16' || age == '17'){
+      $("#age-range").val('13-27')
+      $("#age-msg").text(" ")
+
+   }else if(age == '18' || age== '19' || age == '20' || age == '21' || age == '22'){
+
+       $("#age-range").val('18-22')
+       $("#age-msg").text(" ")
+
+
+   }else if(age == '23' || age== '24' || age == '25' || age == '26' || age == '27' || age == '28' || age == '29')
+    {
+
+        $("#age-range").val('23-29')
+        $("#age-msg").text(" ")
+
+
+   }else if(age == '30' || age== '31' || age == '32' || age == '33' || age == '34'){
+
+       $("#age-range").val('30-34')
+       $("#age-msg").text(" ")
+
+   }else if(age == '35' || age== '36' || age == '37' || age == '38' || age == '39'){
+
+       $("#age-range").val('35-39')
+       $("#age-msg").text(" ")
+
+
+   }else if(age == '40' || age== '41' || age == '42' || age == '43' || age == '44'){
+
+    $("#age-range").val('40-49')
+    $("#age-msg").text(" ")
+
+   }else if(age == '45' || age== '46' || age == '47' || age == '48' || age == '49'){
+
+    $("#age-range").val('40-49')
+    $("#age-msg").text(" ")
+
+   }else if(age == '50' || age== '51' || age == '52' || age == '53' || age == '54'){
+
+    $("#age-range").val('50-59')
+    $("#age-msg").text(" ")
+
+   }
+   else if(age == '55' || age== '56' || age == '57' || age == '58' || age == '59'){
+
+    $("#age-range").val('50-59')
+    $("#age-msg").text(" ")
+
+   }
+   else if(age == '61' || age== '62' || age == '63' || age == '64' || age == '65'){
+
+    $("#age-range").val('60-69')
+    $("#age-msg").text(" ")
+
+   } else if(age == '65' || age== '66' || age == '67' || age == '68' || age == '69'){
+
+    $("#age-range").val('60-69')
+    $("#age-msg").text(" ")
+
+   }else{
+       $("#age-range").val("You are too young!")
+       $("#age-msg").text("You are too young!")
+   }
+
+
+
+}
+    })
+})
+
+
     $(".toggle-password").click(function() {
 
 $(this).removeClass("fa fa-eye-slash");
@@ -188,6 +283,14 @@ $(this).removeClass("fas fa-eye");
   input.attr("type", "password");
 }
 });
+
+$("#password-field").focus(function(){
+   var output = "";
+   output +="<ul><li>must contain at least one lowercase letter</li><li>must contain at least one upercase letter</li><li>must contain aleast one digit</li><li>must contain atleast one symbol</li></ul>";
+   $("#password-rule").html(output)
+})
+
+
 </script>
 @livewireScripts
 </body>

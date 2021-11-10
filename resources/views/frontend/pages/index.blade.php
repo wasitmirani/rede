@@ -19,7 +19,7 @@
 				<h2 class="heading-two">Welcome to <strong>RedE</strong>.</h2>
 				<p class="para-one">Use <strong class="color-black bold">RedE</strong> to find the hobbies and events that
 				electrify you.</p>
-				<p class="para-one">Then use <strong class="color-black bold">RedE</strong> to connect with people who
+				<p class="para-one">Then use <strong class="color-black bold">RedE</strong> to connect with member who
 					share your enthusiasm.
 				</p>
 				<p class="para-one"> “sometimes” – thus “But be careful. Sometimes, when we play together, we can’t help but become ”<strong class="color-red">Friends</strong>.</p>

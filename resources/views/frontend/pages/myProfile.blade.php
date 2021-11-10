@@ -6,19 +6,14 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="fixed z-10 inset-0 overflow-y-auto" id="my-modal" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-
       <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-
       <!-- This element is to trick the browser into centering the modal contents. -->
       <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
-
       <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="sm:flex sm:items-start">
             <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
               <!-- Heroicon name: outline/exclamation -->
-
             </div>
             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
               <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
@@ -34,14 +29,10 @@
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
           <button id="ok-btn" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">Ok</button>
-
         </div>
       </div>
     </div>
   </div>
-
-
-
 @endif
     <!-- profile-cover-->
     <div class="flex lg:flex-row flex-col items-center lg:py-8 lg:space-x-8">
@@ -79,11 +70,6 @@
             <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
                 <a href="#">{{ $profile->covid_status }}</a>
             </div>
-
-
-
-
-
                 {{-- <div class="capitalize flex font-semibold space-x-3 text-center text-sm my-2">
                     <a href="#" class="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700"> Add friend</a>
                     <a href="#" class="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"> Send message</a>
@@ -148,10 +134,7 @@
         </div>
     </div>
 
-    <h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mt-8">My Interests </h1>
-
-
-
+    <h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mt-8">My McGuffins </h1>
     <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
         <a href="{{route('all.interest')}}"  >
             <div class="bg-gray-100 border-4 border-dashed flex flex-col h-full items-center justify-center relative rounded-2xl w-full" >
@@ -173,17 +156,10 @@
 
 
     <div class="my-6 grid lg:grid-cols-4 grid-cols-2 gap-1.5 hover:text-yellow-700 uk-link-reset">
-
-
-
         <div class="flex justify-between items-baseline uk-visible@s">
-            <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> My Connections
-            </h1>
-            {{-- <a href="#" class="text-blue-400 hover:text-blue-500"> See all</a> --}}
+            <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> My Circle</h1>
         </div>
-
-
-</div>
+    </div>
 <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
     <a href="{{ route('create.group') }}">
         <div class="bg-gray-100 border-4 border-dashed flex flex-col h-full items-center justify-center relative rounded-2xl w-full">
@@ -203,7 +179,7 @@
 
 
     <div class="flex justify-between items-baseline uk-visible@s">
-        <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> My McGuffins
+        <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight"> My Happenings
         </h1>
 
     </div>
@@ -245,19 +221,8 @@
                     </div>
                     <button type="submit" class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Upload</button>
                 </form>
-
             </div>
-
-
-
         </div>
-
-
-
-
-
-
-
     </div>
 </div>
 
