@@ -36,12 +36,14 @@ class FeedsController extends Controller
         $following = FollowRequest::with('followings')->where([['follower','=',Auth::user()->id],['status','=',1]])->get();
         //get follow request
         $followReq = FollowRequest::with('followersreq')->where([['following','=',Auth::user()->id],['status','=',0]])->get();
+        $mcguffins = User::where('id',Auth::user()->id)->with('interests')->first();
+
         //get suggestions
         $NotFollowing = $this->followSugest();
         // $feeds = FollowRequest::with('posts')->with('postComments')->with('followersreq')->where('follower','=',Auth::user()->id)->orWhere('following','=',Auth::user()->id)->get();
         //list of posts posted by user. follower and who are following
         $posts = $this->posts();
-        return view('frontend.pages.messenger.index',compact('posts','users','follower','following','comments','NotFollowing','followReq'));
+        return view('frontend.pages.messenger.index',compact('posts','users','follower','following','comments','NotFollowing','followReq','mcguffins'));
     }
 
 
@@ -65,6 +67,7 @@ public function storeFeed(Request $request){
 
          $feed->feed = $request->post;
          $feed->user_id =  Auth::user()->id;
+         $feed->interest = json_encode($request->interest);
          $feed->image = $name;
          $posted = $feed->save();
          $post = Feed::orderBy('id', 'desc')->first();
@@ -82,22 +85,34 @@ public function storeFeed(Request $request){
 
     public function follow_request(Request $request){
         // check follower exist
-        $follower = FollowRequest::where([['follower','=',$request->following],['following','=',Auth::user()->id],['status','=',1]])->exists();
+        // $follower = FollowRequest::where([['follower','=',$request->following],['following','=',Auth::user()->id],['status','=',1]])->exists();
 
         // check check any follow request exists
-        $requested = FollowRequest::where([['follower','=',$request->following],['following','=',Auth::user()->id],['status','=',0]])->exists();
+        // $requested = FollowRequest::where([['follower','=',$request->following],['following','=',Auth::user()->id],['status','=',0]])->exists();
+        // if($follower){
+        //     $disliked =  FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$request->following],['status','=',1]])->delete();
+        //     return response()->json('Follow');
+        // }
+        // elseif($requested){
+            // $disliked =  FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$request->following]])->delete();
+            // return response()->json('Follow');
+        // }
+        // else{
+        //    $liked = FollowRequest::create(['following'=>Auth::user()->id,'follower'=>$request->following,'status'=> 0]);
+        $follower = FollowRequest::where([['follower','=',$request->following],['following','=',Auth::user()->id],['status','=',1]])->exists();
+        $status = "";
         if($follower){
-            $disliked =  FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$request->following],['status','=',1]])->delete();
-            return response()->json('Follow');
+            $unfollow =  FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$request->following]])->delete();
+            $status = "Follow";
+        }else{
+            $liked = FollowRequest::create(['following'=>Auth::user()->id,'follower'=>$request->following,'status'=> 1]);
+            $status = "Following";
+
         }
-        elseif($requested){
-            $disliked =  FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$request->following]])->delete();
-            return response()->json('Follow');
-        }
-        else{
-           $liked = FollowRequest::create(['following'=>Auth::user()->id,'follower'=>$request->following,'status'=> 0]);
-            return response()->json('Requested');
-        }
+        return response()->json($status);
+
+
+        // }
     }
 
     public function followRequestAccepted(Request $request){

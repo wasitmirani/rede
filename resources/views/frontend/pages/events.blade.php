@@ -1,58 +1,155 @@
 @extends('layouts.frontend.messengermaster')
 @section('content')
-<h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mb-2">McGuffins</h1>
+<h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mb-2">My Happening</h1>
 
-
-<div class="lg:m-0 -mx-5 flex justify-between py-4 relative space-x-3 uk-sticky dark-tabs" uk-sticky="cls-active: bg-gray-100 bg-opacity-95" style="">
-  <div class="flex overflow-x-scroll lg:overflow-hidden lg:pl-0 pl-5 space-x-3">
-
-        {{-- <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> Shop</a>
-        <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> headphones  </a>
-        <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> Parfums </a>
-        <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> Fruits </a>
-        <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> Mobiles  </a>
-        <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> Laptops </a> --}}
-    </div>
-    <a href="{{ route('create.event') }}" uk-toggle="target: #offcanvas-create" class="bg-pink-500 hover:bg-pink-600 hover:text-white flex font-bold inline-block items-center px-4 py-2 rounded shadow text-white lg:block hidden"> <i class="-mb-1 mr-1 uil-plus"></i> Create</a>
-
+<div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
+  <a type="button" onclick="toggleModal()">
+      <div class="bg-gray-100 border-4 border-dashed flex flex-col h-full items-center justify-center relative rounded-2xl w-full"> 
+          <i class="text-4xl uil-plus-circle"></i> <span> Add new </span>
+      </div>
+  </a>
+  @foreach($events as $event)
+  <a href="#story-modal" uk-toggle="">
+      <img src="assets/images/avatars/avatar-lg-1.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+  </a>
+  @endforeach
+  {{-- <a href="#story-modal" uk-toggle="">
+      <img src="assets/images/post/img2.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+  </a>
+  <a href="#story-modal" uk-toggle="">
+      <img src="assets/images/post/img7.jpg" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover uk-visible@s">
+  </a> --}}
 </div>
+<div class="fixed z-10 overflow-y-auto top-0 w-full left-0 hidden" id="modal">
+  <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div class="fixed inset-0 transition-opacity">
+      <div class="absolute inset-0 bg-gray-900 opacity-75" />
+    </div>
+    <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+    <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <p id="message"></p>
+        <form id="addHappening">
+        <label>Happening Name</label>
+        <input type="text" class="w-full bg-gray-100 p-2 mt-2 mb-3" id="name" />
+        <label>Happening Type</label>
+        <select id="type">
+          <option><-----/---></option>
+          <option value="Party">Party,</option>
+          <option value="Festival">Festival</option>
+          <option value="Meeting">Meeting</option>
+          <option value="Rally">Rally</option>
+          <option value="Competition">Competition</option>
+          <option value="Outdoor Adventure">Outdoor Adventur</option>
+          <option value="Musical Performance">Musical Performance</option>
+          <option value="Theatrical Performance">Theatrical Performance</option>
+          <option value="Sports Event">Sports Event</option>
+        </select>
+        <label>Zip Code</label>
+        <input type="text" class="w-full bg-gray-100 p-2 mt-2 mb-3" id="zip" />
+        <label>Human Sponsor</label>
+        <input type="text" class="w-full bg-gray-100 p-2 mt-2 mb-3" id="sponsor" />
+        <label>Happening McGuffins</label>
+        <input type="text" class="w-full bg-gray-100 p-2 mt-2 mb-3" id="mcguffin" />
+        <label>Start Date</label>
+        <input type="date" class="w-full bg-gray-100 p-2 mt-2 mb-3" id="start_date" />
+        <label>End Date</label>
+        <input type="date" class="w-full bg-gray-100 p-2 mt-2 mb-3" id="end_date" />
+        <label>Subscription</label>
+        <div class="mt-2">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio" name="subscription" value="Free">
+            <span class="ml-2">Free</span>
+          </label>
+          <label class="inline-flex items-center ml-6">
+            <input type="radio" class="form-radio" name="subscription" value="Premium">
+            <span class="ml-2">Premium</span>
+          </label>
+        </div>
+        <label>Attendance</label>
+        <div class="mt-2">
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio" name="attendance" value="One Time">
+            <span class="ml-2">One Time</span>
+          </label>
+          <label class="inline-flex items-center ml-6">
+            <input type="radio" class="form-radio" name="attendance" value="Recurring">
+            <span class="ml-2">Recurring</span>
+          </label>
+        </div>
+        <label>Tagline</label>
+        <input type="input" placeholder="short notice" name="tagline" id="tagline">
+
+     
+      </div>
+      <div class="bg-gray-200 px-4 py-3 text-right">
+        <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="toggleModal()"><i class="fas fa-times"></i> Cancel</button>
+        <button type="button" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2"><i class="fas fa-plus" id="addEvent"></i> Create</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+@endsection
+@section('scripts')
+ <script>
+function toggleModal() {
+  document.getElementById('modal').classList.toggle('hidden')
+}
+   $(document).ready(function(){
+
+    $("addEvent").on('click',function(){
+        
+      var name = $("#name").val();
+      var type = $("#type").val();
+      var zip = $("#zip").val();
+      var sponsor = $("#sponsor").val();
+      var mcguffin = $("#mcguffin").val();
+      var start = $("#start").val();
+      var end = $("#end").val();
+      var attendance = $('input[name="attendance"]:checked').val();
+      var subscription = $('input[name="subscription"]:checked').val();
+      var tagline = $("#tagline").val();
+
+      $.ajax({
+        type:"POST",
+        url:"/create/event",
+        dataL:{_token:"{{csrf_token()}}",
+              name:name,
+              type:type,
+              zip:zip,
+              sponsor:sponsor,
+              mcguffin:mcguffin,
+              start:start,
+              end:end,
+              attendance:attendance,
+              tagline:tagline,
+        },
+        success:function(res){
+          if(res == '200'){
+                    reload.location()
+                }else{
+                    $("#message").val('Something Went Wrong')
+                }
+        },
+        error:function(){
+          if (err.status == 422) {
+                    var errors = err.responseJSON.errors
+                    $('#message').empty()
+                    jQuery.each(errors, (index, item) => {
+                        $('#message').fadeIn().append("<p class='alert alert-warning alert-dismissible fade show'>"+item+"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button><p>");
+                    });
+                }
+
+        }
+      })
 
 
-    @foreach($events as $event)
-
-
-        <!-- container for all cards -->
-        <div class="container w-100 lg:w-4/5 mx-auto flex flex-col">
-          <!-- card -->
-          <div  class="flex flex-col md:flex-row bg-white rounded-lg shadow-xl  mt-4 w-100 mx-2 rounded-md">
-            <!-- media -->
-            <div class="h-64 w-auto md:w-1/2">
-              <img class="inset-0 h-full w-full object-cover object-center" src="{{ asset('/user/event/images/'.$event->image) }}" />
-            </div>
-            <!-- content -->
-            <div class="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
-              <h3 class="font-semibold text-lg leading-tight ">{{ $event->title }}</h3>
-              <p class="mt-1">
-                {!! $event->description !!}
-              </p>
-              @if(isset($event->group))
-              <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> Group: {{ $event->group->title }}</p>
-              @endif
-              <p class="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2">
-                {{ $event->user->name }} &bull;  {{ $event->event_date }}
-              </p>
-              <div class="capitalize  font-semibold space-x-3 text-right text-sm ">
-              <a href="{{ route('book.event',$event->id) }}" class="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700">{{App\Models\BookEvent::bookingStatus($event->id)}}</a>
-              <a href="#" class="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600">Visit</a>
-              </div>
-            </div>
-
-
-          </div><!--/ card-->
-        </div><!--/ flex-->
-
-    @endforeach
+    })
 
 
 
+   })
+
+ </script>
 @endsection

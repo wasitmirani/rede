@@ -28,8 +28,6 @@ class FeedLike extends Model
         else{
             $liked = FeedLike::create(['user_id'=>Auth::user()->id,'post_id'=>$id]);
            return response()->json('dislike');
-
-
         }
 
     }

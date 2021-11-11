@@ -112,7 +112,6 @@ if($updated){
         $followerslist = FollowRequest::with('followersreq')->where([['following','=',$id],['status','=',1]])->get();
 
         $crews = User::with('profile')->get();
-
         return view('frontend.pages.friendlist',compact('crews','followerslist'));
     }
 
@@ -175,10 +174,16 @@ if($updated){
              return back()->with('message','Your Story Updated');
          }
 
+    }
 
+    public function publicProfile($id){
 
+        $user = User::where('id',$id)->with('profile','feeds','followers','interests')->orderBy('id','desc')->first();
 
-
+        $followers = $user->followers->count();
+        $feeds = $user->feeds;
+        $profile = $user->profile;
+        return view('frontend.pages.publicprofile',compact('user','followers','feeds','profile'));
 
     }
 }

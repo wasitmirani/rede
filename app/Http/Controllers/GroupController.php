@@ -251,6 +251,15 @@ class GroupController extends Controller
     }
 
 
+    public function groupMembers($id){
+
+        $members = GroupMember::with('members')->where('group_id',$id)->get();
+  
+        return view('frontend.pages.groupmember',compact('members'));
+
+    }
+
+
 
 
 }

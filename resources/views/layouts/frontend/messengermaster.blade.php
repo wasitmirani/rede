@@ -52,6 +52,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/events/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/events/css/search.css') }}">
     <script src="{{ asset('/assets/events/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/6.0.0-beta.1/basic.css" integrity="sha512-4udAZj+ndsYhOtoTw4OGW2YhD7kphg37bZ+9n2p4ksuSNz7nir+TRzbBFZbqrXlpqiP4MxEkCfGibQCyo1mDRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 @yield('style')
 
@@ -361,10 +362,11 @@
                 </header>
 
                 <div class="container m-auto" id="searchResult">
-                    @yield('content')
-                </div>
 
-            </div>
+                    @yield('content')
+
+
+                </div>
 
         </div>
 
@@ -517,7 +519,7 @@
     <script src="{{ asset('lib/js/util.js') }}"></script>
     <script src="{{ asset('lib/js/jquery.emojiarea.js') }}"></script>
     <script src="{{ asset('lib/js/emoji-picker.js') }}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/6.0.0-beta.1/dropzone-min.js" integrity="sha512-kLQ8y6epwwH5HA1M6K0bw2erLB1+Vz+7HOUepLaKRecyGXaP0K/9b6kq2+MZlyWt6E/AH6dtnxDom8lniz5BWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('/assets/events/js/vendor/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('/assets/events/js/vendor/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('/assets/events/js/vendor/waypoints-jquery.js') }}"></script>
@@ -533,11 +535,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   {{-- <script src="./maps/api/js_key_aizasyblujtsii_frurx0i2wugoxf_kanohmc4o.js"></script>
 <script src="{{ asset('/assets/events/js/vendor/map.js') }}"></script> --}}
-<script src="{{ asset('/assets/events/js/vendor/jquery-migrate.js') }}"></script>
-
+   <script src="{{ asset('/assets/events/js/vendor/jquery-migrate.js') }}"></script>
+  <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
     <script>
 
@@ -579,7 +584,7 @@ axios.request(options).then(function (response) {
 
 });
 }).catch(function (error) {
-	console.error(error);
+	console.log(error);
 });
 
   $(document).ready(function () {

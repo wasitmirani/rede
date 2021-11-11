@@ -4,6 +4,7 @@
 <h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mb-2"> McGuffin </h1>
 
 
+
 @endsection
 @section('scripts')
 <script>

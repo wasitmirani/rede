@@ -2911,81 +2911,104 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
+    // sendMessage() {
+    //                 socket.emit('chat-message', {
+    //                     message:  this.message_body,
+    //                     receiver_id: this.receiver.id,
+    //                     sender_id:this.auth_user.id,
+    //                 }, this.receiver.name)
+    //                 this.messages.push({
+    //                     message: this.message_body,
+    //                     receiver_id: this.receiver.id,
+    //                     sender_id:this.auth_user.id,
+    //                     by: this.auth_user.name
+    //                 })
+    //                 this.message_body = null
+    //             },
+    //              setName() {
+    //                  console.log("recvi",this.receiver.name);
+    //                 socket.emit('joined', this.receiver.name)
+    //             },
     sendMessage: function sendMessage() {
-      socket.emit('chat-message', {
-        message: this.message_body,
-        receiver_id: this.receiver.id,
-        sender_id: this.auth_user.id
-      }, this.receiver.name);
-      this.messages.push({
-        message: this.message_body,
-        receiver_id: this.receiver.id,
-        sender_id: this.auth_user.id,
-        by: this.auth_user.name
-      });
-      this.message_body = null;
-    },
-    setName: function setName() {
-      console.log("recvi", this.receiver.name);
-      socket.emit('joined', this.receiver.name);
-    },
-    //   async sendMessage(){
-    //          let formdata=new FormData();
-    //         formdata.append('receiver_id',this.receiver.id);
-    //         formdata.append('sender_id',this.auth_user.id);
-    //         formdata.append('conversation_id',this.conversation_id);
-    //         formdata.append('message',this.message_body);
-    //      await   axios.post('message/send',formdata).then((res)=>{
-    //                     axios.get('/message/messages/'+this.conversation_id).then((res)=>{
-    //                                         this.messages=res.data;
-    //                     });
-    //                    socket.emit('chat-message', {
-    //                         message: message,
-    //                         receiver_id:  this.receiver.id,
-    //                         sender_id:this.auth_user.id,
-    //                     }, this.receiver.name)
-    //                     this.messages.push({
-    //                         message: this.message_body,
-    //                         receiver_id:  this.receiver.id,
-    //                         sender_id:this.auth_user.id,
-    //                         type: 0,
-    //                         by: this.auth_user
-    //                     })
-    //                     this.message_body = null
-    //                     console.log('sended success')
-    //                 });
-    //    },
-    getConversation: function getConversation(item) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var formdata;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (item.get_user1.id != user.id) {
-                  _this.receiver = item.get_user1;
-                  _this.conversation_id = item.id;
-                }
+                formdata = new FormData();
+                formdata.append('receiver_id', _this.receiver.id);
+                formdata.append('sender_id', _this.auth_user.id);
+                formdata.append('conversation_id', _this.conversation_id);
+                formdata.append('message', _this.message_body);
+                _context.next = 7;
+                return axios.post('message/send', formdata).then(function (res) {
+                  axios.get('/message/messages/' + _this.conversation_id).then(function (res) {
+                    _this.messages = res.data;
+                  }); //    socket.emit('chat-message', {
+                  //         message: message,
+                  //         receiver_id:  this.receiver.id,
+                  //         sender_id:this.auth_user.id,
+                  //     }, this.receiver.name)
 
-                if (item.get_user2.id != user.id) {
-                  _this.receiver = item.get_user2;
-                  _this.conversation_id = item.id;
-                }
+                  //    socket.emit('chat-message', {
+                  //         message: message,
+                  //         receiver_id:  this.receiver.id,
+                  //         sender_id:this.auth_user.id,
+                  //     }, this.receiver.name)
+                  _this.messages.push({
+                    message: _this.message_body,
+                    receiver_id: _this.receiver.id,
+                    sender_id: _this.auth_user.id,
+                    type: 0,
+                    by: _this.auth_user
+                  });
 
-                _this.setName();
-
-                _context.next = 5;
-                return axios.get('/message/messages/' + item.id).then(function (res) {
-                  _this.messages = res.data;
+                  _this.message_body = null;
+                  console.log('sended success');
                 });
 
-              case 5:
+              case 7:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
+      }))();
+    },
+    getConversation: function getConversation(item) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (item.get_user1.id != user.id) {
+                  _this2.receiver = item.get_user1;
+                  _this2.conversation_id = item.id;
+                }
+
+                if (item.get_user2.id != user.id) {
+                  _this2.receiver = item.get_user2;
+                  _this2.conversation_id = item.id;
+                }
+
+                _this2.setName();
+
+                _context2.next = 5;
+                return axios.get('/message/messages/' + item.id).then(function (res) {
+                  _this2.messages = res.data;
+                });
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     },
     getName: function getName(item) {
@@ -3011,32 +3034,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return window.origin + "/assets/images/" + val;
     },
     getConversations: function getConversations() {
-      var _this2 = this;
+      var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.next = 2;
+                _context3.next = 2;
                 return axios.get('/conversations').then(function (res) {
-                  _this2.conversations = res.data;
+                  _this3.conversations = res.data;
                 });
 
               case 2:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2);
+        }, _callee3);
       }))();
     }
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this4 = this;
 
     window.onbeforeunload = function () {
-      socket.emit("leaved", _this3.name);
+      socket.emit("leaved", _this4.name);
     }; // socket.on("noOfConnections", count => {
     //   this.connectionCount = count;
     // });
@@ -3048,49 +3071,49 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.getConversations();
     this.auth_user = user;
     socket.on('chat-message', function (data) {
       console.loog("newmsg", data);
 
-      _this4.messages.push({
+      _this5.messages.push({
         message: data.message,
         by: data.user
       });
 
-      _this4.typing = false;
+      _this5.typing = false;
     });
     socket.on("typing", function (data) {
       console.log(data);
-      _this4.typing = data;
+      _this5.typing = data;
     });
     socket.on("stoptyping", function () {
-      _this4.typing = false;
+      _this5.typing = false;
     });
     socket.on("leaved", function (name) {
-      _this4.online.splice(_this4.online.indexOf(name));
+      _this5.online.splice(_this5.online.indexOf(name));
 
-      _this4.info.push({
+      _this5.info.push({
         name: name,
         type: "Leaved"
       });
 
       setTimeout(function () {
-        _this4.info = [];
+        _this5.info = [];
       }, 5000);
     });
     socket.on("joined", function (name) {
-      _this4.online.push(name);
+      _this5.online.push(name);
 
-      _this4.info.push({
+      _this5.info.push({
         name: name,
         type: "Joined"
       });
 
       setTimeout(function () {
-        _this4.info = [];
+        _this5.info = [];
       }, 5000);
     }); // console.log(user);
   }

@@ -6,6 +6,7 @@
 
     <div class="lg:flex justify-center lg:space-x-10 lg:space-y-0 space-y-5">
 
+
         <!-- left sidebar-->
         <div class="space-y-5 flex-shrink-0 lg:w-8/12">
 
@@ -16,7 +17,7 @@
                         <img src="{{ asset('/user/group/images/'.$group->image) }}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full dark:border-gray-900">
 
                         <div class="absolute -bottom-3 custom-overly1 flex justify-center pt-4 pb-7 space-x-3 text-2xl text-white uk-transition-slide-bottom-medium w-full">
-                            <a href="#" class="hover:text-white">
+                            <a type="button" class="hover:text-white" onclick="toggleModal()">
                                 <i class="uil-camera"></i>
                             </a>
                             <a href="#" class="hover:text-white">
@@ -25,9 +26,11 @@
                         </div>
                     </div>
                 </div>
+              
 
 
                 <div class="lg:w/8/12 flex-1 flex flex-col lg:items-start items-center">
+                
 
                     <h2 class="font-semibold lg:text-2xl text-lg mb-2"> {{ $group->title }}</h2>
                     <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> {!! $group->description !!}</p>
@@ -43,7 +46,7 @@
                               @php echo App\Models\GroupMember::joinStatus($group->id)  @endphp
                             </a>
                             @endif
-                            <a href="#" class="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"> Send message</a>
+                            <a href="{{route('group.member',$group->id)}}" class="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600" > Memeber</a>
                             <div>
 
                             <a href="#" class="bg-gray-300 flex h-12 h-full items-center justify-center rounded-full text-xl w-9 dark:bg-gray-700" aria-expanded="false">
@@ -73,7 +76,22 @@
                 </div>
 
                 <div class="w-20"></div>
+          
 
+
+            </div>
+            <div class="lg:m-0 -mx-5 flex justify-between items-center py-2 relative space-x-3 dark-tabs uk-sticky" uk-sticky="cls-active: bg-gray-100 bg-opacity-95; media : @m ; media @m">
+                <div class="flex overflow-x-scroll lg:overflow-hidden lg:pl-0 pl-5 space-x-3 lg:py-2">
+                    <a href="{{ route("new.feeds") }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+                    color: #fff;">Our Story</a>
+                    <a href="#" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+                    color: #fff;">Our Particulars </a>
+                    <a href="{{ route('friend.list') }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+                    color: #fff;">Our Crew</a>
+                    <a href="{{ route('my.calendar') }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+                    color: #fff;">Our Calendar</a>
+        
+                </div>
             </div>
 
             @if(App\Models\GroupMember::joinStatus($group->id) == "Joined")
@@ -317,12 +335,35 @@
 
 
     </div>
+    <div class="fixed z-10 overflow-y-auto top-0 w-full left-0 hidden" id="modal">
+        <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <div class="fixed inset-0 transition-opacity">
+            <div class="absolute inset-0 bg-gray-900 opacity-75" />
+          </div>
+          <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+          <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <form id="uploadCircleImage">
+              <label>Select Image</label>
+              <input type="file" class="w-full bg-gray-100 p-2 mt-2 mb-3" />
+              <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2"><i class="fas fa-plus"></i> Upload</button>
+                </form>
+            </div>
+            <div class="bg-gray-200 px-4 py-3 text-right">
+              <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="toggleModal()"><i class="fas fa-times"></i> Cancel</button>
+            
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 </div>
+
 @endsection
 @section('scripts')
 <script>
+ 
 
     $(document).ready(function(){
 
@@ -335,6 +376,13 @@
     }
 
 });
+
+
+$("#uploadCircleImage").submit(function(e){
+    e.preventDefault();
+    console.log('s')
+
+})
 
 
 
@@ -514,7 +562,6 @@
 
             var post_id = $(this).data('post');
             var group_id = $(this).data('group');
-
             $.ajax({
                 url:"/like/group/post",
                 type:'post',
@@ -524,13 +571,19 @@
                     $('.like'+post_id).html(msg);
 
 
-
-
                 }
             })
 
+         
+
         })
 
-    })
+function toggleModal() {
+  document.getElementById('modal').classList.toggle('hidden')
+}
+
+
+
+   
 </script>
 @endsection

@@ -28,7 +28,11 @@
 <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
     @foreach($groups as $group)
 	<div>
+        @if(!empty($group->image))
 		<img src="{{ asset('user/group/images/'.$group->image) }}" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">
+        @else
+        <img src="{{ Avatar::create($group->title)->toBase64() }}" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">
+        @endif
 		<div class="relative px-4 -mt-16  ">
 			<div class="bg-white p-6 rounded-lg shadow-lg">
 				<div class="flex items-baseline">
@@ -41,9 +45,6 @@
 				<div class="mt-4"></div></div></div></div>
 
 @endforeach
-
-
-
 
 </div>
 
@@ -59,7 +60,7 @@
           <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <p id="message"></p>
-                <form>
+                <form id="addCircleForm">
               <label>Name</label>
               <input type="text" class="w-full bg-gray-100 p-2 mt-2 mb-3" id="name" />
               <label>Circle Type</label>
@@ -130,7 +131,10 @@ $(document).ready(function(){
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+
+
     $("#addCircle").on('click',function(){
+
         var name = $("#name").val();
         var zip = $("#zip").val();
         var circle_type = $("#circle_type").val();

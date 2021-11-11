@@ -63,10 +63,6 @@
 
                             <p>{{ $post->feed }}</p>
 
-
-
-
-
                         </div></div></div><div class="simplebar-placeholder" style="width: 313px; height: 341px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 348px; transform: translate3d(0px, 0px, 0px); visibility: visible;"></div></div></div>
 
 

@@ -67,7 +67,7 @@ class FollowRequest extends Model
 
          if($follower){
 
-            return 'Follower';
+            return 'Following';
 
          }else if($requested){
              return 'Requested';

@@ -31,12 +31,11 @@ class EventController extends Controller
 
            $validate = $request->validate([
 
-            'title' => 'required',
-            'description' => 'required',
-            'date' => 'required',
-            'image' => 'required',
-            'interest' => 'required'
-
+            'name' => 'required',
+            'tagline' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+            'mcguffin' => 'required'
 
            ]);
 
@@ -64,9 +63,6 @@ class EventController extends Controller
            }else{
                return response()->json('Something Went Wrong');
            }
-
-
-
 
 
     }

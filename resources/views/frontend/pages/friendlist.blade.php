@@ -31,10 +31,13 @@
                                 {{-- <div> 21, Turkey </div> --}}
 
                             </div>
-                            <a type="button" id="followBtn{{ $crew->id }}" class=" right-3 bottom-3 rounded-full bg-gradient-to-tr from-blue-500 to-purple-700 followBtn" data-id="{{ $crew->id }}" data-follower="{{ Auth::user()->id }}">
+                            <a href="{{ route('public.profile',['id'=>$crew->id,'name'=>$crew->name]) }}" id="followBtn{{ $crew->id }}" class=" right-3 bottom-3 rounded-full bg-gradient-to-tr from-blue-500 to-purple-700 followBtn" data-id="{{ $crew->id }}" data-follower="{{ Auth::user()->id }}">
+                                Visit Profile
+                            </a
+                            {{-- <a type="button" id="followBtn{{ $crew->id }}" class=" right-3 bottom-3 rounded-full bg-gradient-to-tr from-blue-500 to-purple-700 followBtn" data-id="{{ $crew->id }}" data-follower="{{ Auth::user()->id }}">
 
-                                {{ App\Models\FollowRequest::followStatus($crew->id) }}
-                            </a>
+                                {{-- {{ App\Models\FollowRequest::followStatus($crew->id) }}
+                            </a>--}}
                         </div>
                     </div>
                 </div>
@@ -94,16 +97,14 @@
 @foreach($followerslist as $follower)
     <div>
         <div class="bg-red-400 max-w-full lg:h-56 h-48 rounded-lg relative overflow-hidden shadow uk-transition-toggle">
-            <a href="#story-modal" uk-toggle="">
+            <a href="{{ route('public.profile',['id'=>$follower->follower,'name'=>$follower->followersreq->name]) }}" uk-toggle="">
                 <img src="{{ asset('user/images/'.$follower->followersreq->image) }}" class="w-full h-full absolute object-cover inset-0 scale-150 transform">
             </a>
             <div class="flex flex-1 items-center absolute bottom-0 w-full p-3 text-white custom-overly1 uk-transition-slide-bottom-medium">
                 <a href="profile.html" class="lg:flex flex-1 items-center hidden">
                     <div> {{ $follower->followersreq->name }}</div>
                 </a>
-
             </div>
-
         </div>
     </div>
     <div id="story-modal{{ $follower->followersreq->id }}" class="uk-modal-container uk-modal" uk-modal="" style="">

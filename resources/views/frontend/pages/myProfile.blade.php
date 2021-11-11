@@ -43,10 +43,7 @@
                 <img src="{{asset('/user/images/'.Auth::user()->image)}}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full dark:border-gray-900">
                 @else
                 <img src="{{asset('/assets/images/dummyuser.jpg')}}" class="bg-gray-200 border-4 border-white rounded-full w-full h-full dark:border-gray-900">
-
                 @endif
-
-
                 <div class="absolute -bottom-3 custom-overly1 flex justify-center pt-4 pb-7 space-x-3 text-2xl text-white uk-transition-slide-bottom-medium w-full uk-transition-toggle">
                     <a href="#story-modal" class="hover:text-white" uk-toggle="">
                         <i class="uil-camera"></i>

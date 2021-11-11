@@ -12,6 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/frontend/frontend.js', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css')
 
@@ -40,5 +41,6 @@ mix.scripts([
     `${path_js+'/fontawesome.js'}`,
     `${path_js+'/popper.min.js'}`,
     `${path_js+'/slick.min.js'}`,
-    `${path_js+'/slim.min.js'}`,
+    `${path_js+'/slim.min.js'}`
+
 ], 'public/js/custom.js');

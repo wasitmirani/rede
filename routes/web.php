@@ -81,6 +81,8 @@ Route::middleware('auth')->group(function () {
     Route::post('updateStory',[UserDetailController::class,'updateStory'])->name('my.story');
     Route::get('bookmarks',[BookmarkController::class,'myBookmarks'])->name('my.bookmarks');
     Route::post('add/bookmarks',[BookmarkController::class,'addBookmarks'])->name('add.bookmarks');
+    Route::get('group/member/{id}',[GroupController::class,'groupMembers'])->name('group.member');
+    Route::get('profile/{id}/{name}',[UserDetailController::class,'publicProfile'])->name('public.profile');
 
 });
 Route::get('mcguffin',[FrontEndController::class,'mcguffin'])->name('mcguffin.deatil');
@@ -108,3 +110,5 @@ Route::prefix('api')->group(function () {
     Route::get('/conversations',[MessengerController::class,'getConversations']);
     Route::get('/messages',[MessengerController::class,'getMessages']);
 });
+Route::post('ckeditor/image_upload', 'CKEditorController@upload')->name('upload');
+

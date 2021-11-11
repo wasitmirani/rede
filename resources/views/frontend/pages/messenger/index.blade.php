@@ -31,10 +31,19 @@
     </div>
         <div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0" id="postArea">
             <div class="grid p-4">
+                <p>Share Your Feed</p>
                 <form id="postForm" method="post">
+                    <div class="col-span-2 mcgufin">
+                        <select id="interest" name="interest[]" class="js-example-basic-multiple" multiple="multiple">
+                            <option>Select Mcguffin</option>
+                            @foreach ($mcguffins->interests  as $mcguffin)
+                               <option value="{{ $mcguffin->interest }}">{{ $mcguffin->interest }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="col-span-2">
                         <label for="about">Write Your Feed Here</label>
-                        <textarea id="about" name="post"  class="resize-none border rounded-md"></textarea>
+                        <textarea id="about" id="post" name="post"  class="resize-none border rounded-md"></textarea>
                         <img id="blah"  style="width:548px;"  />
                     </div>
 
@@ -86,6 +95,10 @@
 <script >
 
     $(document).ready(function(){
+        CKEDITOR.replace( 'post', {
+    filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+    filebrowserUploadMethod: "{route('upload', ['file' => 'Image' ])}}"
+});
 
         $.ajaxSetup({
     headers: {
@@ -93,7 +106,7 @@
     }
 });
 
-
+$('.js-example-basic-multiple').select2();
 chekcbox1.onchange = evt => {
   const [file] = chekcbox1.files
   if (file) {
@@ -105,10 +118,7 @@ chekcbox1.onchange = evt => {
 }
 
         $('#postForm').on('submit',function(e){
-
             e.preventDefault();
-
-
             var data = new FormData(this);
             $.ajax({
                 url:'/store/feed',
@@ -357,7 +367,13 @@ chekcbox1.onchange = evt => {
             })
 
         })
-    })
+
+
+        $('.select2-container').css({'height':'42px;'})
+
+
+});
+
 
 </script>
 @endsection
