@@ -37,18 +37,23 @@
 @endsection
 @section('content')
 
-
-	<div id="chart"></div>
-
-    <div id="question">
-        <h2>Looking For Something New?</h2>
-        <h2>Try Your Luck......</h2>
-        <h1></h1>
-    </div>
-
-
-
-
+   <div class="container-fluid">
+    <div class="col-12">
+       <div class="row">
+               <div class="col-1"></div>
+               <div class="col-8">
+                <div id="chart" ></div>
+               </div>
+               <div class="col-3">
+                <div id="question" class="">
+                    <h2>Looking For Something New?</h2>
+                    <h2>Try Your Luck......</h2>
+                    <h1></h1>
+                </div>
+               </div>
+           </div>
+       </div>
+   </div>
 @endsection
 @section('scripts')
 <script>

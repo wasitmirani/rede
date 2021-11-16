@@ -1,3 +1,4 @@
+
 <div class="sidebar_inner" data-simplebar="">
     <div class="flex flex-col items-center my-6 uk-visible@s">
         <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-1 rounded-full transition m-0.5 mr-2  w-24 h-24">
@@ -90,7 +91,13 @@
                 <span> Search By Mcguffin </span> </a>
         </li>
         <li>
-
+            <a href="{{route('search.name')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <span> Search By Name </span> </a>
+        </li>
+        <li>
             <a href="{{route('spin.the.wheel')}}">
                 <i class="uil-bullseye"></i>
                 <span> Spin The Wheel </span> </a>
@@ -137,3 +144,4 @@
         </li>
     </ul>
 </div>
+

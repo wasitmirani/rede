@@ -6,33 +6,77 @@
 
     <h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mb-2"> News </h1>
     <div class="lg:m-0 -mx-5 flex justify-between py-4 relative space-x-3 uk-sticky dark-tabs" uk-sticky="cls-active: bg-gray-100 bg-opacity-95" style="">
+    </div>
+<div class="space-y-5 flex-shrink-0 lg:w-7/12">
+@foreach($posts as $post)
 
+<div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0">
 
+    <!-- post header-->
+    <div class="flex justify-between items-center px-4 py-3">
+        <div class="flex flex-1 items-center space-x-4">
+            <a href="#">
+                <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-0.5 rounded-full">
+                    <img src="{{ asset('/user/images/'.$post->user->image) }}" class="bg-gray-200 border border-white rounded-full w-8 h-8">
+                </div>
+            </a>
+            <span class="block capitalize font-semibold dark:text-gray-100"> {{ $post->user->name }} </span>
+        </div>
+      <div>
+      </div>
     </div>
 
+    <div uk-lightbox="">
+        <a href="{{ asset('/user/post/images/'.$post->image) }}" alt="">
+            <img src="{{ asset('/user/post/image/'.$post->image) }}" alt="">
+        </a>
+    </div>
+
+    <div class="p-3 border-b dark:border-gray-700">
+
+      {!! $post->feed !!}
+
+    </div>
+    <div class="py-3 px-4 space-y-3">
+        <div class="flex space-x-4 lg:font-bold">
+            <a href="#" class="flex items-center space-x-2">
+                <div class="p-2 rounded-full text-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
+                        <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"></path>
+                    </svg>
+                </div>
+                <div> Like</div>
+            </a>
+        </div>
+   
+    </div>
+</div>
+@endforeach
+</div>
 
 
 
-    <div class="my-3 grid lg:grid-cols-4 grid-cols-2 gap-3 hover:text-yellow-700 uk-link-reset">
+
+    {{-- <div class="my-3 grid lg:grid-cols-4 grid-cols-2 gap-3 hover:text-yellow-700 uk-link-reset"> --}}
 @foreach($posts as $post)
-        <div>
+
+        {{-- <div>
             <div class="bg-red-400 max-w-full lg:h-56 h-48 rounded-lg relative overflow-hidden shadow uk-transition-toggle">
                 <a href="#story-modal{{ $post->id }}" uk-toggle="">
                     @if($post->image != null)
-
                     <img src="{{asset('/user/post/images/'.$post->image)}}" class="w-full h-full absolute object-cover inset-0 scale-150 transform">
                     @endif
                 </a>
                 <div class="flex flex-1 items-center absolute bottom-0 w-full p-3 text-white custom-overly1 uk-transition-slide-bottom-medium">
                     <a href="profile.html" class="lg:flex flex-1 items-center hidden">
                         <div> {{ $post->feed }} </div>
-                    </a>
 
+                    </a>
                 </div>
 
             </div>
-        </div>
-        <div id="story-modal{{ $post->id }}" class="uk-modal-container uk-modal" uk-modal="">
+        </div> --}}
+        {{-- <div id="story-modal{{ $post->id }}" class="uk-modal-container uk-modal" uk-modal="">
             <div class="uk-modal-dialog story-modal">
                 <button class="uk-modal-close-default lg:-mt-9 lg:-mr-9 -mt-5 -mr-5 shadow-lg bg-white rounded-full p-4 transition dark:bg-gray-600 dark:text-white uk-icon uk-close" type="button" uk-close=""><svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" data-svg="close-icon"><line fill="none" stroke="#000" stroke-width="1.1" x1="1" y1="1" x2="13" y2="13"></line><line fill="none" stroke="#000" stroke-width="1.1" x1="13" y1="1" x2="1" y2="13"></line></svg></button>
 
@@ -69,12 +113,12 @@
                     </div>
 
             </div>
-        </div>
+        </div> --}}
 
 @endforeach
 
 
-    </div>
+    {{-- </div> --}}
 
 </div>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\Group;
 use App\Models\Interest;
 use App\Models\MyInterest;
 use Illuminate\Http\Request;
@@ -109,7 +110,7 @@ class InterestController extends Controller
 
 
     public function getinterest(){
-        
+
 
         $id = Auth::user()->id;
         $interests = Interest::orderby('id','desc')->paginate(15);
@@ -130,6 +131,31 @@ class InterestController extends Controller
 
        $interests = Interest::where('interest',$request->keyword)->get();
         return response()->json($interests);
+    }
+
+    public function searchByInterest(Request $request){
+        $users = Interest::where('id',$request->interest)->with('users')->get();
+        return response()->json($users);
+    }
+
+    public function searchForm(){
+        $interests = Interest::all();
+        return view('frontend.pages.searchresult',compact('interests'));
+    }
+
+    public function searchByName(Request $request){
+        $users = User::all();
+        $groups  = Group::all();
+        return view('frontend.pages.searchbyname',compact('users','groups'));
+    }
+
+
+    public function nameSearch(Request $request){
+
+        $users = User::where('name','like','%'.$request->name.'%')->get();
+     
+        return response()->json($users);
+
     }
 
 

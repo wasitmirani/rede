@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Group;
 use App\Models\GroupPost;
 use App\Models\GroupMember;
@@ -22,18 +23,18 @@ class GroupController extends Controller
     }
 
     public function createGroup(){
-        return view('frontend.pages.creategroup');
+        $interests = User::where('id',Auth::user()->id)->with('interests')->first()->interests;
+        return view('frontend.pages.creategroup',compact('interests'));
     }
 
     public function storeGroup(Request $request){
 
-       
         $validate = $request->validate([
 
-            'name' => 'required',
+            'title' => 'required',
             'tagline' => 'required',
             'type' => 'required',
-         
+
            ]);
 
            if ($request->hasfile('image')) {
@@ -47,7 +48,7 @@ class GroupController extends Controller
         }
 
            $group = new Group();
-           $group->title = $request->name;
+           $group->title = $request->title;
            $group->description = $request->tagline;
            $group->type = $request->type;
            $group->sponsor = $request->sponsor;
@@ -70,7 +71,9 @@ class GroupController extends Controller
                 'status' => 1
             ]);
 
-               return response()->json('200');
+            $groups = Group::orderBy('created_at','desc')->paginate(15);
+
+            return view('frontend.pages.groups',compact('groups'));
 
            }else{
                return response()->json('Something Went Wrong');
@@ -130,15 +133,16 @@ class GroupController extends Controller
         $unjoin = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['status','=',1]])->delete();
         return response()->json('Join');
 
-        }else if($requested){
-            $unjoin = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['status','=',0]])->delete();
-            return response()->json('Join');
+        // }else if($requested){
+        //     $unjoin = GroupMember::where([['user_id','=',Auth::user()->id],['group_id','=',$request->group_id],['status','=',0]])->delete();
+        //     return response()->json('Join');
         }else{
             $joined = GroupMember::create([
                 'user_id' => Auth::user()->id,
                 'group_id' => $request->group_id,
+                'status' => '1'
             ]);
-            return response()->json('Requested');
+            return response()->json('Joined');
 
         }
 
@@ -254,7 +258,7 @@ class GroupController extends Controller
     public function groupMembers($id){
 
         $members = GroupMember::with('members')->where('group_id',$id)->get();
-  
+
         return view('frontend.pages.groupmember',compact('members'));
 
     }

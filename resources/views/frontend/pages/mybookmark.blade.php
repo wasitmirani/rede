@@ -3,7 +3,7 @@
 <h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mb-2">My Booksmarks</h1>
 <h1 class="lg:text-2xl text-lg font-extrabold leading-none text-gray-900 tracking-tight mt-8">My McGuffins </h1>
 <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
-    <a href="{{route('all.interest')}}"  >
+    <a href="{{route('create.bookmark','mcguffin')}}"  >
         <div class="bg-gray-100 border-4 border-dashed flex flex-col h-full items-center justify-center relative rounded-2xl w-full" >
             <i class="text-4xl uil-plus-circle"></i> <span>Add new </span>
         </div>
@@ -28,7 +28,7 @@
     </div>
 </div>
 <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
-<a href="{{ route('create.group') }}">
+<a href="{{route('create.bookmark','circle')}}">
     <div class="bg-gray-100 border-4 border-dashed flex flex-col h-full items-center justify-center relative rounded-2xl w-full">
         <i class="text-4xl uil-plus-circle"></i> <span> Add new </span>
     </div>
@@ -56,7 +56,7 @@
 </div>
 
 <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
-<a href="{{ route('create.event') }}">
+<a href="{{route('create.bookmark','happening')}}">
     <div class="bg-gray-100 border-4 border-dashed flex flex-col h-full items-center justify-center relative rounded-2xl w-full">
         <i class="text-4xl uil-plus-circle"></i> <span> Add new </span>
     </div>

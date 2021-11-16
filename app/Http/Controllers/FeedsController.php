@@ -45,12 +45,13 @@ class FeedsController extends Controller
         $posts = $this->posts();
         return view('frontend.pages.messenger.index',compact('posts','users','follower','following','comments','NotFollowing','followReq','mcguffins'));
     }
-
-
-
     public function feeds(){
 
         return view('frontend.pages.feeds');
+    }
+
+    public function news(){
+        $feeds = Feed::where('user_id','=',Auth::user()->id)->get();
     }
 
 public function storeFeed(Request $request){
@@ -248,7 +249,13 @@ public function storeFeed(Request $request){
 
 
     public function myNews(){
-      $posts = $this->posts();
+        $user = User::with('followers','following')->find(Auth::user()->id);
+        $followerid = $user->followers()->pluck('follower')->toArray();
+        $followingids = $user->following()->pluck('following')->toArray();
+        $userIds = array_merge($followerid, $followingids);
+
+        $posts = Feed::with('user')->with('comments')->whereIn('user_id',$userIds)->orwhere('user_id','=',Auth::user()->id)->orderBy('created_at','desc')->get();
+        
       return view('frontend.pages.feeds',compact('posts'));
     }
 

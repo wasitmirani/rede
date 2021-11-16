@@ -26,6 +26,9 @@ class FrontEndController extends Controller
 
     public function signupUser(Request $request){
 
+        $array = ["iIamrede","Iamrede", "Iamready", "Imrede", "Imready", "I’mrede", "I’mready"];
+        $index = array_rand($array);
+        $pass = $array[$index];
     $request->validate([
         'username' => ['required', 'string', 'max:255', 'unique:users'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -48,7 +51,7 @@ class FrontEndController extends Controller
             'username'=>$request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'pass_key' => "i'mrede",
+            'pass_key' => $pass,
             'image' => 'dummyuser.jpg'
 
         ]);

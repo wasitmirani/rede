@@ -30,14 +30,16 @@
                  {{-- <a href="#">Sports</a>  , <a href="#">Movies</a> --}}
             </div>
             <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
-                <a href="#" id="city"></a> , <a href="#" id="state"></a>  , <a href="#">USA</a><a>({{ $profile->zip_code }})</a>
+                <a href="#" id="city"></a> , <a href="#" id="state"></a>  , <a href="#">USA</a><a>@if(!empty($profile->zip_code))({{ $profile->zip_code }})@endif</a>
             </div>
             <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
-                <a href="#">{{ $profile->covid_status }}</a>
+                @if(isset($profile->covid_status))
+                    @if($profile->covid_status != "Not Specified")
+                    <a href="#"> {{ $profile->covid_status }}</a>
+       
+                    @endif
+                @endif
             </div>
-
-
-
             <div class="capitalize flex font-semibold space-x-3 text-center text-sm my-2">
                 <button type="button" id="followBtn"  data-id="{{ $user->id }}" data-follower="{{ Auth::user()->id }}"  class="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700">  {{ App\Models\FollowRequest::followStatus($user->id) }}</button>
                 {{-- <a href="#" class="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"> Send message</a> --}}
@@ -141,7 +143,7 @@
 <script>
        $(document).ready(function() {
         $('#followBtn').on('click',function(){
-     
+
 
             var following = $(this).data('id');
             var follower = $(this).data('follower');

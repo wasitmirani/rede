@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Auth;
 
 class BookmarkController extends Controller
 {
+
+    public function createBookmark($name){
+
+        $mcguffins = User::where('id',Auth::user()->id)->with('interests')->first()->interests;
+        $circles = Group::where('user_id',Auth::user()->id)->get();
+        $happenings = Event::where('user_id',Auth::user()->id)->get();
+        $bookmark = $name;
+        return view('frontend.pages.addbookmark',compact('bookmark','mcguffins','circles','happenings'));
+    }
     public function myBookmarks(){
 
         $id = Auth::user()->id;
@@ -24,22 +33,32 @@ class BookmarkController extends Controller
 
     public function addBookmarks(Request $request){
 
-          $request->validate([
-              'title' => 'required',
-              'url'   => 'required'
-          ]);
-          $bookmark = BookMark::create([
-              'title'=>$request->title,
-              'url' => $request->url,
-              'user_id' => Auth::user()->id
-            ]);
+        $exist = Bookmark::where([['user_id','=',$request->participent],['item_id','=',$request->bookmark]])->exists();
 
-            if($bookmark){
+    if(!$exist){
+        $bookmark = BookMark::create([
+            'title'=>$request->title,
+            'item_id' => $request->bookmark,
+            'user_id' => Auth::user()->id
+        ]);
 
-                return response()->json('200');
 
-            }else{
-                return response()->json('Something Went Wrong');
-            }
+        if($bookmark){
+
+            return response()->json('200');
+
+        }else{
+
+            return response()->json('Something Went Wrong');
+
+        }
+
+    }else if($exist){
+
+        return response()->json('300');
+
+    }
+
+
     }
 }

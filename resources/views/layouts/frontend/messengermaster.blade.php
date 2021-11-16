@@ -46,7 +46,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/events/css/vendor/animate.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="{{ asset('/assets/events/css/vendor/lightbox.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/events/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/events/css/responsive.css') }}">
@@ -375,143 +375,13 @@
 
 
     <!-- Story modal -->
-    <div id="story-modal" class="uk-modal-container" uk-modal="">
-        <div class="uk-modal-dialog story-modal">
-            <button class="uk-modal-close-default lg:-mt-9 lg:-mr-9 -mt-5 -mr-5 shadow-lg bg-white rounded-full p-4 transition dark:bg-gray-600 dark:text-white" type="button" uk-close=""></button>
-
-                <div class="story-modal-media">
-                    <img src="/messenger/assets/images/post/img4.jpg" alt="" class="inset-0 h-full w-full object-cover">
-                </div>
-                <div class="flex-1 bg-white dark:bg-gray-900 dark:text-gray-100">
-
-                    <!-- post header-->
-                    <div class="border-b flex items-center justify-between px-5 py-3 dark:border-gray-600">
-                        <div class="flex flex-1 items-center space-x-4">
-                            <a href="#">
-                                <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-0.5 rounded-full">
-                                    <img src="/messenger/assets/images/avatars/avatar-2.jpg" class="bg-gray-200 border border-white rounded-full w-8 h-8">
-                                </div>
-                            </a>
-                            <span class="block text-lg font-semibold"> Johnson smith </span>
-                        </div>
-                        <a href="#">
-                            <i class="icon-feather-more-horizontal text-2xl rounded-full p-2 transition -mr-1"></i>
-                        </a>
-                    </div>
-                    <div class="story-content p-4" data-simplebar="">
-
-                        <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
-
-                        <div class="py-4 ">
-                            <div class="flex justify-around">
-                                <a href="#" class="flex items-center space-x-3">
-                                    <div class="flex font-bold items-baseline"> <i class="uil-heart mr-1"> </i> Like</div>
-                                </a>
-                                <a href="#" class="flex items-center space-x-3">
-                                    <div class="flex font-bold items-baseline"> <i class="uil-heart mr-1"> </i> Comment</div>
-                                </a>
-                                <a href="#" class="flex items-center space-x-3">
-                                    <div class="flex font-bold items-baseline"> <i class="uil-heart mr-1"> </i> Share</div>
-                                </a>
-                            </div>
-                            <hr class="-mx-4 my-3">
-                            <div class="flex items-center space-x-3">
-                                <div class="flex items-center">
-                                    <img src="/messenger/assets/images/avatars/avatar-1.jpg" alt="" class="w-6 h-6 rounded-full border-2 border-white">
-                                    <img src="/messenger/assets/images/avatars/avatar-4.jpg" alt="" class="w-6 h-6 rounded-full border-2 border-white -ml-2">
-                                    <img src="/messenger/assets/images/avatars/avatar-2.jpg" alt="" class="w-6 h-6 rounded-full border-2 border-white -ml-2">
-                                </div>
-                                <div>
-                                    Liked <strong> Johnson</strong> and <strong> 209 Others </strong>
-                                </div>
-                            </div>
-                        </div>
-
-                    <div class="-mt-1 space-y-1">
-                        <div class="flex flex-1 items-center space-x-2">
-                            <img src="/messenger/assets/images/avatars/avatar-2.jpg" class="rounded-full w-8 h-8">
-                            <div class="flex-1 p-2">
-                                consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                            </div>
-                        </div>
-
-                        <div class="flex flex-1 items-center space-x-2">
-                            <img src="/messenger/assets/images/avatars/avatar-4.jpg" class="rounded-full w-8 h-8">
-                            <div class="flex-1 p-2">
-                                consectetuer adipiscing elit
-                            </div>
-                        </div>
-
-                    </div>
 
 
-                    </div>
-                    <div class="p-3 border-t dark:border-gray-600">
-                        <div class="bg-gray-200 dark:bg-gray-700 rounded-full rounded-md relative">
-                            <input type="text" placeholder="Add your Comment.." class="bg-transparent max-h-8 shadow-none">
-                            <div class="absolute bottom-0 flex h-full items-center right-0 right-3 text-xl space-x-2">
-                                <a href="#"> <i class="uil-image"></i></a>
-                                <a href="#"> <i class="uil-video"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-        </div>
-    </div>
-
-
-
-    <script>
-
-
-
-
-        (function (window, document, undefined) {
-            'use strict';
-            if (!('localStorage' in window)) return;
-            var nightMode = localStorage.getItem('gmtNightMode');
-            if (nightMode) {
-                document.documentElement.className += ' dark';
-            }
-        })(window, document);
-
-
-        (function (window, document, undefined) {
-
-            'use strict';
-
-            // Feature test
-            if (!('localStorage' in window)) return;
-
-            // Get our newly insert toggle
-            var nightMode = document.querySelector('#night-mode');
-            if (!nightMode) return;
-
-            // When clicked, toggle night mode on or off
-            nightMode.addEventListener('click', function (event) {
-                event.preventDefault();
-                document.documentElement.classList.toggle('dark');
-                if (document.documentElement.classList.contains('dark')) {
-                    localStorage.setItem('gmtNightMode', true);
-                    return;
-                }
-                localStorage.removeItem('gmtNightMode');
-            }, false);
-
-        })(window, document);
-
-
-    </script>
-
- <!-- Scripts
-    ================================================== -->
     <script src="{{asset('/messenger/assets/js/tippy.all.min.js')}}"></script>
     <script src="{{asset('/messenger/assets/js/jquery-3.3.1.min.js')}}"></script>
     <script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
     <script src="{{ asset('/assets/events/js/vendor/popper-1.12.9.min.js') }}"></script>
-<script src="{{ asset('/assets/events/js/vendor/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('/assets/events/js/vendor/bootstrap.min.js') }}"></script>
     <script src="{{asset('/messenger/assets/js/uikit.js')}}"></script>
     <script src="{{asset('/messenger/assets/js/simplebar.js')}}"></script>
     <script src="{{asset('/messenger/assets/js/custom.js')}}"></script>
@@ -519,33 +389,63 @@
     <script src="{{ asset('lib/js/util.js') }}"></script>
     <script src="{{ asset('lib/js/jquery.emojiarea.js') }}"></script>
     <script src="{{ asset('lib/js/emoji-picker.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/6.0.0-beta.1/dropzone-min.js" integrity="sha512-kLQ8y6epwwH5HA1M6K0bw2erLB1+Vz+7HOUepLaKRecyGXaP0K/9b6kq2+MZlyWt6E/AH6dtnxDom8lniz5BWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('/assets/events/js/vendor/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('/assets/events/js/vendor/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('/assets/events/js/vendor/waypoints-jquery.js') }}"></script>
     <script src="{{ asset('/assets/events/js/vendor/lightbox.js') }}"></script>
     <script src="{{ asset('/assets/events/js/vendor/jquery.appear.js') }}"></script>
     <script src="{{ asset('/assets/events/js/vendor/countdown.js') }}"></script>
-    <script src="{{ asset('/assets/events/js/vendor/jquery-ui.min.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="{{ asset('/assets/events/js/vendor/wow.min.js') }}"></script>
     <script src="{{ asset('/assets/events/js/vendor/plugins.js') }}"></script>
     <script src="{{ asset('/assets/events/js/main.js') }}"></script>
-  <script src="{{ asset('/assets/js/toaster.js') }}"></script>
+    <script src="{{ asset('/assets/js/toaster.js') }}"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   {{-- <script src="./maps/api/js_key_aizasyblujtsii_frurx0i2wugoxf_kanohmc4o.js"></script>
-<script src="{{ asset('/assets/events/js/vendor/map.js') }}"></script> --}}
-   <script src="{{ asset('/assets/events/js/vendor/jquery-migrate.js') }}"></script>
-  <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+   <script src="{{ asset('/assets/events/js/vendor/map.js') }}"></script> --}}
+    <script src="{{ asset('/assets/events/js/vendor/jquery-migrate.js') }}"></script>
 
-
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+  
+    <script src="../ionicons@5.2.3/dist/ionicons.js"></script>
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script  type="application/javascript">
+(function (window, document, undefined) {
+    'use strict';
+    if (!('localStorage' in window)) return;
+    var nightMode = localStorage.getItem('gmtNightMode');
+    if (nightMode) {
+        document.documentElement.className += ' dark';
+    }
+})(window, document);
 
 
-    <script>
+(function (window, document, undefined) {
 
+
+
+    // Feature test
+    if (!('localStorage' in window)) return;
+
+    // Get our newly insert toggle
+    var nightMode = document.querySelector('#night-mode');
+    if (!nightMode) return;
+
+    // When clicked, toggle night mode on or off
+    nightMode.addEventListener('click', function (event) {
+        event.preventDefault();
+        document.documentElement.classList.toggle('dark');
+        if (document.documentElement.classList.contains('dark')) {
+            localStorage.setItem('gmtNightMode', true);
+            return;
+        }
+        localStorage.removeItem('gmtNightMode');
+    }, false);
+
+})(window, document);
 
         @auth
             window.user = {!! json_encode(Auth::user(), true) !!};
@@ -560,9 +460,6 @@
         var zip_code = ""
 
         @endif
-
-
-
 const options = {
   method: 'GET',
   url: 'https://us-zip-code-information.p.rapidapi.com/',
@@ -597,13 +494,7 @@ axios.request(options).then(function (response) {
 
   });
 
-
-    </script>
-
-    <script src="../ionicons@5.2.3/dist/ionicons.js"></script>
-<script>
-
-    $(document).ready(function(){
+$(document).ready(function(){
 
         $("#searchKeyword").on('keyup',function(){
 
@@ -653,10 +544,7 @@ axios.request(options).then(function (response) {
 
 </script>
 
-    @yield('scripts')
-
-
-
 </body>
+@yield('scripts')
 
 </html>

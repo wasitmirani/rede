@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Group;
 use App\Models\MyInterest;
 use App\Models\UserDetail;
+use App\Models\GroupMember;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\FollowRequest;
@@ -59,13 +60,15 @@ class UserDetailController extends Controller
 
     public function myProfile(){
         $id = Auth::user()->id;
+
         $user = User::with('profile')->where('id',$id)->first();
         $profile = $user->profile;
         // $followers = FollowRequest::where('following',$id)->get()->count();
         // $followingList = FollowRequest::with('followings')->where('follower',$id)->get();
         $followerslist = FollowRequest::with('followersreq')->where('following',$id)->get();
         $events = Event::with('user')->where('user_id',$id)->get();
-        $groups = Group::with('members')->where('user_id',$id)->get();
+        $groups = GroupMember::with('group')->where('user_id',$id)->get();
+      
         // $follower = "";
         $myInterests = User::with('interests')->where('id',Auth::user()->id)->get();
         return view('frontend.pages.myProfile',compact('myInterests','user','profile','groups','events'));
@@ -110,13 +113,14 @@ if($updated){
     public function friendlist(){
         $id = Auth::user()->id;
         $followerslist = FollowRequest::with('followersreq')->where([['following','=',$id],['status','=',1]])->get();
-
         $crews = User::with('profile')->get();
         return view('frontend.pages.friendlist',compact('crews','followerslist'));
     }
 
-    public function myCalendar(){
-        return view('frontend.pages.calendar');
+    public function myCalendar()
+    {
+        $events = Event::where('user_id',Auth::user()->id)->with('user')->with('group')->orderBy('created_at','desc')->paginate(5);
+        return view('frontend.pages.calendar',compact('events'));
     }
 
     public function updateImage(Request $request){
@@ -139,10 +143,6 @@ if($updated){
         }else{
             return response()->json('402');
         }
-
-
-
-
 
 
     }

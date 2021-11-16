@@ -45,7 +45,9 @@
     </div>
     @endforeach
 
+
 </div>
+
 {{ $interests->links() }}
 {{-- <div class="relative uk-slider" uk-slider="finite: true">
     @if(Session::has('message'))

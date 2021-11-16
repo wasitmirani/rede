@@ -23,14 +23,17 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $password="i'mready";
+        $array = ["iIamrede","Iamrede", "Iamready", "Imrede", "Imready", "I’mrede", "I’mready"];
+        $index = array_rand($array);
+        $pass = $array[$index];
         // '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'username'=>'$2y$10$92IX',
             'email_verified_at' => now(),
-            'password' => Hash::make($password),
+            'password' => Hash::make('password'),
+             'pass_key' => $pass,
             'remember_token' => Str::random(10),
         ];
     }

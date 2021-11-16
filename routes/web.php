@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/like/feed',[FeedsController::class,'likeFeed'])->name('like.feed');
     Route::post('/post/comment',[CommentController::class,'PostComment'])->name('post.comment');
     Route::get('/events',[EventController::class,'index'])->name('events.list');
+
     Route::get('/create/event',[EventController::class,'createEvent'])->name('create.event');
     Route::post('/store/event',[EventController::class,'storeEvent'])->name('store.event');
     Route::get('/event/detail/{id}',[EventController::class,'eventDetail'])->name('event.detail');
@@ -71,18 +72,25 @@ Route::middleware('auth')->group(function () {
     Route::post('/store/event/booking',[EventController::class,'eventBooking'])->name('event.booking');
     Route::post('search/tag/{tag}',[InterestController::class,'searchByTag'])->name('tag.search');
     Route::post('/search/interest',[InterestController::class, 'searchInterest'])->name('search.interest');
+    Route::post('/search/interest/{interest}',[InterestController::class, 'searchByInterest'])->name('search.by.interest');
     Route::post('share/feed',[FeedsController::class,'shareFeed'])->name('share.feed');
     Route::get('/friend/list',[UserDetailController::class,'friendlist'])->name('friend.list');
     Route::get('/my/feeds',[FeedsController::class,'myNews'])->name('my.news');
     Route::get('/my/calendar',[UserDetailController::class,'myCalendar'])->name('my.calendar');
     Route::post('/update/image',[UserDetailController::class,'updateImage'])->name('update.image');
     Route::get('/search',[FeedsController::class,'searchForm'])->name('search.form');
+    Route::get('/search/by/name',[InterestController::class,'searchByName'])->name('search.name');
+    Route::post('search/{name}',[InterestController::class, 'nameSearch'])->name('name.search');
     Route::get('/spin/the/wheel',[UserDetailController::class,'spinTheWheel'])->name('spin.the.wheel');
     Route::post('updateStory',[UserDetailController::class,'updateStory'])->name('my.story');
     Route::get('bookmarks',[BookmarkController::class,'myBookmarks'])->name('my.bookmarks');
     Route::post('add/bookmarks',[BookmarkController::class,'addBookmarks'])->name('add.bookmarks');
     Route::get('group/member/{id}',[GroupController::class,'groupMembers'])->name('group.member');
     Route::get('profile/{id}/{name}',[UserDetailController::class,'publicProfile'])->name('public.profile');
+    Route::get('suggest/mcguffin',[InterestController::class,'suggestMcguffin'])->name('suggest.mcguffin');
+    
+    Route::get('create/bookmark/{name}',[BookmarkController::class,'createBookmark'])->name('create.bookmark');
+
 
 });
 Route::get('mcguffin',[FrontEndController::class,'mcguffin'])->name('mcguffin.deatil');
@@ -110,5 +118,5 @@ Route::prefix('api')->group(function () {
     Route::get('/conversations',[MessengerController::class,'getConversations']);
     Route::get('/messages',[MessengerController::class,'getMessages']);
 });
-Route::post('ckeditor/image_upload', 'CKEditorController@upload')->name('upload');
+// Route::post('ckeditor/image_upload', 'CKEditorController@upload')->name('upload');
 

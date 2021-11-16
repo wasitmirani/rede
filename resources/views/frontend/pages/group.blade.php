@@ -26,11 +26,11 @@
                         </div>
                     </div>
                 </div>
-              
+
 
 
                 <div class="lg:w/8/12 flex-1 flex flex-col lg:items-start items-center">
-                
+
 
                     <h2 class="font-semibold lg:text-2xl text-lg mb-2"> {{ $group->title }}</h2>
                     <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> {!! $group->description !!}</p>
@@ -58,7 +58,7 @@
                                 <ul class="space-y-1">
                                     <li>
                                         <a href="{{ route('create.group.event',$group->id) }}" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-700">
-                                         <i class="uil-user-minus mr-2"></i>Create Event
+                                         <i class="uil-user-minus mr-2"></i>Create Circle
                                         </a>
                                     </li>
 
@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="w-20"></div>
-          
+
 
 
             </div>
@@ -90,7 +90,7 @@
                     color: #fff;">Our Crew</a>
                     <a href="{{ route('my.calendar') }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
                     color: #fff;">Our Calendar</a>
-        
+
                 </div>
             </div>
 
@@ -351,7 +351,7 @@
             </div>
             <div class="bg-gray-200 px-4 py-3 text-right">
               <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="toggleModal()"><i class="fas fa-times"></i> Cancel</button>
-            
+
             </div>
           </div>
         </div>
@@ -363,7 +363,7 @@
 @endsection
 @section('scripts')
 <script>
- 
+
 
     $(document).ready(function(){
 
@@ -574,7 +574,7 @@ $("#uploadCircleImage").submit(function(e){
                 }
             })
 
-         
+
 
         })
 
@@ -584,6 +584,6 @@ function toggleModal() {
 
 
 
-   
+
 </script>
 @endsection

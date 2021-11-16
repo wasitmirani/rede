@@ -139,15 +139,14 @@
             </div>
         </a>
 
-        @foreach($myInterests as $myinterest)
+    @foreach($myInterests as $myinterest)
           @foreach($myinterest->interests as $interest)
-
-        <a href="#story-modal" uk-toggle="">
-            <img src="https://source.unsplash.com/random/350x350" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+        <a href="#" uk-toggle="">
+            <img src="{{ Avatar::create($interest->interest)->toBase64() }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+            <p>{{ $interest->interest }}</p>
         </a>
         @endforeach
-
-        @endforeach
+    @endforeach
 
     </div>
 
@@ -158,20 +157,23 @@
         </div>
     </div>
 <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
-    <a href="{{ route('create.group') }}">
+    <a href="{{ route('group.list') }}">
         <div class="bg-gray-100 border-4 border-dashed flex flex-col h-full items-center justify-center relative rounded-2xl w-full">
             <i class="text-4xl uil-plus-circle"></i> <span> Add new </span>
         </div>
     </a>
     @foreach($groups as $group)
-    <a href="#story-modal" uk-toggle="">
-        <img src="{{ asset('/user/group/images/'.$group->image) }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+
+    <a href="{{ route('show.group',$group->group->id) }}" uk-toggle="">
+        <img src="{{ asset('/user/group/images/'.$group->group->image) }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+        <p></p>
+        <p>{{ $group->group->title }}</p>
     </a>
     @endforeach
 
 </div>
 
-<div class="my-6 grid lg:grid-cols-4 grid-cols-2 gap-1.5 hover:text-yellow-700 uk-link-reset">
+<div class="my-6 grid lg:grid-cols-4  grid-cols-2 gap-1.5 hover:text-yellow-700 uk-link-reset">
 
 
 
@@ -191,8 +193,9 @@
         </div>
     </a>
     @foreach($events as $event)
-    <a href="#story-modal" uk-toggle="">
+    <a href="{{ route('event.detail',$event->id) }}" uk-toggle="">
         <img src="{{ asset('/user/event/images/'.$event->image) }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+        <p>{{ $event->title }}|<span>{{ \Carbon\Carbon::parse($event->start_date)->diffForHumans() }}</span></p>
     </a>
     @endforeach
 
@@ -227,7 +230,7 @@
 
 @endsection
 @section('scripts')
-<script>
+<script  type="application/javascript">
 
 $(document).ready(function(){
     $("#ok-btn").on('click',function(){
