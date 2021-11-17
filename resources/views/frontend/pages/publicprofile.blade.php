@@ -36,7 +36,7 @@
                 @if(isset($profile->covid_status))
                     @if($profile->covid_status != "Not Specified")
                     <a href="#"> {{ $profile->covid_status }}</a>
-       
+
                     @endif
                 @endif
             </div>
@@ -45,33 +45,20 @@
                 {{-- <a href="#" class="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"> Send message</a> --}}
                 <div>
 
-                {{-- <a href="#" class="bg-gray-300 flex h-12 h-full items-center justify-center rounded-full text-xl w-9 dark:bg-gray-700" aria-expanded="false">
+                <a href="#" class="bg-gray-300 flex h-12 h-full items-center justify-center rounded-full text-xl w-9 dark:bg-gray-700" aria-expanded="false">
                     <i class="icon-feather-chevron-down"></i>
-                </a> --}}
+                </a>
 
              <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base dark:bg-gray-900 uk-drop" uk-drop="mode: click">
 
-                  {{-- <ul class="space-y-1">
+                   <ul class="space-y-1">
                     <li>
                         <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-700">
-                         <i class="uil-user-minus mr-2"></i>Unfriend
+                         <i class="uil-user-minus mr-2"></i>Unfolow
                         </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-700">
-                         <i class="uil-eye-slash  mr-2"></i>Hide Your Story
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-700">
-                         <i class="uil-share-alt mr-2"></i> Share This Profile
-                        </a>
-                    </li>
-                    <li>
-                      <hr class="-mx-2 my-2  dark:border-gray-700">
                     </li>
 
-                  </ul> --}}
+                  </ul>
 
                 </div>
 
@@ -173,7 +160,7 @@
                 }
             })
 
-        })
+    })
 
 $(".likeBtn").click(function(){
 

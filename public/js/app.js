@@ -3158,6 +3158,203 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/quiz/QuizComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/quiz/QuizComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['route'],
+  data: function data() {
+    return {
+      idx: 0,
+      selectedAnswer: '',
+      correctAnswers: 0,
+      wrongAnswers: 0,
+      count: 13,
+      questions: [{
+        question: "Do you have too many friends?",
+        answers: {
+          a: 'Yes',
+          b: 'No'
+        },
+        correctAnswer: 'b'
+      }, {
+        question: "Do you have any friends that you didn’t meet via work or school?",
+        answers: {
+          a: 'Yes',
+          b: 'No'
+        },
+        correctAnswer: 'b'
+      }, {
+        question: "Are there things you’d like to do – games you’d like to play, sports you’d like to try, events you’d like to attend – that you can’t because you don’t know anyone who will do them with you?",
+        answers: {
+          a: 'Yes',
+          b: 'No'
+        },
+        correctAnswer: 'b'
+      }, {
+        question: "When you take chances or try new things, do you prefer to have a friend tag along?",
+        answers: {
+          a: 'Yes',
+          b: 'No'
+        },
+        correctAnswer: 'a'
+      }, {
+        question: "Think back to when you met your friends? Were you doing some kind of activity together?",
+        answers: {
+          a: 'Yes',
+          b: 'No'
+        },
+        correctAnswer: 'a'
+      }, {
+        question: "Have you ever done some fun (or not-so-fun) group event and found yourself making friends with the other participants?",
+        answers: {
+          a: 'Yes',
+          b: 'No'
+        },
+        correctAnswer: 'a'
+      }, {
+        question: "Have you ever met a potential new friend but not known how to follow up?",
+        answers: {
+          a: 'Yes',
+          b: 'No'
+        },
+        correctAnswer: 'a'
+      }, {
+        question: "Did you recently get married or divorced or have children?",
+        answers: {
+          a: 'Yes',
+          b: 'No'
+        },
+        correctAnswer: 'a'
+      }, {
+        question: "If you enjoy the same activities, would you be willing to spend time with someone of a different race/nationality/gender identity/etc.?",
+        answers: {
+          a: 'Yes',
+          b: 'No'
+        },
+        correctAnswer: 'a'
+      }, {
+        question: "Do you feel like Americans are too divided and wish we could all find the common ground that is sure to exist among us?",
+        answers: {
+          a: 'Yes',
+          b: 'No'
+        },
+        correctAnswer: 'a'
+      }, {
+        question: "Have you ever felt stress while using traditonal social media?",
+        answers: {
+          a: 'Yes',
+          b: 'No'
+        },
+        correctAnswer: 'a'
+      }, {
+        question: "Have you ever tried to use a dating app to find companionship?",
+        answers: {
+          a: 'Yes',
+          b: 'No'
+        },
+        correctAnswer: 'a'
+      }, {
+        question: "Are you frustrated by superficial assumptions people make based on a brief glance at your photo, or felt that appearance is over-emphasized online?",
+        answers: {
+          a: 'Yes',
+          b: 'No'
+        },
+        correctAnswer: 'a'
+      }]
+    };
+  },
+  methods: {
+    answered: function answered(e) {
+      this.selectedAnswer = e.target.value;
+
+      if (this.selectedAnswer == this.questions[this.idx].correctAnswer) {
+        this.correctAnswers++;
+      } else {
+        this.wrongAnswers++;
+      }
+    },
+    nextQuestion: function nextQuestion() {
+      this.idx++;
+      this.selectedAnswer = '';
+      document.querySelectorAll('input').forEach(function (el) {
+        return el.checked = false;
+      });
+    },
+    showResults: function showResults() {
+      this.idx++;
+    },
+    resetQuiz: function resetQuiz() {
+      this.idx = 0;
+      this.selectedAnswer = '';
+      this.correctAnswers = 0;
+      this.wrongAnswers = 0;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -3205,6 +3402,7 @@ var files = __webpack_require__("./resources/js sync recursive \\.vue$/");
 files.keys().map(function (key) {
   return Vue.component(key.split('/').pop().split('.')[0], files(key)["default"]);
 });
+Vue.component('quiz-component', __webpack_require__(/*! ./components/quiz/QuizComponent.vue */ "./resources/js/components/quiz/QuizComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -3246,10 +3444,10 @@ try {// window.Popper = require('popper.js').default;
  */
 
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.headers.common['Authorization'] = "Bearer " + user.api_token;
-window.axios.defaults.baseURL = window.location.origin + "/api/";
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios.defaults.headers.common['Authorization'] = `Bearer ` + user.api_token;
+// window.axios.defaults.baseURL = window.location.origin + "/api/";
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -5619,6 +5817,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.profile {\n    width: 60px;\n    height: 60px;\n    display: inline-block;\n    border-radius: 20px !important;\n    position: relative;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/quiz/QuizComponent.vue?vue&type=style&index=0&id=4f8eae59&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/quiz/QuizComponent.vue?vue&type=style&index=0&id=4f8eae59&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*! tailwindcss v2.1.4 | MIT License | https://tailwindcss.com */\n\n/*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */\n\n/*\nDocument\n========\n*/\n\n/**\nUse a better box model (opinionated).\n*/\n*[data-v-4f8eae59],[data-v-4f8eae59]::before,[data-v-4f8eae59]::after {\n  box-sizing: border-box;\n}\n\n/**\nUse a more readable tab size (opinionated).\n*/\nhtml[data-v-4f8eae59] {\n  -moz-tab-size: 4;\n  -o-tab-size: 4;\n     tab-size: 4;\n}\n\n/**\n1. Correct the line height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n*/\nhtml[data-v-4f8eae59] {\n  line-height: 1.15; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n}\n\n/*\nSections\n========\n*/\n\n/**\nRemove the margin in all browsers.\n*/\nbody[data-v-4f8eae59] {\n  margin: 0;\n}\n\n/**\nImprove consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)\n*/\nbody[data-v-4f8eae59] {\n  font-family:\n\t\tsystem-ui,\n\t\t-apple-system, /* Firefox supports this but not yet `system-ui` */\n\t\t'Segoe UI',\n\t\tRoboto,\n\t\tHelvetica,\n\t\tArial,\n\t\tsans-serif,\n\t\t'Apple Color Emoji',\n\t\t'Segoe UI Emoji';\n}\n\n/*\nGrouping content\n================\n*/\n\n/**\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n*/\nhr[data-v-4f8eae59] {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n}\n\n/*\nText-level semantics\n====================\n*/\n\n/**\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\nabbr[title][data-v-4f8eae59] {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/**\nAdd the correct font weight in Edge and Safari.\n*/\nb[data-v-4f8eae59],\nstrong[data-v-4f8eae59] {\n  font-weight: bolder;\n}\n\n/**\n1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)\n2. Correct the odd 'em' font sizing in all browsers.\n*/\ncode[data-v-4f8eae59],\nkbd[data-v-4f8eae59],\nsamp[data-v-4f8eae59],\npre[data-v-4f8eae59] {\n  font-family:\n\t\tui-monospace,\n\t\tSFMono-Regular,\n\t\tConsolas,\n\t\t'Liberation Mono',\n\t\tMenlo,\n\t\tmonospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/**\nAdd the correct font size in all browsers.\n*/\nsmall[data-v-4f8eae59] {\n  font-size: 80%;\n}\n\n/**\nPrevent 'sub' and 'sup' elements from affecting the line height in all browsers.\n*/\nsub[data-v-4f8eae59],\nsup[data-v-4f8eae59] {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsub[data-v-4f8eae59] {\n  bottom: -0.25em;\n}\nsup[data-v-4f8eae59] {\n  top: -0.5em;\n}\n\n/*\nTabular data\n============\n*/\n\n/**\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n*/\ntable[data-v-4f8eae59] {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n}\n\n/*\nForms\n=====\n*/\n\n/**\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n*/\nbutton[data-v-4f8eae59],\ninput[data-v-4f8eae59],\noptgroup[data-v-4f8eae59],\nselect[data-v-4f8eae59],\ntextarea[data-v-4f8eae59] {\n  font-family: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  line-height: 1.15; /* 1 */\n  margin: 0; /* 2 */\n}\n\n/**\nRemove the inheritance of text transform in Edge and Firefox.\n1. Remove the inheritance of text transform in Firefox.\n*/\nbutton[data-v-4f8eae59],\nselect[data-v-4f8eae59] { /* 1 */\n  text-transform: none;\n}\n\n/**\nCorrect the inability to style clickable types in iOS and Safari.\n*/\nbutton[data-v-4f8eae59],\n[type='button'][data-v-4f8eae59] {\n  -webkit-appearance: button;\n}\n\n/**\nRemove the inner border and padding in Firefox.\n*/\n\n/**\nRestore the focus styles unset by the previous rule.\n*/\n\n/**\nRemove the additional ':invalid' styles in Firefox.\nSee: https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737\n*/\n\n/**\nRemove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.\n*/\nlegend[data-v-4f8eae59] {\n  padding: 0;\n}\n\n/**\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\nprogress[data-v-4f8eae59] {\n  vertical-align: baseline;\n}\n\n/**\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n/**\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n/**\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n/**\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to 'inherit' in Safari.\n*/\n\n/*\nInteractive\n===========\n*/\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\nsummary[data-v-4f8eae59] {\n  display: list-item;\n}\n\n/**\n * Manually forked from SUIT CSS Base: https://github.com/suitcss/base\n * A thin layer on top of normalize.css that provides a starting point more\n * suitable for web applications.\n */\n\n/**\n * Removes the default spacing and border for appropriate elements.\n */\nblockquote[data-v-4f8eae59],\ndl[data-v-4f8eae59],\ndd[data-v-4f8eae59],\nh1[data-v-4f8eae59],\nh2[data-v-4f8eae59],\nh3[data-v-4f8eae59],\nh4[data-v-4f8eae59],\nh5[data-v-4f8eae59],\nh6[data-v-4f8eae59],\nhr[data-v-4f8eae59],\nfigure[data-v-4f8eae59],\np[data-v-4f8eae59],\npre[data-v-4f8eae59] {\n  margin: 0;\n}\nbutton[data-v-4f8eae59] {\n  background-color: transparent;\n  background-image: none;\n}\n\n/**\n * Work around a Firefox/IE bug where the transparent `button` background\n * results in a loss of the default `button` focus styles.\n */\nbutton[data-v-4f8eae59]:focus {\n  outline: 1px dotted;\n  outline: 5px auto -webkit-focus-ring-color;\n}\nfieldset[data-v-4f8eae59] {\n  margin: 0;\n  padding: 0;\n}\nol[data-v-4f8eae59],\nul[data-v-4f8eae59] {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/**\n * Tailwind custom reset styles\n */\n\n/**\n * 1. Use the user's configured `sans` font-family (with Tailwind's default\n *    sans-serif font stack as a fallback) as a sane default.\n * 2. Use Tailwind's default \"normal\" line-height so the user isn't forced\n *    to override it to ensure consistency even when using the default theme.\n */\nhtml[data-v-4f8eae59] {\n  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"; /* 1 */\n  line-height: 1.5; /* 2 */\n}\n\n/**\n * Inherit font-family and line-height from `html` so users can set them as\n * a class directly on the `html` element.\n */\nbody[data-v-4f8eae59] {\n  font-family: inherit;\n  line-height: inherit;\n}\n\n/**\n * 1. Prevent padding and border from affecting element width.\n *\n *    We used to set this in the html element and inherit from\n *    the parent element for everything else. This caused issues\n *    in shadow-dom-enhanced elements like <details> where the content\n *    is wrapped by a div with box-sizing set to `content-box`.\n *\n *    https://github.com/mozdevs/cssremedy/issues/4\n *\n *\n * 2. Allow adding a border to an element by just adding a border-width.\n *\n *    By default, the way the browser specifies that an element should have no\n *    border is by setting it's border-style to `none` in the user-agent\n *    stylesheet.\n *\n *    In order to easily add borders to elements by just setting the `border-width`\n *    property, we change the default border-style for all elements to `solid`, and\n *    use border-width to hide them instead. This way our `border` utilities only\n *    need to set the `border-width` property instead of the entire `border`\n *    shorthand, making our border utilities much more straightforward to compose.\n *\n *    https://github.com/tailwindcss/tailwindcss/pull/116\n */\n*[data-v-4f8eae59],[data-v-4f8eae59]::before,[data-v-4f8eae59]::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: #e5e7eb; /* 2 */\n}\n\n/*\n * Ensure horizontal rules are visible by default\n */\nhr[data-v-4f8eae59] {\n  border-top-width: 1px;\n}\n\n/**\n * Undo the `border-style: none` reset that Normalize applies to images so that\n * our `border-{width}` utilities have the expected effect.\n *\n * The Normalize reset is unnecessary for us since we default the border-width\n * to 0 on all elements.\n *\n * https://github.com/tailwindcss/tailwindcss/issues/362\n */\nimg[data-v-4f8eae59] {\n  border-style: solid;\n}\ntextarea[data-v-4f8eae59] {\n  resize: vertical;\n}\ninput[data-v-4f8eae59]::-moz-placeholder, textarea[data-v-4f8eae59]::-moz-placeholder {\n  opacity: 1;\n  color: #9ca3af;\n}\ninput[data-v-4f8eae59]:-ms-input-placeholder, textarea[data-v-4f8eae59]:-ms-input-placeholder {\n  opacity: 1;\n  color: #9ca3af;\n}\ninput[data-v-4f8eae59]::placeholder,\ntextarea[data-v-4f8eae59]::placeholder {\n  opacity: 1;\n  color: #9ca3af;\n}\nbutton[data-v-4f8eae59] {\n  cursor: pointer;\n}\ntable[data-v-4f8eae59] {\n  border-collapse: collapse;\n}\nh1[data-v-4f8eae59],\nh2[data-v-4f8eae59],\nh3[data-v-4f8eae59],\nh4[data-v-4f8eae59],\nh5[data-v-4f8eae59],\nh6[data-v-4f8eae59] {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/**\n * Reset links to optimize for opt-in styling instead of\n * opt-out.\n */\na[data-v-4f8eae59] {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/**\n * Reset form element properties that are easy to forget to\n * style explicitly so you don't inadvertently introduce\n * styles that deviate from your design system. These styles\n * supplement a partial reset that is already applied by\n * normalize.css.\n */\nbutton[data-v-4f8eae59],\ninput[data-v-4f8eae59],\noptgroup[data-v-4f8eae59],\nselect[data-v-4f8eae59],\ntextarea[data-v-4f8eae59] {\n  padding: 0;\n  line-height: inherit;\n  color: inherit;\n}\n\n/**\n * Use the configured 'mono' font family for elements that\n * are expected to be rendered with a monospace font, falling\n * back to the system monospace stack if there is no configured\n * 'mono' font family.\n */\npre[data-v-4f8eae59],\ncode[data-v-4f8eae59],\nkbd[data-v-4f8eae59],\nsamp[data-v-4f8eae59] {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;\n}\n\n/**\n * Make replaced elements `display: block` by default as that's\n * the behavior you want almost all of the time. Inspired by\n * CSS Remedy, with `svg` added as well.\n *\n * https://github.com/mozdevs/cssremedy/issues/14\n */\nimg[data-v-4f8eae59],\nsvg[data-v-4f8eae59],\nvideo[data-v-4f8eae59],\ncanvas[data-v-4f8eae59],\naudio[data-v-4f8eae59],\niframe[data-v-4f8eae59],\nembed[data-v-4f8eae59],\nobject[data-v-4f8eae59] {\n  display: block;\n  vertical-align: middle;\n}\n\n/**\n * Constrain images and videos to the parent width and preserve\n * their intrinsic aspect ratio.\n *\n * https://github.com/mozdevs/cssremedy/issues/14\n */\nimg[data-v-4f8eae59],\nvideo[data-v-4f8eae59] {\n  max-width: 100%;\n  height: auto;\n}\n.space-x-4[data-v-4f8eae59] > :not([hidden]) ~ :not([hidden]) {\n  --tw-space-x-reverse: 0;\n  margin-right: calc(1rem * var(--tw-space-x-reverse));\n  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));\n}\n.bg-white[data-v-4f8eae59] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));\n}\n.bg-gray-100[data-v-4f8eae59] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(243, 244, 246, var(--tw-bg-opacity));\n}\n.bg-red-200[data-v-4f8eae59] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(254, 202, 202, var(--tw-bg-opacity));\n}\n.bg-green-200[data-v-4f8eae59] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(167, 243, 208, var(--tw-bg-opacity));\n}\n.bg-indigo-600[data-v-4f8eae59] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(79, 70, 229, var(--tw-bg-opacity));\n}\n.hover\\:bg-gray-100[data-v-4f8eae59]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgba(243, 244, 246, var(--tw-bg-opacity));\n}\n.border-gray-300[data-v-4f8eae59] {\n  --tw-border-opacity: 1;\n  border-color: rgba(209, 213, 219, var(--tw-border-opacity));\n}\n.rounded-lg[data-v-4f8eae59] {\n  border-radius: 0.5rem;\n}\n.rounded-full[data-v-4f8eae59] {\n  border-radius: 9999px;\n}\n.border[data-v-4f8eae59] {\n  border-width: 1px;\n}\n.cursor-pointer[data-v-4f8eae59] {\n  cursor: pointer;\n}\n.block[data-v-4f8eae59] {\n  display: block;\n}\n.flex[data-v-4f8eae59] {\n  display: flex;\n}\n.table[data-v-4f8eae59] {\n  display: table;\n}\n.flow-root[data-v-4f8eae59] {\n  display: flow-root;\n}\n.hidden[data-v-4f8eae59] {\n  display: none;\n}\n.items-center[data-v-4f8eae59] {\n  align-items: center;\n}\n.justify-start[data-v-4f8eae59] {\n  justify-content: flex-start;\n}\n.justify-center[data-v-4f8eae59] {\n  justify-content: center;\n}\n.float-right[data-v-4f8eae59] {\n  float: right;\n}\n.font-bold[data-v-4f8eae59] {\n  font-weight: 700;\n}\n.h-screen[data-v-4f8eae59] {\n  height: 100vh;\n}\n.text-sm[data-v-4f8eae59] {\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n}\n.text-lg[data-v-4f8eae59] {\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n}\n.text-2xl[data-v-4f8eae59] {\n  font-size: 1.5rem;\n  line-height: 2rem;\n}\n.text-3xl[data-v-4f8eae59] {\n  font-size: 1.875rem;\n  line-height: 2.25rem;\n}\n.text-5xl[data-v-4f8eae59] {\n  font-size: 3rem;\n  line-height: 1;\n}\n.mt-4[data-v-4f8eae59] {\n  margin-top: 1rem;\n}\n.mt-6[data-v-4f8eae59] {\n  margin-top: 1.5rem;\n}\n.mt-8[data-v-4f8eae59] {\n  margin-top: 2rem;\n}\n.max-w-xl[data-v-4f8eae59] {\n  max-width: 36rem;\n}\n.p-3[data-v-4f8eae59] {\n  padding: 0.75rem;\n}\n.p-12[data-v-4f8eae59] {\n  padding: 3rem;\n}\n.py-2[data-v-4f8eae59] {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n}\n.px-5[data-v-4f8eae59] {\n  padding-left: 1.25rem;\n  padding-right: 1.25rem;\n}\n.px-6[data-v-4f8eae59] {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\n*[data-v-4f8eae59] {\n  --tw-shadow: 0 0 #0000;\n}\n.shadow-lg[data-v-4f8eae59] {\n  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n*[data-v-4f8eae59] {\n  --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgba(59, 130, 246, 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n}\n.text-center[data-v-4f8eae59] {\n  text-align: center;\n}\n.text-white[data-v-4f8eae59] {\n  --tw-text-opacity: 1;\n  color: rgba(255, 255, 255, var(--tw-text-opacity));\n}\n.text-gray-700[data-v-4f8eae59] {\n  --tw-text-opacity: 1;\n  color: rgba(55, 65, 81, var(--tw-text-opacity));\n}\n.text-red-700[data-v-4f8eae59] {\n  --tw-text-opacity: 1;\n  color: rgba(185, 28, 28, var(--tw-text-opacity));\n}\n.text-green-700[data-v-4f8eae59] {\n  --tw-text-opacity: 1;\n  color: rgba(4, 120, 87, var(--tw-text-opacity));\n}\n.text-indigo-700[data-v-4f8eae59] {\n  --tw-text-opacity: 1;\n  color: rgba(67, 56, 202, var(--tw-text-opacity));\n}\n.antialiased[data-v-4f8eae59] {\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n.tracking-wide[data-v-4f8eae59] {\n  letter-spacing: 0.025em;\n}\n.w-full[data-v-4f8eae59] {\n  width: 100%;\n}\n@-webkit-keyframes spin-data-v-4f8eae59 {\nto {\n    transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-4f8eae59 {\nto {\n    transform: rotate(360deg);\n}\n}\n@-webkit-keyframes ping-data-v-4f8eae59 {\n75%, 100% {\n    transform: scale(2);\n    opacity: 0;\n}\n}\n@keyframes ping-data-v-4f8eae59 {\n75%, 100% {\n    transform: scale(2);\n    opacity: 0;\n}\n}\n@-webkit-keyframes pulse-data-v-4f8eae59 {\n50% {\n    opacity: .5;\n}\n}\n@keyframes pulse-data-v-4f8eae59 {\n50% {\n    opacity: .5;\n}\n}\n@-webkit-keyframes bounce-data-v-4f8eae59 {\n0%, 100% {\n    transform: translateY(-25%);\n    -webkit-animation-timing-function: cubic-bezier(0.8,0,1,1);\n            animation-timing-function: cubic-bezier(0.8,0,1,1);\n}\n50% {\n    transform: none;\n    -webkit-animation-timing-function: cubic-bezier(0,0,0.2,1);\n            animation-timing-function: cubic-bezier(0,0,0.2,1);\n}\n}\n@keyframes bounce-data-v-4f8eae59 {\n0%, 100% {\n    transform: translateY(-25%);\n    -webkit-animation-timing-function: cubic-bezier(0.8,0,1,1);\n            animation-timing-function: cubic-bezier(0.8,0,1,1);\n}\n50% {\n    transform: none;\n    -webkit-animation-timing-function: cubic-bezier(0,0,0.2,1);\n            animation-timing-function: cubic-bezier(0,0,0.2,1);\n}\n}\n@media (min-width: 640px) {\n}\n@media (min-width: 768px) {\n}\n@media (min-width: 1024px) {\n}\n@media (min-width: 1280px) {\n}\n@media (min-width: 1536px) {\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -60136,6 +60358,47 @@ component.options.__file = "resources/js/components/messenger/components/TypingC
 
 /***/ }),
 
+/***/ "./resources/js/components/quiz/QuizComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/quiz/QuizComponent.vue ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _QuizComponent_vue_vue_type_template_id_4f8eae59_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./QuizComponent.vue?vue&type=template&id=4f8eae59&scoped=true& */ "./resources/js/components/quiz/QuizComponent.vue?vue&type=template&id=4f8eae59&scoped=true&");
+/* harmony import */ var _QuizComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./QuizComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/quiz/QuizComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _QuizComponent_vue_vue_type_style_index_0_id_4f8eae59_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./QuizComponent.vue?vue&type=style&index=0&id=4f8eae59&scoped=true&lang=css& */ "./resources/js/components/quiz/QuizComponent.vue?vue&type=style&index=0&id=4f8eae59&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _QuizComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _QuizComponent_vue_vue_type_template_id_4f8eae59_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _QuizComponent_vue_vue_type_template_id_4f8eae59_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "4f8eae59",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/quiz/QuizComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -60213,6 +60476,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TypingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TypingComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/messenger/components/TypingComponent.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TypingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/quiz/QuizComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/quiz/QuizComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./QuizComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/quiz/QuizComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -60301,6 +60580,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/quiz/QuizComponent.vue?vue&type=template&id=4f8eae59&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/quiz/QuizComponent.vue?vue&type=template&id=4f8eae59&scoped=true& ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_template_id_4f8eae59_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_template_id_4f8eae59_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_template_id_4f8eae59_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./QuizComponent.vue?vue&type=template&id=4f8eae59&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/quiz/QuizComponent.vue?vue&type=template&id=4f8eae59&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/messenger/FeedsComponent.vue?vue&type=style&index=0&lang=css&":
 /*!***********************************************************************************************!*\
   !*** ./resources/js/components/messenger/FeedsComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -60313,6 +60609,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FeedsComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FeedsComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
 /* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FeedsComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FeedsComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
+/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
+
+
+/***/ }),
+
+/***/ "./resources/js/components/quiz/QuizComponent.vue?vue&type=style&index=0&id=4f8eae59&scoped=true&lang=css&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/quiz/QuizComponent.vue?vue&type=style&index=0&id=4f8eae59&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_style_index_0_id_4f8eae59_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-style-loader/index.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./QuizComponent.vue?vue&type=style&index=0&id=4f8eae59&scoped=true&lang=css& */ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/quiz/QuizComponent.vue?vue&type=style&index=0&id=4f8eae59&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_style_index_0_id_4f8eae59_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_style_index_0_id_4f8eae59_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
+/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_style_index_0_id_4f8eae59_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_style_index_0_id_4f8eae59_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
 /* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
 
 
@@ -63510,6 +63823,203 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/quiz/QuizComponent.vue?vue&type=template&id=4f8eae59&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/quiz/QuizComponent.vue?vue&type=template&id=4f8eae59&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "flex w-full h-screen justify-center items-center",
+        attrs: { id: "app" }
+      },
+      [
+        _c("div", { staticClass: "w-full max-w-xl " }, [
+          _c("h1", {
+            staticClass: "font-bold text-5xl text-center text-red-700"
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "bg-white p-12 rounded-lg shadow-lg w-full mt-8" },
+            [
+              _vm.idx < _vm.count
+                ? _c(
+                    "div",
+                    [
+                      _c("p", { staticClass: "text-2xl font-bold" }, [
+                        _vm._v(
+                          "\n                      " +
+                            _vm._s(_vm.questions[_vm.idx]["question"]) +
+                            "\n                  "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.questions[_vm.idx].answers, function(
+                        answer,
+                        index
+                      ) {
+                        return _c(
+                          "label",
+                          {
+                            key: index,
+                            staticClass:
+                              "block mt-4 border border-gray-300 rounded-lg py-2 px-6 text-lg",
+                            attrs: { for: index }
+                          },
+                          [
+                            _c("input", {
+                              staticClass: "hidden",
+                              attrs: {
+                                id: index,
+                                type: "radio",
+                                disabled: _vm.selectedAnswer != ""
+                              },
+                              domProps: { value: index },
+                              on: {
+                                change: function($event) {
+                                  return _vm.answered($event)
+                                }
+                              }
+                            }),
+                            _vm._v(
+                              "\n                      " +
+                                _vm._s(answer) +
+                                "\n                  "
+                            )
+                          ]
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-6 flow-root" }, [
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.selectedAnswer != "" &&
+                                  _vm.idx < _vm.count - 1,
+                                expression:
+                                  "selectedAnswer != '' && idx < count - 1"
+                              }
+                            ],
+                            staticClass:
+                              "float-right bg-indigo-600 text-white text-sm font-bold tracking-wide rounded-full px-5 py-2",
+                            on: { click: _vm.nextQuestion }
+                          },
+                          [
+                            _vm._v(
+                              "\n                          Next >\n                      "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.selectedAnswer != "" &&
+                                  _vm.idx == _vm.count - 1,
+                                expression:
+                                  "selectedAnswer != '' && idx == count - 1"
+                              }
+                            ],
+                            staticClass:
+                              "float-right bg-indigo-600 text-white text-sm font-bold tracking-wide rounded-full px-5 py-2",
+                            on: { click: _vm.showResults }
+                          },
+                          [
+                            _vm._v(
+                              "\n                          Finish\n                      "
+                            )
+                          ]
+                        )
+                      ])
+                    ],
+                    2
+                  )
+                : _c("div", [
+                    _c("h2", { staticClass: "text-bold text-3xl" }, [
+                      _vm._v("Results")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "flex justify-start space-x-4 mt-6" },
+                      [
+                        _c("p", [
+                          _vm._v("Your Points : "),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "text-2xl text-green-700 font-bold"
+                            },
+                            [_vm._v(_vm._s(_vm.correctAnswers))]
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "flex" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "float-right  btn btn-business",
+                          attrs: { href: _vm.route }
+                        },
+                        [_vm._v("Try It Out")]
+                      )
+                    ])
+                  ])
+            ]
+          )
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex" }, [
+      _c("p", [
+        _vm._v(
+          " you are definitely ready to make some new friends and to try some new activities"
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -63660,6 +64170,27 @@ if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(/*! !../../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
 var update = add("0d948101", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/quiz/QuizComponent.vue?vue&type=style&index=0&id=4f8eae59&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/quiz/QuizComponent.vue?vue&type=style&index=0&id=4f8eae59&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./QuizComponent.vue?vue&type=style&index=0&id=4f8eae59&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/quiz/QuizComponent.vue?vue&type=style&index=0&id=4f8eae59&scoped=true&lang=css&");
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! !../../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
+var update = add("10c01112", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -77938,7 +78469,8 @@ var map = {
 	"./components/SignupComponent.vue": "./resources/js/components/SignupComponent.vue",
 	"./components/messenger/FeedsComponent.vue": "./resources/js/components/messenger/FeedsComponent.vue",
 	"./components/messenger/MessagesComponent.vue": "./resources/js/components/messenger/MessagesComponent.vue",
-	"./components/messenger/components/TypingComponent.vue": "./resources/js/components/messenger/components/TypingComponent.vue"
+	"./components/messenger/components/TypingComponent.vue": "./resources/js/components/messenger/components/TypingComponent.vue",
+	"./components/quiz/QuizComponent.vue": "./resources/js/components/quiz/QuizComponent.vue"
 };
 
 

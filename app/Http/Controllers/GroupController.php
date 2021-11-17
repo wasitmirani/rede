@@ -8,6 +8,7 @@ use App\Models\GroupPost;
 use App\Models\GroupMember;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\FollowRequest;
 use App\Models\GroupPostLike;
 use App\Models\GroupPostComment;
 use Illuminate\Support\Facades\DB;
@@ -19,12 +20,20 @@ class GroupController extends Controller
 
         $groups = Group::orderBy('created_at','desc')->paginate(9);
 
+
         return view('frontend.pages.groups',compact('groups'));
     }
 
     public function createGroup(){
         $interests = User::where('id',Auth::user()->id)->with('interests')->first()->interests;
         return view('frontend.pages.creategroup',compact('interests'));
+    }
+
+    public function myCircle(){
+        $my_groups = GroupMember::with('group')->where('user_id',Auth::user()->id)->get();
+        $followings = FollowRequest::with('followings')->where('following',Auth::user()->id)->get();
+        $followers = FollowRequest::with('followers')->where('follower',Auth::user()->id)->get();
+        return view('frontend.pages.my_circle',compact('my_groups','followings','followers'));
     }
 
     public function storeGroup(Request $request){

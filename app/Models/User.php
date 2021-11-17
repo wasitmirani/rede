@@ -66,6 +66,8 @@ class User extends Authenticatable
         return $this->hasMany(FollowRequest::class, 'follower', 'id');
     }
 
+    
+
 
 
     public function feeds(){

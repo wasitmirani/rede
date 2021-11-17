@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedsController;
 use App\Http\Controllers\GroupController;
@@ -26,7 +27,8 @@ use App\Http\Controllers\UserDetailController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/',[FrontEndController::class,'index'])->name('index');
-    Route::get('/welcome',[FrontEndController::class,'welcome'])->name('welcome');    Route::get('/congs',[FrontEndController::class,'congs'])->name('congs');
+    Route::get('/welcome',[FrontEndController::class,'welcome'])->name('welcome');
+    Route::get('/congs',[FrontEndController::class,'congs'])->name('congs');
     Route::get('/timeline',[FrontEndController::class,'timeLine'])->name('timeline');
     Route::get('/customer/login',[FrontEndController::class,'customerLogin'])->name('customer.login');
     Route::post('/customer/login',[FrontEndController::class,'LoginUser'])->name('customer.user.login');
@@ -88,8 +90,10 @@ Route::middleware('auth')->group(function () {
     Route::get('group/member/{id}',[GroupController::class,'groupMembers'])->name('group.member');
     Route::get('profile/{id}/{name}',[UserDetailController::class,'publicProfile'])->name('public.profile');
     Route::get('suggest/mcguffin',[InterestController::class,'suggestMcguffin'])->name('suggest.mcguffin');
-    
+    Route::get('my/circle',[GroupController::class,'myCircle'])->name('my.circle');
     Route::get('create/bookmark/{name}',[BookmarkController::class,'createBookmark'])->name('create.bookmark');
+    Route::get('/quiz',[QuizController::class,'index'])->name('quiz');
+    Route::post('privacy',[UserDetailController::class,'privacySetting'])->name('privacy');
 
 
 });
@@ -97,7 +101,6 @@ Route::get('mcguffin',[FrontEndController::class,'mcguffin'])->name('mcguffin.de
 
 Route::get('/signup',[FrontEndController::class,'signup'])->name('signup');
 Route::post('/signup',[FrontEndController::class,'signupUser'])->name('signup.user');
-
 Route::prefix('api')->group(function(){
     Route::get('/all/interest', [InterestController::class,'getinterest']);
 

@@ -31,9 +31,6 @@
 <div id="app">
     @yield('content')
 </div>
-
-
-
 <!-- Contact Form -->
 <!-- Contact Form -->
 <!-- Footer -->
@@ -127,7 +124,7 @@
 <script src="{{asset('/assets/js/fontawesome.min.js')}}"></script>
 <script src="{{asset('/assets/js/custom.js')}}"></script>
 <script src="{{asset('/assets/js/fancybox.js')}}"></script>
-<script src="{{asset('/assets/js/bootstrap.bundle.min.js')}}"></script> 
+<script src="{{asset('/assets/js/bootstrap.bundle.min.js')}}"></script>
 
 <script src="{{asset('/assets/js/slick.min.js')}}"></script>
 @yield('scripts')

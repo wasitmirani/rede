@@ -26,7 +26,7 @@ class FollowRequest extends Model
     }
 
     public function followings(){
-        return $this->belongsTo(User::class,'following','id');
+        return $this->belongsTo(User::class,'follower','id');
     }
 
     public function posts(){

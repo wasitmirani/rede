@@ -21,7 +21,7 @@
         <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> Mobiles  </a>
         <a href="#" class="bg-white py-2 px-4 rounded inline-block font-bold shadow"> Laptops </a> --}}
     </div>
-    <a href="{{ $route('create.group') }}" type="button" uk-toggle="target: #offcanvas-create" class="bg-pink-500 hover:bg-pink-600 hover:text-white flex font-bold inline-block items-center px-4 py-2 rounded shadow text-white lg:block hidden" "> <i class="-mb-1 mr-1 uil-plus"></i>Add New</a>
+    <a href="{{ route('create.group') }}" type="button" uk-toggle="target: #offcanvas-create" class="bg-pink-500 hover:bg-pink-600 hover:text-white flex font-bold inline-block items-center px-4 py-2 rounded shadow text-white lg:block hidden" "> <i class="-mb-1 mr-1 uil-plus"></i>Add New</a>
 </div>
 
 
@@ -47,6 +47,7 @@
 @endforeach
 
 </div>
+
 
 <section>
     <div class="fixed z-10 overflow-y-auto top-0 w-full left-0 hidden" id="modal">

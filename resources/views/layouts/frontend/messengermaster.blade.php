@@ -401,14 +401,14 @@
     <script src="{{ asset('/assets/events/js/main.js') }}"></script>
     <script src="{{ asset('/assets/js/toaster.js') }}"></script>
 
-
+   
    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   {{-- <script src="./maps/api/js_key_aizasyblujtsii_frurx0i2wugoxf_kanohmc4o.js"></script>
    <script src="{{ asset('/assets/events/js/vendor/map.js') }}"></script> --}}
     <script src="{{ asset('/assets/events/js/vendor/jquery-migrate.js') }}"></script>
 
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-  
+
     <script src="../ionicons@5.2.3/dist/ionicons.js"></script>
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -457,7 +457,8 @@
         @if(!empty(Auth::user()->profile))
         var zip_code = {!! Auth::user()->profile->zip_code !!}
         @else
-        var zip_code = ""
+        var zip_code = "";
+
 
         @endif
 const options = {

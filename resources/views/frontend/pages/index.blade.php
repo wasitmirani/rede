@@ -111,7 +111,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="#" class="btn btn-business">Take our quiz to find out if you’re ready for  <strong class="color-red">RedE</strong>?  </a>
+				<a href="{{ route('quiz') }}" class="btn btn-business">Take our quiz to find out if you’re ready for  <strong class="color-red">RedE</strong>?  </a>
 			</div>
 		</div>
 	</div>
