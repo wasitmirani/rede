@@ -66,8 +66,8 @@
             <label for=""> Covid Status</label>
            <select class="shadow-none bg-gray-100" name="covid_status">
                <option value=""><--/--></option>
-               <option @if($user->profile->covid_status == "Vaccinated") selected @endif value="Male">Vaccinated</option>
-               <option @if($user->profile->covid_status == "Not Vaccinated") selected @endif value="female">Not Vaccinated</option>
+               <option @if($user->profile->covid_status == "Vaccinated") selected @endif value="Vaccinated">Vaccinated</option>
+               <option @if($user->profile->covid_status == "Not Vaccinated") selected @endif value="Not Vaccinated">Not Vaccinated</option>
                <option @if($user->profile->covid_status == "Not Specified") selected @endif value="Not Specified">Not Specified</option>
            </select>
         </div>
@@ -121,7 +121,10 @@
             </div>
             <div class="w-full md:w-1/2 px-3">
                 <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                <input type="checkbox"  name="toggle" data-id="covid" id="toggle1" {{ $privacy->show_covid_status == 'true' ? 'checked' : '' }} class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer privacyBtn"/>
+                <input type="checkbox"  name="toggle" data-id="covid" id="toggle1" @if($privacy != null) {{    $privacy->show_covid_status == 'true' ? 'checked' : '' }} data-pronouns="{{$privacy->show_status}}"  @endif class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer privacyBtn"/>
+                @if($privacy)
+                    <input type="hidden" id="covid" value="{{$privacy->show_covid_status}}">
+                @endif
                 <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
                 </div>
 
@@ -138,7 +141,10 @@
             </div>
             <div class="w-full md:w-1/2 px-3">
                 <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                <input type="checkbox" name="toggle"  data-id="age" id="toggle2" {{ $privacy->show_age == 'true' ? 'checked' : '' }} class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer privacyBtn"/>
+                <input type="checkbox" name="toggle"  data-id="age" id="toggle2"   @if($privacy != null) {{ $privacy->show_age == 'true' ? 'checked' : '' }} @endif class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer privacyBtn"/>
+                @if($privacy)
+                    <input type="hidden" id="age" value="{{$privacy->show_age}}">
+                @endif
                 <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
                 </div>
 
@@ -151,14 +157,16 @@
               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Show Pronouns
               </label>
-
             </div>
             <div class="w-full md:w-1/2 px-3">
                 <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                <input type="checkbox" name="toggle" data-id="pronouns" id="toggle3" {{ $privacy->show_pronouns == 'true' ? 'checked' : '' }} class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer privacyBtn"/>
+                <input type="checkbox" name="toggle" data-id="pronouns"  id="toggle3" @if($privacy != null) data-pronouns="{{$privacy->show_pronouns}}" {{ $privacy->show_pronouns == 'true' ? 'checked' : '' }} @endif class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer privacyBtn"/>
+                @if($privacy)
+                <input type="hidden" id="pronouns" value={{$privacy->show_pronouns}}>
+                @endif
+        
                 <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
                 </div>
-
             </div>
         </div>
         </div>
@@ -308,10 +316,11 @@
 
         $(".privacyBtn").on('change',function(){
 
-            var covid_switch = {{$privacy->show_covid_status}}
-            var age_switch = {{$privacy->show_age}};
-            var pronouns_switch =  {{$privacy->show_pronouns}}
-    
+            var covid_switch = $("#covid").val();
+            var age_switch =  $("#age").val();
+            var pronouns_switch =   $("#pronouns").val();
+
+
             if ($(this).is(':checked')) {
                 if($(this).data("id") == "covid"){
                     covid_switch = $(this).is(':checked');
@@ -319,7 +328,7 @@
                     age_switch = $(this).is(':checked')
                 }else if($(this).data("id") == "pronouns"){
                     pronouns_switch = $(this).is(':checked')
-                }    
+                }
             }
             else {
                 if($(this).data("id") == "covid"){
@@ -345,12 +354,12 @@
                 error:function(error){
                   cosnole.log(error)
                 }
-        })    
+        })
         })
 
         //     $("#toggle2").on('change',function(){
         //     if ($(this).is(':checked')) {
-        //         switchStatus = $(this).is(':checked');   
+        //         switchStatus = $(this).is(':checked');
         //     }
         //     else {
         //         switchStatus = $(this).is(':checked');
@@ -369,12 +378,12 @@
         //         error:function(error){
         //           cosnole.log(error)
         //         }
-        // })    
+        // })
         // })
 
         //         $("#toggle3").on('change',function(){
         //     if ($(this).is(':checked')) {
-        //         switchStatus = $(this).is(':checked');   
+        //         switchStatus = $(this).is(':checked');
         //     }
         //     else {
         //         switchStatus = $(this).is(':checked');
@@ -393,7 +402,7 @@
         //         error:function(error){
         //           cosnole.log(error)
         //         }
-        // })    
+        // })
         // })
 
     })

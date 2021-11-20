@@ -5,7 +5,7 @@
     <a href="{{route('all.interest')}}" class="text-blue-400 hover:text-blue-500 bg-white py-2 px-4 font-bold shadow"> Add More</a>
 </div>
 <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-    @foreach($myInterests as $myInterest)
+    @forelse($myInterests as $myInterest)
     <div>
         <img src="{{ Avatar::create($myInterest->interest)->toBase64() }}" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">
      <div class="relative px-4 -mt-16  ">
@@ -32,7 +32,11 @@
       </div>
      </div>
     </div>
-  @endforeach
+    @empty
+    <div>
+      <h6>Add Mcguffins</h6>
+    </div>
+  @endforelse
   {{ $myInterests->links() }}
 
 </div>

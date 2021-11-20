@@ -6,15 +6,17 @@ use App\Models\Feed;
 use App\Models\Interest;
 use App\Models\BookEvent;
 use App\Models\UserDetail;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
+use Hootlex\Friendships\Traits\Friendable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Friendable;
 
     /**
      * The attributes that are mass assignable.
@@ -56,22 +58,34 @@ class User extends Authenticatable
         return $this->hasMany(MyInterest::class);
     }
 
-    public function followers()
-    {
-        return $this->hasMany(FollowRequest::class, 'following', 'id');
-    }
+    // public function followers()
+    // {
+    //     return $this->hasMany(FollowRequest::class, 'following', 'id');
+    // }
+
+    public function followers(){
+        $id = Auth::user()->id;
+        $followersList = DB::table('users')
+                              ->join('friendships', 'users.id','=','friendships.sender_id')
+                              ->where('users.id',$id)
+                              ->get();
+        return $followersList;
+
+     }
 
     public function following()
     {
-        return $this->hasMany(FollowRequest::class, 'follower', 'id');
+        $id = Auth::user()->id;
+        $followersList = DB::table('users')
+                              ->join('friendships', 'users.id','=','friendships.recipient_id')
+                              ->where('users.id',$id)
+                              ->get();
+        return $followersList;
+
+        // return $this->hasMany(FollowRequest::class, 'follower', 'id');
     }
-
-    
-
-
-
     public function feeds(){
-        return $this->hasMany(Feed::class);
+        return $this->hasMany(Feed::class)->orderBy('id','desc');
     }
 
     public function bookedevents(){

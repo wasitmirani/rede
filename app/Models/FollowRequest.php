@@ -62,18 +62,32 @@ class FollowRequest extends Model
 
        public static function followStatus($id){
 
-        $follower = FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$id],['status','=',1]])->exists();
-        $requested = FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$id],['status','=',0]])->exists();
 
-         if($follower){
-
+        $friend = User::find($id);
+        $user = User::where('id',Auth::user()->id)->first();
+    
+        if($friend->isFriendWith($user)){
             return 'Following';
 
-         }else if($requested){
-             return 'Requested';
-         }else{
-             return "Follow";
-         }
+        }else{
+            return 'Follow';
+
+
+        }
+
+        // $follower = FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$id],['status','=',1]])->exists();
+        // $requested = FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$id],['status','=',0]])->exists();
+
+        //  if($follower){
+
+        //     return 'Following';
+
+        //  }else if($requested){
+        //      return 'Follow';
+        //  }
+        // //  }else{
+        // //      return "Follow";
+        // //  }
 
     }
 

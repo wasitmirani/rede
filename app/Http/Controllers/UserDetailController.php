@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Group;
+use App\Models\Privacy;
+use App\Models\Friendship;
 use App\Models\MyInterest;
 use App\Models\UserDetail;
 use App\Models\GroupMember;
-use App\Models\Privacy;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\FollowRequest;
@@ -28,10 +29,9 @@ class UserDetailController extends Controller
 
     public function editProfile(Request $request){
 
- 
+
         $user = User::where('id',Auth::user()->id)->first();
         $user_detail = UserDetail::where('user_id',Auth::user()->id)->first();
-       
 
         if ($request->hasfile('image')) {
             $name = !empty($request->title) ? $request->title : config('app.name');
@@ -43,7 +43,6 @@ class UserDetailController extends Controller
 
         }else{
             $user->image = $request->old_image;
-
         }
 
         $user->name = $request->name;
@@ -62,11 +61,11 @@ class UserDetailController extends Controller
         $user_detail->zip_code = $request->zip;
         $user_detail->covid_status = $request->covid_status;
         $user_detail->pronouns = $request->pronouns;
-   
+
         $user_detail->gender = $request->gender;
         $user_detail->save();
 
-     
+
         if($user->save()){
             return back()->with('message','Profile Updated');
         }else{
@@ -81,12 +80,12 @@ class UserDetailController extends Controller
 
         $user = User::with('profile')->where('id',$id)->first();
         $profile = $user->profile;
-      
+        $followers = $user->followers();
         // $followers = FollowRequest::where('following',$id)->get()->count();
         // $followingList = FollowRequest::with('followings')->where('follower',$id)->get();
-        $followerslist = FollowRequest::with('followersreq')->where('following',$id)->get();
         $events = Event::with('user')->where('user_id',$id)->get();
         $groups = GroupMember::with('group')->where('user_id',$id)->get();
+
 
         // $follower = "";
         $myInterests = User::with('interests')->where('id',Auth::user()->id)->get();
@@ -108,8 +107,6 @@ class UserDetailController extends Controller
 
 
     }
-
-
 if($updated){
 
     return response()->json('Interest Update Successfully');
@@ -119,8 +116,6 @@ if($updated){
 
 }
 
-
-
     }
 
     public function editEvent(Request $request){
@@ -128,12 +123,19 @@ if($updated){
         return response()->json($request->all());
 
     }
-
     public function friendlist(){
+
         $id = Auth::user()->id;
-        $followerslist = FollowRequest::with('followersreq')->where([['following','=',$id],['status','=',1]])->get();
-        $crews = User::with('profile')->get();
-        return view('frontend.pages.friendlist',compact('crews','followerslist'));
+        $user = User::find($id);
+        // $sender; = User::
+        $suggestion = new Friendship;
+        $crews = $suggestion->user();
+        $requests = $user->getFriendRequests()->pluck('sender_id');
+        $follow_reqs = Friendship::where([['recipient_id','=',Auth::user()->id],['status','=',0]])->with('userData')->get();
+        $followerslist  = $user->getAcceptedFriendships()->pluck('recipient_id');
+        $followers = User::wherein('id',$followerslist)->get();
+        // $followerslist = FollowRequest::with('followersreq')->where([['following','=',$id],['status','=',1]])->get();
+        return view('frontend.pages.friendlist',compact('crews','followers','follow_reqs'));
     }
 
     public function myCalendar()
@@ -173,18 +175,19 @@ if($updated){
     public function updateStory(Request $request){
 
         $id = Auth::user()->id;
+
         $user = User::with('profile')->where('id',$id)->first();
         $profile = $user->profile;
+        $followerslist  = $user->getAcceptedFriendships()->pluck('sender_id');
+        $followers = User::wherein('id',$followerslist)->get();
         // $followers = FollowRequest::where('following',$id)->get()->count();
         // $followingList = FollowRequest::with('followings')->where('follower',$id)->get();
-        $followerslist = FollowRequest::with('followersreq')->where('following',$id)->get();
         $events = Event::with('user')->where('user_id',$id)->get();
-        $groups = Group::with('members')->where('user_id',$id)->get();
-
-        $myInterests = User::with('interests')->where('id',Auth::user()->id)->get();
-
+        $groups = GroupMember::with('group')->where('user_id',$id)->get();
+        // $follower = "";
+         $myInterests = User::with('interests')->where('id',Auth::user()->id)->get();
          $ind = UserDetail::where('user_id',Auth::user()->id)->first();
-         $ind ->description = $request->description;
+         $ind->description = $request->description;
          $updated = $ind->save();
 
          if($updated){
@@ -197,10 +200,12 @@ if($updated){
 
     public function publicProfile($id){
 
-        $user = User::where('id',$id)->with('profile','feeds','followers','interests')->orderBy('id','desc')->first();
+        $user = User::where('id',$id)->with('profile','feeds','interests')->orderBy('id','desc')->first();
 
-        $followers = $user->followers->count();
+        $followerslist  = $user->getAcceptedFriendships()->pluck('sender_id');
+        $followers = User::wherein('id',$followerslist)->count();
         $feeds = $user->feeds;
+
         $profile = $user->profile;
         return view('frontend.pages.publicprofile',compact('user','followers','feeds','profile'));
 
@@ -208,19 +213,30 @@ if($updated){
 
 
     public function privacySetting(Request $request){
-     
 
-    
+
+
         $pivacy = Privacy::updateOrCreate(
         [
             'user_id'   => Auth::user()->id,
         ],
         [
-             'show_covid_status' => $request->covid_switch,
+             'show_covid_status' => !empty($request->covid_switch) ? $request->covid_switch : $privacy->show_covid_status,
              'show_age' => $request->age_switch,
              'show_pronouns' => $request->pronouns_switch
-        ]);   
+        ]);
+
 
         return response()->json('Privacy Updated');
+    }
+
+    public function acceptRequest($id){
+
+        $recipient_id = Auth::user()->id;
+        $sender = User::find($id);
+        $user = User::find($recipient_id);
+        $accepted = $user->acceptFriendRequest($sender);
+        return redirect()->back();
+
     }
 }

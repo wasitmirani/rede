@@ -65,7 +65,7 @@ class EventController extends Controller
            $event->attendance = $request->attendance;
 
            if($event->save()){
-            $events = Event::with('user')->with('group')->orderby('id','desc')->paginate(15);
+            $events = Event::with('user')->with('group')->where('user_id',Auth::user()->id)->orderby('id','desc')->paginate(15);
                return  view('frontend.pages.events',compact('events'));
            }else{
                return back()->with('message','Something Went Wrong');

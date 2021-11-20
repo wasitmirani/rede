@@ -18,21 +18,30 @@
             <a href="#">
                 <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-0.5 rounded-full">
                     <img src="{{ asset('/user/images/'.$post->user->image) }}" class="bg-gray-200 border border-white rounded-full w-8 h-8">
+                    
                 </div>
             </a>
             <span class="block capitalize font-semibold dark:text-gray-100"> {{ $post->user->name }} </span>
+            <span class="block capitalize font-semibold dark:text-gray-100"> {{ \Carbon\Carbon::parse($post->created_at)->diffForhumans() }} </span>
+
         </div>
       <div>
       </div>
     </div>
+    <div class="p-3 border-b dark:border-gray-700">
 
     <div uk-lightbox="">
+      
         <a href="{{ asset('/user/post/images/'.$post->image) }}" alt="">
             <img src="{{ asset('/user/post/image/'.$post->image) }}" alt="">
         </a>
+        @foreach($post->interests as $ints)
+        <a class="py-2 px-4 shadow-md no-underline rounded-full bg-red text-white font-sans font-semibold text-sm border-red btn-primary hover:text-white hover:bg-red-light focus:outline-none active:shadow-none" >{{ $ints->interest }}</a>
+        @endforeach
+     
     </div>
 
-    <div class="p-3 border-b dark:border-gray-700">
+
 
       {!! $post->feed !!}
 
@@ -48,7 +57,7 @@
                 <div> Like</div>
             </a>
         </div>
-   
+
     </div>
 </div>
 @endforeach

@@ -25,18 +25,20 @@ class FeedsController extends Controller
 
         // $follower = FollowRequest::where('follower',Auth::user()->id)->get();
         // $followerId = FollowRequest::where('following',Auth::user()->id)->get();
+        $user = User::find(Auth::user()->id);
         $posts = '';
         $users = '';
         // $totalPost = Feed::where('user_id',Auth::user()->id)->count();
         //get comments
         $comments = Comment::with('user')->get();
         //getfollowers
-        $follower = FollowRequest::with('followings')->where([['following','=',Auth::user()->id],['status','=',1]])->get();
+        $follower = $user->getAcceptedFriendships();
         //get following
         $following = FollowRequest::with('followings')->where([['follower','=',Auth::user()->id],['status','=',1]])->get();
         //get follow request
         $followReq = FollowRequest::with('followersreq')->where([['following','=',Auth::user()->id],['status','=',0]])->get();
         $mcguffins = User::where('id',Auth::user()->id)->with('interests')->first();
+
 
         //get suggestions
         $NotFollowing = $this->followSugest();
@@ -68,9 +70,11 @@ public function storeFeed(Request $request){
 
          $feed->feed = $request->post;
          $feed->user_id =  Auth::user()->id;
-         $feed->interest = json_encode($request->interest);
          $feed->image = $name;
+         $feed->status = $request->status;
          $posted = $feed->save();
+         $feed->interests()->attach($request->interest);
+
          $post = Feed::orderBy('id', 'desc')->first();
 
         if($posted){
@@ -85,6 +89,25 @@ public function storeFeed(Request $request){
     }
 
     public function follow_request(Request $request){
+
+        $recipient = User::find($request->following);
+        $recipient_id = $recipient->id;
+        $user = User::where('id',Auth::user()->id)->first();
+
+        if($recipient->isFriendWith($user)){
+
+            $recipient->unfriend($user);
+            $status = "Follow";
+
+        }else{
+            $request = $user->befriend($recipient);
+            $status = "Following";
+
+        }
+
+        return response()->json($status);
+
+
         // check follower exist
         // $follower = FollowRequest::where([['follower','=',$request->following],['following','=',Auth::user()->id],['status','=',1]])->exists();
 
@@ -100,17 +123,17 @@ public function storeFeed(Request $request){
         // }
         // else{
         //    $liked = FollowRequest::create(['following'=>Auth::user()->id,'follower'=>$request->following,'status'=> 0]);
-        $follower = FollowRequest::where([['follower','=',$request->following],['following','=',Auth::user()->id],['status','=',1]])->exists();
-        $status = "";
-        if($follower){
-            $unfollow =  FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$request->following]])->delete();
-            $status = "Follow";
-        }else{
-            $liked = FollowRequest::create(['following'=>Auth::user()->id,'follower'=>$request->following,'status'=> 1]);
-            $status = "Following";
+        // $follower = FollowRequest::where([['follower','=',$request->following],['following','=',Auth::user()->id],['status','=',1]])->exists();
+        // $status = "";
+        // if($follower){
+        //     $unfollow =  FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$request->following]])->delete();
+        //     $status = "Follow";
+        // }else{
+        //     $liked = FollowRequest::create(['following'=>Auth::user()->id,'follower'=>$request->following,'status'=> 1]);
+        //     $status = "Following";
 
-        }
-        return response()->json($status);
+        // }
+
 
 
         // }
@@ -118,12 +141,20 @@ public function storeFeed(Request $request){
 
     public function followRequestAccepted(Request $request){
 
-        $requested = FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$request->id],['status','=',0]])->first();
-        $accepted = $requested->update(['status'=>1]);
-        if($accepted){
-            return response()->json('Following');
+        
 
-       }
+        $sender = User::find($request->follower);
+        $user = User::where('id',Auth::user()->id)->first();
+        $user->acceptFriendRequest($sender);
+        $status = "Following";
+        return response()->json($status);
+
+    //     $requested = FollowRequest::where([['following','=',Auth::user()->id],['follower','=',$request->id],['status','=',0]])->first();
+    //     $accepted = $requested->update(['status'=>1]);
+    //     if($accepted){
+    //         return response()->json('Following');
+
+    //    }
 
     }
 
@@ -239,24 +270,29 @@ public function storeFeed(Request $request){
 
     public function posts(){
 
-        $user = User::with('followers','following')->find(Auth::user()->id);
-        $followerid = $user->followers()->pluck('follower')->toArray();
-        $followingids = $user->following()->pluck('following')->toArray();
-        $userIds = array_merge($followerid, $followingids);
-        $fooeds = Feed::with('user')->with('comments')->with('feedShareBy')->with('user')->whereIn('user_id',$userIds)->orwhere('user_id',Auth::user()->id)->orderBy('created_at','desc')->get();
+        $user = User::find(Auth::user()->id);
+        // $followerid = $user->followers()->pluck('follower')->toArray();
+        // $followingids = $user->following()->pluck('following')->toArray();
+        $userIds = $user->followers()->pluck('id');
+        $fooeds = Feed::with('user')->with('interests')->with('comments')->with('feedShareBy')->with('user')->whereIn('user_id',$userIds)->orwhere('user_id',Auth::user()->id)->orderBy('created_at','desc')->get();
+
         return $fooeds;
     }
 
 
     public function myNews(){
-        $user = User::with('followers','following')->find(Auth::user()->id);
-        $followerid = $user->followers()->pluck('follower')->toArray();
-        $followingids = $user->following()->pluck('following')->toArray();
-        $userIds = array_merge($followerid, $followingids);
+        $id = Auth::user()->id;
+        $user = User::find($id);
 
-        $posts = Feed::with('user')->with('comments')->whereIn('user_id',$userIds)->orwhere('user_id','=',Auth::user()->id)->orderBy('created_at','desc')->get();
-        
-      return view('frontend.pages.feeds',compact('posts'));
+        $userIds = $user->followers()->pluck('id');
+
+
+        // $followerid = $user->followers()->pluck('follower')->toArray();
+        // $followingids = $user->following()->pluck('following')->toArray();
+        // $userIds = array_merge($followerid, $followingids);
+
+        $posts = Feed::with('user')->with('comments')->with('interests')->whereIn('user_id',$userIds)->orwhere('user_id','=',Auth::user()->id)->orderBy('created_at','desc')->get();
+        return view('frontend.pages.feeds',compact('posts'));
     }
 
 

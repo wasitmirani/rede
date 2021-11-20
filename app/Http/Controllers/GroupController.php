@@ -30,10 +30,17 @@ class GroupController extends Controller
     }
 
     public function myCircle(){
+
+
+        $user = User::with('profile')->find(Auth::user()->id);
         $my_groups = GroupMember::with('group')->where('user_id',Auth::user()->id)->get();
-        $followings = FollowRequest::with('followings')->where('following',Auth::user()->id)->get();
-        $followers = FollowRequest::with('followers')->where('follower',Auth::user()->id)->get();
-        return view('frontend.pages.my_circle',compact('my_groups','followings','followers'));
+        $followerslist  = $user->getAcceptedFriendships()->pluck('recipient_id');
+        $followings = User::wherein('id',$followerslist)->get();
+
+        // $followers = $user->followers();
+        // $followings = FollowRequest::with('followings')->where('following',Auth::user()->id)->get();
+        // $followers = FollowRequest::with('followers')->where('follower',Auth::user()->id)->get();
+        return view('frontend.pages.my_circle',compact('my_groups','followings','user'));
     }
 
     public function storeGroup(Request $request){
@@ -104,7 +111,7 @@ class GroupController extends Controller
         $status = $this->memberStatus($id);
 
         $member = $this->singleMember($id);
-        $groupMembers = GroupMember::with('members')->where('group_id',$group->id)->get();
+         $groupMembers = GroupMember::with('members')->where('group_id',$id)->get();
         return view('frontend.pages.group',compact('group','member','groupMembers','posts','status','comments','likes'));
 
     }

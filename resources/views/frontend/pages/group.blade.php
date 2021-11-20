@@ -82,13 +82,13 @@
             </div>
             <div class="lg:m-0 -mx-5 flex justify-between items-center py-2 relative space-x-3 dark-tabs uk-sticky" uk-sticky="cls-active: bg-gray-100 bg-opacity-95; media : @m ; media @m">
                 <div class="flex overflow-x-scroll lg:overflow-hidden lg:pl-0 pl-5 space-x-3 lg:py-2">
-                    <a href="{{ route("new.feeds") }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+                    <a href="{{ route('add.story',$group->id) }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
                     color: #fff;">Our Story</a>
-                    <a href="#" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+                    <a href="{{ route('group.particulars',$group->id) }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
                     color: #fff;">Our Particulars </a>
                     <a href="{{ route('friend.list') }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
                     color: #fff;">Our Crew</a>
-                    <a href="{{ route('my.calendar') }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+                    <a href="" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
                     color: #fff;">Our Calendar</a>
 
                 </div>
@@ -116,7 +116,7 @@
 
                         </div> --}}
                         <div class="col-span-2 m-4	">
-                            <div class="grid grid-cols-3 gap-4">
+                            <div class="grid grid-cols-2 gap-4">
                             <button type="submit" class="bg-blue-500 flex font-bold hidden hover:bg--600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white" aria-expanded="false" id="uploadBtn">Post</button>
                             <input type="file"  id="checkbox1" name="image">
                             </div>
@@ -344,8 +344,10 @@
           <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <form id="uploadCircleImage">
+                <img id="blah"   style="width:548px;" />
               <label>Select Image</label>
-              <input type="file" class="w-full bg-gray-100 p-2 mt-2 mb-3" />
+
+              <input type="file" class="w-full bg-gray-100 p-2 mt-2 mb-3"  id="chekcbox1" name="image">
               <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2"><i class="fas fa-plus"></i> Upload</button>
                 </form>
             </div>
@@ -367,7 +369,6 @@
 
     $(document).ready(function(){
 
-
         })
 
         $.ajaxSetup({
@@ -378,11 +379,17 @@
 });
 
 
-$("#uploadCircleImage").submit(function(e){
-    e.preventDefault();
-    console.log('s')
 
-})
+
+chekcbox1.onchange = evt => {
+  const [file] = chekcbox1.files
+  if (file) {
+
+    // blah.src = URL.createObjectURL(file)
+    blah.src = URL.createObjectURL(event.target.files[0]);
+
+  }
+}
 
 
 

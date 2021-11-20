@@ -1,5 +1,10 @@
 @extends('layouts.frontend.master')
+@section('style')
+<style>
 
+
+</style>
+@endsection
 @section('content')
 
 <!-- Signup -->

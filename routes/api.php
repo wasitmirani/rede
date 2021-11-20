@@ -17,16 +17,16 @@ use App\Http\Controllers\InterestController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 
-Route::post('/user/register',[FrontEndController::class,'register']);
+// Route::post('/user/register',[FrontEndController::class,'register']);
 
-Route::prefix('message')->name('message')->group(function () {
-    Route::get('/messages/{conversation_id?}',[MessengerController::class,'getMessages']);
-    Route::post('/send',[MessengerController::class,'sendMessage']);
-    // conversations
-});
+// Route::prefix('message')->name('message')->group(function () {
+//     Route::get('/messages/{conversation_id?}',[MessengerController::class,'getMessages']);
+//     Route::post('/send',[MessengerController::class,'sendMessage']);
+//     // conversations
+// });
 

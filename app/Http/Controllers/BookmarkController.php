@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\Event;
 use App\Models\Group;
 use App\Models\Bookmark;
+use App\Models\MyInterest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,11 +23,11 @@ class BookmarkController extends Controller
     public function myBookmarks(){
 
         $id = Auth::user()->id;
-        $bookmarks = Bookmark::all();
-        $events = Event::with('user')->where('user_id',$id)->get();
-        $groups = Group::with('members')->where('user_id',$id)->get();
-        // $follower = "";
-        $myInterests = User::with('interests')->where('id',Auth::user()->id)->get();
+        $bookmarks = Bookmark::find($id);
+        $events = Bookmark::where([['user_id','=',$id],['type','=','happening']])->get();
+        $groups = Bookmark::with('members')->where([['user_id','=',$id],['type','=','circle']])->get();
+        $myInterests = Bookmark::where([['user_id','=',$id],['type','=','mcguffin']])->get();
+
         return view('frontend.pages.mybookmark',compact('bookmarks','events','groups','myInterests'));
 
     }
@@ -39,7 +40,8 @@ class BookmarkController extends Controller
         $bookmark = BookMark::create([
             'title'=>$request->title,
             'item_id' => $request->bookmark,
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
+            'type' => $request->type
         ]);
 
 

@@ -20,9 +20,6 @@ class InterestController extends Controller
         $tags = Tag::all();
         $interests = Interest::orderby('id','desc')->paginate(9);
         $myInterests = User::with('interests')->where('id',$id)->orderby('id','desc','tags')->get();
-
-
-
         return view('frontend.pages.interests',compact('interests','myInterests','tags'));
     }
 
@@ -65,8 +62,6 @@ class InterestController extends Controller
 
         }
 
-
-
         // foreach($request->interests as $int){
         //     $added = DB::table('interest_user')->insert([
         //         'user_id' => Auth::user()->id,
@@ -92,9 +87,6 @@ class InterestController extends Controller
         //         $added = $int->save();
         //         break;
         // }
-
-
-
 
     }
 
@@ -153,7 +145,7 @@ class InterestController extends Controller
     public function nameSearch(Request $request){
 
         $users = User::where('name','like','%'.$request->name.'%')->get();
-     
+
         return response()->json($users);
 
     }

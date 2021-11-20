@@ -14,13 +14,10 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/frontend/frontend.js', 'public/js')
     .js('resources/js/frontend/sort.js', 'public/js')
-    .js('resources/js/frontend/sortable.js', 'public/js')
+
     .js('resources/js/frontend/st.js', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css')
-
-
-
 
 
 const path_css = "resources/assets/css";

@@ -36,12 +36,11 @@
                 @if(isset($profile->covid_status))
                     @if($profile->covid_status != "Not Specified")
                     <a href="#"> {{ $profile->covid_status }}</a>
-
                     @endif
                 @endif
             </div>
             <div class="capitalize flex font-semibold space-x-3 text-center text-sm my-2">
-                <button type="button" id="followBtn"  data-id="{{ $user->id }}" data-follower="{{ Auth::user()->id }}"  class="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700">  {{ App\Models\FollowRequest::followStatus($user->id) }}</button>
+                <button type="button" id={{"followBtn".$user->id}}  data-id="{{ $user->id }}" data-follower="{{ Auth::user()->id }}"  class="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700 followBtn">  {{ App\Models\FollowRequest::followStatus($user->id) }}</button>
                 {{-- <a href="#" class="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600"> Send message</a> --}}
                 <div>
 
@@ -77,8 +76,9 @@
     <div class="w-20"></div>
 
 </div>
-@foreach($feeds as $feed)
-<div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0">
+@forelse($feeds as $feed)
+ @if($feed->status =="public")
+  <div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0">
 
     <!-- post header-->
     <div class="flex justify-between items-center px-4 py-3">
@@ -90,6 +90,7 @@
                 </div>
             </a>
             <span class="block capitalize font-semibold dark:text-gray-100"> {{ $user->name }} </span>
+            <span class="block capitalize font-semibold dark:text-gray-100"> {{ \Carbon\Carbon::parse($feed->created_at)->diffForhumans() }} </span>
 
         </div>
       <div>
@@ -103,6 +104,7 @@
     </div>
 
     <div uk-lightbox="">
+
         <p class="py-3 px-4 space-y-3">{!! $feed->feed !!}</p>
         <a href="assets/images/post/img4.jpg">
             <img src="{{ asset('/user/post/images/'.$feed->image) }}" alt="">
@@ -119,23 +121,20 @@
                 <div class="like{{ $feed->id }}" >@php echo App\Models\FeedLike::LikeStatus($feed->id) @endphp</div>
             </a>
         </div>
-
-
     </div>
-
-</div>
-@endforeach
+  </div>
+@endif
+@empty
+ <h3>No Feed Posted Yet</h3>
+@endforelse
 @endsection
 @section('scripts')
 <script>
        $(document).ready(function() {
-        $('#followBtn').on('click',function(){
-
-
+        $('.followBtn').on('click',function(){
             var following = $(this).data('id');
             var follower = $(this).data('follower');
             var status = 0;
-
             $.ajax({
                 url:"/follow/request",
                 type:"POST",
@@ -145,8 +144,10 @@
                     status : status
                 },
                 success:function(msg){
+                 var ids = "#followBtn"+following;
+                 $(ids).html(msg);
 
-                 $("#followBtn"+following).html(msg);
+
                 //  if(msg == "Following"){
                 //     toastr.success(msg)
 

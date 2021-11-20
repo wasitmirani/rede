@@ -22,10 +22,10 @@
             <div>
                 <a href="#">
                     @if(!empty(Auth::user()->profile))
-                    <strong>{{ Auth()->user()->profile->covid_status }}</strong>
-                    <div>{{ Auth()->user()->profile->age }}</div>
-                    <div>{{ Auth()->user()->profile->gender }}</div>
-                    <div>{{ Auth()->user()->profile->pronouns }}</div>
+                    <strong>{{ Auth()->user()->profile->covid_status === "null" ? Auth()->user()->profile->covid_status : ""   }}</strong>
+                    <div>{{ Auth()->user()->profile->age == null ? "" : Auth()->user()->profile->age  }}</div>
+                    <div>{{ Auth()->user()->profile->gender == null ? "" : Auth()->user()->profile->gender }}</div>
+                    <div>{{ Auth()->user()->profile->pronouns != null ? Auth()->user()->profile->pronouns : "" }}</div>
                     @endif
                 </a>
             </div>
@@ -54,9 +54,9 @@
         </li>
 
         <li>
-            <a href="{{route('group.list')}}">
+            <a href="{{route('my.circle')}}">
                 <i class="uil-comment-alt-plus"></i>
-                <span> My Circle </span>  </a>
+                <span> My Community </span>  </a>
                 {{-- <span class="nav-tag"> 0</span> --}}
         </li>
 

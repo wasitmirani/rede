@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Interest;
 
 class Feed extends Model
 {
@@ -28,6 +29,10 @@ class Feed extends Model
 
     public function feedShareBy(){
         return $this->belongsTo(User::class,'share_id','id');
+    }
+
+    public function interests(){
+        return $this->belongsToMany(MyInterest::class,'feed_myinterest','feed_id','myinterest_id');
     }
 
 }

@@ -11,6 +11,8 @@ use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\InterestController;
 use App\Http\Controllers\MessengerController;
+use App\Http\Controllers\GroupStoryController;
+use App\Http\Controllers\ParticularController;
 use App\Http\Controllers\UserDetailController;
 
 /*
@@ -49,7 +51,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/like/feed',[FeedsController::class,'likeFeed'])->name('like.feed');
     Route::post('/post/comment',[CommentController::class,'PostComment'])->name('post.comment');
     Route::get('/events',[EventController::class,'index'])->name('events.list');
-
     Route::get('/create/event',[EventController::class,'createEvent'])->name('create.event');
     Route::post('/store/event',[EventController::class,'storeEvent'])->name('store.event');
     Route::get('/event/detail/{id}',[EventController::class,'eventDetail'])->name('event.detail');
@@ -94,9 +95,23 @@ Route::middleware('auth')->group(function () {
     Route::get('create/bookmark/{name}',[BookmarkController::class,'createBookmark'])->name('create.bookmark');
     Route::get('/quiz',[QuizController::class,'index'])->name('quiz');
     Route::post('privacy',[UserDetailController::class,'privacySetting'])->name('privacy');
+    Route::get('/accept/request/{id}',[UserDetailController::class,'acceptRequest'])->name('accept.request');
+    Route::get('/particulars',[ParticularController::class,'index'])->name('particulars');
+    Route::get('/create/particulars',[ParticularController::class,'create'])->name('particular.create');
+    Route::post('/particulars',[ParticularController::class,'store'])->name('store.particular');
+    Route::get('group/story/{id}',[App\Http\Controllers\GroupStoryController::class,'index'])->name('add.story');
+    Route::post('/group/store',[App\Http\Controllers\GroupStoryController::class,'store'])->name('group.story');
+});
 
+Route::middleware('auth')->prefix('group')->group(function(){
+
+    Route::get('particulars/{id}',[App\Http\Controllers\GroupStoryController::class,'particulars'])->name('group.particulars');
 
 });
+
+
+
+
 Route::get('mcguffin',[FrontEndController::class,'mcguffin'])->name('mcguffin.deatil');
 
 Route::get('/signup',[FrontEndController::class,'signup'])->name('signup');

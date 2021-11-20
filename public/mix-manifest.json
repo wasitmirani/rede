@@ -2,9 +2,9 @@
     "/js/app.js": "/js/app.js",
     "/js/frontend.js": "/js/frontend.js",
     "/js/sort.js": "/js/sort.js",
-    "/js/sortable.js": "/js/sortable.js",
     "/js/st.js": "/js/st.js",
     "/css/app.css": "/css/app.css",
     "/css/style.css": "/css/style.css",
-    "/js/custom.js": "/js/custom.js"
+    "/js/custom.js": "/js/custom.js",
+    "/css/gallery.css": "/css/gallery.css"
 }

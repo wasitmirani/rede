@@ -58,8 +58,8 @@
 
         <div class="lg:w/8/12 flex-1 flex flex-col lg:items-start items-center">
 
-            <h2 class="font-semibold lg:text-2xl text-lg mb-2"> {{Auth::user()->name}}</h2>
-            <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> {{ $profile->description }}
+            <h2 class="font-semibold lg:text-2xl text-lg mb-2"> {{Auth::user()->username}}</h2>
+            <p class="lg:text-left mb-2 text-center  dark:text-gray-100"> {!! $profile->description !!}
             </p>
             <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
                 <a href="#" id="city"></a> , <a href="#" id="state"></a>  , <a href="#">USA</a><a>({{ $profile->zip_code }})</a>
@@ -121,7 +121,7 @@
         <div class="flex overflow-x-scroll lg:overflow-hidden lg:pl-0 pl-5 space-x-3 lg:py-2">
             <a href="{{ route("new.feeds") }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
             color: #fff;">My Story</a>
-            <a href="#" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
+            <a href="{{ route('particulars') }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
             color: #fff;">My Particulars </a>
             <a href="{{ route('friend.list') }}" class="bg-red py-2 px-4 rounded inline-block font-bold shadow" style="background-color: #b74b4b;
             color: #fff;">My Crew</a>
@@ -162,6 +162,7 @@
             <i class="text-4xl uil-plus-circle"></i> <span> Add new </span>
         </div>
     </a>
+    @if($groups)
     @foreach($groups as $group)
 
     <a href="{{ route('show.group',$group->group->id) }}" uk-toggle="">
@@ -170,6 +171,7 @@
         <p>{{ $group->group->title }}</p>
     </a>
     @endforeach
+    @endif
 
 </div>
 
@@ -212,16 +214,17 @@
             </svg>
         </button>
         <img id="blah"  style="width:548px;"  />
-        <div class="flex-1 bg-white dark:bg-gray-900 dark:text-gray-100" style="margin-left: 282px; margin-top: 329px;">
-
-            <div class="border-b flex items-center justify-between px-5 py-3 dark:border-gray-600">
-                <form id="profileImageForm">
-                    <div class="flex lg:flex-row flex-col lg:space-x-2">
-                    <input type="file" name="image" id="imageField">
+        <div class="flex-1 bg-white dark:bg-gray-900 dark:text-gray-100" >
+                <div class="flex col-span-1 m-4">
+                <div class="flex-1 py-5">
+                    <form id="profileImageForm">
+                <input type="file" name="image" id="imageField">
+                <button type="submit" class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Upload</button>
                     </div>
-                    <button type="submit" class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Upload</button>
-                </form>
-            </div>
+                </div>
+
+
+                </div>
         </div>
     </div>
 </div>

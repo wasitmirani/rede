@@ -169,6 +169,28 @@
 <script>
 
 $(document).ready(function(){
+    $("#password-field").focus(function(){
+    var output = "";
+    output +="<ul><li>must contain at least one lowercase letter</li><li>must contain at least one upercase letter</li><li>must contain aleast one digit</li><li>must contain atleast one symbol</li></ul>";
+    $("#password-rule").html(output)
+});
+
+
+$(".toggle-password").click(function() {
+    $(this).removeClass("fa fa-eye-slash");
+    $(this).addClass("fas fa-eye");
+    var input = $($(this).attr("toggle"));
+    if (input.attr("type") == "password") {
+        input.attr("type", "text");
+    } else {
+        $(this).addClass("fa fa-eye-slash");
+        $(this).removeClass("fas fa-eye");
+        input.attr("type", "password");
+    }
+});
+
+
+
 
     let startYear = 1800;
     let endYear = new Date().getFullYear();
@@ -266,26 +288,6 @@ var today = new Date();
 })
 
 
-    $(".toggle-password").click(function() {
-
-$(this).removeClass("fa fa-eye-slash");
-$(this).addClass("fas fa-eye");
-var input = $($(this).attr("toggle"));
-if (input.attr("type") == "password") {
-  input.attr("type", "text");
-} else {
-    $(this).addClass("fa fa-eye-slash");
-$(this).removeClass("fas fa-eye");
-
-  input.attr("type", "password");
-}
-});
-
-$("#password-field").focus(function(){
-   var output = "";
-   output +="<ul><li>must contain at least one lowercase letter</li><li>must contain at least one upercase letter</li><li>must contain aleast one digit</li><li>must contain atleast one symbol</li></ul>";
-   $("#password-rule").html(output)
-})
 
 
 </script>

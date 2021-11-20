@@ -14,13 +14,7 @@
 @section('style')
 <style>
 .col-md-12 .input-group-addon {
-    position: absolute;
-    right: 10px;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    opacity: .6;
+
 }
 </style>
 @endsection

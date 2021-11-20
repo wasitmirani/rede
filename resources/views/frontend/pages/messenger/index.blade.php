@@ -5,7 +5,7 @@
 <div class="lg:flex justify-center lg:space-x-10 lg:space-y-0 space-y-5">
 
 
-    <!-- left sidebar-->
+
 
 
     <div class="space-y-5 flex-shrink-0 lg:w-10/12">
@@ -33,14 +33,23 @@
             <div class="grid p-4">
                 <p>Share Your Feed</p>
                 <form id="postForm" method="post">
+                    <div class="col-span-2">
+                        <label for="about">Feed Status</label>
+                        <select name="status">
+                            <option value="public">Public</option>
+                            <option value="private">Only Crew</option>
+                        </select>
+                    </div>
                     <div class="col-span-2 mcgufin">
+                        <p>Tag An Interest</p>
                         <select id="interest" name="interest[]" class="js-example-basic-multiple" multiple="multiple">
                             <option>Select Mcguffin</option>
                             @foreach ($mcguffins->interests  as $mcguffin)
-                               <option value="{{ $mcguffin->interest }}">{{ $mcguffin->interest }}</option>
+                               <option value="{{ $mcguffin->id }}">{{ $mcguffin->interest }}</option>
                             @endforeach
                         </select>
                     </div>
+
                     <div class="col-span-2">
                         <label for="about">Write Your Feed Here</label>
                         <textarea id="about" id="post" name="post"  class="resize-none border rounded-md"></textarea>

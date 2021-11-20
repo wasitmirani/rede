@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Tag;
+use App\Models\Feed;
 
 class Interest extends Model
 {
@@ -19,4 +20,6 @@ class Interest extends Model
     public function tags(){
         return $this->belongsToMany(Tag::class);
     }
+
+   
 }

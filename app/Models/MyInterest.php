@@ -20,6 +20,14 @@ class MyInterest extends Model
         return $this->hasOne(User::class,'id','user_id');
     }
 
+    public function feeds(){
+        return $this->belongsToMany(Feed::class,'feed_myinterest','myinterest_id','feed_id');
+    }
+
+    public function interests(){
+        return $this->belongsTo(Interest::class,'interest_id','id');
+    }
+
 
 
 

@@ -11,14 +11,22 @@
 </div>
 <div class="my-6 grid lg:grid-cols-4 grid-cols-2 gap-1.5 hover:text-yellow-700 uk-link-reset">
 @foreach($members as $member)
+
     <div>
-        <div class="bg-red-500 max-w-full lg:h-64 h-40 rounded-md relative overflow-hidden uk-transition-toggle" tabindex="0">
+        <div class="bg-red-500 max-w-full lg:h-64 h-40 rounded-md relative overflow-hidden " >
+
                 <img src="{{asset('/user/images/'.$member->members->image)}}" class="w-full h-full absolute object-cover inset-0">
+                <a href="{{ route('public.profile',[$member->members->id,$member->members->name]) }}">
                 <div class="absolute bg-black bg-opacity-40 bottom-0 flex h-full items-center justify-center space-x-5 text-lg text-white uk-transition-scale-up w-full">
+
                 </div>
+            </a>
             </div>
+            <p>{{ $member->members->name }}</p>
         </div>
+
     <div>
+
 @endforeach
     </div>
 </div>

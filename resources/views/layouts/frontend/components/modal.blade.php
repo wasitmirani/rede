@@ -3,16 +3,16 @@
            <div class="modal-dialog modal-lg">
            <div class="modal-content"  style="top: 254px">
         <div class="ratio ratio-16x916">
-          <iframe
-            src="{{ asset('assets/images/dummy-video.mp4') }}"
-            title="YouTube video"
-            allowfullscreen
-          ></iframe>
+            <video style="width:100%; height:100%" controls poster="{{ asset('assets/images/video-img.jpg') }}">
+                <source src="{{ asset('assets/images/dummy-video.mp4') }}" type="video/mp4">
+                <source src="movie.ogg" type="video/ogg">
+                Your browser does not support the video tag.
+              </video>
         </div>
         <div class="text-center py-3">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
+            <button type="button" class="btn btn-secondary btn-close"  data-dismiss="modal">
+                Close
+              </button>
         </div>
       </div>
         </div>
@@ -21,16 +21,16 @@
         <div class="modal-dialog modal-lg">
         <div class="modal-content" style="top: 254px">
      <div class="ratio ratio-16x16">
-       <iframe
-         src="{{ asset('assets/images/dummy-video.mp4') }}"
-         title="YouTube video"
-         allowfullscreen
-       ></iframe>
+        <video style="width:100%; height:100%" controls poster="{{ asset('assets/images/video-img.jpg') }}">
+            <source src="{{ asset('assets/images/dummy-video.mp4') }}" type="video/mp4">
+            <source src="movie.ogg" type="video/ogg">
+            Your browser does not support the video tag.
+          </video>
      </div>
      <div class="text-center py-3">
-       <button type="button" class="btn btn-secondary" data-dismiss="modal">
-         Close
-       </button>
+        <button type="button" class="btn btn-secondary btn-close"  data-dismiss="modal">
+            Close
+          </button>
      </div>
    </div>
      </div>
@@ -39,17 +39,21 @@
     <div class="modal-dialog modal-lg">
     <div class="modal-content" style="top: 254px">
  <div class="ratio ratio-16x16">
-   <iframe
+   {{-- <iframe
      src="{{ asset('assets/images/dummy-video.mp4') }}"
      title="YouTube video"
      allowfullscreen
-   ></iframe>
+   ></iframe> --}}
+   <video style="width:100%; height:100%" controls poster="{{ asset('assets/images/video-img.jpg') }}">
+    <source src="{{ asset('assets/images/dummy-video.mp4') }}" type="video/mp4">
+    <source src="movie.ogg" type="video/ogg">
+    Your browser does not support the video tag.
+  </video>
+
  </div>
- <div class="text-center py-3">
-   <button type="button" class="btn btn-secondary" data-dismiss="modal">
+   <button type="button" class="btn btn-secondary btn-close"  data-dismiss="modal">
      Close
    </button>
- </div>
 </div>
  </div>
 </div>
@@ -57,16 +61,16 @@
 <div class="modal-dialog modal-lg">
 <div class="modal-content" style="top: 254px">
 <div class="ratio ratio-16x16">
-<iframe
- src="https://www.youtube.com/embed/A3PDXmYoF5U"
- title="YouTube video"
- allowfullscreen
-></iframe>
+    <video style="width:100%; height:100%" controls poster="{{ asset('assets/images/video-img.jpg') }}">
+        <source src="{{ asset('assets/images/dummy-video.mp4') }}" type="video/mp4">
+        <source src="movie.ogg" type="video/ogg">
+        Your browser does not support the video tag.
+      </video>
 </div>
 <div class="text-center py-3">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">
- Close
-</button>
+    <button type="button" class="btn btn-secondary btn-close"  data-dismiss="modal">
+        Close
+      </button>
 </div>
 </div>
 </div>
@@ -75,16 +79,16 @@
 <div class="modal-dialog modal-lg">
 <div class="modal-content" style="top: 254px">
 <div class="ratio ratio-16x16">
-<iframe
-src="https://www.youtube.com/embed/A3PDXmYoF5U"
-title="YouTube video"
-allowfullscreen
-></iframe>
+    <video style="width:100%; height:100%" controls poster="{{ asset('assets/images/video-img.jpg') }}">
+        <source src="{{ asset('assets/images/dummy-video.mp4') }}" type="video/mp4">
+        <source src="movie.ogg" type="video/ogg">
+        Your browser does not support the video tag.
+      </video>
 </div>
 <div class="text-center py-3">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">
-Close
-</button>
+    <button type="button" class="btn btn-secondary btn-close"  data-dismiss="modal">
+        Close
+      </button>
 </div>
 </div>
 </div>
@@ -93,16 +97,16 @@ Close
 <div class="modal-dialog modal-lg">
 <div class="modal-content" style="top: 254px">
 <div class="ratio ratio-16x16">
-<iframe
-src="https://www.youtube.com/embed/A3PDXmYoF5U"
-title="YouTube video"
-allowfullscreen
-></iframe>
+    <video style="width:100%; height:100%" controls poster="{{ asset('assets/images/video-img.jpg') }}">
+        <source src="{{ asset('assets/images/dummy-video.mp4') }}" type="video/mp4">
+        <source src="movie.ogg" type="video/ogg">
+        Your browser does not support the video tag.
+      </video>
 </div>
 <div class="text-center py-3">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">
-Close
-</button>
+    <button type="button" class="btn btn-secondary btn-close"  data-dismiss="modal">
+        Close
+      </button>
 </div>
 </div>
 </div>

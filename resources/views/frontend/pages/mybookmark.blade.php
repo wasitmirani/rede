@@ -10,12 +10,12 @@
     </a>
 
     @foreach($myInterests as $myinterest)
-      @foreach($myinterest->interests as $interest)
-    <a href="#" uk-toggle="">
-        <img src="{{ Avatar::create($interest->interest)->toBase64() }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
-        <p>{{ $interest->interest }}</p>
+
+    <a href="#">
+        <img src="{{ Avatar::create($myinterest->interest)->toBase64() }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+        <p>{{ $myinterest->interest }}</p>
     </a>
-    @endforeach
+
 
     @endforeach
 
@@ -34,7 +34,7 @@
     </div>
 </a>
 @foreach($groups as $group)
-<a href="{{ route('event.group',$group->id) }}" uk-toggle="">
+<a href="{{ route('event.group',$group->id) }}" >
     <img src="{{ asset('/user/group/images/'.$group->image) }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
     <p>{{ $group->description }}</p>
 </a>
@@ -62,7 +62,7 @@
     </div>
 </a>
 @foreach($events as $event)
-<a href="{{ route('event.detail',$event->id) }}" uk-toggle="">
+<a href="{{ route('event.detail',$event->id) }}" >
     <img src="{{ asset('/user/event/images/'.$event->image) }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
     <p>{{ $event->description }}</p>
 </a>

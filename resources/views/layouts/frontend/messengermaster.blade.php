@@ -544,8 +544,8 @@ $(document).ready(function(){
  })
 
 </script>
-
-</body>
 @yield('scripts')
+</body>
+
 
 </html>
