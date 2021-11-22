@@ -231,8 +231,9 @@ if($updated){
 
     public function acceptRequest($id){
 
-        $recipient_id = Auth::user()->id;
-        $sender = User::find($id);
+        $recipient = User::find('id',Auth::user()->id)->first();
+        $recipient_id = $recipient->id;
+        $sender = User::find($id)->first();
         $user = User::find($recipient_id);
         $accepted = $user->acceptFriendRequest($sender);
         return redirect()->back();
