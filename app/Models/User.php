@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hootlex\Friendships\Traits\Friendable;
 use App\Models\Feed;
 use App\Models\Interest;
 use App\Models\BookEvent;
@@ -9,7 +10,6 @@ use App\Models\UserDetail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
-use Hootlex\Friendships\Traits\Friendable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
