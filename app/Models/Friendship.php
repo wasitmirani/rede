@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Hootlex\Friendships\Traits\Friendable;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Friendship extends Model
 {
-    use HasFactory;
+    use HasFactory, Friendable;
 
     public function user(){
 
