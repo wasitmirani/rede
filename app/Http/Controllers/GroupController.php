@@ -32,7 +32,8 @@ class GroupController extends Controller
     public function myCircle(){
 
 
-        $user = User::with('profile')->find(Auth::user()->id)->first();
+        $user = User::with('profile')->where('id',Auth::user()->id)->first();
+
         $my_groups = GroupMember::with('group')->where('user_id',Auth::user()->id)->get();
         $followerslist  = $user->getAcceptedFriendships()->pluck('recipient_id');
         $followings = User::wherein('id',$followerslist)->get();

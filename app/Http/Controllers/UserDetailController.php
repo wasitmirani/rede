@@ -126,13 +126,15 @@ if($updated){
     public function friendlist(){
 
         $id = Auth::user()->id;
-        $user = User::find($id)->first();
+        $user = User::find($id);
         // $sender; = User::
         $suggestion = new Friendship;
         $crews = $suggestion->user();
         $requests = $user->getFriendRequests()->pluck('sender_id');
         $follow_reqs = Friendship::where([['recipient_id','=',Auth::user()->id],['status','=',0]])->with('userData')->get();
+
         $followerslist  = $user->getAcceptedFriendships()->pluck('recipient_id');
+
         $followers = User::wherein('id',$followerslist)->get();
         // $followerslist = FollowRequest::with('followersreq')->where([['following','=',$id],['status','=',1]])->get();
         return view('frontend.pages.friendlist',compact('crews','followers','follow_reqs'));
@@ -213,8 +215,6 @@ if($updated){
 
     public function privacySetting(Request $request){
 
-
-
         $pivacy = Privacy::updateOrCreate(
         [
             'user_id'   => Auth::user()->id,
@@ -231,9 +231,9 @@ if($updated){
 
     public function acceptRequest($id){
 
-        $recipient = User::find('id',Auth::user()->id)->first();
+        $recipient = User::where('id',Auth::user()->id)->first();
         $recipient_id = $recipient->id;
-        $sender = User::find($id)->first();
+        $sender = User::find($id);
         $user = User::find($recipient_id);
         $accepted = $user->acceptFriendRequest($sender);
         return redirect()->back();

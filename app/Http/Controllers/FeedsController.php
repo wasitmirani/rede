@@ -25,7 +25,7 @@ class FeedsController extends Controller
 
         // $follower = FollowRequest::where('follower',Auth::user()->id)->get();
         // $followerId = FollowRequest::where('following',Auth::user()->id)->get();
-        $user = User::find(Auth::user()->id)->first();
+        $user = User::find(Auth::user()->id);
         $posts = '';
         $users = '';
         // $totalPost = Feed::where('user_id',Auth::user()->id)->count();
@@ -90,7 +90,7 @@ public function storeFeed(Request $request){
 
     public function follow_request(Request $request){
 
-        $recipient = User::find($request->following)->first();
+        $recipient = User::find($request->following);
         $recipient_id = $recipient->id;
         $user = User::where('id',Auth::user()->id)->first();
 
