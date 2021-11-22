@@ -126,7 +126,7 @@ if($updated){
     public function friendlist(){
 
         $id = Auth::user()->id;
-        $user = User::find($id);
+        $user = User::find($id)->first();
         // $sender; = User::
         $suggestion = new Friendship;
         $crews = $suggestion->user();
@@ -201,7 +201,6 @@ if($updated){
     public function publicProfile($id){
 
         $user = User::where('id',$id)->with('profile','feeds','interests')->orderBy('id','desc')->first();
-
         $followerslist  = $user->getAcceptedFriendships()->pluck('sender_id');
         $followers = User::wherein('id',$followerslist)->count();
         $feeds = $user->feeds;

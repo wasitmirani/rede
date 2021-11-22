@@ -32,7 +32,7 @@ class GroupController extends Controller
     public function myCircle(){
 
 
-        $user = User::with('profile')->find(Auth::user()->id);
+        $user = User::with('profile')->find(Auth::user()->id)->first();
         $my_groups = GroupMember::with('group')->where('user_id',Auth::user()->id)->get();
         $followerslist  = $user->getAcceptedFriendships()->pluck('recipient_id');
         $followings = User::wherein('id',$followerslist)->get();
@@ -195,7 +195,6 @@ class GroupController extends Controller
             $name = Str::slug($name, '-')  . "-" . time() . '.' . $request->image->extension();
             $request->image->move(public_path("/user/group/post/images/"), $name);
 
-
         }else{
             $name = "";
         }
@@ -218,8 +217,6 @@ class GroupController extends Controller
             return response()->json("Something Went Wrong");
 
           }
-
-
 
     }
 

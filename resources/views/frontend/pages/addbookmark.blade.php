@@ -13,6 +13,7 @@
 
 <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
             @forelse($mcguffins as $mcguffin)
+            <input type="hidden" value="{{ $bookmark }}" id="type">
             <div>
                 <button type="button" class="mcguffinBtn" data-title="{{ $mcguffin->interest }}" data-participant="{{ Auth::user()->id }}" data-bookmark="{{ $mcguffin->id }}">
                         <div>
@@ -36,18 +37,20 @@
    @endif
    @if ($bookmark == 'circle')
     <div class="flex justify-between items-baseline uk-visible@s">
-        <input type="hidden" value="{{ $bookmark }}" id="type">
+
        <h1 class="font-extrabold leading-none mb-6 mt-8 lg:text-2xl text-lg text-gray-900 tracking-tight">Circle</h1>
     </div>
     <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
             @forelse($circles as $circle)
-                    <button type="button"  class="mcguffinBtn" data-title="{{ $circle->interest }}" data-participant="{{ Auth::user()->id }}" data-bookmark="{{ $circle->id }}">
-                            <div class="item-media"> <img src="{{ Avatar::create($circle->name)->toBase64() }}" alt=""></div>
+        
+                    <button type="button"  class="mcguffinBtn" data-title="{{ $circle->title }}" data-participant="{{ Auth::user()->id }}" data-bookmark="{{ $circle->id }}">
+                            <div class="item-media"> <img src="{{ asset('user/group/images/'.$circle->image) }}" alt=""></div>
                             <div class="item-inner">
                                 {{-- <div class="item-price"> 20$ </div> --}}
-                                <div class="item-title"> {{ $circle->name }} </div>
+
 
                             </div>
+                            <div class="item-title"> {{ $circle->title }} </div>
                     </button>
             @empty
             <h3>Add Circles</h3>

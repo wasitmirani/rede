@@ -63,9 +63,9 @@ class FollowRequest extends Model
        public static function followStatus($id){
 
 
-        $friend = User::find($id);
+        $friend = User::find($id)->first();
         $user = User::where('id',Auth::user()->id)->first();
-    
+
         if($friend->isFriendWith($user)){
             return 'Following';
 

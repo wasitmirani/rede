@@ -35,7 +35,7 @@
 </a>
 @foreach($groups as $group)
 <a href="{{ route('event.group',$group->id) }}" >
-    <img src="{{ asset('/user/group/images/'.$group->image) }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+    <img src="{{ asset('user/group/images/'.$group->image) }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
     <p>{{ $group->description }}</p>
 </a>
 @endforeach
@@ -63,7 +63,7 @@
 </a>
 @foreach($events as $event)
 <a href="{{ route('event.detail',$event->id) }}" >
-    <img src="{{ asset('/user/event/images/'.$event->image) }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
+    <img src="{{ asset('user/event/images/'.$event->image) }}" alt="" class="w-full lg:h-60 h-40 rounded-md object-cover">
     <p>{{ $event->description }}</p>
 </a>
 @endforeach

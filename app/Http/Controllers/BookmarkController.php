@@ -7,6 +7,7 @@ use App\Models\Group;
 use App\Models\Bookmark;
 use App\Models\MyInterest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class BookmarkController extends Controller
@@ -24,10 +25,12 @@ class BookmarkController extends Controller
 
         $id = Auth::user()->id;
         $bookmarks = Bookmark::find($id);
-        $events = Bookmark::where([['user_id','=',$id],['type','=','happening']])->get();
-        $groups = Bookmark::with('members')->where([['user_id','=',$id],['type','=','circle']])->get();
-        $myInterests = Bookmark::where([['user_id','=',$id],['type','=','mcguffin']])->get();
+        $events = DB::table('bookmarks')->join('events','bookmarks.item_id','events.id')
+                           ->where('bookmarks.type','happening')
+                           ->get();
 
+        $groups = DB::table('bookmarks')->join('groups','bookmarks.item_id','groups.id')->where('bookmarks.type','circle')->get();
+        $myInterests = Bookmark::where([['user_id','=',$id],['type','=','mcguffin']])->get();
         return view('frontend.pages.mybookmark',compact('bookmarks','events','groups','myInterests'));
 
     }
