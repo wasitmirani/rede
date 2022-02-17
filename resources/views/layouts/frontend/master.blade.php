@@ -120,6 +120,8 @@
  <script src="{{asset('/assets/js/popper.min.js')}}"></script>
  {{-- <script src="{{asset('/assets/js/bootstrap.min.js')}}"></script> --}}
 <script src="{{ asset('js/app.js') }}" defer></script>
+
+
 <script src="{{asset('/assets/js/fontawesome.js')}}"></script>
 <script src="{{asset('/assets/js/fontawesome.min.js')}}"></script>
 <script src="{{asset('/assets/js/custom.js')}}"></script>

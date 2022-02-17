@@ -96,14 +96,16 @@
 
             @if(App\Models\GroupMember::joinStatus($group->id) == "Joined")
             <div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0" id="postArea">
-                <div class="grid grid-cols-2 gap-3 lg:p-6 p-4">
+                <div class="grid  gap-3 lg:p-6 p-4">
                     <form id="postForm" method="post">
                         <div class="col-span-2">
                             <label for="about">Share Your Ideas....</label>
                             <textarea id="about" name="post"  class="shadow-none bg-gray-100" data-emojiable="true"></textarea>
+
                             <img id="blah"  style="width:548px;"/>
                             <input type="hidden" name="group_id" value="{{ $group->id }}">
 
+                       <input type="file"  id="checkbox1" name="image">
                         </div>
 
 
@@ -116,9 +118,9 @@
 
                         </div> --}}
                         <div class="col-span-2 m-4	">
-                            <div class="grid grid-cols-2 gap-4">
-                            <button type="submit" class="bg-blue-500 flex font-bold hidden hover:bg--600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white" aria-expanded="false" id="uploadBtn">Post</button>
-                            <input type="file"  id="checkbox1" name="image">
+                            <div class="grid grid-cols-1 gap-4">
+                            <button type="submit" class="bg-blue-500 flex font-bold  hover:bg--600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white" aria-expanded="false" id="uploadBtn">Post</button>
+
                             </div>
                         </div>
 
@@ -128,6 +130,7 @@
             @endif
 
             <!-- post 1-->
+            <br><br>
             <div id="postArea"></div>
             @foreach($posts as $post)
             <div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0">
@@ -149,13 +152,13 @@
                   </div>
                 </div>
                 <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 h-full relative lg:ml-5 ml-2 lg:mr-20  dark:bg-gray-800 dark:text-gray-100">
-                    <p class="leading-6">{{ $post->content }}
-                    </p>
+                    <h3 class="leading-6">{{ $post->content }}
+                    </h3>
                     <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
                 </div>
                 <div uk-lightbox="">
                     <a href="{{ asset('/user/group/post/images/'.$post->file) }}">
-                        <img src="{{ asset('/user/group/post/images/'.$post->file) }}" alt="" style="width: 665px;">
+                        <img src="{{ asset('/user/group/post/images/'.$post->file) }}" alt="" style="width: 365px;    margin-left: 153px;">
                     </a>
                 </div>
 
@@ -200,6 +203,7 @@
                          </div></div>
 
                          @endif
+                         <hr>
                          @endforeach
                          <div><a type="button" class="showMore" style="cursor: pointer;" data-id="{{ $post->id }}">Show More.....</a></div>
 
@@ -427,7 +431,7 @@ chekcbox1.onchange = evt => {
                     var member = msg.member;
 
 
-                     toastr.success();
+                     toastr.success('New Post has been created successfully', 'Post Created Successfully', {timeOut: 5000});
                      var output = "";
                      output +='<div class="bg-white shadow rounded-md dark:bg-gray-900 -mx-2 lg:mx-0"><div class="flex justify-between items-center px-4 py-3">'
                             +'<div class="flex flex-1 items-center space-x-4">'
@@ -516,7 +520,8 @@ chekcbox1.onchange = evt => {
                 content:content
             },
                 success:function(msg){
-
+                      toastr.success("Your comment has been posted successfully", "Comment Posted", {timeOut: 5000});
+                                 $(".content").val('');
                    var output = "";
                    output +='<div class="flex">'
                           +'<div class="w-10 h-10 rounded-full relative flex-shrink-0">'
@@ -524,8 +529,10 @@ chekcbox1.onchange = evt => {
                            +'</div><div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 h-full relative lg:ml-5 ml-2 lg:mr-20  dark:bg-gray-800 dark:text-gray-100">'
                            +'<p class="leading-6">'+msg.content+'<urna class="i uil-heart"></urna> <i class="uil-grin-tongue-wink"></i></p>'
                            +'<div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>'
-                           +'</div></div>'
+                           +'</div></div>   ';
                     $("#commentArea").html(output);
+
+
 
                 }
             })
@@ -546,13 +553,13 @@ chekcbox1.onchange = evt => {
                 success:function(msg){
                     var output = "";
                     jQuery.each(msg, (index, item) => {
-                        output +='<div class="flex">'
+                        output +='<div class="flex" style="margin-top:10px;">'
                           +'<div class="w-10 h-10 rounded-full relative flex-shrink-0">'
-                           +'<img src="{{ asset('user/images') }}/'+item.members.image+'" alt="" class="absolute h-full rounded-full w-full">'
+                           +'<img src="{{ asset('user/images') }}/'+item.members.image+'" alt="" class="absolute h-full rounded-full w-full" >'
                            +'</div><div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 h-full relative lg:ml-5 ml-2 lg:mr-20  dark:bg-gray-800 dark:text-gray-100">'
                            +'<p class="leading-6">'+item.content+'<urna class="i uil-heart"></urna> <i class="uil-grin-tongue-wink"></i></p>'
                            +'<div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>'
-                           +'</div></div>'
+                           +'</div></div> <hr>';
 
 
                            $("#commentArea"+post_id).html(output);
