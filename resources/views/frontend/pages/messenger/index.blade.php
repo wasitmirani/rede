@@ -15,7 +15,13 @@
                     @csrf
                     <div class="col-span-2">
                         <label for="about">Update Your Story.....</label>
-                        <textarea id="about" name="description"  class="resize-none border rounded-md"></textarea>
+                   
+                        <textarea id="about" name="description"  class="resize-none border rounded-md">
+                            @if(!empty($user->profile))
+                            {{ $user->profile->description }}
+                            @endif
+
+                        </textarea>
 
                     </div>
 
