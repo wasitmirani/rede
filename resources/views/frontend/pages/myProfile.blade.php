@@ -159,7 +159,7 @@
 <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
     <a href="{{ route('group.list') }}">
         <div class="bg-gray-100 border-4 border-dashed flex flex-col h-full items-center justify-center relative rounded-2xl w-full">
-            <i class="text-4xl uil-plus-circle"></i> <span> Add new </span>
+            <i class="text-4xl uil-plus-circle"></i> <span> Create  new </span>
         </div>
     </a>
     @if($groups)
@@ -191,7 +191,7 @@
 <div class="my-6 grid lg:grid-cols-5 grid-cols-3 gap-2 hover:text-yellow-700 uk-link-reset">
     <a href="{{ route('create.event') }}">
         <div class="bg-gray-100 border-4 border-dashed flex flex-col h-full items-center justify-center relative rounded-2xl w-full">
-            <i class="text-4xl uil-plus-circle"></i> <span> Add new </span>
+            <i class="text-4xl uil-plus-circle"></i> <span> Create  new </span>
         </div>
     </a>
     @foreach($events as $event)
